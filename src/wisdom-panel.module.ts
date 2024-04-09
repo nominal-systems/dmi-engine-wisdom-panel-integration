@@ -3,6 +3,9 @@ import { HttpModule } from '@nestjs/axios'
 import { ClientsModule, Transport } from '@nestjs/microservices'
 import { ConfigModule, ConfigService } from '@nestjs/config'
 import { BullModule } from '@nestjs/bull'
+import { WisdomPanelService } from './services/wisdom-panel.service'
+import { WisdomPanelMapper } from './providers/wisdom-panel-mapper'
+import { WisdomPanelApiService } from './services/wisdom-panel-api.service'
 
 @Module({
   imports: [
@@ -28,7 +31,11 @@ import { BullModule } from '@nestjs/bull'
       })
     })
   ],
-  providers: [],
+  providers: [
+    WisdomPanelService,
+    WisdomPanelApiService,
+    WisdomPanelMapper
+  ],
   controllers: [],
   exports: [BullModule]
 })
