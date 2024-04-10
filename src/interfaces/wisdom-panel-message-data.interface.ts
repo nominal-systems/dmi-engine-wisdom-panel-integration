@@ -7,6 +7,7 @@ export interface WisdomPanelMessageData<Payload = any> extends IMetadata {
 }
 
 export interface WisdomPanelProviderConfiguration {
+  baseUrl: string
   username: string
   password: string
   organizationUnitId: string
