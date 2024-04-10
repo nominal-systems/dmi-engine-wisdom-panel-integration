@@ -48,8 +48,7 @@ export class WisdomPanelService extends BaseProviderService<WisdomPanelMessageDa
         }
       }
     } catch (error) {
-      this.logger.error(error)
-      throw new Error('Failed to create order')
+      throw new Error(`Failed to create order: ${error.message}`)
     }
   }
 
