@@ -9,6 +9,7 @@ import {
   NullPayloadPayload,
   Order,
   OrderCreatedResponse,
+  OrderStatus,
   OrderTestPayload,
   ReferenceDataResponse,
   Result,
@@ -20,6 +21,7 @@ import {
 import { WisdomPanelMessageData } from '../interfaces/wisdom-panel-message-data.interface'
 import { WisdomPanelApiService } from './wisdom-panel-api.service'
 import { WisdomPanelMapper } from '../providers/wisdom-panel-mapper'
+import { WisdomPanelCreatePetPayload } from '../interfaces/wisdom-panel-api-payloads.interface'
 
 @Injectable()
 export class WisdomPanelService extends BaseProviderService<WisdomPanelMessageData> {
@@ -31,6 +33,24 @@ export class WisdomPanelService extends BaseProviderService<WisdomPanelMessageDa
     private readonly wisdomPanelMapper: WisdomPanelMapper
   ) {
     super()
+  }
+
+  public async createOrder (payload: CreateOrderPayload, metadata: WisdomPanelMessageData): Promise<OrderCreatedResponse> {
+    try {
+      const createPetPayload: WisdomPanelCreatePetPayload = this.wisdomPanelMapper.mapCreateOrderPayload(payload, metadata)
+      const response = await this.wisdomPanelApiService.createPet(createPetPayload, metadata.providerConfiguration)
+
+      return {
+        externalId: response.data.kit.id,
+        status: OrderStatus.SUBMITTED,
+        manifest: {
+          data: response.data.requisition_form
+        }
+      }
+    } catch (error) {
+      this.logger.error(error)
+      throw new Error('Failed to create order')
+    }
   }
 
   public acknowledgeOrder (payload: IdPayload, metadata: WisdomPanelMessageData): Promise<void> {
@@ -46,10 +66,6 @@ export class WisdomPanelService extends BaseProviderService<WisdomPanelMessageDa
   }
 
   public cancelOrderTest (payload: OrderTestPayload, metadata: WisdomPanelMessageData): Promise<void> {
-    throw new Error('Method not implemented')
-  }
-
-  public createOrder (payload: CreateOrderPayload, metadata: WisdomPanelMessageData): Promise<OrderCreatedResponse> {
     throw new Error('Method not implemented')
   }
 

@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { Module } from '@nestjs/common'
 import { HttpModule } from '@nestjs/axios'
 import { ClientsModule, Transport } from '@nestjs/microservices'
 import { ConfigModule, ConfigService } from '@nestjs/config'
@@ -6,6 +6,7 @@ import { BullModule } from '@nestjs/bull'
 import { WisdomPanelService } from './services/wisdom-panel.service'
 import { WisdomPanelMapper } from './providers/wisdom-panel-mapper'
 import { WisdomPanelApiService } from './services/wisdom-panel-api.service'
+import { WisdomPanelController } from './controllers/wisdom-panel.controller'
 
 @Module({
   imports: [
@@ -36,7 +37,9 @@ import { WisdomPanelApiService } from './services/wisdom-panel-api.service'
     WisdomPanelApiService,
     WisdomPanelMapper
   ],
-  controllers: [],
+  controllers: [
+    WisdomPanelController
+  ],
   exports: [BullModule]
 })
 export class WisdomPanelModule {}

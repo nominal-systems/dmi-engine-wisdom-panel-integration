@@ -1,0 +1,64 @@
+{
+  "integrationId": "ceefe0c3-7da4-47fb-a4d0-b3dd8f8eb1a5",
+  "devices": [
+    "PTH5485645145788"
+  ],
+  "patient": {
+    "name": "Electronic-lab-ordering-test",
+    "birthdate": "2023-04-24",
+    "identifier": [
+      {
+        "system": "pims:patient:id",
+        "value": "434956978",
+        "id": 1137
+      }
+    ],
+    "species": "36c3cde0-bd6b-11eb-9610-302432eba3e9",
+    "breed": "1ddc1bc2-d7ed-11ea-aee5-302432eba3ec",
+    "sex": "a6de9d9e-e3b9-4cc5-bfb4-68e33a8684ba",
+    "weightMeasurement": null,
+    "weightUnits": null,
+    "id": "aa8093d3-0447-4022-8d73-4608178e46d4"
+  },
+  "client": {
+    "lastName": "M",
+    "firstName": "Srikanth",
+    "identifier": [
+      {
+        "system": "pims:client:id",
+        "value": "UAT2JWU",
+        "id": 1138
+      }
+    ],
+    "id": "3da0246d-be43-4ea8-965d-597e3a93d98b",
+    "isStaff": false
+  },
+  "veterinarian": {
+    "lastName": "Jimenez",
+    "firstName": "Alysha",
+    "identifier": [
+      {
+        "system": "pims:veterinarian:id",
+        "value": "9999",
+        "id": 1139
+      }
+    ],
+    "id": "1e9f3603-013b-4cdd-aa07-f3a4fd11eaf2"
+  },
+  "status": "ACCEPTED",
+  "tests": [
+    {
+      "code": "SA804"
+    }
+  ],
+  "requisitionId": null,
+  "externalId": null,
+  "submissionUri": null,
+  "technician": null,
+  "notes": null,
+  "labRequisitionInfo": null,
+  "id": "49d3371b-3f0d-4470-b1c2-f0bc3da7cd8c",
+  "editable": false,
+  "createdAt": "2024-04-09T23:41:23.746Z",
+  "updatedAt": "2024-04-09T23:41:23.746Z"
+}
