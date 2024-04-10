@@ -1,0 +1,545 @@
+{
+  "data": [
+    {
+      "id": "1cdf3f85-e3e0-4795-b582-a716fac2ad4c",
+      "type": "kits",
+      "links": {
+        "self": "https://staging.wisdompanel.com/api/v1/kits/1cdf3f85-e3e0-4795-b582-a716fac2ad4c"
+      },
+      "attributes": {
+        "code": "VSMQCZR",
+        "inbound-tracking-code": null,
+        "outbound-tracking-code": null,
+        "current-stage": null,
+        "current-failure": null,
+        "stage-updated-at": null,
+        "legacy-url": null,
+        "active": true,
+        "enabled": true,
+        "activated": true,
+        "auto-activated": null,
+        "created-at": "2024-02-27T17:41:56.028Z",
+        "lab-order-number": null,
+        "sample-received-on": null,
+        "report-ready-on": null,
+        "can-upgrade": false,
+        "disabled-at": null,
+        "kit-type-name-override": null,
+        "available-upgrades": [],
+        "relative-counts": {},
+        "organization-identity": "BANFIELD-VOYAGER-VSMQCZR",
+        "activated-on": null,
+        "acknowledged-at": null,
+        "resend-banfield-claim-email": null,
+        "veterinarian-name": "Dr. Foo",
+        "hospital-street": null,
+        "hospital-city": null,
+        "hospital-state": null,
+        "hospital-country": null,
+        "hospital-postal-code": null,
+        "profiling-result-present": false,
+        "hospital-name": "Test Hospital",
+        "hospital-number": "123"
+      },
+      "relationships": {
+        "pet": {
+          "links": {
+            "self": "https://staging.wisdompanel.com/api/v1/kits/1cdf3f85-e3e0-4795-b582-a716fac2ad4c/relationships/pet",
+            "related": "https://staging.wisdompanel.com/api/v1/kits/1cdf3f85-e3e0-4795-b582-a716fac2ad4c/pet"
+          },
+          "data": {
+            "type": "pets",
+            "id": "b25bee8f-6b42-49c6-ada4-4d7ff4d7e964"
+          }
+        },
+        "statuses": {
+          "links": {
+            "self": "https://staging.wisdompanel.com/api/v1/kits/1cdf3f85-e3e0-4795-b582-a716fac2ad4c/relationships/statuses",
+            "related": "https://staging.wisdompanel.com/api/v1/kits/1cdf3f85-e3e0-4795-b582-a716fac2ad4c/statuses"
+          }
+        },
+        "kit-type": {
+          "links": {
+            "self": "https://staging.wisdompanel.com/api/v1/kits/1cdf3f85-e3e0-4795-b582-a716fac2ad4c/relationships/kit-type",
+            "related": "https://staging.wisdompanel.com/api/v1/kits/1cdf3f85-e3e0-4795-b582-a716fac2ad4c/kit-type"
+          }
+        },
+        "applied-kit-upgrades": {
+          "links": {
+            "self": "https://staging.wisdompanel.com/api/v1/kits/1cdf3f85-e3e0-4795-b582-a716fac2ad4c/relationships/applied-kit-upgrades",
+            "related": "https://staging.wisdompanel.com/api/v1/kits/1cdf3f85-e3e0-4795-b582-a716fac2ad4c/applied-kit-upgrades"
+          }
+        },
+        "active-result-set": {
+          "links": {
+            "self": "https://staging.wisdompanel.com/api/v1/kits/1cdf3f85-e3e0-4795-b582-a716fac2ad4c/relationships/active-result-set",
+            "related": "https://staging.wisdompanel.com/api/v1/kits/1cdf3f85-e3e0-4795-b582-a716fac2ad4c/active-result-set"
+          }
+        },
+        "previous-result-set": {
+          "links": {
+            "self": "https://staging.wisdompanel.com/api/v1/kits/1cdf3f85-e3e0-4795-b582-a716fac2ad4c/relationships/previous-result-set",
+            "related": "https://staging.wisdompanel.com/api/v1/kits/1cdf3f85-e3e0-4795-b582-a716fac2ad4c/previous-result-set"
+          }
+        },
+        "vet-calls": {
+          "links": {
+            "self": "https://staging.wisdompanel.com/api/v1/kits/1cdf3f85-e3e0-4795-b582-a716fac2ad4c/relationships/vet-calls",
+            "related": "https://staging.wisdompanel.com/api/v1/kits/1cdf3f85-e3e0-4795-b582-a716fac2ad4c/vet-calls"
+          }
+        },
+        "kit-issues": {
+          "links": {
+            "self": "https://staging.wisdompanel.com/api/v1/kits/1cdf3f85-e3e0-4795-b582-a716fac2ad4c/relationships/kit-issues",
+            "related": "https://staging.wisdompanel.com/api/v1/kits/1cdf3f85-e3e0-4795-b582-a716fac2ad4c/kit-issues"
+          }
+        },
+        "result-sets": {
+          "links": {
+            "self": "https://staging.wisdompanel.com/api/v1/kits/1cdf3f85-e3e0-4795-b582-a716fac2ad4c/relationships/result-sets",
+            "related": "https://staging.wisdompanel.com/api/v1/kits/1cdf3f85-e3e0-4795-b582-a716fac2ad4c/result-sets"
+          }
+        },
+        "organization": {
+          "links": {
+            "self": "https://staging.wisdompanel.com/api/v1/kits/1cdf3f85-e3e0-4795-b582-a716fac2ad4c/relationships/organization",
+            "related": "https://staging.wisdompanel.com/api/v1/kits/1cdf3f85-e3e0-4795-b582-a716fac2ad4c/organization"
+          }
+        },
+        "filiation-results": {
+          "links": {
+            "self": "https://staging.wisdompanel.com/api/v1/kits/1cdf3f85-e3e0-4795-b582-a716fac2ad4c/relationships/filiation-results",
+            "related": "https://staging.wisdompanel.com/api/v1/kits/1cdf3f85-e3e0-4795-b582-a716fac2ad4c/filiation-results"
+          }
+        },
+        "profiling-result": {
+          "links": {
+            "self": "https://staging.wisdompanel.com/api/v1/kits/1cdf3f85-e3e0-4795-b582-a716fac2ad4c/relationships/profiling-result",
+            "related": "https://staging.wisdompanel.com/api/v1/kits/1cdf3f85-e3e0-4795-b582-a716fac2ad4c/profiling-result"
+          }
+        },
+        "parentage-result": {
+          "links": {
+            "self": "https://staging.wisdompanel.com/api/v1/kits/1cdf3f85-e3e0-4795-b582-a716fac2ad4c/relationships/parentage-result",
+            "related": "https://staging.wisdompanel.com/api/v1/kits/1cdf3f85-e3e0-4795-b582-a716fac2ad4c/parentage-result"
+          }
+        }
+      }
+    },
+    {
+      "id": "9ba7315a-2ea5-4721-9d54-11bdacb19924",
+      "type": "kits",
+      "links": {
+        "self": "https://staging.wisdompanel.com/api/v1/kits/9ba7315a-2ea5-4721-9d54-11bdacb19924"
+      },
+      "attributes": {
+        "code": "VYJKWVD",
+        "inbound-tracking-code": null,
+        "outbound-tracking-code": null,
+        "current-stage": null,
+        "current-failure": null,
+        "stage-updated-at": null,
+        "legacy-url": null,
+        "active": true,
+        "enabled": true,
+        "activated": true,
+        "auto-activated": null,
+        "created-at": "2024-02-27T17:41:56.028Z",
+        "lab-order-number": null,
+        "sample-received-on": null,
+        "report-ready-on": null,
+        "can-upgrade": false,
+        "disabled-at": null,
+        "kit-type-name-override": null,
+        "available-upgrades": [],
+        "relative-counts": {},
+        "organization-identity": "BANFIELD-VOYAGER-VYJKWVD",
+        "activated-on": null,
+        "acknowledged-at": null,
+        "resend-banfield-claim-email": null,
+        "veterinarian-name": "Dr. Foo",
+        "hospital-street": null,
+        "hospital-city": null,
+        "hospital-state": null,
+        "hospital-country": null,
+        "hospital-postal-code": null,
+        "profiling-result-present": false,
+        "hospital-name": "Test Hospital",
+        "hospital-number": "123"
+      },
+      "relationships": {
+        "pet": {
+          "links": {
+            "self": "https://staging.wisdompanel.com/api/v1/kits/9ba7315a-2ea5-4721-9d54-11bdacb19924/relationships/pet",
+            "related": "https://staging.wisdompanel.com/api/v1/kits/9ba7315a-2ea5-4721-9d54-11bdacb19924/pet"
+          },
+          "data": {
+            "type": "pets",
+            "id": "8b85c33e-d689-4534-99e8-b4071c170a7f"
+          }
+        },
+        "statuses": {
+          "links": {
+            "self": "https://staging.wisdompanel.com/api/v1/kits/9ba7315a-2ea5-4721-9d54-11bdacb19924/relationships/statuses",
+            "related": "https://staging.wisdompanel.com/api/v1/kits/9ba7315a-2ea5-4721-9d54-11bdacb19924/statuses"
+          }
+        },
+        "kit-type": {
+          "links": {
+            "self": "https://staging.wisdompanel.com/api/v1/kits/9ba7315a-2ea5-4721-9d54-11bdacb19924/relationships/kit-type",
+            "related": "https://staging.wisdompanel.com/api/v1/kits/9ba7315a-2ea5-4721-9d54-11bdacb19924/kit-type"
+          }
+        },
+        "applied-kit-upgrades": {
+          "links": {
+            "self": "https://staging.wisdompanel.com/api/v1/kits/9ba7315a-2ea5-4721-9d54-11bdacb19924/relationships/applied-kit-upgrades",
+            "related": "https://staging.wisdompanel.com/api/v1/kits/9ba7315a-2ea5-4721-9d54-11bdacb19924/applied-kit-upgrades"
+          }
+        },
+        "active-result-set": {
+          "links": {
+            "self": "https://staging.wisdompanel.com/api/v1/kits/9ba7315a-2ea5-4721-9d54-11bdacb19924/relationships/active-result-set",
+            "related": "https://staging.wisdompanel.com/api/v1/kits/9ba7315a-2ea5-4721-9d54-11bdacb19924/active-result-set"
+          }
+        },
+        "previous-result-set": {
+          "links": {
+            "self": "https://staging.wisdompanel.com/api/v1/kits/9ba7315a-2ea5-4721-9d54-11bdacb19924/relationships/previous-result-set",
+            "related": "https://staging.wisdompanel.com/api/v1/kits/9ba7315a-2ea5-4721-9d54-11bdacb19924/previous-result-set"
+          }
+        },
+        "vet-calls": {
+          "links": {
+            "self": "https://staging.wisdompanel.com/api/v1/kits/9ba7315a-2ea5-4721-9d54-11bdacb19924/relationships/vet-calls",
+            "related": "https://staging.wisdompanel.com/api/v1/kits/9ba7315a-2ea5-4721-9d54-11bdacb19924/vet-calls"
+          }
+        },
+        "kit-issues": {
+          "links": {
+            "self": "https://staging.wisdompanel.com/api/v1/kits/9ba7315a-2ea5-4721-9d54-11bdacb19924/relationships/kit-issues",
+            "related": "https://staging.wisdompanel.com/api/v1/kits/9ba7315a-2ea5-4721-9d54-11bdacb19924/kit-issues"
+          }
+        },
+        "result-sets": {
+          "links": {
+            "self": "https://staging.wisdompanel.com/api/v1/kits/9ba7315a-2ea5-4721-9d54-11bdacb19924/relationships/result-sets",
+            "related": "https://staging.wisdompanel.com/api/v1/kits/9ba7315a-2ea5-4721-9d54-11bdacb19924/result-sets"
+          }
+        },
+        "organization": {
+          "links": {
+            "self": "https://staging.wisdompanel.com/api/v1/kits/9ba7315a-2ea5-4721-9d54-11bdacb19924/relationships/organization",
+            "related": "https://staging.wisdompanel.com/api/v1/kits/9ba7315a-2ea5-4721-9d54-11bdacb19924/organization"
+          }
+        },
+        "filiation-results": {
+          "links": {
+            "self": "https://staging.wisdompanel.com/api/v1/kits/9ba7315a-2ea5-4721-9d54-11bdacb19924/relationships/filiation-results",
+            "related": "https://staging.wisdompanel.com/api/v1/kits/9ba7315a-2ea5-4721-9d54-11bdacb19924/filiation-results"
+          }
+        },
+        "profiling-result": {
+          "links": {
+            "self": "https://staging.wisdompanel.com/api/v1/kits/9ba7315a-2ea5-4721-9d54-11bdacb19924/relationships/profiling-result",
+            "related": "https://staging.wisdompanel.com/api/v1/kits/9ba7315a-2ea5-4721-9d54-11bdacb19924/profiling-result"
+          }
+        },
+        "parentage-result": {
+          "links": {
+            "self": "https://staging.wisdompanel.com/api/v1/kits/9ba7315a-2ea5-4721-9d54-11bdacb19924/relationships/parentage-result",
+            "related": "https://staging.wisdompanel.com/api/v1/kits/9ba7315a-2ea5-4721-9d54-11bdacb19924/parentage-result"
+          }
+        }
+      }
+    }
+  ],
+  "included": [
+    {
+      "id": "8b85c33e-d689-4534-99e8-b4071c170a7f",
+      "type": "pets",
+      "links": {
+        "self": "https://staging.wisdompanel.com/api/v1/pets/8b85c33e-d689-4534-99e8-b4071c170a7f"
+      },
+      "attributes": {
+        "name": "Miso",
+        "nickname": null,
+        "story": null,
+        "birth-year": null,
+        "birth-month": null,
+        "birth-day": null,
+        "sex": "male",
+        "species": "dog",
+        "intact": true,
+        "location-display": null,
+        "location-types": [],
+        "location-latitude": null,
+        "location-longitude": null,
+        "public-location-city": null,
+        "public-location-state": null,
+        "public-location-country": null,
+        "public-location-latitude": null,
+        "public-location-longitude": null,
+        "custom-registry-name": null,
+        "registration-number": null,
+        "assigned-breed-type": null,
+        "assigned-custom-breed-name": null,
+        "country-of-origin": null,
+        "microchip-number": null,
+        "loi-roi": null,
+        "record-info": null,
+        "identification-tattoo": null,
+        "instagram-handle": null,
+        "share-level": "link_and_relatives",
+        "share-health": false,
+        "share-token": "g8d1hx2",
+        "organization-identity": "BANFIELD-VOYAGER-VYJKWVD",
+        "accepts-optional-email": true,
+        "report-viewed-by-owner": null,
+        "upgraded-report-viewed-by-owner": null,
+        "claimable": true,
+        "owner-first-name": "Gonzalo",
+        "owner-last-name": "Bellver",
+        "created-at": "2024-04-10T00:51:05.994Z",
+        "viewed-summary-at": null,
+        "viewed-ancestry-at": null,
+        "viewed-traits-at": null,
+        "viewed-health-at": null,
+        "viewed-profile-settings-at": null,
+        "viewed-share-card-at": null,
+        "viewed-share-settings-at": null,
+        "viewed-relatives-at": null,
+        "last-viewed-relatives-at": null,
+        "updated-share-settings-at": null,
+        "shared-card-at": null,
+        "shared-link-at": null,
+        "added-profile-image-at": null,
+        "generated-technical-report-at": null,
+        "closed-prompt-add-pet-photo-at": null,
+        "completed-typeform-onboarding-survey-at": null,
+        "closed-prompt-add-pet-location-at": null,
+        "active-result-set-viewed-at": null,
+        "closed-pet-gallery-tooltip-at": null,
+        "closed-behaviors-modal-at": null,
+        "closed-share-tooltip-at": null,
+        "reported-deceased-at": null,
+        "viewed-health-update-pop-up-at": null,
+        "viewed-bcsys-one-point-one-pop-up-at": null
+      },
+      "relationships": {
+        "owner": {
+          "links": {
+            "self": "https://staging.wisdompanel.com/api/v1/pets/8b85c33e-d689-4534-99e8-b4071c170a7f/relationships/owner",
+            "related": "https://staging.wisdompanel.com/api/v1/pets/8b85c33e-d689-4534-99e8-b4071c170a7f/owner"
+          }
+        },
+        "kits": {
+          "links": {
+            "self": "https://staging.wisdompanel.com/api/v1/pets/8b85c33e-d689-4534-99e8-b4071c170a7f/relationships/kits",
+            "related": "https://staging.wisdompanel.com/api/v1/pets/8b85c33e-d689-4534-99e8-b4071c170a7f/kits"
+          },
+          "data": [
+            {
+              "type": "kits",
+              "id": "9ba7315a-2ea5-4721-9d54-11bdacb19924"
+            }
+          ]
+        },
+        "profile-photo": {
+          "links": {
+            "self": "https://staging.wisdompanel.com/api/v1/pets/8b85c33e-d689-4534-99e8-b4071c170a7f/relationships/profile-photo",
+            "related": "https://staging.wisdompanel.com/api/v1/pets/8b85c33e-d689-4534-99e8-b4071c170a7f/profile-photo"
+          }
+        },
+        "pet-photos": {
+          "links": {
+            "self": "https://staging.wisdompanel.com/api/v1/pets/8b85c33e-d689-4534-99e8-b4071c170a7f/relationships/pet-photos",
+            "related": "https://staging.wisdompanel.com/api/v1/pets/8b85c33e-d689-4534-99e8-b4071c170a7f/pet-photos"
+          }
+        },
+        "pet-gallery-photos": {
+          "links": {
+            "self": "https://staging.wisdompanel.com/api/v1/pets/8b85c33e-d689-4534-99e8-b4071c170a7f/relationships/pet-gallery-photos",
+            "related": "https://staging.wisdompanel.com/api/v1/pets/8b85c33e-d689-4534-99e8-b4071c170a7f/pet-gallery-photos"
+          }
+        },
+        "registry": {
+          "links": {
+            "self": "https://staging.wisdompanel.com/api/v1/pets/8b85c33e-d689-4534-99e8-b4071c170a7f/relationships/registry",
+            "related": "https://staging.wisdompanel.com/api/v1/pets/8b85c33e-d689-4534-99e8-b4071c170a7f/registry"
+          }
+        },
+        "assigned-purebreed": {
+          "links": {
+            "self": "https://staging.wisdompanel.com/api/v1/pets/8b85c33e-d689-4534-99e8-b4071c170a7f/relationships/assigned-purebreed",
+            "related": "https://staging.wisdompanel.com/api/v1/pets/8b85c33e-d689-4534-99e8-b4071c170a7f/assigned-purebreed"
+          }
+        },
+        "assigned-crossbreed": {
+          "links": {
+            "self": "https://staging.wisdompanel.com/api/v1/pets/8b85c33e-d689-4534-99e8-b4071c170a7f/relationships/assigned-crossbreed",
+            "related": "https://staging.wisdompanel.com/api/v1/pets/8b85c33e-d689-4534-99e8-b4071c170a7f/assigned-crossbreed"
+          }
+        },
+        "assigned-breeds": {
+          "links": {
+            "self": "https://staging.wisdompanel.com/api/v1/pets/8b85c33e-d689-4534-99e8-b4071c170a7f/relationships/assigned-breeds",
+            "related": "https://staging.wisdompanel.com/api/v1/pets/8b85c33e-d689-4534-99e8-b4071c170a7f/assigned-breeds"
+          }
+        },
+        "organization-unit": {
+          "links": {
+            "self": "https://staging.wisdompanel.com/api/v1/pets/8b85c33e-d689-4534-99e8-b4071c170a7f/relationships/organization-unit",
+            "related": "https://staging.wisdompanel.com/api/v1/pets/8b85c33e-d689-4534-99e8-b4071c170a7f/organization-unit"
+          }
+        }
+      }
+    },
+    {
+      "id": "b25bee8f-6b42-49c6-ada4-4d7ff4d7e964",
+      "type": "pets",
+      "links": {
+        "self": "https://staging.wisdompanel.com/api/v1/pets/b25bee8f-6b42-49c6-ada4-4d7ff4d7e964"
+      },
+      "attributes": {
+        "name": "Miso",
+        "nickname": null,
+        "story": null,
+        "birth-year": null,
+        "birth-month": null,
+        "birth-day": null,
+        "sex": "male",
+        "species": "dog",
+        "intact": true,
+        "location-display": null,
+        "location-types": [],
+        "location-latitude": null,
+        "location-longitude": null,
+        "public-location-city": null,
+        "public-location-state": null,
+        "public-location-country": null,
+        "public-location-latitude": null,
+        "public-location-longitude": null,
+        "custom-registry-name": null,
+        "registration-number": null,
+        "assigned-breed-type": null,
+        "assigned-custom-breed-name": null,
+        "country-of-origin": null,
+        "microchip-number": null,
+        "loi-roi": null,
+        "record-info": null,
+        "identification-tattoo": null,
+        "instagram-handle": null,
+        "share-level": "link_and_relatives",
+        "share-health": false,
+        "share-token": "fr8zlxy",
+        "organization-identity": "BANFIELD-VOYAGER-VSMQCZR",
+        "accepts-optional-email": true,
+        "report-viewed-by-owner": null,
+        "upgraded-report-viewed-by-owner": null,
+        "claimable": true,
+        "owner-first-name": "Gonzalo",
+        "owner-last-name": "Bellver",
+        "created-at": "2024-04-02T13:14:13.484Z",
+        "viewed-summary-at": null,
+        "viewed-ancestry-at": null,
+        "viewed-traits-at": null,
+        "viewed-health-at": null,
+        "viewed-profile-settings-at": null,
+        "viewed-share-card-at": null,
+        "viewed-share-settings-at": null,
+        "viewed-relatives-at": null,
+        "last-viewed-relatives-at": null,
+        "updated-share-settings-at": null,
+        "shared-card-at": null,
+        "shared-link-at": null,
+        "added-profile-image-at": null,
+        "generated-technical-report-at": null,
+        "closed-prompt-add-pet-photo-at": null,
+        "completed-typeform-onboarding-survey-at": null,
+        "closed-prompt-add-pet-location-at": null,
+        "active-result-set-viewed-at": null,
+        "closed-pet-gallery-tooltip-at": null,
+        "closed-behaviors-modal-at": null,
+        "closed-share-tooltip-at": null,
+        "reported-deceased-at": null,
+        "viewed-health-update-pop-up-at": null,
+        "viewed-bcsys-one-point-one-pop-up-at": null
+      },
+      "relationships": {
+        "owner": {
+          "links": {
+            "self": "https://staging.wisdompanel.com/api/v1/pets/b25bee8f-6b42-49c6-ada4-4d7ff4d7e964/relationships/owner",
+            "related": "https://staging.wisdompanel.com/api/v1/pets/b25bee8f-6b42-49c6-ada4-4d7ff4d7e964/owner"
+          }
+        },
+        "kits": {
+          "links": {
+            "self": "https://staging.wisdompanel.com/api/v1/pets/b25bee8f-6b42-49c6-ada4-4d7ff4d7e964/relationships/kits",
+            "related": "https://staging.wisdompanel.com/api/v1/pets/b25bee8f-6b42-49c6-ada4-4d7ff4d7e964/kits"
+          },
+          "data": [
+            {
+              "type": "kits",
+              "id": "1cdf3f85-e3e0-4795-b582-a716fac2ad4c"
+            }
+          ]
+        },
+        "profile-photo": {
+          "links": {
+            "self": "https://staging.wisdompanel.com/api/v1/pets/b25bee8f-6b42-49c6-ada4-4d7ff4d7e964/relationships/profile-photo",
+            "related": "https://staging.wisdompanel.com/api/v1/pets/b25bee8f-6b42-49c6-ada4-4d7ff4d7e964/profile-photo"
+          }
+        },
+        "pet-photos": {
+          "links": {
+            "self": "https://staging.wisdompanel.com/api/v1/pets/b25bee8f-6b42-49c6-ada4-4d7ff4d7e964/relationships/pet-photos",
+            "related": "https://staging.wisdompanel.com/api/v1/pets/b25bee8f-6b42-49c6-ada4-4d7ff4d7e964/pet-photos"
+          }
+        },
+        "pet-gallery-photos": {
+          "links": {
+            "self": "https://staging.wisdompanel.com/api/v1/pets/b25bee8f-6b42-49c6-ada4-4d7ff4d7e964/relationships/pet-gallery-photos",
+            "related": "https://staging.wisdompanel.com/api/v1/pets/b25bee8f-6b42-49c6-ada4-4d7ff4d7e964/pet-gallery-photos"
+          }
+        },
+        "registry": {
+          "links": {
+            "self": "https://staging.wisdompanel.com/api/v1/pets/b25bee8f-6b42-49c6-ada4-4d7ff4d7e964/relationships/registry",
+            "related": "https://staging.wisdompanel.com/api/v1/pets/b25bee8f-6b42-49c6-ada4-4d7ff4d7e964/registry"
+          }
+        },
+        "assigned-purebreed": {
+          "links": {
+            "self": "https://staging.wisdompanel.com/api/v1/pets/b25bee8f-6b42-49c6-ada4-4d7ff4d7e964/relationships/assigned-purebreed",
+            "related": "https://staging.wisdompanel.com/api/v1/pets/b25bee8f-6b42-49c6-ada4-4d7ff4d7e964/assigned-purebreed"
+          }
+        },
+        "assigned-crossbreed": {
+          "links": {
+            "self": "https://staging.wisdompanel.com/api/v1/pets/b25bee8f-6b42-49c6-ada4-4d7ff4d7e964/relationships/assigned-crossbreed",
+            "related": "https://staging.wisdompanel.com/api/v1/pets/b25bee8f-6b42-49c6-ada4-4d7ff4d7e964/assigned-crossbreed"
+          }
+        },
+        "assigned-breeds": {
+          "links": {
+            "self": "https://staging.wisdompanel.com/api/v1/pets/b25bee8f-6b42-49c6-ada4-4d7ff4d7e964/relationships/assigned-breeds",
+            "related": "https://staging.wisdompanel.com/api/v1/pets/b25bee8f-6b42-49c6-ada4-4d7ff4d7e964/assigned-breeds"
+          }
+        },
+        "organization-unit": {
+          "links": {
+            "self": "https://staging.wisdompanel.com/api/v1/pets/b25bee8f-6b42-49c6-ada4-4d7ff4d7e964/relationships/organization-unit",
+            "related": "https://staging.wisdompanel.com/api/v1/pets/b25bee8f-6b42-49c6-ada4-4d7ff4d7e964/organization-unit"
+          }
+        }
+      }
+    }
+  ],
+  "meta": {
+    "record-count": 2
+  },
+  "links": {
+    "first": "https://staging.wisdompanel.com/api/v1/kits?filter%5Bhospital_number%5D=123&filter%5Bunacknowledged%5D=true&include=pet%2Cpet.owner&page%5Blimit%5D=600&page%5Boffset%5D=0&page%5Bskip-count%5D=false",
+    "last": "https://staging.wisdompanel.com/api/v1/kits?filter%5Bhospital_number%5D=123&filter%5Bunacknowledged%5D=true&include=pet%2Cpet.owner&page%5Blimit%5D=600&page%5Boffset%5D=0&page%5Bskip-count%5D=false"
+  }
+}

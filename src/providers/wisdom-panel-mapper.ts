@@ -2,7 +2,11 @@ import { Injectable } from '@nestjs/common'
 import {
   ClientPayload,
   CreateOrderPayload,
+  Order,
   OrderPatient,
+  OrderStatus,
+  Patient,
+  Veterinarian,
   VeterinarianPayload
 } from '@nominal-systems/dmi-engine-common'
 import { WisdomPanelMessageData } from '../interfaces/wisdom-panel-message-data.interface'
@@ -14,6 +18,8 @@ import {
   WisdomPanelPet,
   WisdomPanelVeterinarian
 } from '../interfaces/wisdom-panel-entities.interface'
+import { WisdomPanelKitItem, WisdomPanelPetItem } from '../interfaces/wisdom-panel-api-responses.interface'
+import { Client } from '@nominal-systems/dmi-engine-common/lib/interfaces/provider-service'
 
 @Injectable()
 export class WisdomPanelMapper {
@@ -29,6 +35,20 @@ export class WisdomPanelMapper {
         ...this.extractHospital(metadata),
         ...this.extractVeterinarian(payload.veterinarian)
       }
+    }
+  }
+
+  mapWisdomPanelKit (kit: WisdomPanelKitItem, pet: WisdomPanelPetItem): Order {
+    return {
+      externalId: kit.id,
+      // TODO(gb): map status
+      status: OrderStatus.SUBMITTED,
+      patient: this.mapPatient(pet),
+      client: this.mapClient(pet),
+      tests: [
+        { code: kit.attributes.code }
+      ],
+      veterinarian: this.mapVeterinarian(kit)
     }
   }
 
@@ -74,6 +94,29 @@ export class WisdomPanelMapper {
   extractVeterinarian (veterinarian: VeterinarianPayload): WisdomPanelVeterinarian {
     return {
       veterinarian_name: `${veterinarian.firstName} ${veterinarian.lastName}`
+    }
+  }
+
+  mapPatient (pet: WisdomPanelPetItem): Patient {
+    return {
+      name: pet.attributes.name,
+      // TODO(gb): map sex
+      sex: pet.attributes.sex,
+      // TODO(gb): map species
+      species: pet.attributes.species,
+    }
+  }
+
+  mapClient (pet: WisdomPanelPetItem): Client {
+    return {
+      firstName: pet.attributes['owner-first-name'],
+      lastName: pet.attributes['owner-last-name'],
+    }
+  }
+
+  mapVeterinarian (kit: WisdomPanelKitItem): Veterinarian {
+    return {
+      firstName: kit.attributes['veterinarian-name']
     }
   }
 }

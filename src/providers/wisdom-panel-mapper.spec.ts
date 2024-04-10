@@ -1,5 +1,6 @@
 import { WisdomPanelMapper } from './wisdom-panel-mapper'
-import { CreateOrderPayload } from '@nominal-systems/dmi-engine-common'
+import { CreateOrderPayload, OrderStatus } from '@nominal-systems/dmi-engine-common'
+import { WisdomPanelKitItem, WisdomPanelPetItem } from '../interfaces/wisdom-panel-api-responses.interface'
 
 describe('WisdomPanelMapper', () => {
   let mapper: WisdomPanelMapper
@@ -84,6 +85,67 @@ describe('WisdomPanelMapper', () => {
           birth_day: '24',
           birth_month: '04',
           birth_year: '2023'
+        }
+      })
+    })
+  })
+
+  describe('mapWisdomPanelKit()', () => {
+    it('should map a kit to an order', () => {
+      const kit: WisdomPanelKitItem = {
+        'id': '1cdf3f85-e3e0-4795-b582-a716fac2ad4c',
+        'type': 'kits',
+        'links': {
+          'self': 'https://staging.wisdompanel.com/api/v1/kits/1cdf3f85-e3e0-4795-b582-a716fac2ad4c'
+        },
+        'attributes': {
+          'code': 'VSMQCZR',
+          'active': true,
+          'enabled': true,
+          'activated': true,
+          'organization-identity': 'BANFIELD-VOYAGER-VSMQCZR',
+          'veterinarian-name': 'Dr. Foo',
+          'hospital-name': 'Test Hospital',
+          'hospital-number': '123',
+          'created-at': '2024-02-27T17:41:56.028Z'
+        },
+        'relationships': {}
+      }
+      const pet: WisdomPanelPetItem = {
+        'id': '8b85c33e-d689-4534-99e8-b4071c170a7f',
+        'type': 'pets',
+        'links': {
+          'self': 'https://staging.wisdompanel.com/api/v1/pets/8b85c33e-d689-4534-99e8-b4071c170a7f'
+        },
+        'attributes': {
+          'name': 'Miso',
+          'sex': 'male',
+          'species': 'dog',
+          'intact': true,
+          'organization-identity': 'BANFIELD-VOYAGER-VYJKWVD',
+          'owner-first-name': 'Gonzalo',
+          'owner-last-name': 'Bellver',
+          'created-at': '2024-04-10T00:51:05.994Z',
+        },
+        'relationships': {}
+      }
+      expect(mapper.mapWisdomPanelKit(kit, pet)).toEqual({
+        externalId: '1cdf3f85-e3e0-4795-b582-a716fac2ad4c',
+        status: OrderStatus.SUBMITTED,
+        patient: {
+          name: 'Miso',
+          sex: 'male',
+          species: 'dog'
+        },
+        client: {
+          firstName: 'Gonzalo',
+          lastName: 'Bellver'
+        },
+        tests: [
+          { code: 'VSMQCZR' }
+        ],
+        veterinarian: {
+          firstName: 'Dr. Foo'
         }
       })
     })
