@@ -2,7 +2,7 @@ import { Injectable, Logger } from '@nestjs/common'
 import {
   BaseProviderService,
   BatchResultsResponse,
-  Breed,
+  Breed, calculateHash,
   CreateOrderPayload,
   Device,
   IdPayload,
@@ -22,6 +22,7 @@ import { WisdomPanelMessageData } from '../interfaces/wisdom-panel-message-data.
 import { WisdomPanelApiService } from './wisdom-panel-api.service'
 import { WisdomPanelMapper } from '../providers/wisdom-panel-mapper'
 import { WisdomPanelCreatePetPayload } from '../interfaces/wisdom-panel-api-payloads.interface'
+import { WisdomPanelKitItem } from '../interfaces/wisdom-panel-api-responses.interface'
 
 @Injectable()
 export class WisdomPanelService extends BaseProviderService<WisdomPanelMessageData> {
@@ -80,14 +81,6 @@ export class WisdomPanelService extends BaseProviderService<WisdomPanelMessageDa
     throw new Error('Method not implemented')
   }
 
-  public getBreeds (payload: NullPayloadPayload, metadata: WisdomPanelMessageData): Promise<ReferenceDataResponse<Breed>> {
-    throw new Error('Method not implemented')
-  }
-
-  public getDevices (payload: NullPayloadPayload, metadata: WisdomPanelMessageData): Promise<Device[]> {
-    throw new Error('Method not implemented')
-  }
-
   public getOrder (payload: IdPayload, metadata: WisdomPanelMessageData): Promise<Order> {
     throw new Error('Method not implemented')
   }
@@ -100,17 +93,59 @@ export class WisdomPanelService extends BaseProviderService<WisdomPanelMessageDa
     throw new Error('Method not implemented')
   }
 
-  public getServices (payload: NullPayloadPayload, metadata: WisdomPanelMessageData): Promise<Service[]> {
-    throw new Error('Method not implemented')
+  async getServices (payload: NullPayloadPayload, metadata: WisdomPanelMessageData): Promise<Service[]> {
+    const kits: WisdomPanelKitItem[] = await this.wisdomPanelApiService.getAvailableKits(metadata.providerConfiguration)
+    return kits.map(kit => ({
+      code: kit.attributes.code,
+      name: kit.attributes['organization-identity']
+    }))
   }
 
-  public getSexes (payload: NullPayloadPayload, metadata: WisdomPanelMessageData): Promise<ReferenceDataResponse<Sex>> {
-    throw new Error('Method not implemented')
+  public getSexes (): Promise<ReferenceDataResponse<Sex>> {
+    const items: Sex[] = [
+      {
+        code: 'male',
+        name: 'MALE'
+      },
+      {
+        code: 'female',
+        name: 'FEMALE'
+      }
+    ]
+
+    return Promise.resolve({
+      items,
+      hash: calculateHash(items)
+    })
   }
 
-  public getSpecies (payload: NullPayloadPayload, metadata: WisdomPanelMessageData): Promise<ReferenceDataResponse<Species>> {
-    throw new Error('Method not implemented')
+  public getDevices (): Promise<Device[]> {
+    return Promise.resolve([])
   }
 
+  public getSpecies (): Promise<ReferenceDataResponse<Species>> {
+    const items: Species[] = [
+      {
+        code: 'dog',
+        name: 'CANINE'
+      },
+      {
+        code: 'cat',
+        name: 'FELINE'
+      }
+    ]
+
+    return Promise.resolve({
+      items,
+      hash: calculateHash(items)
+    })
+  }
+
+  public getBreeds (): Promise<ReferenceDataResponse<Breed>> {
+    return Promise.resolve({
+      items: [],
+      hash: calculateHash([])
+    })
+  }
 
 }

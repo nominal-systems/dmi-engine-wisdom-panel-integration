@@ -2,7 +2,12 @@ import { Injectable, Logger } from '@nestjs/common'
 import { HttpService } from '@nestjs/axios'
 import { BaseApiService } from '@nominal-systems/dmi-engine-common'
 import { WisdomPanelApiConfig, WisdomPanelCreatePetPayload } from '../interfaces/wisdom-panel-api-payloads.interface'
-import { OAuthTokenResponse, WisdomPanelPetCreatedResponse } from '../interfaces/wisdom-panel-api-responses.interface'
+import {
+  OAuthTokenResponse,
+  WisdomPanelKitItem,
+  WisdomPanelKitsResponse,
+  WisdomPanelPetCreatedResponse
+} from '../interfaces/wisdom-panel-api-responses.interface'
 import { WisdomPanelApiEndpoints } from '../interfaces/wisdom-panel-api-endpoints.interface'
 
 @Injectable()
@@ -23,6 +28,23 @@ export class WisdomPanelApiService extends BaseApiService {
       }
       const response = await this.post<OAuthTokenResponse>(`${config.baseUrl}${WisdomPanelApiEndpoints.AUTH}`, payload, {})
       return response.access_token
+    } catch (error) {
+      throw new Error(`[HTTP ${error.status}] ${error.message}`)
+    }
+  }
+
+  async getAvailableKits (config: WisdomPanelApiConfig): Promise<WisdomPanelKitItem[]> {
+    try {
+      const token = await this.authenticate(config)
+      const reqConfig = {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`
+        }
+      }
+      // TODO(gb): filter by available kits for a specific hospital
+      const response: WisdomPanelKitsResponse = await this.get<WisdomPanelKitsResponse>(`${config.baseUrl}${WisdomPanelApiEndpoints.GET_KITS}`, reqConfig)
+      return response.data
     } catch (error) {
       throw new Error(`[HTTP ${error.status}] ${error.message}`)
     }
