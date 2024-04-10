@@ -1,0 +1,136 @@
+{
+  "data": {
+    "id": "b25bee8f-6b42-49c6-ada4-4d7ff4d7e964",
+    "type": "pets",
+    "links": {
+      "self": "https://staging.wisdompanel.com/api/v1/pets/b25bee8f-6b42-49c6-ada4-4d7ff4d7e964"
+    },
+    "attributes": {
+      "name": "Miso",
+      "nickname": null,
+      "story": null,
+      "birth-year": null,
+      "birth-month": null,
+      "birth-day": null,
+      "sex": "male",
+      "species": "dog",
+      "intact": true,
+      "location-display": null,
+      "location-types": [],
+      "location-latitude": null,
+      "location-longitude": null,
+      "public-location-city": null,
+      "public-location-state": null,
+      "public-location-country": null,
+      "public-location-latitude": null,
+      "public-location-longitude": null,
+      "custom-registry-name": null,
+      "registration-number": null,
+      "assigned-breed-type": null,
+      "assigned-custom-breed-name": null,
+      "country-of-origin": null,
+      "microchip-number": null,
+      "loi-roi": null,
+      "record-info": null,
+      "identification-tattoo": null,
+      "instagram-handle": null,
+      "share-level": "link_and_relatives",
+      "share-health": false,
+      "share-token": "fr8zlxy",
+      "organization-identity": "BANFIELD-VOYAGER-VSMQCZR",
+      "accepts-optional-email": true,
+      "report-viewed-by-owner": null,
+      "upgraded-report-viewed-by-owner": null,
+      "claimable": true,
+      "owner-first-name": "Gonzalo",
+      "owner-last-name": "Bellver",
+      "created-at": "2024-04-02T13:14:13.484Z",
+      "viewed-summary-at": null,
+      "viewed-ancestry-at": null,
+      "viewed-traits-at": null,
+      "viewed-health-at": null,
+      "viewed-profile-settings-at": null,
+      "viewed-share-card-at": null,
+      "viewed-share-settings-at": null,
+      "viewed-relatives-at": null,
+      "last-viewed-relatives-at": null,
+      "updated-share-settings-at": null,
+      "shared-card-at": null,
+      "shared-link-at": null,
+      "added-profile-image-at": null,
+      "generated-technical-report-at": null,
+      "closed-prompt-add-pet-photo-at": null,
+      "completed-typeform-onboarding-survey-at": null,
+      "closed-prompt-add-pet-location-at": null,
+      "active-result-set-viewed-at": null,
+      "closed-pet-gallery-tooltip-at": null,
+      "closed-behaviors-modal-at": null,
+      "closed-share-tooltip-at": null,
+      "reported-deceased-at": null,
+      "viewed-health-update-pop-up-at": null,
+      "viewed-bcsys-one-point-one-pop-up-at": null
+    },
+    "relationships": {
+      "owner": {
+        "links": {
+          "self": "https://staging.wisdompanel.com/api/v1/pets/b25bee8f-6b42-49c6-ada4-4d7ff4d7e964/relationships/owner",
+          "related": "https://staging.wisdompanel.com/api/v1/pets/b25bee8f-6b42-49c6-ada4-4d7ff4d7e964/owner"
+        }
+      },
+      "kits": {
+        "links": {
+          "self": "https://staging.wisdompanel.com/api/v1/pets/b25bee8f-6b42-49c6-ada4-4d7ff4d7e964/relationships/kits",
+          "related": "https://staging.wisdompanel.com/api/v1/pets/b25bee8f-6b42-49c6-ada4-4d7ff4d7e964/kits"
+        }
+      },
+      "profile-photo": {
+        "links": {
+          "self": "https://staging.wisdompanel.com/api/v1/pets/b25bee8f-6b42-49c6-ada4-4d7ff4d7e964/relationships/profile-photo",
+          "related": "https://staging.wisdompanel.com/api/v1/pets/b25bee8f-6b42-49c6-ada4-4d7ff4d7e964/profile-photo"
+        }
+      },
+      "pet-photos": {
+        "links": {
+          "self": "https://staging.wisdompanel.com/api/v1/pets/b25bee8f-6b42-49c6-ada4-4d7ff4d7e964/relationships/pet-photos",
+          "related": "https://staging.wisdompanel.com/api/v1/pets/b25bee8f-6b42-49c6-ada4-4d7ff4d7e964/pet-photos"
+        }
+      },
+      "pet-gallery-photos": {
+        "links": {
+          "self": "https://staging.wisdompanel.com/api/v1/pets/b25bee8f-6b42-49c6-ada4-4d7ff4d7e964/relationships/pet-gallery-photos",
+          "related": "https://staging.wisdompanel.com/api/v1/pets/b25bee8f-6b42-49c6-ada4-4d7ff4d7e964/pet-gallery-photos"
+        }
+      },
+      "registry": {
+        "links": {
+          "self": "https://staging.wisdompanel.com/api/v1/pets/b25bee8f-6b42-49c6-ada4-4d7ff4d7e964/relationships/registry",
+          "related": "https://staging.wisdompanel.com/api/v1/pets/b25bee8f-6b42-49c6-ada4-4d7ff4d7e964/registry"
+        }
+      },
+      "assigned-purebreed": {
+        "links": {
+          "self": "https://staging.wisdompanel.com/api/v1/pets/b25bee8f-6b42-49c6-ada4-4d7ff4d7e964/relationships/assigned-purebreed",
+          "related": "https://staging.wisdompanel.com/api/v1/pets/b25bee8f-6b42-49c6-ada4-4d7ff4d7e964/assigned-purebreed"
+        }
+      },
+      "assigned-crossbreed": {
+        "links": {
+          "self": "https://staging.wisdompanel.com/api/v1/pets/b25bee8f-6b42-49c6-ada4-4d7ff4d7e964/relationships/assigned-crossbreed",
+          "related": "https://staging.wisdompanel.com/api/v1/pets/b25bee8f-6b42-49c6-ada4-4d7ff4d7e964/assigned-crossbreed"
+        }
+      },
+      "assigned-breeds": {
+        "links": {
+          "self": "https://staging.wisdompanel.com/api/v1/pets/b25bee8f-6b42-49c6-ada4-4d7ff4d7e964/relationships/assigned-breeds",
+          "related": "https://staging.wisdompanel.com/api/v1/pets/b25bee8f-6b42-49c6-ada4-4d7ff4d7e964/assigned-breeds"
+        }
+      },
+      "organization-unit": {
+        "links": {
+          "self": "https://staging.wisdompanel.com/api/v1/pets/b25bee8f-6b42-49c6-ada4-4d7ff4d7e964/relationships/organization-unit",
+          "related": "https://staging.wisdompanel.com/api/v1/pets/b25bee8f-6b42-49c6-ada4-4d7ff4d7e964/organization-unit"
+        }
+      }
+    }
+  }
+}

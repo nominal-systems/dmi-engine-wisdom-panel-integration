@@ -2,7 +2,8 @@ import { Injectable, Logger } from '@nestjs/common'
 import {
   BaseProviderService,
   BatchResultsResponse,
-  Breed, calculateHash,
+  Breed,
+  calculateHash,
   CreateOrderPayload,
   Device,
   IdPayload,
@@ -22,7 +23,7 @@ import { WisdomPanelMessageData } from '../interfaces/wisdom-panel-message-data.
 import { WisdomPanelApiService } from './wisdom-panel-api.service'
 import { WisdomPanelMapper } from '../providers/wisdom-panel-mapper'
 import { WisdomPanelCreatePetPayload } from '../interfaces/wisdom-panel-api-payloads.interface'
-import { WisdomPanelKitItem } from '../interfaces/wisdom-panel-api-responses.interface'
+import { WisdomPanelKitItem, WisdomPanelKitsResponse } from '../interfaces/wisdom-panel-api-responses.interface'
 
 @Injectable()
 export class WisdomPanelService extends BaseProviderService<WisdomPanelMessageData> {
@@ -53,6 +54,31 @@ export class WisdomPanelService extends BaseProviderService<WisdomPanelMessageDa
     }
   }
 
+  async getBatchOrders (payload: NullPayloadPayload, metadata: WisdomPanelMessageData): Promise<Order[]> {
+    const orders: Order[] = []
+    try {
+      const response: WisdomPanelKitsResponse = await this.wisdomPanelApiService.getUnacknowledgedKitsForHospital(metadata.integrationOptions.hospitalNumber, metadata.providerConfiguration)
+      for (const kit of response.data) {
+        const pet = response.included.find((include) => {
+          return include.type === 'pets' && include.id === kit.relationships?.pet?.data?.id
+        })
+        if (pet === undefined) {
+          this.logger.warn(`Pet not found for kit ${kit.id}`)
+          continue
+        }
+
+        const order: Order = this.wisdomPanelMapper.mapWisdomPanelKit(kit, pet)
+        orders.push(order)
+        this.logger.debug(`Found order ${order.externalId} (kit code: ${kit.attributes.code})`)
+      }
+
+    } catch (error) {
+      throw new Error(`Failed to get batch orders: ${error.message}`)
+    }
+
+    return orders
+  }
+
   public acknowledgeOrder (payload: IdPayload, metadata: WisdomPanelMessageData): Promise<void> {
     throw new Error('Method not implemented')
   }
@@ -70,10 +96,6 @@ export class WisdomPanelService extends BaseProviderService<WisdomPanelMessageDa
   }
 
   public createRequisitionId (payload: NullPayloadPayload, metadata: WisdomPanelMessageData): string {
-    throw new Error('Method not implemented')
-  }
-
-  public getBatchOrders (payload: NullPayloadPayload, metadata: WisdomPanelMessageData): Promise<Order[]> {
     throw new Error('Method not implemented')
   }
 

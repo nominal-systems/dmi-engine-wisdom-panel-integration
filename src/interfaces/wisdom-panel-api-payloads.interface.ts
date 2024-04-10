@@ -20,3 +20,14 @@ export interface WisdomPanelCreatePetPayload {
     & WisdomPanelHospital
     & WisdomPanelVeterinarian
 }
+
+export interface WisdomPanelKitQuery extends WisdomPanelKitFiler, WisdomPanelInclude {}
+
+export interface WisdomPanelKitFiler {
+  unacknowledged?: boolean
+  hospital_number?: string
+}
+
+export interface WisdomPanelInclude {
+  include?: string
+}

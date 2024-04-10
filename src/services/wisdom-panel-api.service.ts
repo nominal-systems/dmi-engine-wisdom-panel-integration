@@ -1,7 +1,12 @@
 import { Injectable, Logger } from '@nestjs/common'
 import { HttpService } from '@nestjs/axios'
 import { BaseApiService } from '@nominal-systems/dmi-engine-common'
-import { WisdomPanelApiConfig, WisdomPanelCreatePetPayload } from '../interfaces/wisdom-panel-api-payloads.interface'
+import {
+  WisdomPanelApiConfig,
+  WisdomPanelCreatePetPayload,
+  WisdomPanelInclude,
+  WisdomPanelKitFiler
+} from '../interfaces/wisdom-panel-api-payloads.interface'
 import {
   OAuthTokenResponse,
   WisdomPanelKitItem,
@@ -18,7 +23,7 @@ export class WisdomPanelApiService extends BaseApiService {
     super(httpService)
   }
 
-  async authenticate (config: WisdomPanelApiConfig): Promise<string> {
+  private async authenticate (config: WisdomPanelApiConfig): Promise<string> {
     try {
       const payload = {
         username: config.username,
@@ -33,21 +38,38 @@ export class WisdomPanelApiService extends BaseApiService {
     }
   }
 
-  async getAvailableKits (config: WisdomPanelApiConfig): Promise<WisdomPanelKitItem[]> {
+  async getKits (filter: WisdomPanelKitFiler = {}, include: WisdomPanelInclude = {}, config: WisdomPanelApiConfig): Promise<WisdomPanelKitsResponse> {
     try {
       const token = await this.authenticate(config)
+      const query = {
+        ...include
+      }
+      for (const key of Object.keys(filter)) {
+        query[`filter[${key}]`] = filter[key]
+      }
       const reqConfig = {
+        params: query,
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`
         }
       }
-      // TODO(gb): filter by available kits for a specific hospital
-      const response: WisdomPanelKitsResponse = await this.get<WisdomPanelKitsResponse>(`${config.baseUrl}${WisdomPanelApiEndpoints.GET_KITS}`, reqConfig)
-      return response.data
+      return await this.get<WisdomPanelKitsResponse>(`${config.baseUrl}${WisdomPanelApiEndpoints.GET_KITS}`, reqConfig)
     } catch (error) {
       throw new Error(`[HTTP ${error.status}] ${error.message}`)
     }
+  }
+
+  async getUnacknowledgedKitsForHospital (hospitalNumber: string, config: WisdomPanelApiConfig): Promise<WisdomPanelKitsResponse> {
+    return await this.getKits({
+      hospital_number: hospitalNumber,
+      unacknowledged: true
+    }, { include: 'pet,pet.owner' }, config)
+  }
+
+  async getAvailableKits (config: WisdomPanelApiConfig): Promise<WisdomPanelKitItem[]> {
+    const response = await this.getKits({}, {}, config)
+    return response.data
   }
 
   async createPet (payload: WisdomPanelCreatePetPayload, config: WisdomPanelApiConfig): Promise<WisdomPanelPetCreatedResponse> {
