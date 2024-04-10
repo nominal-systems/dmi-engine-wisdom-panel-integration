@@ -16,3 +16,18 @@ export interface WisdomPanelPetCreatedResponse {
     requisition_form: string
   }
 }
+
+export interface WisdomPanelKitsResponse {
+  data: WisdomPanelKitItem[]
+}
+
+export interface WisdomPanelKitItem {
+  id: string,
+  type: 'kits',
+  links: any[],
+  attributes: {
+    code: string,
+    'organization-identity': string,
+  },
+  relationships: any
+}
