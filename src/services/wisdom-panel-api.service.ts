@@ -165,7 +165,9 @@ export class WisdomPanelApiService extends BaseApiService {
         }
       }
       const payload = {
-        'kit_ids': kitIds
+        data: {
+          'kit_ids': kitIds
+        }
       }
       await this.post(`${config.baseUrl}${WisdomPanelApiEndpoints.ACKNOWLEDGE_KITS}`, payload, reqConfig)
       this.logger.debug(`Acknowledged ${kitIds.length} kit${kitIds.length > 1 ? 's' : ''}: ${kitIds.join(', ')}`)
@@ -184,7 +186,9 @@ export class WisdomPanelApiService extends BaseApiService {
         }
       }
       const payload = {
-        'result_set_ids': resultSetIds
+        data: {
+          'result_set_ids': resultSetIds
+        }
       }
       await this.post(`${config.baseUrl}${WisdomPanelApiEndpoints.ACKNOWLEDGE_RESULT_SETS}`, payload, reqConfig)
       this.logger.debug(`Acknowledged ${resultSetIds.length} result set${resultSetIds.length > 1 ? 's' : ''}: ${resultSetIds.join(', ')}`)
