@@ -4,7 +4,6 @@ import {
   CreateOrderPayload,
   Order,
   OrderPatient,
-  OrderStatus,
   Patient,
   Result,
   Veterinarian,
@@ -12,7 +11,14 @@ import {
 } from '@nominal-systems/dmi-engine-common'
 import { WisdomPanelMessageData } from '../interfaces/wisdom-panel-message-data.interface'
 import { WisdomPanelCreatePetPayload, } from '../interfaces/wisdom-panel-api-payloads.interface'
-import { extractClientPetId, extractKitCode, extractPetId, mapPetSex, mapPetSpecies } from '../common/mapper-utils'
+import {
+  extractClientPetId,
+  extractKitCode,
+  extractPetId,
+  mapKitStatus,
+  mapPetSex,
+  mapPetSpecies
+} from '../common/mapper-utils'
 import {
   WisdomPanelClient,
   WisdomPanelHospital,
@@ -22,7 +28,8 @@ import {
 import {
   WisdomPanelKitItem,
   WisdomPanelPetItem,
-  WisdomPanelSimpleResult
+  WisdomPanelSimpleResult,
+  WisdomPanelStatusesItem
 } from '../interfaces/wisdom-panel-api-responses.interface'
 import { Client } from '@nominal-systems/dmi-engine-common/lib/interfaces/provider-service'
 
@@ -43,11 +50,10 @@ export class WisdomPanelMapper {
     }
   }
 
-  mapWisdomPanelKit (kit: WisdomPanelKitItem, pet: WisdomPanelPetItem): Order {
+  mapWisdomPanelKit (kit: WisdomPanelKitItem, pet: WisdomPanelPetItem, kitStatus?: WisdomPanelStatusesItem): Order {
     return {
       externalId: kit.id,
-      // TODO(gb): map status
-      status: OrderStatus.SUBMITTED,
+      status: mapKitStatus(kit.attributes['current-stage']),
       patient: this.mapPatient(pet),
       client: this.mapClient(pet),
       tests: [

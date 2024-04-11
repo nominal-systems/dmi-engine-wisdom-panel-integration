@@ -10,9 +10,9 @@
         "code": "VSMQCZR",
         "inbound-tracking-code": null,
         "outbound-tracking-code": null,
-        "current-stage": null,
+        "current-stage": "report-ready",
         "current-failure": null,
-        "stage-updated-at": null,
+        "stage-updated-at": "2024-04-10T19:14:31.343Z",
         "legacy-url": null,
         "active": true,
         "enabled": true,
@@ -21,7 +21,7 @@
         "created-at": "2024-02-27T17:41:56.028Z",
         "lab-order-number": null,
         "sample-received-on": null,
-        "report-ready-on": null,
+        "report-ready-on": "2024-04-10T19:14:31.343Z",
         "can-upgrade": false,
         "disabled-at": null,
         "kit-type-name-override": null,
@@ -37,7 +37,7 @@
         "hospital-state": null,
         "hospital-country": null,
         "hospital-postal-code": null,
-        "profiling-result-present": false,
+        "profiling-result-present": true,
         "hospital-name": "Test Hospital",
         "hospital-number": "123"
       },
@@ -56,7 +56,13 @@
           "links": {
             "self": "https://staging.wisdompanel.com/api/v1/kits/1cdf3f85-e3e0-4795-b582-a716fac2ad4c/relationships/statuses",
             "related": "https://staging.wisdompanel.com/api/v1/kits/1cdf3f85-e3e0-4795-b582-a716fac2ad4c/statuses"
-          }
+          },
+          "data": [
+            {
+              "type": "statuses",
+              "id": "072e2291-aecb-40a0-b7a6-6edcc82063d8"
+            }
+          ]
         },
         "kit-type": {
           "links": {
@@ -136,9 +142,9 @@
         "code": "VYJKWVD",
         "inbound-tracking-code": null,
         "outbound-tracking-code": null,
-        "current-stage": null,
+        "current-stage": "report-ready",
         "current-failure": null,
-        "stage-updated-at": null,
+        "stage-updated-at": "2024-04-10T19:14:33.222Z",
         "legacy-url": null,
         "active": true,
         "enabled": true,
@@ -147,7 +153,7 @@
         "created-at": "2024-02-27T17:41:56.028Z",
         "lab-order-number": null,
         "sample-received-on": null,
-        "report-ready-on": null,
+        "report-ready-on": "2024-04-10T19:14:33.222Z",
         "can-upgrade": false,
         "disabled-at": null,
         "kit-type-name-override": null,
@@ -163,7 +169,7 @@
         "hospital-state": null,
         "hospital-country": null,
         "hospital-postal-code": null,
-        "profiling-result-present": false,
+        "profiling-result-present": true,
         "hospital-name": "Test Hospital",
         "hospital-number": "123"
       },
@@ -182,7 +188,13 @@
           "links": {
             "self": "https://staging.wisdompanel.com/api/v1/kits/9ba7315a-2ea5-4721-9d54-11bdacb19924/relationships/statuses",
             "related": "https://staging.wisdompanel.com/api/v1/kits/9ba7315a-2ea5-4721-9d54-11bdacb19924/statuses"
-          }
+          },
+          "data": [
+            {
+              "type": "statuses",
+              "id": "9a174fe8-538b-4966-a296-3d2d5e100757"
+            }
+          ]
         },
         "kit-type": {
           "links": {
@@ -533,13 +545,63 @@
           }
         }
       }
+    },
+    {
+      "id": "072e2291-aecb-40a0-b7a6-6edcc82063d8",
+      "type": "statuses",
+      "links": {
+        "self": "https://staging.wisdompanel.com/api/v1/statuses/072e2291-aecb-40a0-b7a6-6edcc82063d8"
+      },
+      "attributes": {
+        "code": "report_ready",
+        "stage": "report-ready",
+        "sample-lifecycle-status": "ReportProcessed",
+        "created-at": "2024-04-10T19:14:31.343Z"
+      },
+      "relationships": {
+        "kit": {
+          "links": {
+            "self": "https://staging.wisdompanel.com/api/v1/statuses/072e2291-aecb-40a0-b7a6-6edcc82063d8/relationships/kit",
+            "related": "https://staging.wisdompanel.com/api/v1/statuses/072e2291-aecb-40a0-b7a6-6edcc82063d8/kit"
+          },
+          "data": {
+            "type": "kits",
+            "id": "1cdf3f85-e3e0-4795-b582-a716fac2ad4c"
+          }
+        }
+      }
+    },
+    {
+      "id": "9a174fe8-538b-4966-a296-3d2d5e100757",
+      "type": "statuses",
+      "links": {
+        "self": "https://staging.wisdompanel.com/api/v1/statuses/9a174fe8-538b-4966-a296-3d2d5e100757"
+      },
+      "attributes": {
+        "code": "report_ready",
+        "stage": "report-ready",
+        "sample-lifecycle-status": "ReportProcessed",
+        "created-at": "2024-04-10T19:14:33.222Z"
+      },
+      "relationships": {
+        "kit": {
+          "links": {
+            "self": "https://staging.wisdompanel.com/api/v1/statuses/9a174fe8-538b-4966-a296-3d2d5e100757/relationships/kit",
+            "related": "https://staging.wisdompanel.com/api/v1/statuses/9a174fe8-538b-4966-a296-3d2d5e100757/kit"
+          },
+          "data": {
+            "type": "kits",
+            "id": "9ba7315a-2ea5-4721-9d54-11bdacb19924"
+          }
+        }
+      }
     }
   ],
   "meta": {
     "record-count": 2
   },
   "links": {
-    "first": "https://staging.wisdompanel.com/api/v1/kits?filter%5Bhospital_number%5D=123&filter%5Bunacknowledged%5D=true&include=pet%2Cpet.owner&page%5Blimit%5D=600&page%5Boffset%5D=0&page%5Bskip-count%5D=false",
-    "last": "https://staging.wisdompanel.com/api/v1/kits?filter%5Bhospital_number%5D=123&filter%5Bunacknowledged%5D=true&include=pet%2Cpet.owner&page%5Blimit%5D=600&page%5Boffset%5D=0&page%5Bskip-count%5D=false"
+    "first": "https://staging.wisdompanel.com/api/v1/kits?filter%5Bhospital_number%5D=123&filter%5Bunacknowledged%5D=true&include=pet%2Cpet.owner%2Cstatuses&page%5Blimit%5D=600&page%5Boffset%5D=0&page%5Bskip-count%5D=false",
+    "last": "https://staging.wisdompanel.com/api/v1/kits?filter%5Bhospital_number%5D=123&filter%5Bunacknowledged%5D=true&include=pet%2Cpet.owner%2Cstatuses&page%5Blimit%5D=600&page%5Boffset%5D=0&page%5Bskip-count%5D=false"
   }
 }

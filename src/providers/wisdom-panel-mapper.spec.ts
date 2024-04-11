@@ -103,6 +103,7 @@ describe('WisdomPanelMapper', () => {
           'active': true,
           'enabled': true,
           'activated': true,
+          'current-stage': 'shipped',
           'organization-identity': 'BANFIELD-VOYAGER-VSMQCZR',
           'veterinarian-name': 'Dr. Foo',
           'hospital-name': 'Test Hospital',
