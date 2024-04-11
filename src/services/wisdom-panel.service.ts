@@ -62,7 +62,7 @@ export class WisdomPanelService extends BaseProviderService<WisdomPanelMessageDa
     const orders: Order[] = []
     try {
       const response: WisdomPanelKitsResponse = await this.wisdomPanelApiService.getUnacknowledgedKitsForHospital(metadata.integrationOptions.hospitalNumber, metadata.providerConfiguration)
-      this.logger.debug(`Found ${response.data.length} unacknowledged kit${response.data.length > 1 ? 's' : ''} for hospital '${metadata.integrationOptions.hospitalNumber}'`)
+      this.logger.debug(`Found ${response.data.length} kit${response.data.length === 1 ? '' : 's'} for hospital '${metadata.integrationOptions.hospitalNumber}'`)
       for (const kit of response.data) {
         const pet = response.included.find((include): include is WisdomPanelPetItem => {
           return include.type === 'pets' && include.id === kit.relationships?.pet?.data?.id
@@ -97,7 +97,7 @@ export class WisdomPanelService extends BaseProviderService<WisdomPanelMessageDa
 
     try {
       const response: WisdomPanelResultSetsResponse = await this.wisdomPanelApiService.getUnacknowledgedResultSetsForHospital(metadata.integrationOptions.hospitalNumber, metadata.providerConfiguration)
-      this.logger.debug(`Found ${response.data.length} unacknowledged result set${response.data.length > 1 ? 's' : ''} for hospital '${metadata.integrationOptions.hospitalNumber}'`)
+      this.logger.debug(`Found ${response.data.length} result set${response.data.length === 1 ? '' : 's'} for hospital '${metadata.integrationOptions.hospitalNumber}'`)
       for (const resultSet of response.data) {
         const kitId = resultSet.relationships.kit.data?.id
         const kit = response.included
