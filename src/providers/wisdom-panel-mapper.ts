@@ -28,6 +28,7 @@ import {
 import {
   WisdomPanelKitItem,
   WisdomPanelPetItem,
+  WisdomPanelResultSetItem,
   WisdomPanelSimpleResult,
   WisdomPanelStatusesItem
 } from '../interfaces/wisdom-panel-api-responses.interface'
@@ -63,9 +64,11 @@ export class WisdomPanelMapper {
     }
   }
 
-  mapWisdomPanelSimpleResult (simpleResult: WisdomPanelSimpleResult): Result {
+  mapWisdomPanelResult (resultSet: WisdomPanelResultSetItem, simpleResult: WisdomPanelSimpleResult): Result {
     // TODO(gb): map result
-    return {} as unknown as Result
+    return {
+      id: resultSet.id
+    } as unknown as Result
   }
 
   extractPet (patient: OrderPatient): Omit<WisdomPanelPet, 'id'> {
