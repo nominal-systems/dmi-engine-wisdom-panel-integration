@@ -5,13 +5,16 @@ import {
   WisdomPanelApiConfig,
   WisdomPanelCreatePetPayload,
   WisdomPanelInclude,
-  WisdomPanelKitFiler
+  WisdomPanelKitFiler,
+  WisdomPanelResultSetsFilter
 } from '../interfaces/wisdom-panel-api-payloads.interface'
 import {
   OAuthTokenResponse,
   WisdomPanelKitItem,
   WisdomPanelKitsResponse,
-  WisdomPanelPetCreatedResponse
+  WisdomPanelPetCreatedResponse,
+  WisdomPanelResultSetsResponse,
+  WisdomPanelSimpleResultResponse
 } from '../interfaces/wisdom-panel-api-responses.interface'
 import { WisdomPanelApiEndpoints } from '../interfaces/wisdom-panel-api-endpoints.interface'
 
@@ -60,7 +63,62 @@ export class WisdomPanelApiService extends BaseApiService {
     }
   }
 
+  async getResultSets (filter: WisdomPanelResultSetsFilter = {}, include: WisdomPanelInclude = {}, config: WisdomPanelApiConfig): Promise<WisdomPanelResultSetsResponse> {
+    try {
+      const token = await this.authenticate(config)
+      const query = {
+        ...include
+      }
+      for (const key of Object.keys(filter)) {
+        query[`filter[${key}]`] = filter[key]
+      }
+      const reqConfig = {
+        params: query,
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`
+        }
+      }
+      return await this.get<WisdomPanelResultSetsResponse>(`${config.baseUrl}${WisdomPanelApiEndpoints.GET_RESULT_SETS}`, reqConfig)
+    } catch (error) {
+      throw new Error(`[HTTP ${error.status}] ${error.message}`)
+    }
+  }
+
+  async getSimplifiedResultSets (kitId, config: WisdomPanelApiConfig): Promise<WisdomPanelSimpleResultResponse> {
+    try {
+      const token = await this.authenticate(config)
+      const reqConfig = {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`
+        }
+      }
+      return await this.get<WisdomPanelSimpleResultResponse>(`${config.baseUrl}${WisdomPanelApiEndpoints.GET_SIMPLIFIED_RESULT_SETS}/${kitId}`, reqConfig)
+    } catch (error) {
+      throw new Error(`[HTTP ${error.status}] ${error.message}`)
+    }
+  }
+
+  async getUnacknowledgedResultSetsForHospital (hospitalNumber: string, config: WisdomPanelApiConfig): Promise<WisdomPanelResultSetsResponse> {
+    const response = await this.getResultSets({ unacknowledged: true }, { include: 'kit' }, config)
+
+    // Filter kits for hospital
+    const kitsForHospital: Array<WisdomPanelKitItem> = response.included.filter((include) => include.attributes['hospital-number'] === hospitalNumber)
+    response.included = kitsForHospital
+
+    // Filter result sets for hospital
+    const kitIds = kitsForHospital.map(kit => kit.id)
+    response.data = response.data.filter((resultSet) => {
+      const kitId: string = resultSet.relationships.kit.data !== undefined ? resultSet.relationships.kit.data.id : ''
+      return kitIds.includes(kitId)
+    })
+
+    return response
+  }
+
   async getUnacknowledgedKitsForHospital (hospitalNumber: string, config: WisdomPanelApiConfig): Promise<WisdomPanelKitsResponse> {
+    // TODO(gb): include statuses
     return await this.getKits({
       hospital_number: hospitalNumber,
       unacknowledged: true

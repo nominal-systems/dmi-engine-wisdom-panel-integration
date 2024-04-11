@@ -169,7 +169,36 @@ export interface WisdomPanelLinks {
     related?: string
   }
   data?: {
-    type: 'pets'
+    type: 'pets' | 'kits'
     id: string
   }
+}
+
+export interface WisdomPanelResultSetsResponse {
+  data: WisdomPanelResultSetItem[]
+  included: Array<WisdomPanelKitItem>
+}
+
+export interface WisdomPanelResultSetItem extends WisdomPanelLinks {
+  id: string
+  type: 'result-sets'
+  attributes: {
+    'genotype-chip-version': string,
+    'created-at': string,
+    'acknowledged-at'?: string
+  }
+  relationships: {
+    kit: WisdomPanelLinks
+  }
+}
+
+export interface WisdomPanelSimpleResultResponse {
+  message: string
+  data: WisdomPanelSimpleResult
+}
+
+export interface WisdomPanelSimpleResult {
+  breed_percentages?: any[]
+  ideal_weight_result?: any
+  notable_and_at_risk_health_test_results: any[]
 }

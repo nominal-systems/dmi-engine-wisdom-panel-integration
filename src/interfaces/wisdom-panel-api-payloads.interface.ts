@@ -21,11 +21,14 @@ export interface WisdomPanelCreatePetPayload {
     & WisdomPanelVeterinarian
 }
 
-export interface WisdomPanelKitQuery extends WisdomPanelKitFiler, WisdomPanelInclude {}
 
 export interface WisdomPanelKitFiler {
   unacknowledged?: boolean
   hospital_number?: string
+}
+
+export interface WisdomPanelResultSetsFilter {
+  unacknowledged?: boolean
 }
 
 export interface WisdomPanelInclude {

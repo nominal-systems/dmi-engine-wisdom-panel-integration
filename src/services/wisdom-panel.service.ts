@@ -23,7 +23,11 @@ import { WisdomPanelMessageData } from '../interfaces/wisdom-panel-message-data.
 import { WisdomPanelApiService } from './wisdom-panel-api.service'
 import { WisdomPanelMapper } from '../providers/wisdom-panel-mapper'
 import { WisdomPanelCreatePetPayload } from '../interfaces/wisdom-panel-api-payloads.interface'
-import { WisdomPanelKitItem, WisdomPanelKitsResponse } from '../interfaces/wisdom-panel-api-responses.interface'
+import {
+  WisdomPanelKitItem,
+  WisdomPanelKitsResponse,
+  WisdomPanelResultSetsResponse
+} from '../interfaces/wisdom-panel-api-responses.interface'
 
 @Injectable()
 export class WisdomPanelService extends BaseProviderService<WisdomPanelMessageData> {
@@ -79,6 +83,35 @@ export class WisdomPanelService extends BaseProviderService<WisdomPanelMessageDa
     return orders
   }
 
+  async getBatchResults (payload: NullPayloadPayload, metadata: WisdomPanelMessageData): Promise<BatchResultsResponse> {
+    const batchResults: BatchResultsResponse = {
+      results: []
+    }
+
+    try {
+      const response: WisdomPanelResultSetsResponse = await this.wisdomPanelApiService.getUnacknowledgedResultSetsForHospital(metadata.integrationOptions.hospitalNumber, metadata.providerConfiguration)
+      this.logger.debug(`Found ${response.data.length} unacknowledged result set${response.data.length > 1 ? 's' : ''} for hospital '${metadata.integrationOptions.hospitalNumber}'`)
+      for (const resultSet of response.data) {
+        const kitId = resultSet.relationships.kit.data?.id
+        const kit = response.included
+          .find((include) => {
+          return include.type === 'kits' && include.id === kitId
+        })
+        if (kit === undefined) {
+          this.logger.warn(`Kit not found for result set ${resultSet.id}`)
+          continue
+        }
+        
+        const simplifiedResults = await this.wisdomPanelApiService.getSimplifiedResultSets(kitId, metadata.providerConfiguration)
+        batchResults.results.push(this.wisdomPanelMapper.mapWisdomPanelSimpleResult(simplifiedResults.data))
+      }
+    } catch (error) {
+      throw new Error(`Failed to get batch results: ${error.message}`)
+    }
+
+    return batchResults
+  }
+
   public acknowledgeOrder (payload: IdPayload, metadata: WisdomPanelMessageData): Promise<void> {
     throw new Error('Method not implemented')
   }
@@ -96,10 +129,6 @@ export class WisdomPanelService extends BaseProviderService<WisdomPanelMessageDa
   }
 
   public createRequisitionId (payload: NullPayloadPayload, metadata: WisdomPanelMessageData): string {
-    throw new Error('Method not implemented')
-  }
-
-  public getBatchResults (payload: NullPayloadPayload, metadata: WisdomPanelMessageData): Promise<BatchResultsResponse> {
     throw new Error('Method not implemented')
   }
 

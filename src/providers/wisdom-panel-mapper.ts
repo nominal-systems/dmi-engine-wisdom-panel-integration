@@ -6,6 +6,7 @@ import {
   OrderPatient,
   OrderStatus,
   Patient,
+  Result,
   Veterinarian,
   VeterinarianPayload
 } from '@nominal-systems/dmi-engine-common'
@@ -18,7 +19,11 @@ import {
   WisdomPanelPet,
   WisdomPanelVeterinarian
 } from '../interfaces/wisdom-panel-entities.interface'
-import { WisdomPanelKitItem, WisdomPanelPetItem } from '../interfaces/wisdom-panel-api-responses.interface'
+import {
+  WisdomPanelKitItem,
+  WisdomPanelPetItem,
+  WisdomPanelSimpleResult
+} from '../interfaces/wisdom-panel-api-responses.interface'
 import { Client } from '@nominal-systems/dmi-engine-common/lib/interfaces/provider-service'
 
 @Injectable()
@@ -50,6 +55,11 @@ export class WisdomPanelMapper {
       ],
       veterinarian: this.mapVeterinarian(kit)
     }
+  }
+
+  mapWisdomPanelSimpleResult (simpleResult: WisdomPanelSimpleResult): Result {
+    // TODO(gb): map result
+    return {} as unknown as Result
   }
 
   extractPet (patient: OrderPatient): Omit<WisdomPanelPet, 'id'> {

@@ -8,6 +8,7 @@ import { WisdomPanelMapper } from './providers/wisdom-panel-mapper'
 import { WisdomPanelApiService } from './services/wisdom-panel-api.service'
 import { WisdomPanelController } from './controllers/wisdom-panel.controller'
 import { OrdersProcessor } from './processors/orders.processors'
+import { ResultsProcessor } from './processors/results.processor'
 
 @Module({
   imports: [
@@ -37,7 +38,8 @@ import { OrdersProcessor } from './processors/orders.processors'
     WisdomPanelService,
     WisdomPanelApiService,
     WisdomPanelMapper,
-    OrdersProcessor
+    OrdersProcessor,
+    ResultsProcessor
   ],
   controllers: [
     WisdomPanelController

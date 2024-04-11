@@ -1,0 +1,539 @@
+{
+  "message": "success",
+  "data": {
+    "breed_percentages": [
+      {
+        "percentage": 48,
+        "breed": {
+          "id": "7d69accf-ffbc-5699-a76f-57fe6ddfc3ce",
+          "slug": "boxer",
+          "breed_group_id": "d2e74867-59e2-57ab-8a06-deb6cb83c902",
+          "weight_range_pet_min": "22.2",
+          "weight_range_pet_max": "34.9",
+          "weight_range_show_min": "24.9",
+          "weight_range_show_max": "29.9",
+          "height_range_min": "53.0",
+          "height_range_max": "64.0",
+          "life_span_range_min": "10.0",
+          "life_span_range_max": "12.0",
+          "created_at": "2020-05-11T17:40:53.182Z",
+          "updated_at": "2024-02-05T15:11:38.890Z",
+          "external_updated_at": "2021-03-29T19:20:31.000Z",
+          "external_id": "boxer",
+          "external_source": "airtable",
+          "head_image_id": "8c7d126a-7f1c-408f-a101-bc296fda0be3",
+          "color_image_id": "c9b32c87-0ad2-44ad-b769-62fcf47f090b",
+          "bw_image_id": "05d3d783-0c2d-488c-a8bd-52b8e5e8c0fd",
+          "breed_size_group_id": "5fba23a3-e27b-5cbc-b046-edf7bbd7ad34",
+          "internal_name": "Boxer",
+          "references": "https://www.akc.org/dog-breeds/boxer/\n\nhttps://vcahospitals.com/know-your-pet/dog-breeds/boxer",
+          "reviewed_by": "Cindy Elston, DVM, MPH",
+          "date_reviewed": "2020-07-26T19:00:00.000Z",
+          "species": "dog",
+          "recommended_activity_mins_young": 101,
+          "recommended_activity_mins_adult": 65,
+          "recommended_activity_mins_senior": 43,
+          "allow_user_entry": true,
+          "locales": [
+            "US",
+            "UK"
+          ],
+          "name": {
+            "en": "Boxer"
+          },
+          "plural_name": {
+            "en": "Boxers"
+          },
+          "history": {
+            "en": "The history of the Boxer dates back to 19th century Germany. Now extinct, ancestors of the Boxer included the Bullenbeiszer and the Barenbeiszer, which were used for hunting deer and boar. The crossing of these breeds with the English Bulldogs of the 1830s resulted in the Boxer as we know it today.\n\nBoxers were bred to be hunting dogs, and they earned their name from the boxing pose they take when standing on their hind legs. Later in the breed's development, they also gained some ability for herding.\n\nOver the years, Boxers have taken on many roles. These include athlete, cattle dog, police dog, war dog (in both World Wars I and II), watchdog, protection dog, and guide dog for the blind. They were also used for dogfighting and bull-baiting until those activities were outlawed. And circuses even used Boxers for their ability to learn tricks quickly and perform them on command.\n\nThe popularity of Boxers started to increase rapidly in the 1860s when the German Boxer Klub was founded. At the turn of the 20th century, the Boxer made its way to the United States, and the American Kennel Club officially recognized the Boxer in 1904."
+          },
+          "facts": {
+            "en": "Boxers are intelligent, hardworking, and good-looking dogs. They are very loyal and affectionate to their family, as well as playful and gentle. This makes them great with children. So, it's no wonder that the Boxer has earned a reputation as one of America's most popular dog breeds."
+          },
+          "traits_appearance": {
+            "en": "The Boxer has a rippled, muscular look. Their dark brown eyes and wrinkled forehead contribute to their alert and curious expression. A well-shaped head and a broad, blunt muzzle are common characteristics of the Boxer. The breed's stride is like that of an athlete: sleek and effortless, with a powerful forward thrust."
+          },
+          "traits_coat_and_coloring": {
+            "en": "Boxer coats can be fawn or brindle with white markings. The breed doesn't do well in freezing weather due to its short coat."
+          },
+          "traits_physical": {
+            "en": "Boxers are medium-sized and sturdy. They can be stocky or lean with a short back, sturdy limbs, and a short coat that shows off their bodies' contours. The well-developed muscles of the Boxer are clean, hard, and appear smooth under taut skin."
+          },
+          "temperament": {
+            "en": "The upbeat Boxer is very active, playful, and curious. It has a gentle nature and is good with other animals. Known to paw at their toys and food, Boxers can be expressive of their needs and temperament.\n\nA very protective breed, Boxers make excellent watchdogs and family guardians. Yet, they are typically friendly toward strangers. To promote their social development, you should expose them to various people and other animals in early puppyhood.\n\nBoxers are incredibly energetic and powerful even as puppies. So, bringing one into a home with young children or elderly adults may be unwise."
+          },
+          "care_nutrition": {
+            "en": "Boxers require a high-quality dog food that is age-appropriate—whether it's commercially manufactured or homemade (with a veterinarian's supervision and approval). For puppies, experts recommend a food formulated for large breeds.\n\nBoxers tend to stay at a healthy weight. But it's still important to monitor the amount of food you give your Boxer and reduce portions or restrict calories if your pup gains weight. Also, remember that giving too many treats in addition to regular meals can cause obesity."
+          },
+          "care_grooming": {
+            "en": "The short, shiny coat of the Boxer is relatively maintenance-free and requires little grooming. Shedding an average amount, Boxers are clean dogs that only need an occasional bath. Once or twice a week, brushing your Boxer with a rubber curry-brush or a hound glove will help keep them looking their best."
+          },
+          "care_exercise": {
+            "en": "As a high-energy and playful dog, the Boxer needs plenty of exercise every day—whether it's on a leash, in your yard, or in the park. It's not a good idea, however, to let them run loose."
+          },
+          "care_training": {
+            "en": "A brilliant breed, Boxers are quick to learn but can be both sensitive and stubborn. They love to jump, and when trained, their skills as guards, military dogs, and watchdogs are outstanding. But Boxers can get restless if they don't receive enough exercise.\n\nBecause they are hardwired to jump and leap about, Boxers need constant reminders when young to stay down. They really do best with firm owners who use reward-based training, set limits, and maintain control.\n\n[Socialization and puppy training classes]({%blogURL puppy-socialization%}) should start early to help channel the Boxer's energy. These dogs are highly intelligent and tend to hate repetition. So, offering a wide range of canine activities and mental stimulation that involve obedience, agility, and herding skills will help them be their best.\n\nBoxers are top-notch service, assistance, and therapy dogs, and they serve well in drug detection and search-and-rescue roles."
+          },
+          "care_health": null,
+          "published_at": "2023-07-05T16:27:26.614Z",
+          "country_codes": [
+            "US",
+            "GB"
+          ],
+          "ancestry_version_ids": [
+            "a726d077-0886-57b4-81d5-01362be36a09",
+            "b5bb33f8-400e-43f7-a48f-d6dfdcb8a6fa",
+            "ff9d3dfa-fad7-449e-bb69-ad820473897c"
+          ]
+        }
+      },
+      {
+        "percentage": 31,
+        "breed": {
+          "id": "a74b86ca-3f07-5143-9517-efdba17f9ad0",
+          "slug": "bulldog-standard",
+          "breed_group_id": "d2e74867-59e2-57ab-8a06-deb6cb83c902",
+          "weight_range_pet_min": "14.5",
+          "weight_range_pet_max": "30.8",
+          "weight_range_show_min": "15.9",
+          "weight_range_show_max": "24.9",
+          "height_range_min": "30.0",
+          "height_range_max": "41.0",
+          "life_span_range_min": "8.0",
+          "life_span_range_max": "10.0",
+          "created_at": "2020-05-11T17:39:56.836Z",
+          "updated_at": "2024-02-05T15:11:38.890Z",
+          "external_updated_at": "2021-03-29T19:20:31.000Z",
+          "external_id": "bulldog-standard",
+          "external_source": "airtable",
+          "head_image_id": "af8f8acd-e355-4f2b-a728-aa7d04d50de3",
+          "color_image_id": "e947bf5c-fac4-44d7-9475-72c15029b4b5",
+          "bw_image_id": "cc29eacb-6b08-4627-83f6-1e08b2e2fbb1",
+          "breed_size_group_id": "c678e1be-c426-5785-92df-14985140fb1d",
+          "internal_name": "Bulldog (Standard)",
+          "references": "https://www.akc.org/dog-breeds/bulldog/",
+          "reviewed_by": "Cindy Elston, DVM, MPH",
+          "date_reviewed": "2020-07-26T19:00:00.000Z",
+          "species": "dog",
+          "recommended_activity_mins_young": 81,
+          "recommended_activity_mins_adult": 43,
+          "recommended_activity_mins_senior": 34,
+          "allow_user_entry": true,
+          "locales": [
+            "US",
+            "UK"
+          ],
+          "name": {
+            "en": "Bulldog",
+            "pt": "Buldogue Inglês"
+          },
+          "plural_name": {
+            "en": "Bulldogs",
+            "pt": "Buldogues Inglêses"
+          },
+          "history": {
+            "en": "The Bulldog of today may look a bit like that of days gone by. But their personalities are nothing alike. Bulldogs were originally developed to be fierce bullfighters, with high pain tolerance and unparalleled aggression. But modern Bulldogs make for much friendlier pups.\n\nThe ancestors of Bulldogs—Bullenbeissers, Asian dogs resembling Mastiffs—served as military dogs for the Romans, Teutons, and Celts. And when the Bullenbeissers came to England, breeders worked to reduce the dog's overall size while increasing its head size. The resulting dog was very effective at bull baiting (i.e., pitting a bull against another animal), earning the name \"English Bulldog.\"\n\nExperts believe Bulldogs were first brought to the United States in 1735. Just 100 years later, bull-baiting was outlawed, and breeders started to eliminate the dog's aggressive tendencies. As a result, today's Bulldogs are much calmer and better suited to family life than the Bulldogs of the past."
+          },
+          "facts": {
+            "en": "Bulldogs are gentle, loving, and affectionate with their family. This docile, dignified, loyal breed adapts well, whether they live in an urban or rural setting."
+          },
+          "traits_appearance": {
+            "en": "Bulldogs have characteristically wide heads and shoulders, black, wide-set eyes, and a short muzzle."
+          },
+          "traits_coat_and_coloring": {
+            "en": "The Bulldog's short, smooth, and glossy coat comes in a variety of colors, including fallow, fawn, brindle, white, and red."
+          },
+          "traits_physical": {
+            "en": "The Bulldog has a recognizable look: loose skin on the head, a wrinkled brow, pushed-in nose, little ears, an underbite with an upturned lower jaw, and droopy skin flanking each side. They also have a unique rolling gait."
+          },
+          "temperament": {
+            "en": "Breeders have worked to reduce aggression in Bulldogs. Now, most dogs of this breed have an easygoing, patient disposition.\n\nThey're generally docile, sweet, and friendly. As such, Bulldogs make great family pets. They enjoy lots of attention, and they're eager to please (and curl up in a lap). Bulldogs typically befriend other pets but may be suspicious of unfamiliar dogs."
+          },
+          "care_nutrition": {
+            "en": "For healthy development, Bulldogs should be fed a high-quality pet food that is age-appropriate.\n\nBulldogs tend to stay at a good weight. But it's still wise to monitor food intake. Reduce portions or restrict calories if your pup gains weight. Also, remember that giving too many treats can contribute to obesity."
+          },
+          "care_grooming": {
+            "en": "Brushing your Bulldog from nose to tail with a soft brush for 10 minutes twice weekly will keep their coat looking good. During heavier shedding, you may want to use a rubber curry brush before the soft brush.\n\nBecause Bulldogs have heavily wrinkled faces, they need to be routinely checked to ensure their skin is clean and dry. Food or moisture can get caught in the wrinkles and cause irritation or infection. The ears and the area under the tail should be kept clean as well, and you should trim your Bulldog's nails every two weeks or so."
+          },
+          "care_exercise": {
+            "en": "Bulldogs need regular, moderate exercise. (A walk should do.) But you should limit strenuous exercise in the summer months. The Bulldog's short-nosed (a.k.a., brachycephalic) face can make breathing difficult if it's too hot and humid.\n\nBulldogs like to wade in shallow water. But they should never be allowed in water that's more than elbow deep unless carefully monitored."
+          },
+          "care_training": {
+            "en": "To help get your Bulldog off to a good start and curb unwelcome behaviors—such as chewing—begin [socialization]({%blogURL puppy-socialization%}) and training classes early. As your pup grows, firm but gentle training will help you overcome the breed's stubborn tendencies. Reward-based training with small treats is also key.\n\nBulldogs are less energetic than other breeds, but they still need exercise to avoid becoming obese. Once engaged in an activity, a Bulldog can be rather tenacious and eager to continue playing.\n\nTug-o-war is a game that Bulldogs love. But remember that [puppy training]({%blogURL dog-obedience-training%}) should include teaching your dog to release what's in their mouth on command. Relatedly, Bulldogs can be protective of their food. Nip this tendency in the bud by teaching your pup to be comfortable with people taking food from their bowl while they are eating."
+          },
+          "care_health": null,
+          "published_at": "2023-07-05T16:27:26.614Z",
+          "country_codes": [
+            "US",
+            "GB"
+          ],
+          "ancestry_version_ids": [
+            "a726d077-0886-57b4-81d5-01362be36a09",
+            "b5bb33f8-400e-43f7-a48f-d6dfdcb8a6fa",
+            "ff9d3dfa-fad7-449e-bb69-ad820473897c"
+          ]
+        }
+      },
+      {
+        "percentage": 14,
+        "breed": {
+          "id": "dc275478-d04b-5d7b-8c84-e95f0a8e1bad",
+          "slug": "bulldog-american",
+          "breed_group_id": "d2e74867-59e2-57ab-8a06-deb6cb83c902",
+          "weight_range_pet_min": "28.1",
+          "weight_range_pet_max": "53.5",
+          "weight_range_show_min": "27.2",
+          "weight_range_show_max": "54.4",
+          "height_range_min": "51.0",
+          "height_range_max": "71.0",
+          "life_span_range_min": "10.0",
+          "life_span_range_max": "12.0",
+          "created_at": "2020-05-11T17:40:53.453Z",
+          "updated_at": "2024-02-05T15:11:38.890Z",
+          "external_updated_at": "2021-03-29T19:20:31.000Z",
+          "external_id": "bulldog-american",
+          "external_source": "airtable",
+          "head_image_id": "c41c342f-f4bd-4d27-86cc-65f9c71eb539",
+          "color_image_id": "00073880-6893-4f39-a93d-7f600bc6f14e",
+          "bw_image_id": "e16eaa0b-e4aa-40bf-b5a8-54e0198bd865",
+          "breed_size_group_id": "5fba23a3-e27b-5cbc-b046-edf7bbd7ad34",
+          "internal_name": "Bulldog (American)",
+          "references": "https://www.akc.org/dog-breeds/american-bulldog/\n\nhttps://vcahospitals.com/know-your-pet/dog-breeds/bulldog",
+          "reviewed_by": "Cindy Elston, DVM, MPH",
+          "date_reviewed": "2020-07-26T19:00:00.000Z",
+          "species": "dog",
+          "recommended_activity_mins_young": 85,
+          "recommended_activity_mins_adult": 54,
+          "recommended_activity_mins_senior": 39,
+          "allow_user_entry": true,
+          "locales": [
+            "US",
+            "UK"
+          ],
+          "name": {
+            "en": "American Bulldog",
+            "pt": "Buldogue Americano"
+          },
+          "plural_name": {
+            "en": "American Bulldogs",
+            "pt": "Buldogue Americanos"
+          },
+          "history": {
+            "en": "The American Bulldog is considered the closest surviving relative of the Old English Bulldog. Experts believe Bulldogs arrived in the United States as early as the 17th century, along with immigrant farmers and ranchers who put them to work as farm guardians (protecting livestock), stock dogs (herding livestock), and catch dogs (catching and holding mature livestock for slaughter).\n\nBy the late 1940s, the Bulldogs approached extinction. But thanks to breeding programs set up by John D. Johnson and Alan Scott, the American Bulldog survived. There are now two American Bulldog types named after the breeders: the Johnson, also known as the classic or bully type, and the Scott, which is sometimes called the standard or performance type.\n\nIn 1970, the National Kennel Club officially recognized and registered the American Bulldog breed. The American Bulldog Association started in 1989. And a year later, the United Kennel Club recognized the breed in the working class."
+          },
+          "facts": {
+            "en": "American Bulldogs are powerful, alert, and self-confident dogs that demonstrate endurance and agility. Though they are known to be affectionate, loyal, and fun-loving companions that form stable bonds with their family members, American Bulldogs also have strong protective instincts."
+          },
+          "traits_appearance": {
+            "en": "Though they can vary in size and appearance depending on which line or strain they came from, American Bulldogs are typically stocky and well-built. The Johnson type American Bulldog is a large dog with a shorter muzzle, whereas the Scott type is smaller with a longer muzzle."
+          },
+          "traits_coat_and_coloring": {
+            "en": "The American Bulldog may be solid white or white with all shades of brindle (i.e., black with brown stripes), brown, red, fawn, or tan. The dog’s eyes are typically brown, which is the preferred color per the breed standard. Blue eyes can occur, but they are not common."
+          },
+          "traits_physical": {
+            "en": "American Bulldogs have large heads, powerful jaws, and beefy builds that include a deep, broad chest, broad back, and muscular shoulders. The breed’s natural tail is thick at the base and tapers to a point."
+          },
+          "temperament": {
+            "en": "American Bulldogs often serve as guard, hunting, and working dogs. They require daily mental and physical activity to prevent hyperactivity and undesirable behaviors. American Bulldogs also need firm, consistent [obedience training]({%blogURL dog-obedience-training%}) and socialization to be friendly toward strangers and easy to control in all situations. As such, this breed is best for experienced dog owners.\n\nAmerican Bulldogs can be wary of cats and other small pets and may react to strange dogs—especially those of the same sex. And there have been incidents of American Bulldog aggression toward other pets or people. But you can reduce the risk of such events through [early socialization]({%blogURL puppy-socialization%})."
+          },
+          "care_nutrition": {
+            "en": "American Bulldogs need a high-quality diet formulated for large dogs. To ensure slow and steady growth, they should eat large-breed puppy food for the first 14 months of life. And you should not feed them foods with added calcium until they are eating adult food."
+          },
+          "care_grooming": {
+            "en": "Grooming American Bulldogs is relatively easy. Their coats are fine and glossy, with moderate shedding. That means the breed needs only occasional brushing, and baths can typically wait until they get into something messy."
+          },
+          "care_exercise": {
+            "en": "The American Bulldog is an athletic breed. When young, the dogs shouldn’t engage in high-impact exercises. Otherwise, bone and joint damage are possible. Adult Bulldogs, on the other hand, can enjoy a range of invigorating activities—from jogs, hikes, and tug-a-war games to training exercises.\n\nAmerican Bulldogs often struggle when left alone for long periods. The boredom of solitude may drive them to develop a variety of behavior problems—such as chewing or digging. Meeting their needs for physical and mental stimulation can help prevent this."
+          },
+          "care_training": {
+            "en": "To help channel your American Bulldog’s energy, you should start socialization and puppy training classes early. It’s critical to establish rules and routines during puppyhood if you want your dog to behave once grown. And with this breed, you’ll need a firm but loving hand to set proper boundaries.\n\nIf exposed to good training practices, other dogs, and a variety of people, your American Bulldog will likely grow to be a well-mannered, manageable adult."
+          },
+          "care_health": null,
+          "published_at": "2023-07-05T16:27:26.614Z",
+          "country_codes": [
+            "US",
+            "GB"
+          ],
+          "ancestry_version_ids": [
+            "a726d077-0886-57b4-81d5-01362be36a09",
+            "b5bb33f8-400e-43f7-a48f-d6dfdcb8a6fa",
+            "ff9d3dfa-fad7-449e-bb69-ad820473897c"
+          ]
+        }
+      },
+      {
+        "percentage": 4,
+        "breed": {
+          "id": "de82a874-35b8-55a5-9805-bc5e61932d76",
+          "slug": "staffordshire-bull-terrier",
+          "breed_group_id": "d2e74867-59e2-57ab-8a06-deb6cb83c902",
+          "weight_range_pet_min": "10.4",
+          "weight_range_pet_max": "20.9",
+          "weight_range_show_min": "10.9",
+          "weight_range_show_max": "17.2",
+          "height_range_min": "33.0",
+          "height_range_max": "41.0",
+          "life_span_range_min": "12.0",
+          "life_span_range_max": "15.0",
+          "created_at": "2020-05-11T17:40:53.869Z",
+          "updated_at": "2024-02-05T15:11:38.890Z",
+          "external_updated_at": "2021-03-29T19:20:31.000Z",
+          "external_id": "staffordshire-bull-terrier",
+          "external_source": "airtable",
+          "head_image_id": "0e1b6d00-795c-4906-b2de-399e8abc77ce",
+          "color_image_id": "61b44feb-817d-48cd-bf6b-c8ab32f71e04",
+          "bw_image_id": "e10f293c-af06-4494-a752-42e5078bda4b",
+          "breed_size_group_id": "c678e1be-c426-5785-92df-14985140fb1d",
+          "internal_name": "Staffordshire Bull Terrier",
+          "references": "https://www.akc.org/dog-breeds/staffordshire-bull-terrier/",
+          "reviewed_by": "Annette Louviere, DVM",
+          "date_reviewed": "2020-07-26T19:00:00.000Z",
+          "species": "dog",
+          "recommended_activity_mins_young": 96,
+          "recommended_activity_mins_adult": 59,
+          "recommended_activity_mins_senior": 40,
+          "allow_user_entry": true,
+          "locales": [
+            "US",
+            "UK"
+          ],
+          "name": {
+            "en": "Staffordshire Bull Terrier"
+          },
+          "plural_name": {
+            "en": "Staffordshire Bull Terriers"
+          },
+          "history": {
+            "en": "The Staffordshire Bull Terrier originated in England in the 17th century. As the sport of bull-baiting declined in popularity and dogfights grew more common, the need for a smaller and more agile dog arose.\n\nTo develop this new dog, people bred [Bulldogs]({%breedURL bulldog-standard%}) to reduce their size. Experts think breeders then crossed these smaller Bulldogs with the Black and Tan Terrier to produce the Staffordshire Bull Terrier.\n\nDogfighting ultimately lost its popularity, and the sport was banned in 1835. Still, the Staffordshire Bull Terrier remained a favorite breed of working-class families. Eventually, a group of workers in the Staffordshire area preserved the breed by introducing it into the world of dog shows.\n\nThe Kennel Club in England officially accepted the breed in 1935, and the American Kennel Club followed suit in 1974."
+          },
+          "facts": {
+            "en": "The Staffordshire Bull Terrier is a loving, affectionate breed. Though protective of their family and, these active dogs are usually very friendly toward children and strangers. Staffordshire Bull Terriers have playful, curious natures and love spending time with their people."
+          },
+          "traits_appearance": {
+            "en": "The Staffordshire Bull Terrier is a medium-sized, powerful dog with a broad chest and strong shoulders. Despite these powerful features, they're a very agile breed."
+          },
+          "traits_coat_and_coloring": {
+            "en": "The short-haired Staffordshire Bull Terrier comes in many colors. These include red, fawn, black, white, blue (gray), brindle (black and brown striped), and lighter shades of brindle. Their coats are either a solid color or parti-color with white."
+          },
+          "traits_physical": {
+            "en": "The Staffordshire Bull Terrier has a short, broad head with distinct cheek muscles, wide jaw, short muzzle, and ears that fold over at the tips."
+          },
+          "temperament": {
+            "en": "The Staffordshire Bull Terrier is a smart, stubborn, and quiet breed. And don't be fooled by their tough exterior. These pups are gentle, docile, and sweet-natured. They've even earned the nickname \"nanny dogs\" because they're usually so good with children.\n\nStaffordshire Bull Terriers love being around people and want plenty of time to play. With enough exercise and mental stimulation, these dogs make well-behaved, loyal companions.\n\nSome Staffordshire Bull Terriers can be reactive toward dogs they don't know. Keep this in mind if yours is ever in a situation with unleashed dogs."
+          },
+          "care_nutrition": {
+            "en": "Staffordshire Bull Terriers need a high-quality dog food that is age-appropriate—whether it's commercially manufactured or homemade (under a veterinarian's supervision and approval).\n\nSome dogs are prone to becoming overweight. It's important to monitor the amount of food you give them and reduce portions if they gain weight. Also, remember that giving too many treats in addition to regular meals can contribute to obesity."
+          },
+          "care_grooming": {
+            "en": "Grooming a Staffordshire Bull Terrier is pretty effortless. Weekly brushing with a horsehair mitt or hound glove is usually all it takes to remove dead hairs.\n\nAs with all breeds, regular nail trimming is a must for Staffordshire Bull Terriers. Overly long nails can cause pain or lead to issues walking. And make sure to check your dog's ears often for wax buildup and debris, as both can lead to an infection."
+          },
+          "care_exercise": {
+            "en": "Keeping a Staffordshire Bull Terrier in tip-top shape requires regular exercise. These agile dogs enjoy activities such as flyball, rally, agility, and competitive obedience exercises.\n\nStaffordshire Bull Terriers don't do well in warm or humid weather. So, avoid overstraining them when providing exercise in these conditions."
+          },
+          "care_training": {
+            "en": "Because of their original breeding, Staffordshire Bull Terriers have a natural inclination to guard. Use [socialization]({%blogURL puppy-socialization%}) and firm, dedicated training to temper this tendency and make them safe household companions.\n\nStaffordshire Bull Terriers are an intelligent breed that learns easily and responds quickly. But they can be hard-headed. Reward-based training using small treats and favorite toys helps lessen their stubborn tendencies."
+          },
+          "care_health": null,
+          "published_at": "2023-07-05T16:27:26.614Z",
+          "country_codes": [
+            "US",
+            "GB"
+          ],
+          "ancestry_version_ids": [
+            "a726d077-0886-57b4-81d5-01362be36a09",
+            "b5bb33f8-400e-43f7-a48f-d6dfdcb8a6fa",
+            "ff9d3dfa-fad7-449e-bb69-ad820473897c"
+          ]
+        }
+      },
+      {
+        "percentage": 2,
+        "breed": {
+          "id": "5d2afe56-f331-5e2d-9790-cd60defafd82",
+          "slug": "mastiff",
+          "breed_group_id": "d2e74867-59e2-57ab-8a06-deb6cb83c902",
+          "weight_range_pet_min": "58.1",
+          "weight_range_pet_max": "90.7",
+          "weight_range_show_min": "69.9",
+          "weight_range_show_max": "89.8",
+          "height_range_min": "69.0",
+          "height_range_max": "76.0",
+          "life_span_range_min": "6.0",
+          "life_span_range_max": "10.0",
+          "created_at": "2020-05-11T17:40:23.944Z",
+          "updated_at": "2024-02-05T15:11:38.890Z",
+          "external_updated_at": "2021-03-29T19:20:31.000Z",
+          "external_id": "mastiff",
+          "external_source": "airtable",
+          "head_image_id": "a9061d41-8b68-43db-b7af-3c6f3a42fd09",
+          "color_image_id": "c75a36b2-eddb-4fda-a341-9f5c1ce56812",
+          "bw_image_id": "3bb9635c-8a5c-4bbf-afbf-946d0c3885cf",
+          "breed_size_group_id": "0a849324-93c5-5ae4-b777-a9dcec37c785",
+          "internal_name": "Mastiff",
+          "references": "https://www.mastiff.org/mastiff-history/\n\nhttps://www.akc.org/dog-breeds/mastiff/\n\nhttps://vcahospitals.com/know-your-pet/dog-breeds/mastiff",
+          "reviewed_by": "Annette Louviere, DVM",
+          "date_reviewed": "2020-07-26T19:00:00.000Z",
+          "species": "dog",
+          "recommended_activity_mins_young": 80,
+          "recommended_activity_mins_adult": 47,
+          "recommended_activity_mins_senior": 32,
+          "allow_user_entry": true,
+          "locales": [
+            "US",
+            "UK"
+          ],
+          "name": {
+            "en": "Mastiff"
+          },
+          "plural_name": {
+            "en": "Mastiffs"
+          },
+          "history": {
+            "en": "An ancestor to many modern purebred dogs, the Mastiff has been around since 2500 BC. Caesar praised the Mastiff for its fighting ability in 55 AD, and Phoenician sailors introduced the breed to England in the 6th century.\n\nThe breed participated in blood sports, such as bear-baiting, bull-baiting, lion-baiting, and dogfighting. Mastiffs also served in war. Legend has it that at the Battle of Agincourt in 1415, a Mastiff defended his wounded master, Sir Peers Legh, for many hours until he was rescued. This is just one example of what Mastiffs are known for: protecting their masters and property.\n\nThe Mastiff likely made its way to America aboard the Mayflower. But few Mastiffs were imported to the United States until the late 1800s. And after Britain passed laws in 1835 that banned baiting sports, the breed fell in popularity and began to disappear. After World War II, the Mastiff faced extinction. Fortunately, proponents of Mastiffs imported them and eventually re-established the breed."
+          },
+          "facts": {
+            "en": "Mastiffs are courageous, dignified, and good-natured companions that are extremely loyal to their family members. These large, protective dogs make calm and well-mannered house pets."
+          },
+          "traits_appearance": {
+            "en": "Huge dogs, Mastiffs weigh between 175 and 200 pounds on average."
+          },
+          "traits_coat_and_coloring": {
+            "en": "Mastiffs have short, dense double coats of fawn, apricot, or brindle with stripes."
+          },
+          "traits_physical": {
+            "en": "The rectangular-shaped body of the Mastiff is heavily muscled, and the head is prominent and massive. Trademarks of this breed include a wrinkled forehead, drooping jowls, a black mask around the eyes and nose, ears that flop downward, and a tail that sits high on the rear end."
+          },
+          "temperament": {
+            "en": "Mastiffs may be enormous, powerful, and impressive, but they are actually gentle giants in the dog world. They have calm, patient, and affectionate personalities, are relatively quiet, and demonstrate excellent skills as guards and watchdogs. Mastiffs can be very protective of family and territory. They may be suspicious of strangers who visit the home, but they don’t bark much.\n\nThis breed is generally good with children. That being said, all dogs require supervision when children are around. Mastiffs are eager to please and love attention and companionship."
+          },
+          "care_nutrition": {
+            "en": "Mastiffs grow quickly. Good nutrition—especially during the first two years of life—will support healthy development. Calcium and phosphorus ratios are particularly important in preventing skeletal disorders, which are common in this breed.\n\nFree-feeding your Mastiff is not ideal, as it can lead to excessive eating and weight gain. So, scheduled meals tend to be the recommended approach."
+          },
+          "care_grooming": {
+            "en": "Mastiffs are easy to groom due to their short, dense coat. A quick brushing every few days is usually sufficient. Extreme shedding occurs once or twice a year. At such times, more frequent grooming with a strong, toothed comb can help remove dead hair.\n\nDeep wrinkles surround the Mastiff’s head, eyes, and muzzle. You should check and clean these (and the ears) regularly. Likewise, keep your dog’s nails short to prevent discomfort and mobility problems.\n\nFinally, Mastiffs are the drooling type. So, you might want to have a spare cloth handy at all times for wiping."
+          },
+          "care_exercise": {
+            "en": "Mastiffs have relatively low exercise needs, and they can be quite the couch potato. But regular exercise is best for their health and happiness. Dog sports such as agility, carting, rally and competitive obedience, weight pull, and tracking are all great options for keeping your Mastiff active."
+          },
+          "care_training": {
+            "en": "Mastiffs are quite food-motivated and respond well to [reward-based training techniques]({%blogURL dog-obedience-training%}). Conversely, loud commands and forceful measures tend to activate the Mastiff’s stubborn tendencies.\n\n[Early socialization]({%blogURL puppy-socialization%}) with people and other pets is also critical for helping your Mastiff grow into a well-rounded, friendly companion."
+          },
+          "care_health": null,
+          "published_at": "2023-07-05T16:27:26.614Z",
+          "country_codes": [
+            "US",
+            "GB"
+          ],
+          "ancestry_version_ids": [
+            "a726d077-0886-57b4-81d5-01362be36a09",
+            "b5bb33f8-400e-43f7-a48f-d6dfdcb8a6fa",
+            "ff9d3dfa-fad7-449e-bb69-ad820473897c"
+          ]
+        }
+      },
+      {
+        "percentage": 1,
+        "breed": {
+          "id": "c12b6736-5c0b-522c-8a4c-1a230beb896e",
+          "slug": "american-pit-bull-terrier",
+          "breed_group_id": "d2e74867-59e2-57ab-8a06-deb6cb83c902",
+          "weight_range_pet_min": "13.5",
+          "weight_range_pet_max": "30.0",
+          "weight_range_show_min": "18.0",
+          "weight_range_show_max": "27.0",
+          "height_range_min": "43.0",
+          "height_range_max": "56.0",
+          "life_span_range_min": "8.0",
+          "life_span_range_max": "15.0",
+          "created_at": "2020-08-28T15:00:09.577Z",
+          "updated_at": "2024-02-05T15:11:38.890Z",
+          "external_updated_at": "2021-07-09T19:21:58.000Z",
+          "external_id": "american-pit-bull-terrier",
+          "external_source": "airtable",
+          "head_image_id": "ac62e43c-855d-5d1f-9f00-a5c9bf6f1dcb",
+          "color_image_id": "7e6a0848-0691-568f-a777-e3ba9e4b83b4",
+          "bw_image_id": "0b84d932-5d5f-55f6-ac89-dd8a5fc06971",
+          "breed_size_group_id": "c678e1be-c426-5785-92df-14985140fb1d",
+          "internal_name": "American Pit Bull Terrier",
+          "references": "https://www.ukcdogs.com/american-pit-bull-terrier\n\nhttps://pitbulls.org/article/brief-history-american-pit-bull-terrier\n\nhttps://www.akc.org/expert-advice/dog-breeds/american-staffordshire-terrier-history-amstaff/",
+          "reviewed_by": "Jamie Freyer, DVM",
+          "date_reviewed": "2021-07-09T19:21:00.000Z",
+          "species": "dog",
+          "recommended_activity_mins_young": null,
+          "recommended_activity_mins_adult": null,
+          "recommended_activity_mins_senior": null,
+          "allow_user_entry": true,
+          "locales": [
+            "US",
+            "UK"
+          ],
+          "name": {
+            "en": "American Pit Bull Terrier"
+          },
+          "plural_name": {
+            "en": "American Pit Bull Terriers"
+          },
+          "history": {
+            "en": "The American Pit Bull Terrier (APBT) dates back to 19th-century England when dog fanciers sought to create a dog with gameness, athleticism, and courage. They crossed various terriers and bulldogs, and the resulting dogs made their way to the United States in the late 1800s.\n\nThough originally used for dogfighting, these early pit dogs had a gentle, hard-working nature. As a result, the breed quickly gained a loyal following, and farmers began employing the dogs as herders, guardians, hunters, and companions.\n\nThe United Kennel Club was the first club to recognize the American Pit Bull Terrier in 1898. (Fun fact: The UKC founder’s own dog was the first to be registered.) And the American Dog Breeders Association accepted the APBT in 1909. APBTs have since appeared in TV shows, advertising, and even propaganda posters for the two World Wars. Today, this popular breed serves as a working dog, therapy dog, and devoted family companion.\n\nThe American Kennel Club was reluctant to register a breed once associated with dog fighting, which led to the creation of the related (but distinct) [American Staffordshire Terrier]({%breedURL american-staffordshire-terrier%}), originally called the Staffordshire Terrier, in 1936"
+          },
+          "facts": {
+            "en": "American Pit Bull Terriers are courageous, athletic dogs known for their loyalty and love of children. These eager-to-please pups have an enthusiastic, friendly nature and—when well-trained and socialized—make a great addition to many families."
+          },
+          "traits_appearance": {
+            "en": "The American Pit Bull Terrier is a medium-sized dog with a large, square head and powerful, athletic build."
+          },
+          "traits_coat_and_coloring": {
+            "en": "APBTs have short, smooth, glossy coats that are relatively stiff to the touch. They come in all colors and patterns except merle."
+          },
+          "traits_physical": {
+            "en": "American Pit Bull Terriers have broad heads shaped like a blunt wedge. Their ears are small-to-medium-sized and sit high on the head, and their eyes are small, placed well apart and deep set.\n\nThese dogs have deep chests and strong, firm backs. They carry their relatively short tails low when relaxed, level with their backs when moving, and raised when excited."
+          },
+          "temperament": {
+            "en": "Affectionate, joyful dogs, American Pit Bull Terriers make loyal family companions. They form strong bonds with their people and are loving and protective around children. But such a friendly nature—even towards strangers—often makes them ill-suited as guard dogs.\n\nAPBTs are happiest when with their family. They definitely prefer participating in activities and outings to spending long periods at home alone.\n\nThese brave, confident pups require [early socialization]({%blogURL puppy-socialization%}) and obedience training to help them develop into predictable, well-mannered adult dogs."
+          },
+          "care_nutrition": {
+            "en": "American Pit Bull Terriers thrive on a high-quality diet that's appropriate for their life stage. During puppyhood, consider feeding your dog a large-breed puppy formula to prevent them from growing too fast. Growing at a moderate pace can help prevent or reduce the severity of painful hip dysplasia later in life.\n\nRemember to monitor the amount of food you give your APBT and reduce portions back if they gain excess weight. And be sure to track calories from treats. Ideally, they should make up no more than 10% of a dog's daily caloric intake."
+          },
+          "care_grooming": {
+            "en": "The APBT's short coat is very low-maintenance. Weekly brushing with a soft-bristled brush and an occasional bath are generally all that’s needed to keep it in tip-top condition.\n\nTo reduce your dog's chance of ear infections, check their ears regularly and clean them as needed to remove wax build-up and debris. Nail trims should also be part of their grooming routine. If your pup's nails grow too long, they can cause pain and potentially lead to problems running or walking.\n\nLastly, a good [dental care]({%blogURL dog-dental-care%}) routine will support your dog's overall health. In addition to scheduling professional cleanings, create an at-home dental program that includes regular teeth brushing and veterinarian-recommended dental chews."
+          },
+          "care_exercise": {
+            "en": "As athletic dogs, American Pit Bull Terriers need daily exercise to stay happy and healthy. Ideal activities include long walks on a leash, runs (APBTs make excellent jogging buddies), or chasing a ball in the backyard.\n\nThese sporty dogs also enjoy agility, flyball, rally, lure coursing, and dock jumping. Another great option for this breed is competitive [obedience training]({%blogURL dog-obedience-training%}). It not only reinforces desired behaviors but also provides your dog with mental exercise."
+          },
+          "care_training": {
+            "en": "American Pit Bull Terriers are eager-to-please and relatively easy dogs to train. But they can be a little stubborn. As such, this breed responds best to firm and dedicated training using positive, reward-based methods."
+          },
+          "care_health": null,
+          "published_at": "2023-07-05T16:27:26.614Z",
+          "country_codes": [
+            "US",
+            "GB"
+          ],
+          "ancestry_version_ids": [
+            "b5bb33f8-400e-43f7-a48f-d6dfdcb8a6fa",
+            "ff9d3dfa-fad7-449e-bb69-ad820473897c"
+          ]
+        }
+      }
+    ],
+    "ideal_weight_result": {
+      "id": "cc6c126e-6d34-4c65-aad8-5de393555876",
+      "result_set_id": "066485f9-07c3-4471-8425-b1d3881ef901",
+      "female_pred_size": 24.4,
+      "female_min_size": 19.1,
+      "female_max_size": 32.2,
+      "male_pred_size": 28.4,
+      "male_min_size": 22.2,
+      "male_max_size": 37.2,
+      "spayed_pred_size": 25.8,
+      "spayed_min_size": 20.0,
+      "spayed_max_size": 32.7,
+      "neutered_pred_size": 29.9,
+      "neutered_min_size": 23.1,
+      "neutered_max_size": 37.6,
+      "created_at": "2022-11-14T18:54:41.996Z",
+      "updated_at": "2022-11-14T18:54:41.996Z"
+    },
+    "notable_and_at_risk_health_test_results": []
+  }
+}
