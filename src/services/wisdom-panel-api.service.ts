@@ -118,14 +118,19 @@ export class WisdomPanelApiService extends BaseApiService {
   }
 
   async getUnacknowledgedKitsForHospital (hospitalNumber: string, config: WisdomPanelApiConfig): Promise<WisdomPanelKitsResponse> {
-    // TODO(gb): include statuses
-    return await this.getKits({
-      hospital_number: hospitalNumber,
-      unacknowledged: true
-    }, { include: 'pet,pet.owner' }, config)
+    const filter: WisdomPanelKitFiler = {
+      unacknowledged: true,
+      hospital_number: hospitalNumber
+    }
+    // TODO(gb): do we need to include the statuses?
+    const include: WisdomPanelInclude = {
+      include: ['pet', 'pet.owner', 'statuses'].join(',')
+    }
+    return await this.getKits(filter, include, config)
   }
 
   async getAvailableKits (config: WisdomPanelApiConfig): Promise<WisdomPanelKitItem[]> {
+    // TODO(gb): get active but not activated kits for a hospital
     const response = await this.getKits({}, {}, config)
     return response.data
   }

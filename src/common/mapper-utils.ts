@@ -1,8 +1,11 @@
-import { ClientPayload, Identifier, OrderPatient, PimsIdentifiers, Test } from '@nominal-systems/dmi-engine-common'
-
-export function extractKitCode (tests: Test[]): string {
-  return tests[0].code
-}
+import {
+  ClientPayload,
+  Identifier,
+  OrderPatient,
+  OrderStatus,
+  PimsIdentifiers,
+  Test
+} from '@nominal-systems/dmi-engine-common'
 
 export function mapPetSpecies (species: string): 'dog' | 'cat' {
   switch (species) {
@@ -24,6 +27,26 @@ export function mapPetSex (sex: string): 'male' | 'female' {
     default:
       return 'male'
   }
+}
+
+export function mapKitStatus (status: string): OrderStatus {
+  switch (status) {
+    case 'shipped':
+    case 'waiting':
+      return OrderStatus.SUBMITTED
+    case 'processing':
+    case 'analyzing':
+    case 'generating-report':
+      return OrderStatus.PARTIAL
+    case 'report-ready':
+      return OrderStatus.COMPLETED
+    default:
+      return OrderStatus.SUBMITTED
+  }
+}
+
+export function extractKitCode (tests: Test[]): string {
+  return tests[0].code
 }
 
 export function extractPetId (patient: OrderPatient): string {

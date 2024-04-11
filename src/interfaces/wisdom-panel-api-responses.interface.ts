@@ -19,7 +19,7 @@ export interface WisdomPanelPetCreatedResponse {
 
 export interface WisdomPanelKitsResponse {
   data: WisdomPanelKitItem[]
-  included: Array<WisdomPanelPetItem>
+  included: Array<WisdomPanelPetItem | WisdomPanelStatusesItem>
 }
 
 export interface WisdomPanelKitItem extends WisdomPanelLinks {
@@ -31,13 +31,13 @@ export interface WisdomPanelKitItem extends WisdomPanelLinks {
     'active': boolean,
     'enabled': boolean,
     'activated': boolean,
+    'current-stage': string,
     'created-at': string,
     'veterinarian-name': 'Dr. Foo',
     'hospital-name': 'Test Hospital',
     'hospital-number': '123'
     'inbound-tracking-code'?: string,
     'outbound-tracking-code'?: string,
-    'current-stage'?: string,
     'current-failure'?: string,
     'stage-updated-at'?: string,
     'legacy-url'?: string,
@@ -163,17 +163,6 @@ export interface WisdomPanelPetItemRelationships {
   'organization-unit'?: WisdomPanelLinks
 }
 
-export interface WisdomPanelLinks {
-  links: {
-    self: string,
-    related?: string
-  }
-  data?: {
-    type: 'pets' | 'kits'
-    id: string
-  }
-}
-
 export interface WisdomPanelResultSetsResponse {
   data: WisdomPanelResultSetItem[]
   included: Array<WisdomPanelKitItem>
@@ -201,4 +190,27 @@ export interface WisdomPanelSimpleResult {
   breed_percentages?: any[]
   ideal_weight_result?: any
   notable_and_at_risk_health_test_results: any[]
+}
+
+export interface WisdomPanelStatusesItem extends WisdomPanelLinks {
+  id: string
+  type: 'statuses'
+  attributes: {
+    'code': string,
+    'stage': string,
+    'sample-lifecycle-status': string,
+    'created-at': string
+  }
+  relationships: any
+}
+
+export interface WisdomPanelLinks {
+  links: {
+    self: string,
+    related?: string
+  }
+  data?: {
+    type: 'pets' | 'kits'
+    id: string
+  }
 }

@@ -25,8 +25,8 @@ import { WisdomPanelMapper } from '../providers/wisdom-panel-mapper'
 import { WisdomPanelCreatePetPayload } from '../interfaces/wisdom-panel-api-payloads.interface'
 import {
   WisdomPanelKitItem,
-  WisdomPanelKitsResponse,
-  WisdomPanelResultSetsResponse
+  WisdomPanelKitsResponse, WisdomPanelPetItem,
+  WisdomPanelResultSetsResponse, WisdomPanelStatusesItem
 } from '../interfaces/wisdom-panel-api-responses.interface'
 
 @Injectable()
@@ -62,18 +62,25 @@ export class WisdomPanelService extends BaseProviderService<WisdomPanelMessageDa
     const orders: Order[] = []
     try {
       const response: WisdomPanelKitsResponse = await this.wisdomPanelApiService.getUnacknowledgedKitsForHospital(metadata.integrationOptions.hospitalNumber, metadata.providerConfiguration)
+      this.logger.debug(`Found ${response.data.length} unacknowledged kit${response.data.length > 1 ? 's' : ''} for hospital '${metadata.integrationOptions.hospitalNumber}'`)
       for (const kit of response.data) {
-        const pet = response.included.find((include) => {
+        const pet = response.included.find((include): include is WisdomPanelPetItem => {
           return include.type === 'pets' && include.id === kit.relationships?.pet?.data?.id
         })
+
         if (pet === undefined) {
           this.logger.warn(`Pet not found for kit ${kit.id}`)
           continue
         }
 
+        // TODO(gb): do we need the included statuses?
+        // const status = response.included.find((include): include is WisdomPanelStatusesItem => {
+        //   return include.type === 'statuses' && include.id === kit.relationships?.statuses?.data?.id
+        // })
+
         const order: Order = this.wisdomPanelMapper.mapWisdomPanelKit(kit, pet)
         orders.push(order)
-        this.logger.debug(`Found order ${order.externalId} (kit code: ${kit.attributes.code})`)
+        this.logger.debug(`Found kit ${order.externalId} (kit code: ${kit.attributes.code})`)
       }
 
     } catch (error) {
@@ -101,7 +108,8 @@ export class WisdomPanelService extends BaseProviderService<WisdomPanelMessageDa
           this.logger.warn(`Kit not found for result set ${resultSet.id}`)
           continue
         }
-        
+
+        this.logger.debug(`Found result set ${resultSet.id} (kit code: ${kit.attributes.code})`)
         const simplifiedResults = await this.wisdomPanelApiService.getSimplifiedResultSets(kitId, metadata.providerConfiguration)
         batchResults.results.push(this.wisdomPanelMapper.mapWisdomPanelSimpleResult(simplifiedResults.data))
       }
