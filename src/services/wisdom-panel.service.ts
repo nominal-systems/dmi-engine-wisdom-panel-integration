@@ -25,14 +25,14 @@ import { WisdomPanelMapper } from '../providers/wisdom-panel-mapper'
 import { WisdomPanelCreatePetPayload } from '../interfaces/wisdom-panel-api-payloads.interface'
 import {
   WisdomPanelKitItem,
-  WisdomPanelKitsResponse, WisdomPanelPetItem,
-  WisdomPanelResultSetsResponse, WisdomPanelStatusesItem
+  WisdomPanelKitsResponse,
+  WisdomPanelPetItem,
+  WisdomPanelResultSetsResponse
 } from '../interfaces/wisdom-panel-api-responses.interface'
 
 @Injectable()
 export class WisdomPanelService extends BaseProviderService<WisdomPanelMessageData> {
   private readonly logger: Logger = new Logger(WisdomPanelService.name)
-
 
   constructor (
     private readonly wisdomPanelApiService: WisdomPanelApiService,
@@ -41,7 +41,7 @@ export class WisdomPanelService extends BaseProviderService<WisdomPanelMessageDa
     super()
   }
 
-  public async createOrder (payload: CreateOrderPayload, metadata: WisdomPanelMessageData): Promise<OrderCreatedResponse> {
+  async createOrder (payload: CreateOrderPayload, metadata: WisdomPanelMessageData): Promise<OrderCreatedResponse> {
     try {
       const createPetPayload: WisdomPanelCreatePetPayload = this.wisdomPanelMapper.mapCreateOrderPayload(payload, metadata)
       const response = await this.wisdomPanelApiService.createPet(createPetPayload, metadata.providerConfiguration)
@@ -102,8 +102,8 @@ export class WisdomPanelService extends BaseProviderService<WisdomPanelMessageDa
         const kitId = resultSet.relationships.kit.data?.id
         const kit = response.included
           .find((include) => {
-          return include.type === 'kits' && include.id === kitId
-        })
+            return include.type === 'kits' && include.id === kitId
+          })
         if (kit === undefined) {
           this.logger.warn(`Kit not found for result set ${resultSet.id}`)
           continue
@@ -111,7 +111,7 @@ export class WisdomPanelService extends BaseProviderService<WisdomPanelMessageDa
 
         this.logger.debug(`Found result set ${resultSet.id} (kit code: ${kit.attributes.code})`)
         const simplifiedResults = await this.wisdomPanelApiService.getSimplifiedResultSets(kitId, metadata.providerConfiguration)
-        batchResults.results.push(this.wisdomPanelMapper.mapWisdomPanelSimpleResult(simplifiedResults.data))
+        batchResults.results.push(this.wisdomPanelMapper.mapWisdomPanelResult(resultSet, simplifiedResults.data))
       }
     } catch (error) {
       throw new Error(`Failed to get batch results: ${error.message}`)
@@ -120,35 +120,35 @@ export class WisdomPanelService extends BaseProviderService<WisdomPanelMessageDa
     return batchResults
   }
 
-  public acknowledgeOrder (payload: IdPayload, metadata: WisdomPanelMessageData): Promise<void> {
+  async acknowledgeOrder (payload: IdPayload, metadata: WisdomPanelMessageData): Promise<void> {
+    await this.wisdomPanelApiService.acknowledgeKits([payload.id], metadata.providerConfiguration)
+  }
+
+  async acknowledgeResult (payload: IdPayload, metadata: WisdomPanelMessageData): Promise<void> {
+    await this.wisdomPanelApiService.acknowledgeResultSets([payload.id], metadata.providerConfiguration)
+  }
+
+  cancelOrder (payload: IdPayload, metadata: WisdomPanelMessageData): Promise<void> {
     throw new Error('Method not implemented')
   }
 
-  public acknowledgeResult (payload: IdPayload, metadata: WisdomPanelMessageData): Promise<void> {
+  cancelOrderTest (payload: OrderTestPayload, metadata: WisdomPanelMessageData): Promise<void> {
     throw new Error('Method not implemented')
   }
 
-  public cancelOrder (payload: IdPayload, metadata: WisdomPanelMessageData): Promise<void> {
+  createRequisitionId (payload: NullPayloadPayload, metadata: WisdomPanelMessageData): string {
     throw new Error('Method not implemented')
   }
 
-  public cancelOrderTest (payload: OrderTestPayload, metadata: WisdomPanelMessageData): Promise<void> {
+  getOrder (payload: IdPayload, metadata: WisdomPanelMessageData): Promise<Order> {
     throw new Error('Method not implemented')
   }
 
-  public createRequisitionId (payload: NullPayloadPayload, metadata: WisdomPanelMessageData): string {
+  getOrderResult (payload: IdPayload, metadata: WisdomPanelMessageData): Promise<Result> {
     throw new Error('Method not implemented')
   }
 
-  public getOrder (payload: IdPayload, metadata: WisdomPanelMessageData): Promise<Order> {
-    throw new Error('Method not implemented')
-  }
-
-  public getOrderResult (payload: IdPayload, metadata: WisdomPanelMessageData): Promise<Result> {
-    throw new Error('Method not implemented')
-  }
-
-  public getServiceByCode (payload: ServiceCodePayload, metadata: WisdomPanelMessageData): Promise<Service> {
+  getServiceByCode (payload: ServiceCodePayload, metadata: WisdomPanelMessageData): Promise<Service> {
     throw new Error('Method not implemented')
   }
 
@@ -160,7 +160,7 @@ export class WisdomPanelService extends BaseProviderService<WisdomPanelMessageDa
     }))
   }
 
-  public getSexes (): Promise<ReferenceDataResponse<Sex>> {
+  getSexes (): Promise<ReferenceDataResponse<Sex>> {
     const items: Sex[] = [
       {
         code: 'male',
@@ -178,11 +178,11 @@ export class WisdomPanelService extends BaseProviderService<WisdomPanelMessageDa
     })
   }
 
-  public getDevices (): Promise<Device[]> {
+  getDevices (): Promise<Device[]> {
     return Promise.resolve([])
   }
 
-  public getSpecies (): Promise<ReferenceDataResponse<Species>> {
+  getSpecies (): Promise<ReferenceDataResponse<Species>> {
     const items: Species[] = [
       {
         code: 'dog',
@@ -200,7 +200,7 @@ export class WisdomPanelService extends BaseProviderService<WisdomPanelMessageDa
     })
   }
 
-  public getBreeds (): Promise<ReferenceDataResponse<Breed>> {
+  getBreeds (): Promise<ReferenceDataResponse<Breed>> {
     return Promise.resolve({
       items: [],
       hash: calculateHash([])

@@ -30,7 +30,10 @@ export class OrdersProcessor {
       //   orders
       // })
 
-      // TODO(gb): acknowledge orders
+      // TODO(gb): this could be done in batch
+      for (const order of orders) {
+        await this.wisdomPanelService.acknowledgeOrder({ id: order.externalId }, metadata)
+      }
     }
   }
 }

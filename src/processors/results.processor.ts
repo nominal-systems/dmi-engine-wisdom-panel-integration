@@ -35,7 +35,10 @@ export class ResultsProcessor {
         //   results: batchResults.results
         // })
 
-        // TODO(gb): acknowledge results
+        // TODO(gb): this could be done in batch
+        for (const result of batchResults.results) {
+          await this.wisdomPanelService.acknowledgeResult({ id: result.id }, metadata)
+        }
       }
     } catch (error) {
       this.logger.error(`Error fetching results for integration ${payload.integrationId}: ${error.message}`)

@@ -130,8 +130,9 @@ export class WisdomPanelApiService extends BaseApiService {
   }
 
   async getAvailableKits (config: WisdomPanelApiConfig): Promise<WisdomPanelKitItem[]> {
-    // TODO(gb): get active but not activated kits for a hospital
     const response = await this.getKits({}, {}, config)
+    // TODO(gb): can we filter for a specific hospital?
+    response.data = response.data.filter((kit) => kit.attributes['active'] && !kit.attributes['activated'])
     return response.data
   }
 
@@ -150,6 +151,44 @@ export class WisdomPanelApiService extends BaseApiService {
       // {
       //     "message": "WIS_VOY__104: Cannot process kit VSMQCZR because it already has a pet."
       // }
+      throw new Error(`[HTTP ${error.status}] ${error.message}`)
+    }
+  }
+
+  async acknowledgeKits (kitIds: string[], config: WisdomPanelApiConfig): Promise<void> {
+    try {
+      const token = await this.authenticate(config)
+      const reqConfig = {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`
+        }
+      }
+      const payload = {
+        'kit_ids': kitIds
+      }
+      await this.post(`${config.baseUrl}${WisdomPanelApiEndpoints.ACKNOWLEDGE_KITS}`, payload, reqConfig)
+      this.logger.debug(`Acknowledged ${kitIds.length} kit${kitIds.length > 1 ? 's' : ''}: ${kitIds.join(', ')}`)
+    } catch (error) {
+      throw new Error(`[HTTP ${error.status}] ${error.message}`)
+    }
+  }
+
+  async acknowledgeResultSets (resultSetIds: string[], config: WisdomPanelApiConfig): Promise<void> {
+    try {
+      const token = await this.authenticate(config)
+      const reqConfig = {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`
+        }
+      }
+      const payload = {
+        'result_set_ids': resultSetIds
+      }
+      await this.post(`${config.baseUrl}${WisdomPanelApiEndpoints.ACKNOWLEDGE_RESULT_SETS}`, payload, reqConfig)
+      this.logger.debug(`Acknowledged ${resultSetIds.length} result set${resultSetIds.length > 1 ? 's' : ''}: ${resultSetIds.join(', ')}`)
+    } catch (error) {
       throw new Error(`[HTTP ${error.status}] ${error.message}`)
     }
   }
