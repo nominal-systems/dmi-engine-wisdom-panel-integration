@@ -1,4 +1,4 @@
-import { Injectable, Logger } from '@nestjs/common'
+import { Inject, Injectable, Logger } from '@nestjs/common'
 import { HttpService } from '@nestjs/axios'
 import { BaseApiService } from '@nominal-systems/dmi-engine-common'
 import {
@@ -17,28 +17,41 @@ import {
   WisdomPanelSimpleResultResponse
 } from '../interfaces/wisdom-panel-api-responses.interface'
 import { WisdomPanelApiEndpoints } from '../interfaces/wisdom-panel-api-endpoints.interface'
+import { CACHE_MANAGER, CacheStore } from '@nestjs/cache-manager'
 
 @Injectable()
 export class WisdomPanelApiService extends BaseApiService {
   private readonly logger: Logger = new Logger(WisdomPanelApiService.name)
 
-  constructor (private readonly httpService: HttpService) {
+  constructor (
+    @Inject(CACHE_MANAGER) private cacheManager: CacheStore,
+    private readonly httpService: HttpService
+  ) {
     super(httpService)
   }
 
   private async authenticate (config: WisdomPanelApiConfig): Promise<string> {
-    try {
-      const payload = {
-        username: config.username,
-        password: config.password,
-        grant_type: 'password',
-        scope: 'organization'
+    let token = await this.cacheManager.get<string>('access_token')
+    if (!token) {
+      try {
+        const payload = {
+          username: config.username,
+          password: config.password,
+          grant_type: 'password',
+          scope: 'organization',
+        }
+        const response = await this.post<OAuthTokenResponse>(
+          `${config.baseUrl}${WisdomPanelApiEndpoints.AUTH}`,
+          payload,
+          {},
+        )
+        token = response.access_token
+        await this.cacheManager.set('access_token', token, { ttl: 20 * 60 * 60 * 1000 })
+      } catch (error) {
+        throw new Error(`[HTTP ${error.status}] ${error.message}`)
       }
-      const response = await this.post<OAuthTokenResponse>(`${config.baseUrl}${WisdomPanelApiEndpoints.AUTH}`, payload, {})
-      return response.access_token
-    } catch (error) {
-      throw new Error(`[HTTP ${error.status}] ${error.message}`)
     }
+    return token
   }
 
   async getKits (filter: WisdomPanelKitFiler = {}, include: WisdomPanelInclude = {}, config: WisdomPanelApiConfig): Promise<WisdomPanelKitsResponse> {
