@@ -29,12 +29,15 @@ import {
   WisdomPanelPetItem,
   WisdomPanelResultSetsResponse
 } from '../interfaces/wisdom-panel-api-responses.interface'
+import { ConfigService } from '@nestjs/config'
+import { debugOrderCreated } from '../common/debug-utils'
 
 @Injectable()
 export class WisdomPanelService extends BaseProviderService<WisdomPanelMessageData> {
   private readonly logger: Logger = new Logger(WisdomPanelService.name)
 
   constructor (
+    private readonly configService: ConfigService,
     private readonly wisdomPanelApiService: WisdomPanelApiService,
     private readonly wisdomPanelMapper: WisdomPanelMapper
   ) {
@@ -45,6 +48,10 @@ export class WisdomPanelService extends BaseProviderService<WisdomPanelMessageDa
     try {
       const createPetPayload: WisdomPanelCreatePetPayload = this.wisdomPanelMapper.mapCreateOrderPayload(payload, metadata)
       const response = await this.wisdomPanelApiService.createPet(createPetPayload, metadata.providerConfiguration)
+
+      if (this.configService.get('debug.api')) {
+        debugOrderCreated(payload, response)
+      }
 
       return {
         externalId: response.data.kit.id,
