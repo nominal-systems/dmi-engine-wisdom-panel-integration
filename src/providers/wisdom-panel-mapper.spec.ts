@@ -241,9 +241,10 @@ describe('WisdomPanelMapper', () => {
         code: 'notable_and_at_risk_health_test_results',
         name: 'Notable and At Risk Health Test Results',
         status: TestResultItemStatus.DONE,
-        valueString: 'N/A',
+        valueString: 'Complement 3 Deficiency: clear. MDR1 Medication Sensitivity: clear',
       })
     })
+
   })
 
 })

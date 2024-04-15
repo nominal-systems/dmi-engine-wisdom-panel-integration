@@ -189,7 +189,7 @@ export interface WisdomPanelSimpleResultResponse {
 export interface WisdomPanelSimpleResult {
   breed_percentages?: WisdomPanelBreedPercentagesResult[]
   ideal_weight_result?: WisdomPanelIdealWeightResult
-  notable_and_at_risk_health_test_results: WisdomPanelNotableAndAtRiskHealthTestResult
+  notable_and_at_risk_health_test_results: WisdomPanelNotableAndAtRiskHealthTestResult[]
 }
 
 export interface WisdomPanelBreedPercentagesResult {
@@ -204,12 +204,19 @@ export interface WisdomPanelIdealWeightResult {
   male_max_size: number
 }
 
-export interface WisdomPanelNotableAndAtRiskHealthTestResult {}
+export interface WisdomPanelNotableAndAtRiskHealthTestResult {
+  result_male: string
+  health_test: {
+    disease_name: {
+      en: string
+    }
+  }
+}
 
 export type WisdomPanelTestResult =
-  WisdomPanelBreedPercentagesResult
+  WisdomPanelBreedPercentagesResult[]
   | WisdomPanelIdealWeightResult
-  | WisdomPanelNotableAndAtRiskHealthTestResult
+  | WisdomPanelNotableAndAtRiskHealthTestResult[]
 
 export interface WisdomPanelStatusesItem extends WisdomPanelLinks {
   id: string

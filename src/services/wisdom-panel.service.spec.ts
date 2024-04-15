@@ -4,6 +4,7 @@ import { WisdomPanelApiService } from './wisdom-panel-api.service'
 import { WisdomPanelMapper } from '../providers/wisdom-panel-mapper'
 import { CreateOrderPayload, OrderCreatedResponse } from '@nominal-systems/dmi-engine-common'
 import { WisdomPanelMessageData } from '../interfaces/wisdom-panel-message-data.interface'
+import { ConfigService } from '@nestjs/config'
 
 describe('WisdomPanelService', () => {
   let service: WisdomPanelService
@@ -20,6 +21,12 @@ describe('WisdomPanelService', () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [
         WisdomPanelService,
+        {
+          provide: ConfigService,
+          useValue: {
+            get: jest.fn()
+          }
+        },
         {
           provide: WisdomPanelApiService,
           useValue: apiServiceMock

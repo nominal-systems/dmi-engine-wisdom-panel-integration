@@ -9,6 +9,7 @@ import {
 import {
   WisdomPanelBreedPercentagesResult,
   WisdomPanelIdealWeightResult,
+  WisdomPanelNotableAndAtRiskHealthTestResult,
   WisdomPanelTestResult
 } from '../interfaces/wisdom-panel-api-responses.interface'
 
@@ -103,6 +104,12 @@ export function mapTestResultItemValue (key: string, item: WisdomPanelTestResult
       valueString += `Ideal weight: ${idealWeightResult.male_min_size} - ${idealWeightResult.male_max_size} lbs`
       break
     case 'notable_and_at_risk_health_test_results':
+      const notableAndAtRiskHealthTestResults: string[] = []
+      for (const healthTestResult of item as WisdomPanelNotableAndAtRiskHealthTestResult[]) {
+        notableAndAtRiskHealthTestResults.push(`${healthTestResult.health_test.disease_name.en}: ${healthTestResult.result_male}`)
+      }
+      valueString = notableAndAtRiskHealthTestResults.join('. ')
+      break
     default:
       valueString = 'N/A'
   }
