@@ -1,0 +1,362 @@
+{
+  "breed_percentages": [
+    {
+      "percentage": 64,
+      "breed": {
+        "id": "964ca756-e87c-5868-a8fc-c972a67e82fc",
+        "slug": "pudelpointer",
+        "breed_group_id": "dd928076-d2c2-5ffa-89e7-739092b29eb2",
+        "weight_range_pet_min": "20.0",
+        "weight_range_pet_max": "30.0",
+        "weight_range_show_min": "20.0",
+        "weight_range_show_max": "30.0",
+        "height_range_min": "55.0",
+        "height_range_max": "68.0",
+        "life_span_range_min": "10.0",
+        "life_span_range_max": "12.0",
+        "created_at": "2020-08-28T15:01:30.987Z",
+        "updated_at": "2024-02-05T15:11:38.890Z",
+        "external_updated_at": "2021-06-23T21:06:12.000Z",
+        "external_id": "pudelpointer",
+        "external_source": "airtable",
+        "head_image_id": "f1766b4d-3ce0-52ff-8e71-dc20004c8118",
+        "color_image_id": "5fda3d1e-056c-5209-95a8-341ebee6924e",
+        "bw_image_id": null,
+        "breed_size_group_id": "5fba23a3-e27b-5cbc-b046-edf7bbd7ad34",
+        "internal_name": "Pudelpointer",
+        "references": "https://projectupland.com/hunting-dogs/pudelpointer-the-complete-versatile-hunting-dog-history/\n\nhttps://www.akc.org/dog-breeds/pudelpointer/\n\nhttp://www.fci.be/Nomenclature/Standards/216g07-en.pdf\n\nhttps://www.ukcdogs.com/pudelpointer",
+        "reviewed_by": "Jamie Freyer, DVM",
+        "date_reviewed": "2021-06-16T16:07:00.000Z",
+        "species": "dog",
+        "recommended_activity_mins_young": null,
+        "recommended_activity_mins_adult": null,
+        "recommended_activity_mins_senior": null,
+        "allow_user_entry": true,
+        "locales": [
+          "US",
+          "UK"
+        ],
+        "name": {
+          "en": "Pudelpointer"
+        },
+        "plural_name": {
+          "en": "Pudelpointers"
+        },
+        "history": {
+          "en": "The Pudelpointer originated in Germany in the late 1800s. At that time, German sportsmen were developing gun dogs suited to their way of hunting. A well-known author and expert on hunting dogs, who wrote under the pen name Hegewald, convinced hunters to cross [Poodles]({%breedURL poodle-standard%}) with [English Pointers]({%breedURL pointer%}). His goal was to create a breed that combined the Poodle's love of water, trainability, retrieving skills, and protective coat with the English Pointer's keen nose, pointing instincts, and zeal for hunting.\n\nBreeders used far more Pointers than Poodles when establishing the breeding program. And once they achieved the look and character they were after, they no longer relied on Pointers and, instead, mated Pudelpointers to other Pudelpointers. The breed register was founded in 1892, and breeders formed the first Pudelpointer club in 1897.\n\nH.D. Hume and Sigbot Winterhelt introduced the breed to North America in 1956. Today, most Pudelpointers are bred in Germany or the United States. The United Kennel Club recognized the breed in 2006, and the American Kennel Club has recorded it in their Foundation Stock Service since 2016."
+        },
+        "facts": {
+          "en": "Pudelpointers are intelligent, calm, versatile gun dogs. They're excellent in the water and always eager to please. Though bred to hunt, these pups have friendly, goofy personalities that make them enjoyable family companions at home."
+        },
+        "traits_appearance": {
+          "en": "The Pudelpointer is a medium-sized, strong-boned gun dog with the general look of a Pointer."
+        },
+        "traits_coat_and_coloring": {
+          "en": "Pudelpointers have close, flat-lying, rough coats of medium-length with a dense undercoat. They sport adorable beards and a lock of hair above the forehead. Their coats are typically brown, dead leaf (a lighter shade of brown), or black. Some dogs have small white markings."
+        },
+        "traits_physical": {
+          "en": "This breed has a flat, moderately broad skull and large, dark amber eyes. Pudelpointers' medium-sized ears lie flat and are well-covered in hair. And their straight tails reach the hock and are carried like a saber."
+        },
+        "temperament": {
+          "en": "Pudelpointers are hunting dogs through and through. They have strong retrieving instincts and a love of water—making them an excellent choice for waterfowl hunters.\n\nThese calm, self-controlled pups typically get along well with other dogs. They also have a friendly, easy-going nature and clownish personality. As a result, they're just as much fun to be around at home as out in the field."
+        },
+        "care_nutrition": {
+          "en": "Pudelpointers thrive on a high-quality diet formulated for their life stage (e.g., puppy, adult, senior) and breed size.\n\nObesity is a growing health concern for dogs. To help yours maintain a healthy weight, keep an eye on their food intake and measure their portions with a standard measuring cup to avoid overfeeding. And don't forget to account for treats. As a guideline, they should make up no more than 10% of a dog's daily calories."
+        },
+        "care_grooming": {
+          "en": "Pudelpointers need weekly brushing to remove loose hair from their coats. Occasional baths will also help keep them clean—particularly after a day of hunting in the field or woods.\n\nAnd don't forget those nails. Regular nail trims should be part of every dog's grooming routine. Nails that get too long can cause pain and potentially lead to problems running or walking.\n\nLastly, good [dental hygiene]({%blogURL dog-dental-care%}) is essential to your pup's overall health. So, schedule professional cleanings and establish an at-home routine that includes regular teeth brushing and veterinarian-recommended dental chews."
+        },
+        "care_exercise": {
+          "en": "Like other hunting dogs, Pudelpointers need a fair amount of daily exercise. You can keep your pup active with long walks, hikes, and games of chase in the backyard. These dogs also love activities that play to their innate abilities, such as swimming and retrieving. But agility, rally, and competitive obedience are other great options."
+        },
+        "care_training": {
+          "en": "Pudelpointers are intelligent, eager-to-please dogs that are generally easy to train. A positive, reward-based approach using their favorite toys or treats will keep them engaged and responsive during training sessions.\n\nBe sure to [socialize your pup]({%blogURL puppy-socialization%}) when they're young to help them develop into a well-adjusted adult dog."
+        },
+        "care_health": null,
+        "published_at": "2023-07-05T16:27:26.614Z",
+        "country_codes": [
+          "US",
+          "GB"
+        ],
+        "ancestry_version_ids": [
+          "b5bb33f8-400e-43f7-a48f-d6dfdcb8a6fa",
+          "ff9d3dfa-fad7-449e-bb69-ad820473897c"
+        ]
+      }
+    },
+    {
+      "percentage": 19,
+      "breed": {
+        "id": "1bd2c6a9-a0f6-5553-90ad-6323bd520e7a",
+        "slug": "german-wirehaired-pointer",
+        "breed_group_id": "dd928076-d2c2-5ffa-89e7-739092b29eb2",
+        "weight_range_pet_min": "19.1",
+        "weight_range_pet_max": "37.2",
+        "weight_range_show_min": "20.4",
+        "weight_range_show_max": "32.2",
+        "height_range_min": "56.0",
+        "height_range_max": "66.0",
+        "life_span_range_min": "14.0",
+        "life_span_range_max": "16.0",
+        "created_at": "2020-05-11T17:40:10.152Z",
+        "updated_at": "2024-02-05T15:11:38.890Z",
+        "external_updated_at": "2021-03-29T19:20:31.000Z",
+        "external_id": "german-wirehaired-pointer",
+        "external_source": "airtable",
+        "head_image_id": "4a39606c-0176-454f-9fd9-f68f79f3efdd",
+        "color_image_id": "6181304c-d4db-4570-af4a-f3f100f51e10",
+        "bw_image_id": "66624906-31cc-4259-bfcb-fa236ac8446f",
+        "breed_size_group_id": "5fba23a3-e27b-5cbc-b046-edf7bbd7ad34",
+        "internal_name": "German Wirehaired Pointer",
+        "references": "https://www.akc.org/dog-breeds/german-wirehaired-pointer/\n\nhttp://images.akc.org/pdf/breeds/standards/GermanWirehairedPointer.pdf\n\nhttps://www.akc.org/expert-advice/lifestyle/9-fun-facts-about-the-german-wirehaired-pointer/",
+        "reviewed_by": "Annette Louviere, DVM",
+        "date_reviewed": "2020-07-26T19:00:00.000Z",
+        "species": "dog",
+        "recommended_activity_mins_young": 101,
+        "recommended_activity_mins_adult": 65,
+        "recommended_activity_mins_senior": 43,
+        "allow_user_entry": true,
+        "locales": [
+          "US",
+          "UK"
+        ],
+        "name": {
+          "en": "German Wirehaired Pointer"
+        },
+        "plural_name": {
+          "en": "German Wirehaired Pointers"
+        },
+        "history": {
+          "en": "The German Wirehaired Pointer, also known as the Deutsch Drahtaar, received official recognition in its German homeland in the 1920s.\n\nUnlike British gamesmen—who were breeding specialized dogs that excelled in specific types of hunting—hunters of Continental Europe wanted breeds that could do it all. Breeders combined the Griffon, Stichelhaar, Pudelpointer, and [German Shorthaired Pointer]({%breedURL german-shorthaired-pointer%})—each of which came about in the late 1800s. The resulting dogs could point and track game, retrieve waterfowl from land or water, confront vermin, and more.\n\nThe German Wirehaired Pointer came to the United States in the early 1920s and received American Kennel Club recognition in 1959. Though the breed isn't too popular in the U.S., it has a large following in Germany."
+        },
+        "facts": {
+          "en": "The German Wirehaired Pointer is a smart, energetic breed with a distinctively bushy beard and eyebrows. These dogs make loyal, enthusiastic, and handsome hunting companions and family pets."
+        },
+        "traits_appearance": {
+          "en": "German Wirehaired Pointers are muscled, sturdy dogs best known for their weather-resistant, wire-like coats, bushy beards, and eyebrows."
+        },
+        "traits_coat_and_coloring": {
+          "en": "The German Wirehaired Pointer's coat is both functional and distinctive. The harsh, wiry outer coat is weather-resistant and somewhat water-repellant. During the winter, the undercoat is dense enough to protect the GWP from the cold. In the summer months, this undercoat thins out significantly.\n\nThe GWP's coat is liver or parti-color with white—including patches and ticking. Its head is always liver-color, though a white blaze is possible."
+        },
+        "traits_physical": {
+          "en": "German Wirehaired Pointers have medium-sized, oval, brown eyes. They're bright, clear, and—most notably—overhung with medium length eyebrows. The breed's ears are rounded (but not too broad) and hang close to the head. The tail is set high and carried in line or above the body when the dog is alert."
+        },
+        "temperament": {
+          "en": "The German Wirehaired Pointer is an excellent breed for active people and families looking for an affectionate, loyal, high-energy pet.\n\nFar from couch potatoes, German Wirehaired Pointers need plenty of outdoor exercise to be happy. A bored GWP can easily turn to a destructive one. Giving them \"jobs\" to do around the house will help keep them from destructive behaviors, such as barking or digging.\n\nGerman Wirehaired Pointers form tight bonds with their people. If they live in a home with only one person, they may turn into a one-person dog. But if raised among family, they will bond with the whole group. More than anything, GWPs enjoy human companionship and want to be included in activities as much as possible.\n\nThis breed is usually friendly toward other pets. But because of their sporting dog heritage, German Wirehaired Pointers often chase wildlife. Though sometimes aloof with strangers, they make commendable watch dogs."
+        },
+        "care_nutrition": {
+          "en": "To meet the nutritional needs of your German Wirehaired Pointer, feed a high-quality food that's appropriate for their life stage (e.g., puppy, adult, senior) and activity level.\n\nKeep them at a healthy weight by monitoring their food intake and measuring out meals. And don't forget to account for treats in their daily calorie totals. As a guideline, treats should make up no more than 10% of a dog's calories."
+        },
+        "care_grooming": {
+          "en": "The German Wirehaired Pointer's grooming needs are relatively low-maintenance. Weekly brushing with a comb and soft slicker brush is usually enough to keep their coats free of loose hair and dirt.\n\nYou should clip your dog's nails regularly to keep them short and tidy. Overgrown nails can split and become painful, or lead to issues walking or running.\n\nIn addition to professional dental cleanings, aim to establish an at-home dental care routine that includes regular teeth brushing. Maintaining good [dental hygiene]({%blogURL dog-dental-care%}) is essential for the overall long-term health of all dogs."
+        },
+        "care_exercise": {
+          "en": "German Wirehaired Pointers are busy dogs that have higher exercise needs than many other breeds. Long daily walks, playtime in enclosed yards, hiking, and swimming are all outdoor activities that they enjoy.\n\nThanks to their background, GWPs love to hunt and retrieve. Throwing a tennis ball or frisbee for them to retrieve provides exercise and lets them show off their natural abilities.\n\nGerman Wirehaired Pointers also enjoy participating in dog sports such as field trials, tracking, agility, and competitive obedience. These mentally stimulating activities can give your dog a productive outlet for their energy."
+        },
+        "care_training": {
+          "en": "German Wirehaired Pointers are responsive and extremely eager to please. Such characteristics make them relatively easy to train. However, they can have an independent streak and will sometimes only work for someone they like.\n\nStarting from an early age, consistent, firm training and positive reinforcement techniques are the best tools for success. As with all breeds, German Wirehaired Pointers benefit from [early socialization]({%blogURL puppy-socialization%}). Socialized puppies grow up to be well-mannered adult dogs."
+        },
+        "care_health": null,
+        "published_at": "2023-07-05T16:27:26.614Z",
+        "country_codes": [
+          "US",
+          "GB"
+        ],
+        "ancestry_version_ids": [
+          "a726d077-0886-57b4-81d5-01362be36a09",
+          "b5bb33f8-400e-43f7-a48f-d6dfdcb8a6fa",
+          "ff9d3dfa-fad7-449e-bb69-ad820473897c"
+        ]
+      }
+    },
+    {
+      "percentage": 16,
+      "breed": {
+        "id": "469ce562-d44e-51d6-9895-a800be080ac5",
+        "slug": "german-shorthaired-pointer",
+        "breed_group_id": "dd928076-d2c2-5ffa-89e7-739092b29eb2",
+        "weight_range_pet_min": "19.1",
+        "weight_range_pet_max": "35.8",
+        "weight_range_show_min": "20.4",
+        "weight_range_show_max": "32.2",
+        "height_range_min": "53.0",
+        "height_range_max": "64.0",
+        "life_span_range_min": "10.0",
+        "life_span_range_max": "14.0",
+        "created_at": "2020-05-11T17:40:09.932Z",
+        "updated_at": "2024-02-05T15:11:38.890Z",
+        "external_updated_at": "2021-03-29T19:20:31.000Z",
+        "external_id": "german-shorthaired-pointer",
+        "external_source": "airtable",
+        "head_image_id": "6e92cbee-db98-4262-9676-bc678210dfd8",
+        "color_image_id": "6356403f-2d08-490a-83b0-8eeea532bcf9",
+        "bw_image_id": "94a42795-dca0-41d2-91e4-65f57d020d10",
+        "breed_size_group_id": "5fba23a3-e27b-5cbc-b046-edf7bbd7ad34",
+        "internal_name": "German Shorthaired Pointer",
+        "references": "http://www.gspca.org/Breed/History/index.html\n\nhttps://www.akc.org/dog-breeds/german-shorthaired-pointer/\n\nhttp://images.akc.org/pdf/breeds/standards/GermanShorthairedPointer.pdf\n\nhttps://vcahospitals.com/know-your-pet/dog-breeds/german-shorthaired-pointer",
+        "reviewed_by": "Annette Louviere, DVM",
+        "date_reviewed": "2020-07-26T19:00:00.000Z",
+        "species": "dog",
+        "recommended_activity_mins_young": 101,
+        "recommended_activity_mins_adult": 65,
+        "recommended_activity_mins_senior": 43,
+        "allow_user_entry": true,
+        "locales": [
+          "US",
+          "UK"
+        ],
+        "name": {
+          "en": "German Shorthaired Pointer"
+        },
+        "plural_name": {
+          "en": "German Shorthaired Pointers"
+        },
+        "history": {
+          "en": "The German Shorthaired Pointer, or GSP, was developed in Germany in the late 19th century to meet the need for an all-round hunting dog. Breeders sought to develop an excellent pointer with a good nose—a dog that could retrieve birds as well as animals.\n\nInitially, German hunters thought that a cross between a Spanish Pointer and Hannover Hound would possess these abilities. However, the resulting breed tended to bay when trailing. They then tried crosses with the Bloodhound, Foxhound, and various French hounds. But none hit the mark precisely.\n\nBreeding with the English Pointer finally resulted in a dog that appeared perfect. Still, even this breed had an aversion to water and tracking at times. Fortunately, continuous breeding eliminated these unwanted traits. And the German Shorthaired Pointer became a lean, athletic, and responsive breed.\n\nThe German Kennel Club first registered the breed in 1872. German Shorthaired Pointers arrived in the United States in the 1920s. Impressed by the versatility of the breed after reading an article about it, a man named Charles R. Thornton shipped two dogs to his home in Missoula, Montana.\n\nThe American Kennel Club recognized the German Shorthaired Pointer as a breed in 1930. Today, it's consistently one of the top-winning breeds in competitive hunting events."
+        },
+        "facts": {
+          "en": "The German Shorthaired Pointer is an intelligent, good-natured, friendly breed. It makes an enthusiastic, versatile hunting companion as well as a happy, loyal pet for active families."
+        },
+        "traits_appearance": {
+          "en": "The German Shorthaired Pointer has an aristocratic and well-balanced look. The breed's overall structure suggests power, endurance, and agility."
+        },
+        "traits_coat_and_coloring": {
+          "en": "The German Shorthaired Pointer's hair is thick and short, though slightly longer on the haunches and tail. The breed's coat is black, liver, or a combination of liver and white—including particolor, patched, and ticked."
+        },
+        "traits_physical": {
+          "en": "German Shorthaired Pointers have long muzzles that allow them to seize game and carry it for long periods. Their eyes are medium-size, almond-shaped, and ideally dark brown. They're also very expressive, portraying intelligence, good-humor, and energy.\n\nThe breed's ears are broad and set fairly high, lying flat. They should extend to the corner of the mouth."
+        },
+        "temperament": {
+          "en": "The German Shorthaired Pointer is an excellent breed for active, outdoorsy families. These loving, loyal, protective dogs tend to be friendly towards children. GSPs enjoy being around people and want nothing more than to be included in family life.\n\nThis breed is usually safe around other pets and dogs. But it's not uncommon for them to display dominant behavior. Because of their hunting instincts, they love to play and chase. However, GSPs may choose unwilling playmates, such as cats or wildlife.\n\nGerman Shorthaired Pointers make commendable watch dogs. And though they may be reserved with strangers, they are generally very sociable dogs.\n\nGSPs are an intelligent and highly energetic breed. They mature later than other breeds. The resulting elongated \"puppy phase\" can be challenging for some owners.\n\nGerman Shorthaired Pointers need plenty of activity and exercise to be happy. If they get bored, they may take it upon themselves to find things to do, which can lead to undesired behaviors, such as barking or digging."
+        },
+        "care_nutrition": {
+          "en": "To meet their nutritional needs, feed your GSP a high-quality food appropriate for their life stage (e.g., puppy, adult, senior) and activity level.\n\nGerman Shorthaired Pointers are prone to bloat (also known as twisted stomach). To help prevent this condition, don't feed your dog immediately after any kind of vigorous activity. And wait at least an hour after meals before allowing them to run or exercise.\n\nTo keep your dog at a healthy weight, monitor their food intake carefully. Avoid accidental overfeeding by measuring out meals. And don't forget to account for treats in their daily calorie totals. As a guideline, treats should make up no more than 10% of a dog's calories."
+        },
+        "care_grooming": {
+          "en": "The German Shorthaired Pointer's grooming needs are relatively few. Most of the year, weekly brushing is all it takes to keep the breed's coat looking good. During periods of heavy shedding, your GSP will need frequent brushing to remove loose hairs and prevent them from ending up in unwanted places.\n\nIt's also smart to trim nails regularly to keep them short and tidy. Overgrown nails can split and become painful, or lead to issues walking or running.\n\nIn addition to professional dental cleanings, establish an at-home dental care routine that includes regular daily teeth brushing. Though that may seem ambitious, maintaining good [dental hygiene]({%blogURL dog-dental-care%}) is essential for the overall long-term health of all dogs."
+        },
+        "care_exercise": {
+          "en": "German Shorthaired Pointers have a higher exercise requirement than most dogs. Long daily walks, running in enclosed yards, hiking, and swimming are all outdoor activities that they enjoy. But the ultimate way to a GSP's heart is retrieving, whether that involves a tennis ball or frisbee.\n\nThis breed also seems to enjoy dog sports—such as field trials, tracking, agility, and competitive obedience—which provide both physical exercise and mental stimulation."
+        },
+        "care_training": {
+          "en": "German Shorthaired Pointers are intelligent, extremely eager to please, and hard-working—qualities that make them easy to train. Consistent, firm training starting from an early age and positive reinforcement techniques are the best ways to train a GSP.\n\nAs all breeds do, German Shorthaired Pointers benefit from[Early socialization]({%blogURL puppy-socialization%}). It helps them develop into well-adjusted adult dogs."
+        },
+        "care_health": null,
+        "published_at": "2023-07-05T16:27:26.614Z",
+        "country_codes": [
+          "US",
+          "GB"
+        ],
+        "ancestry_version_ids": [
+          "a726d077-0886-57b4-81d5-01362be36a09",
+          "b5bb33f8-400e-43f7-a48f-d6dfdcb8a6fa",
+          "ff9d3dfa-fad7-449e-bb69-ad820473897c"
+        ]
+      }
+    },
+    {
+      "percentage": 1,
+      "breed": {
+        "id": "874e9fcc-9eaf-556a-8fff-9030e6330c81",
+        "slug": "pointing-griffon-wire",
+        "breed_group_id": "dd928076-d2c2-5ffa-89e7-739092b29eb2",
+        "weight_range_pet_min": "18.1",
+        "weight_range_pet_max": "30.4",
+        "weight_range_show_min": "20.0",
+        "weight_range_show_max": "24.9",
+        "height_range_min": "51.0",
+        "height_range_max": "61.0",
+        "life_span_range_min": "10.0",
+        "life_span_range_max": "15.0",
+        "created_at": "2020-05-11T17:40:09.689Z",
+        "updated_at": "2024-02-05T15:11:38.890Z",
+        "external_updated_at": "2021-03-29T19:20:31.000Z",
+        "external_id": "pointing-griffon-wire",
+        "external_source": "airtable",
+        "head_image_id": "0f15ecdf-eac1-4df2-8f29-f6b37da97c98",
+        "color_image_id": "7491d790-6e6a-429a-b2b4-b71d996e5b45",
+        "bw_image_id": "18d1048e-7c88-49f1-a792-ec0bd03ce296",
+        "breed_size_group_id": "5fba23a3-e27b-5cbc-b046-edf7bbd7ad34",
+        "internal_name": "Pointing Griffon (Wire)",
+        "references": "https://www.awpga.com\n\nhttps://www.akc.org/expert-advice/lifestyle/5-things-you-didnt-know/\n\nhttps://www.akc.org/dog-breeds/wirehaired-pointing-griffon/\n\nhttp://images.akc.org/pdf/breeds/standards/WirehairedPointingGriffon.pdf\n\nhttp://www.fci.be/Nomenclature/Standards/107g07-en.pdf",
+        "reviewed_by": "Annette Louviere, DVM",
+        "date_reviewed": "2020-07-26T19:00:00.000Z",
+        "species": "dog",
+        "recommended_activity_mins_young": 92,
+        "recommended_activity_mins_adult": 55,
+        "recommended_activity_mins_senior": 37,
+        "allow_user_entry": true,
+        "locales": [
+          "US",
+          "UK"
+        ],
+        "name": {
+          "en": "Wirehaired Pointing Griffon"
+        },
+        "plural_name": {
+          "en": "Wirehaired Pointing Griffons"
+        },
+        "history": {
+          "en": "The Wirehaired Pointing Griffon originated in Holland in the late 19th century. Eduard Korthals—a Dutch sportsman and breeder who studied canine genetics—wanted to create the ultimate walking hunter's gundog.\n\nKorthals owned many different dogs and carefully planned his breeding program. He wanted a breed that could hunt a variety of game on all types of terrain. So, he selected dogs with high strength and endurance, talented noses, water-repellent coats, and cooperative natures. The result was a robust dog that had all the characteristics of an exceptional pointer and retriever.\n\nKorthals continued his breeding program when he moved to Germany, and eventually France. The breed standard was established in 1886, and the Wirehaired Pointing Griffon quickly gained popularity throughout Europe. The breed earned AKC recognition in 1887, though it was mistakenly labeled a Russian Setter. Today, most Wirehaired Pointing Griffons are still bred in France."
+        },
+        "facts": {
+          "en": "The Wirehaired Pointing Griffon is an intelligent, active, and affectionate breed. With excellent hunting, pointing, and retrieving skills, Griffons make supreme gundogs. But these pups can be exceptional family dogs, too."
+        },
+        "traits_appearance": {
+          "en": "The Wirehaired Pointing Griffon is a medium-sized dog with a square-shaped head and catlike gracefulness."
+        },
+        "traits_coat_and_coloring": {
+          "en": "The Wirehaired Pointing Griffon's functional coat is one of its most distinguishing features. The outer coat is straight and wiry with a harsh texture that protects the breed when hunting in rough terrain. The undercoat is thick, insulating, and water-repellent.\n\nWirehaired Pointing Griffons come in steel gray with brown markings—which vary from shades of chestnut to white and orange. Ticking and roan are also common."
+        },
+        "traits_physical": {
+          "en": "The Wirehaired Pointing Griffon is famous for its facial furnishings. These extensions of its undercoat create prominent eyebrows and a mustache—giving the Griffon a somewhat unkempt appearance and friendly expression. Large, slightly rounded eyes that range from dark yellow to brown contribute to the breed's casual look."
+        },
+        "temperament": {
+          "en": "Wirehaired Pointing Griffons are intelligent, energetic dogs with outgoing personalities that make them a fun breed for active families. They're very loyal to their people and gentle and loving with kids. All that said, they can be nervous around strangers.\n\nThis breed loves outdoor activities. But Griffons are also happy to curl up on the couch for a nap when they return home."
+        },
+        "care_nutrition": {
+          "en": "Wirehaired Pointing Griffons require a high-quality dog food that is age-appropriate—whether it's commercially manufactured or homemade (with a veterinarian's supervision and approval).\n\nTo keep your Wirehaired Pointing Griffon healthy, it's important to monitor how much they eat. Avoid accidental overfeeding by measuring out meals. And reduce portions or restrict calories if your pup gains weight. Also, remember that giving too many treats can contribute to obesity. Treats should make up no more than 10% of a dog's calories."
+        },
+        "care_grooming": {
+          "en": "Brushing or combing your Wirehaired Pointing Griffon's coat weekly will keep it looking its best. As necessary, use scissors to trim around your pup's feet or ears. But never use clippers on the body, or the wiry hair will grow back much fuzzier.\n\nBecause of their longer ears, Griffons may be more prone to ear infections. Inspect and clean ears routinely to prevent infections. You should also trim nails regularly to keep them at a short, tidy length. Nails that get too long can cause discomfort and lead to problems walking.\n\nFinally, maintaining good [dental hygiene]({%blogURL dog-dental-care%}) is essential for any dog's long-term health. In addition to scheduling professional dental cleanings, establish an at-home care routine that includes regular (ideally daily) teeth brushing."
+        },
+        "care_exercise": {
+          "en": "Like other sporting breeds, Wirehaired Pointing Griffons need daily exercise. Games of fetch in a fenced backyard, hiking, and swimming are all activities Griffons enjoy. They also like dog sports—such as tracking, hunting, field trials, agility, and obedience. And if you're looking for a jogging buddy, the Griffon will happily oblige."
+        },
+        "care_training": {
+          "en": "Intelligent and eager to please, Wirehaired Pointing Griffons tend to be relatively easy to train. Consistent and positive training programs work best for this breed.\n\nIt's also wise to [socialize your Griffon puppy]({%blogURL puppy-socialization%}) to help them grow into a well-mannered adult dog."
+        },
+        "care_health": null,
+        "published_at": "2023-07-05T16:27:26.614Z",
+        "country_codes": [
+          "US",
+          "GB"
+        ],
+        "ancestry_version_ids": [
+          "a726d077-0886-57b4-81d5-01362be36a09",
+          "b5bb33f8-400e-43f7-a48f-d6dfdcb8a6fa",
+          "ff9d3dfa-fad7-449e-bb69-ad820473897c"
+        ]
+      }
+    }
+  ],
+  "ideal_weight_result": {
+    "id": "85eddaee-5974-4540-9bc1-37491b3116e4",
+    "result_set_id": "0e284955-8b7e-4505-a66c-083b75f8c6ac",
+    "female_pred_size": 23.5,
+    "female_min_size": 18.1,
+    "female_max_size": 30.8,
+    "male_pred_size": 28.9,
+    "male_min_size": 22.7,
+    "male_max_size": 38.1,
+    "spayed_pred_size": 24.8,
+    "spayed_min_size": 19.1,
+    "spayed_max_size": 31.8,
+    "neutered_pred_size": 30.5,
+    "neutered_min_size": 24,
+    "neutered_max_size": 38.6,
+    "created_at": "2024-04-12T15:38:39.103Z",
+    "updated_at": "2024-04-12T15:38:39.103Z"
+  },
+  "notable_and_at_risk_health_test_results": []
+}

@@ -101,7 +101,7 @@ export class WisdomPanelService extends BaseProviderService<WisdomPanelMessageDa
       for (const resultSet of response.data) {
         const kitId = resultSet.relationships.kit.data?.id
         const kit = response.included
-          .find((include) => {
+          .find((include): include is WisdomPanelKitItem => {
             return include.type === 'kits' && include.id === kitId
           })
         if (kit === undefined) {
@@ -110,8 +110,8 @@ export class WisdomPanelService extends BaseProviderService<WisdomPanelMessageDa
         }
 
         this.logger.debug(`Found result set ${resultSet.id} (kit code: ${kit.attributes.code})`)
-        const simplifiedResults = await this.wisdomPanelApiService.getSimplifiedResultSets(kitId, metadata.providerConfiguration)
-        batchResults.results.push(this.wisdomPanelMapper.mapWisdomPanelResult(resultSet, simplifiedResults.data))
+        const simplifiedResults = await this.wisdomPanelApiService.getSimplifiedResultSets(kit.id, metadata.providerConfiguration)
+        batchResults.results.push(this.wisdomPanelMapper.mapWisdomPanelResult(resultSet, kit, simplifiedResults.data))
       }
     } catch (error) {
       throw new Error(`Failed to get batch results: ${error.message}`)

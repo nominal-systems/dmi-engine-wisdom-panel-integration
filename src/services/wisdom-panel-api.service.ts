@@ -46,7 +46,7 @@ export class WisdomPanelApiService extends BaseApiService {
           {},
         )
         token = response.access_token
-        await this.cacheManager.set('access_token', token, { ttl: 20 * 60 * 60 * 1000 })
+        await this.cacheManager.set('access_token', token, { ttl: response.expires_in * 0.8 })
       } catch (error) {
         throw new Error(`[HTTP ${error.status}] ${error.message}`)
       }
@@ -98,7 +98,7 @@ export class WisdomPanelApiService extends BaseApiService {
     }
   }
 
-  async getSimplifiedResultSets (kitId, config: WisdomPanelApiConfig): Promise<WisdomPanelSimpleResultResponse> {
+  async getSimplifiedResultSets (kitId: string, config: WisdomPanelApiConfig): Promise<WisdomPanelSimpleResultResponse> {
     try {
       const token = await this.authenticate(config)
       const reqConfig = {
