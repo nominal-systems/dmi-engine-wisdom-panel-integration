@@ -10,10 +10,15 @@ import { WisdomPanelController } from './controllers/wisdom-panel.controller'
 import { OrdersProcessor } from './processors/orders.processors'
 import { ResultsProcessor } from './processors/results.processor'
 import { CacheModule } from '@nestjs/cache-manager'
+import configuration from './config/configuration'
 
 @Module({
   imports: [
     HttpModule,
+    ConfigModule.forRoot({
+      isGlobal: true,
+      load: [configuration]
+    }),
     CacheModule.register({
       ttl: 24 * 60 * 60 * 1000
     }),
