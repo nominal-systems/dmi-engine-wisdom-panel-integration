@@ -6,6 +6,10 @@ import {
   OrderPatient,
   Patient,
   Result,
+  ResultStatus,
+  TestResult,
+  TestResultItem,
+  TestResultItemStatus,
   Veterinarian,
   VeterinarianPayload
 } from '@nominal-systems/dmi-engine-common'
@@ -17,7 +21,9 @@ import {
   extractPetId,
   mapKitStatus,
   mapPetSex,
-  mapPetSpecies
+  mapPetSpecies,
+  mapTestResultItemValue,
+  mapTestResultName
 } from '../common/mapper-utils'
 import {
   WisdomPanelClient,
@@ -30,7 +36,8 @@ import {
   WisdomPanelPetItem,
   WisdomPanelResultSetItem,
   WisdomPanelSimpleResult,
-  WisdomPanelStatusesItem
+  WisdomPanelStatusesItem,
+  WisdomPanelTestResult
 } from '../interfaces/wisdom-panel-api-responses.interface'
 import { Client } from '@nominal-systems/dmi-engine-common/lib/interfaces/provider-service'
 
@@ -64,11 +71,69 @@ export class WisdomPanelMapper {
     }
   }
 
-  mapWisdomPanelResult (resultSet: WisdomPanelResultSetItem, simpleResult: WisdomPanelSimpleResult): Result {
-    // TODO(gb): map result
+  mapWisdomPanelResult (resultSet: WisdomPanelResultSetItem, kit: WisdomPanelKitItem, simpleResult: WisdomPanelSimpleResult): Result {
     return {
-      id: resultSet.id
-    } as unknown as Result
+      id: resultSet.id,
+      orderId: kit.id,
+      // order?: Order;
+      // accession?: string;
+      status: ResultStatus.COMPLETED,
+      testResults: this.extractTestResults(simpleResult)
+    }
+  }
+
+  extractTestResults (simpleResult: WisdomPanelSimpleResult): TestResult[] {
+    const testResults: Record<string, WisdomPanelTestResult>[] = []
+    Object.keys(simpleResult).forEach(key => {
+      testResults.push({
+        [key]: simpleResult[key]
+      })
+    })
+
+    return testResults.map(this.mapWisdomPanelTestResult, this)
+  }
+
+  mapWisdomPanelTestResult (result: Record<string, WisdomPanelTestResult>, index: number): TestResult {
+    const key = Object.keys(result)[0]
+    return {
+      seq: index,
+      code: key,
+      name: mapTestResultName(key),
+      items: [result[key]].map((item, index) => this.mapWisdomPanelTestResultItem(item, key, index))
+    }
+  }
+
+  mapWisdomPanelTestResultItem (item: WisdomPanelTestResult, key: string, index: number): TestResultItem {
+    return {
+      seq: index,
+      code: key,
+      name: mapTestResultName(key),
+      status: TestResultItemStatus.DONE,
+      valueString: mapTestResultItemValue(key, item)
+    }
+  }
+
+  mapPatient (pet: WisdomPanelPetItem): Patient {
+    return {
+      name: pet.attributes.name,
+      // TODO(gb): map sex
+      sex: pet.attributes.sex,
+      // TODO(gb): map species
+      species: pet.attributes.species,
+    }
+  }
+
+  mapClient (pet: WisdomPanelPetItem): Client {
+    return {
+      firstName: pet.attributes['owner-first-name'],
+      lastName: pet.attributes['owner-last-name'],
+    }
+  }
+
+  mapVeterinarian (kit: WisdomPanelKitItem): Veterinarian {
+    return {
+      firstName: kit.attributes['veterinarian-name']
+    }
   }
 
   extractPet (patient: OrderPatient): Omit<WisdomPanelPet, 'id'> {
@@ -113,29 +178,6 @@ export class WisdomPanelMapper {
   extractVeterinarian (veterinarian: VeterinarianPayload): WisdomPanelVeterinarian {
     return {
       veterinarian_name: `${veterinarian.firstName} ${veterinarian.lastName}`
-    }
-  }
-
-  mapPatient (pet: WisdomPanelPetItem): Patient {
-    return {
-      name: pet.attributes.name,
-      // TODO(gb): map sex
-      sex: pet.attributes.sex,
-      // TODO(gb): map species
-      species: pet.attributes.species,
-    }
-  }
-
-  mapClient (pet: WisdomPanelPetItem): Client {
-    return {
-      firstName: pet.attributes['owner-first-name'],
-      lastName: pet.attributes['owner-last-name'],
-    }
-  }
-
-  mapVeterinarian (kit: WisdomPanelKitItem): Veterinarian {
-    return {
-      firstName: kit.attributes['veterinarian-name']
     }
   }
 }
