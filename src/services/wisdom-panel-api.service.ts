@@ -114,6 +114,7 @@ export class WisdomPanelApiService extends BaseApiService {
   }
 
   async getUnacknowledgedResultSetsForHospital (hospitalNumber: string, config: WisdomPanelApiConfig): Promise<WisdomPanelResultSetsResponse> {
+    // TODO(gb): filter by hospital-number
     const response = await this.getResultSets({ unacknowledged: true }, { include: 'kit' }, config)
 
     // Filter kits for hospital
@@ -143,8 +144,11 @@ export class WisdomPanelApiService extends BaseApiService {
   }
 
   async getAvailableKits (config: WisdomPanelApiConfig): Promise<WisdomPanelKitItem[]> {
-    const response = await this.getKits({}, {}, config)
-    // TODO(gb): can we filter for a specific hospital?
+    // TODO(gb): add filter activated=false
+    // TODO(gb): add filter voyager-only=true
+    const filter: WisdomPanelKitFiler = {}
+    const response = await this.getKits(filter, {}, config)
+
     response.data = response.data.filter((kit) => kit.attributes['active'] && !kit.attributes['activated'])
     return response.data
   }
