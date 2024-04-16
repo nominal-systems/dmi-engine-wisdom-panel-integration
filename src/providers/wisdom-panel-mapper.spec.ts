@@ -213,10 +213,11 @@ describe('WisdomPanelMapper', () => {
   })
 
   describe('mapWisdomPanelTestResultItem()', () => {
-    const simpleResultResponse = FileUtils.loadFile('test/examples/simplified-result_01.json') as WisdomPanelSimpleResultResponse
+    const simpleResultResponse01 = FileUtils.loadFile('test/examples/simplified-result_01.json') as WisdomPanelSimpleResultResponse
+    const simpleResultResponse04 = FileUtils.loadFile('test/examples/simplified-result_04.json') as WisdomPanelSimpleResultResponse
 
     it('should map breed percentages results', () => {
-      expect(mapper.mapWisdomPanelTestResultItem(simpleResultResponse.data.breed_percentages as WisdomPanelTestResult, 'breed_percentages', 0)).toEqual({
+      expect(mapper.mapWisdomPanelTestResultItem(simpleResultResponse01.data.breed_percentages as WisdomPanelTestResult, 'breed_percentages', 0)).toEqual({
         seq: 0,
         code: 'breed_percentages',
         name: 'Breed Percentages',
@@ -226,7 +227,7 @@ describe('WisdomPanelMapper', () => {
     })
 
     it('should map ideal weight results', () => {
-      expect(mapper.mapWisdomPanelTestResultItem(simpleResultResponse.data.ideal_weight_result as WisdomPanelTestResult, 'ideal_weight_result', 0)).toEqual({
+      expect(mapper.mapWisdomPanelTestResultItem(simpleResultResponse01.data.ideal_weight_result as WisdomPanelTestResult, 'ideal_weight_result', 0)).toEqual({
         seq: 0,
         code: 'ideal_weight_result',
         name: 'Ideal Weight Result',
@@ -236,12 +237,20 @@ describe('WisdomPanelMapper', () => {
     })
 
     it('should map notable and at risk health test results', () => {
-      expect(mapper.mapWisdomPanelTestResultItem(simpleResultResponse.data.notable_and_at_risk_health_test_results as WisdomPanelTestResult, 'notable_and_at_risk_health_test_results', 0)).toEqual({
+      expect(mapper.mapWisdomPanelTestResultItem(simpleResultResponse01.data.notable_and_at_risk_health_test_results as WisdomPanelTestResult, 'notable_and_at_risk_health_test_results', 0)).toEqual({
         seq: 0,
         code: 'notable_and_at_risk_health_test_results',
         name: 'Notable and At Risk Health Test Results',
         status: TestResultItemStatus.DONE,
         valueString: 'Complement 3 Deficiency: clear. MDR1 Medication Sensitivity: clear',
+      })
+
+      expect(mapper.mapWisdomPanelTestResultItem(simpleResultResponse04.data.notable_and_at_risk_health_test_results as WisdomPanelTestResult, 'notable_and_at_risk_health_test_results', 0)).toEqual({
+        seq: 0,
+        code: 'notable_and_at_risk_health_test_results',
+        name: 'Notable and At Risk Health Test Results',
+        status: TestResultItemStatus.DONE,
+        valueString: 'MDR1 Medication Sensitivity: clear',
       })
     })
 
