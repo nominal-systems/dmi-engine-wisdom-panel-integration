@@ -31,11 +31,10 @@ export class OrdersProcessor {
         debugFetchedOrders(orders)
       }
 
-      // TODO(gb): notify API
-      // this.apiClient.emit('external_orders', {
-      //   integrationId: payload.integrationId,
-      //   orders
-      // })
+      this.apiClient.emit('external_orders', {
+        integrationId: payload.integrationId,
+        orders
+      })
 
       // TODO(gb): this could be done in batch
       for (const order of orders) {

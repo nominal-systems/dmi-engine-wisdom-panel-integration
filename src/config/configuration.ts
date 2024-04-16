@@ -4,7 +4,8 @@ import * as process from 'node:process'
 export default (): Configuration => ({
   debug: {
     http: process.env.DEBUG_HTTP === 'true',
-    api: process.env.DEBUG_API === 'true'
+    api: process.env.DEBUG_API === 'true',
+    wisdomApiRequests: process.env.DEBUG_WISDOM_API_REQUESTS === 'true'
   },
   processors: {
     orders: {

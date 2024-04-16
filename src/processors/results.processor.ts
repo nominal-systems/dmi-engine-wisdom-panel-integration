@@ -32,15 +32,12 @@ export class ResultsProcessor {
           debugFetchedResults(batchResults.results)
         }
 
-        // TODO(gb): notify API
-        // this.apiClient.emit('external_order_results', {
-        //   integrationId: payload.integrationId,
-        //   results: batchResults.results
-        // })
-        // this.apiClient.emit('external_results', {
-        //   integrationId: payload.integrationId,
-        //   results: batchResults.results
-        // })
+        const data = {
+          integrationId: payload.integrationId,
+          results: batchResults.results
+        }
+        this.apiClient.emit('external_order_results', data)
+        this.apiClient.emit('external_results', data)
 
         // TODO(gb): this could be done in batch
         for (const result of batchResults.results) {
