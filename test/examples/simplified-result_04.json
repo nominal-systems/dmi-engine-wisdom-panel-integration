@@ -1,0 +1,524 @@
+{
+  "data" : {
+     "breed_percentages" : [
+        {
+           "breed" : {
+              "allow_user_entry" : true,
+              "ancestry_version_ids" : [
+                 "b5bb33f8-400e-43f7-a48f-d6dfdcb8a6fa",
+                 "ff9d3dfa-fad7-449e-bb69-ad820473897c"
+              ],
+              "breed_group_id" : "dd928076-d2c2-5ffa-89e7-739092b29eb2",
+              "breed_size_group_id" : "5fba23a3-e27b-5cbc-b046-edf7bbd7ad34",
+              "bw_image_id" : null,
+              "care_exercise" : {
+                 "en" : "Like other hunting dogs, Pudelpointers need a fair amount of daily exercise. You can keep your pup active with long walks, hikes, and games of chase in the backyard. These dogs also love activities that play to their innate abilities, such as swimming and retrieving. But agility, rally, and competitive obedience are other great options."
+              },
+              "care_grooming" : {
+                 "en" : "Pudelpointers need weekly brushing to remove loose hair from their coats. Occasional baths will also help keep them cleanâparticularly after a day of hunting in the field or woods.\n\nAnd don't forget those nails. Regular nail trims should be part of every dog's grooming routine. Nails that get too long can cause pain and potentially lead to problems running or walking.\n\nLastly, good [dental hygiene]({%blogURL dog-dental-care%}) is essential to your pup's overall health. So, schedule professional cleanings and establish an at-home routine that includes regular teeth brushing and veterinarian-recommended dental chews."
+              },
+              "care_health" : null,
+              "care_nutrition" : {
+                 "en" : "Pudelpointers thrive on a high-quality diet formulated for their life stage (e.g., puppy, adult, senior) and breed size.\n\nObesity is a growing health concern for dogs. To help yours maintain a healthy weight, keep an eye on their food intake and measure their portions with a standard measuring cup to avoid overfeeding. And don't forget to account for treats. As a guideline, they should make up no more than 10% of a dog's daily calories."
+              },
+              "care_training" : {
+                 "en" : "Pudelpointers are intelligent, eager-to-please dogs that are generally easy to train. A positive, reward-based approach using their favorite toys or treats will keep them engaged and responsive during training sessions.\n\nBe sure to [socialize your pup]({%blogURL puppy-socialization%}) when they're young to help them develop into a well-adjusted adult dog."
+              },
+              "color_image_id" : "5fda3d1e-056c-5209-95a8-341ebee6924e",
+              "country_codes" : [
+                 "US",
+                 "GB"
+              ],
+              "created_at" : "2020-08-28T15:01:30.987Z",
+              "date_reviewed" : "2021-06-16T16:07:00.000Z",
+              "external_id" : "pudelpointer",
+              "external_source" : "airtable",
+              "external_updated_at" : "2021-06-23T21:06:12.000Z",
+              "facts" : {
+                 "en" : "Pudelpointers are intelligent, calm, versatile gun dogs. They're excellent in the water and always eager to please. Though bred to hunt, these pups have friendly, goofy personalities that make them enjoyable family companions at home."
+              },
+              "head_image_id" : "f1766b4d-3ce0-52ff-8e71-dc20004c8118",
+              "height_range_max" : "68.0",
+              "height_range_min" : "55.0",
+              "history" : {
+                 "en" : "The Pudelpointer originated in Germany in the late 1800s. At that time, German sportsmen were developing gun dogs suited to their way of hunting. A well-known author and expert on hunting dogs, who wrote under the pen name Hegewald, convinced hunters to cross [Poodles]({%breedURL poodle-standard%}) with [English Pointers]({%breedURL pointer%}). His goal was to create a breed that combined the Poodle's love of water, trainability, retrieving skills, and protective coat with the English Pointer's keen nose, pointing instincts, and zeal for hunting.\n\nBreeders used far more Pointers than Poodles when establishing the breeding program. And once they achieved the look and character they were after, they no longer relied on Pointers and, instead, mated Pudelpointers to other Pudelpointers. The breed register was founded in 1892, and breeders formed the first Pudelpointer club in 1897.\n\nH.D. Hume and Sigbot Winterhelt introduced the breed to North America in 1956. Today, most Pudelpointers are bred in Germany or the United States. The United Kennel Club recognized the breed in 2006, and the American Kennel Club has recorded it in their Foundation Stock Service since 2016."
+              },
+              "id" : "964ca756-e87c-5868-a8fc-c972a67e82fc",
+              "internal_name" : "Pudelpointer",
+              "life_span_range_max" : "12.0",
+              "life_span_range_min" : "10.0",
+              "locales" : [
+                 "US",
+                 "UK"
+              ],
+              "name" : {
+                 "en" : "Pudelpointer"
+              },
+              "plural_name" : {
+                 "en" : "Pudelpointers"
+              },
+              "published_at" : "2023-07-05T16:27:26.614Z",
+              "recommended_activity_mins_adult" : null,
+              "recommended_activity_mins_senior" : null,
+              "recommended_activity_mins_young" : null,
+              "references" : "https://projectupland.com/hunting-dogs/pudelpointer-the-complete-versatile-hunting-dog-history/\n\nhttps://www.akc.org/dog-breeds/pudelpointer/\n\nhttp://www.fci.be/Nomenclature/Standards/216g07-en.pdf\n\nhttps://www.ukcdogs.com/pudelpointer",
+              "reviewed_by" : "Jamie Freyer, DVM",
+              "slug" : "pudelpointer",
+              "species" : "dog",
+              "temperament" : {
+                 "en" : "Pudelpointers are hunting dogs through and through. They have strong retrieving instincts and a love of waterâmaking them an excellent choice for waterfowl hunters.\n\nThese calm, self-controlled pups typically get along well with other dogs. They also have a friendly, easy-going nature and clownish personality. As a result, they're just as much fun to be around at home as out in the field."
+              },
+              "traits_appearance" : {
+                 "en" : "The Pudelpointer is a medium-sized, strong-boned gun dog with the general look of a Pointer."
+              },
+              "traits_coat_and_coloring" : {
+                 "en" : "Pudelpointers have close, flat-lying, rough coats of medium-length with a dense undercoat. They sport adorable beards and a lock of hair above the forehead. Their coats are typically brown, dead leaf (a lighter shade of brown), or black. Some dogs have small white markings."
+              },
+              "traits_physical" : {
+                 "en" : "This breed has a flat, moderately broad skull and large, dark amber eyes. Pudelpointers' medium-sized ears lie flat and are well-covered in hair. And their straight tails reach the hock and are carried like a saber."
+              },
+              "updated_at" : "2024-02-05T15:11:38.890Z",
+              "weight_range_pet_max" : "30.0",
+              "weight_range_pet_min" : "20.0",
+              "weight_range_show_max" : "30.0",
+              "weight_range_show_min" : "20.0"
+           },
+           "percentage" : 64
+        },
+        {
+           "breed" : {
+              "allow_user_entry" : true,
+              "ancestry_version_ids" : [
+                 "a726d077-0886-57b4-81d5-01362be36a09",
+                 "b5bb33f8-400e-43f7-a48f-d6dfdcb8a6fa",
+                 "ff9d3dfa-fad7-449e-bb69-ad820473897c"
+              ],
+              "breed_group_id" : "dd928076-d2c2-5ffa-89e7-739092b29eb2",
+              "breed_size_group_id" : "5fba23a3-e27b-5cbc-b046-edf7bbd7ad34",
+              "bw_image_id" : "66624906-31cc-4259-bfcb-fa236ac8446f",
+              "care_exercise" : {
+                 "en" : "German Wirehaired Pointers are busy dogs that have higher exercise needs than many other breeds. Long daily walks, playtime in enclosed yards, hiking, and swimming are all outdoor activities that they enjoy.\n\nThanks to their background, GWPs love to hunt and retrieve. Throwing a tennis ball or frisbee for them to retrieve provides exercise and lets them show off their natural abilities.\n\nGerman Wirehaired Pointers also enjoy participating in dog sports such as field trials, tracking, agility, and competitive obedience. These mentally stimulating activities can give your dog a productive outlet for their energy."
+              },
+              "care_grooming" : {
+                 "en" : "The German Wirehaired Pointer's grooming needs are relatively low-maintenance. Weekly brushing with a comb and soft slicker brush is usually enough to keep their coats free of loose hair and dirt.\n\nYou should clip your dog's nails regularly to keep them short and tidy. Overgrown nails can split and become painful, or lead to issues walking or running.\n\nIn addition to professional dental cleanings, aim to establish an at-home dental care routine that includes regular teeth brushing. Maintaining good [dental hygiene]({%blogURL dog-dental-care%}) is essential for the overall long-term health of all dogs."
+              },
+              "care_health" : null,
+              "care_nutrition" : {
+                 "en" : "To meet the nutritional needs of your German Wirehaired Pointer, feed a high-quality food that's appropriate for their life stage (e.g., puppy, adult, senior) and activity level.\n\nKeep them at a healthy weight by monitoring their food intake and measuring out meals. And don't forget to account for treats in their daily calorie totals. As a guideline, treats should make up no more than 10% of a dog's calories."
+              },
+              "care_training" : {
+                 "en" : "German Wirehaired Pointers are responsive and extremely eager to please. Such characteristics make them relatively easy to train. However, they can have an independent streak and will sometimes only work for someone they like.\n\nStarting from an early age, consistent, firm training and positive reinforcement techniques are the best tools for success. As with all breeds, German Wirehaired Pointers benefit from [early socialization]({%blogURL puppy-socialization%}). Socialized puppies grow up to be well-mannered adult dogs."
+              },
+              "color_image_id" : "6181304c-d4db-4570-af4a-f3f100f51e10",
+              "country_codes" : [
+                 "US",
+                 "GB"
+              ],
+              "created_at" : "2020-05-11T17:40:10.152Z",
+              "date_reviewed" : "2020-07-26T19:00:00.000Z",
+              "external_id" : "german-wirehaired-pointer",
+              "external_source" : "airtable",
+              "external_updated_at" : "2021-03-29T19:20:31.000Z",
+              "facts" : {
+                 "en" : "The German Wirehaired Pointer is a smart, energetic breed with a distinctively bushy beard and eyebrows. These dogs make loyal, enthusiastic, and handsome hunting companions and family pets."
+              },
+              "head_image_id" : "4a39606c-0176-454f-9fd9-f68f79f3efdd",
+              "height_range_max" : "66.0",
+              "height_range_min" : "56.0",
+              "history" : {
+                 "en" : "The German Wirehaired Pointer, also known as the Deutsch Drahtaar, received official recognition in its German homeland in the 1920s.\n\nUnlike British gamesmenâwho were breeding specialized dogs that excelled in specific types of huntingâhunters of Continental Europe wanted breeds that could do it all. Breeders combined the Griffon, Stichelhaar, Pudelpointer, and [German Shorthaired Pointer]({%breedURL german-shorthaired-pointer%})âeach of which came about in the late 1800s. The resulting dogs could point and track game, retrieve waterfowl from land or water, confront vermin, and more.\n\nThe German Wirehaired Pointer came to the United States in the early 1920s and received American Kennel Club recognition in 1959. Though the breed isn't too popular in the U.S., it has a large following in Germany."
+              },
+              "id" : "1bd2c6a9-a0f6-5553-90ad-6323bd520e7a",
+              "internal_name" : "German Wirehaired Pointer",
+              "life_span_range_max" : "16.0",
+              "life_span_range_min" : "14.0",
+              "locales" : [
+                 "US",
+                 "UK"
+              ],
+              "name" : {
+                 "en" : "German Wirehaired Pointer"
+              },
+              "plural_name" : {
+                 "en" : "German Wirehaired Pointers"
+              },
+              "published_at" : "2023-07-05T16:27:26.614Z",
+              "recommended_activity_mins_adult" : 65,
+              "recommended_activity_mins_senior" : 43,
+              "recommended_activity_mins_young" : 101,
+              "references" : "https://www.akc.org/dog-breeds/german-wirehaired-pointer/\n\nhttp://images.akc.org/pdf/breeds/standards/GermanWirehairedPointer.pdf\n\nhttps://www.akc.org/expert-advice/lifestyle/9-fun-facts-about-the-german-wirehaired-pointer/",
+              "reviewed_by" : "Annette Louviere, DVM",
+              "slug" : "german-wirehaired-pointer",
+              "species" : "dog",
+              "temperament" : {
+                 "en" : "The German Wirehaired Pointer is an excellent breed for active people and families looking for an affectionate, loyal, high-energy pet.\n\nFar from couch potatoes, German Wirehaired Pointers need plenty of outdoor exercise to be happy. A bored GWP can easily turn to a destructive one. Giving them \"jobs\" to do around the house will help keep them from destructive behaviors, such as barking or digging.\n\nGerman Wirehaired Pointers form tight bonds with their people. If they live in a home with only one person, they may turn into a one-person dog. But if raised among family, they will bond with the whole group. More than anything, GWPs enjoy human companionship and want to be included in activities as much as possible.\n\nThis breed is usually friendly toward other pets. But because of their sporting dog heritage, German Wirehaired Pointers often chase wildlife. Though sometimes aloof with strangers, they make commendable watch dogs."
+              },
+              "traits_appearance" : {
+                 "en" : "German Wirehaired Pointers are muscled, sturdy dogs best known for their weather-resistant, wire-like coats, bushy beards, and eyebrows."
+              },
+              "traits_coat_and_coloring" : {
+                 "en" : "The German Wirehaired Pointer's coat is both functional and distinctive. The harsh, wiry outer coat is weather-resistant and somewhat water-repellant. During the winter, the undercoat is dense enough to protect the GWP from the cold. In the summer months, this undercoat thins out significantly.\n\nThe GWP's coat is liver or parti-color with whiteâincluding patches and ticking. Its head is always liver-color, though a white blaze is possible."
+              },
+              "traits_physical" : {
+                 "en" : "German Wirehaired Pointers have medium-sized, oval, brown eyes. They're bright, clear, andâmost notablyâoverhung with medium length eyebrows. The breed's ears are rounded (but not too broad) and hang close to the head. The tail is set high and carried in line or above the body when the dog is alert."
+              },
+              "updated_at" : "2024-02-05T15:11:38.890Z",
+              "weight_range_pet_max" : "37.2",
+              "weight_range_pet_min" : "19.1",
+              "weight_range_show_max" : "32.2",
+              "weight_range_show_min" : "20.4"
+           },
+           "percentage" : 19
+        },
+        {
+           "breed" : {
+              "allow_user_entry" : true,
+              "ancestry_version_ids" : [
+                 "a726d077-0886-57b4-81d5-01362be36a09",
+                 "b5bb33f8-400e-43f7-a48f-d6dfdcb8a6fa",
+                 "ff9d3dfa-fad7-449e-bb69-ad820473897c"
+              ],
+              "breed_group_id" : "dd928076-d2c2-5ffa-89e7-739092b29eb2",
+              "breed_size_group_id" : "5fba23a3-e27b-5cbc-b046-edf7bbd7ad34",
+              "bw_image_id" : "94a42795-dca0-41d2-91e4-65f57d020d10",
+              "care_exercise" : {
+                 "en" : "German Shorthaired Pointers have a higher exercise requirement than most dogs. Long daily walks, running in enclosed yards, hiking, and swimming are all outdoor activities that they enjoy. But the ultimate way to a GSP's heart is retrieving, whether that involves a tennis ball or frisbee.\n\nThis breed also seems to enjoy dog sportsâsuch as field trials, tracking, agility, and competitive obedienceâwhich provide both physical exercise and mental stimulation."
+              },
+              "care_grooming" : {
+                 "en" : "The German Shorthaired Pointer's grooming needs are relatively few. Most of the year, weekly brushing is all it takes to keep the breed's coat looking good. During periods of heavy shedding, your GSP will need frequent brushing to remove loose hairs and prevent them from ending up in unwanted places.\n\nIt's also smart to trim nails regularly to keep them short and tidy. Overgrown nails can split and become painful, or lead to issues walking or running.\n\nIn addition to professional dental cleanings, establish an at-home dental care routine that includes regular daily teeth brushing. Though that may seem ambitious, maintaining good [dental hygiene]({%blogURL dog-dental-care%}) is essential for the overall long-term health of all dogs."
+              },
+              "care_health" : null,
+              "care_nutrition" : {
+                 "en" : "To meet their nutritional needs, feed your GSP a high-quality food appropriate for their life stage (e.g., puppy, adult, senior) and activity level.\n\nGerman Shorthaired Pointers are prone to bloat (also known as twisted stomach). To help prevent this condition, don't feed your dog immediately after any kind of vigorous activity. And wait at least an hour after meals before allowing them to run or exercise.\n\nTo keep your dog at a healthy weight, monitor their food intake carefully. Avoid accidental overfeeding by measuring out meals. And don't forget to account for treats in their daily calorie totals. As a guideline, treats should make up no more than 10% of a dog's calories."
+              },
+              "care_training" : {
+                 "en" : "German Shorthaired Pointers are intelligent, extremely eager to please, and hard-workingâqualities that make them easy to train. Consistent, firm training starting from an early age and positive reinforcement techniques are the best ways to train a GSP.\n\nAs all breeds do, German Shorthaired Pointers benefit from[Early socialization]({%blogURL puppy-socialization%}). It helps them develop into well-adjusted adult dogs."
+              },
+              "color_image_id" : "6356403f-2d08-490a-83b0-8eeea532bcf9",
+              "country_codes" : [
+                 "US",
+                 "GB"
+              ],
+              "created_at" : "2020-05-11T17:40:09.932Z",
+              "date_reviewed" : "2020-07-26T19:00:00.000Z",
+              "external_id" : "german-shorthaired-pointer",
+              "external_source" : "airtable",
+              "external_updated_at" : "2021-03-29T19:20:31.000Z",
+              "facts" : {
+                 "en" : "The German Shorthaired Pointer is an intelligent, good-natured, friendly breed. It makes an enthusiastic, versatile hunting companion as well as a happy, loyal pet for active families."
+              },
+              "head_image_id" : "6e92cbee-db98-4262-9676-bc678210dfd8",
+              "height_range_max" : "64.0",
+              "height_range_min" : "53.0",
+              "history" : {
+                 "en" : "The German Shorthaired Pointer, or GSP, was developed in Germany in the late 19th century to meet the need for an all-round hunting dog. Breeders sought to develop an excellent pointer with a good noseâa dog that could retrieve birds as well as animals.\n\nInitially, German hunters thought that a cross between a Spanish Pointer and Hannover Hound would possess these abilities. However, the resulting breed tended to bay when trailing. They then tried crosses with the Bloodhound, Foxhound, and various French hounds. But none hit the mark precisely.\n\nBreeding with the English Pointer finally resulted in a dog that appeared perfect. Still, even this breed had an aversion to water and tracking at times. Fortunately, continuous breeding eliminated these unwanted traits. And the German Shorthaired Pointer became a lean, athletic, and responsive breed.\n\nThe German Kennel Club first registered the breed in 1872. German Shorthaired Pointers arrived in the United States in the 1920s. Impressed by the versatility of the breed after reading an article about it, a man named Charles R. Thornton shipped two dogs to his home in Missoula, Montana.\n\nThe American Kennel Club recognized the German Shorthaired Pointer as a breed in 1930. Today, it's consistently one of the top-winning breeds in competitive hunting events."
+              },
+              "id" : "469ce562-d44e-51d6-9895-a800be080ac5",
+              "internal_name" : "German Shorthaired Pointer",
+              "life_span_range_max" : "14.0",
+              "life_span_range_min" : "10.0",
+              "locales" : [
+                 "US",
+                 "UK"
+              ],
+              "name" : {
+                 "en" : "German Shorthaired Pointer"
+              },
+              "plural_name" : {
+                 "en" : "German Shorthaired Pointers"
+              },
+              "published_at" : "2023-07-05T16:27:26.614Z",
+              "recommended_activity_mins_adult" : 65,
+              "recommended_activity_mins_senior" : 43,
+              "recommended_activity_mins_young" : 101,
+              "references" : "http://www.gspca.org/Breed/History/index.html\n\nhttps://www.akc.org/dog-breeds/german-shorthaired-pointer/\n\nhttp://images.akc.org/pdf/breeds/standards/GermanShorthairedPointer.pdf\n\nhttps://vcahospitals.com/know-your-pet/dog-breeds/german-shorthaired-pointer",
+              "reviewed_by" : "Annette Louviere, DVM",
+              "slug" : "german-shorthaired-pointer",
+              "species" : "dog",
+              "temperament" : {
+                 "en" : "The German Shorthaired Pointer is an excellent breed for active, outdoorsy families. These loving, loyal, protective dogs tend to be friendly towards children. GSPs enjoy being around people and want nothing more than to be included in family life.\n\nThis breed is usually safe around other pets and dogs. But it's not uncommon for them to display dominant behavior. Because of their hunting instincts, they love to play and chase. However, GSPs may choose unwilling playmates, such as cats or wildlife.\n\nGerman Shorthaired Pointers make commendable watch dogs. And though they may be reserved with strangers, they are generally very sociable dogs.\n\nGSPs are an intelligent and highly energetic breed. They mature later than other breeds. The resulting elongated \"puppy phase\" can be challenging for some owners.\n\nGerman Shorthaired Pointers need plenty of activity and exercise to be happy. If they get bored, they may take it upon themselves to find things to do, which can lead to undesired behaviors, such as barking or digging."
+              },
+              "traits_appearance" : {
+                 "en" : "The German Shorthaired Pointer has an aristocratic and well-balanced look. The breed's overall structure suggests power, endurance, and agility."
+              },
+              "traits_coat_and_coloring" : {
+                 "en" : "The German Shorthaired Pointer's hair is thick and short, though slightly longer on the haunches and tail. The breed's coat is black, liver, or a combination of liver and whiteâincluding particolor, patched, and ticked."
+              },
+              "traits_physical" : {
+                 "en" : "German Shorthaired Pointers have long muzzles that allow them to seize game and carry it for long periods. Their eyes are medium-size, almond-shaped, and ideally dark brown. They're also very expressive, portraying intelligence, good-humor, and energy.\n\nThe breed's ears are broad and set fairly high, lying flat. They should extend to the corner of the mouth."
+              },
+              "updated_at" : "2024-02-05T15:11:38.890Z",
+              "weight_range_pet_max" : "35.8",
+              "weight_range_pet_min" : "19.1",
+              "weight_range_show_max" : "32.2",
+              "weight_range_show_min" : "20.4"
+           },
+           "percentage" : 16
+        },
+        {
+           "breed" : {
+              "allow_user_entry" : true,
+              "ancestry_version_ids" : [
+                 "a726d077-0886-57b4-81d5-01362be36a09",
+                 "b5bb33f8-400e-43f7-a48f-d6dfdcb8a6fa",
+                 "ff9d3dfa-fad7-449e-bb69-ad820473897c"
+              ],
+              "breed_group_id" : "dd928076-d2c2-5ffa-89e7-739092b29eb2",
+              "breed_size_group_id" : "5fba23a3-e27b-5cbc-b046-edf7bbd7ad34",
+              "bw_image_id" : "18d1048e-7c88-49f1-a792-ec0bd03ce296",
+              "care_exercise" : {
+                 "en" : "Like other sporting breeds, Wirehaired Pointing Griffons need daily exercise. Games of fetch in a fenced backyard, hiking, and swimming are all activities Griffons enjoy. They also like dog sportsâsuch as tracking, hunting, field trials, agility, and obedience. And if you're looking for a jogging buddy, the Griffon will happily oblige."
+              },
+              "care_grooming" : {
+                 "en" : "Brushing or combing your Wirehaired Pointing Griffon's coat weekly will keep it looking its best. As necessary, use scissors to trim around your pup's feet or ears. But never use clippers on the body, or the wiry hair will grow back much fuzzier.\n\nBecause of their longer ears, Griffons may be more prone to ear infections. Inspect and clean ears routinely to prevent infections. You should also trim nails regularly to keep them at a short, tidy length. Nails that get too long can cause discomfort and lead to problems walking.\n\nFinally, maintaining good [dental hygiene]({%blogURL dog-dental-care%}) is essential for any dog's long-term health. In addition to scheduling professional dental cleanings, establish an at-home care routine that includes regular (ideally daily) teeth brushing."
+              },
+              "care_health" : null,
+              "care_nutrition" : {
+                 "en" : "Wirehaired Pointing Griffons require a high-quality dog food that is age-appropriateâwhether it's commercially manufactured or homemade (with a veterinarian's supervision and approval).\n\nTo keep your Wirehaired Pointing Griffon healthy, it's important to monitor how much they eat. Avoid accidental overfeeding by measuring out meals. And reduce portions or restrict calories if your pup gains weight. Also, remember that giving too many treats can contribute to obesity. Treats should make up no more than 10% of a dog's calories."
+              },
+              "care_training" : {
+                 "en" : "Intelligent and eager to please, Wirehaired Pointing Griffons tend to be relatively easy to train. Consistent and positive training programs work best for this breed.\n\nIt's also wise to [socialize your Griffon puppy]({%blogURL puppy-socialization%}) to help them grow into a well-mannered adult dog."
+              },
+              "color_image_id" : "7491d790-6e6a-429a-b2b4-b71d996e5b45",
+              "country_codes" : [
+                 "US",
+                 "GB"
+              ],
+              "created_at" : "2020-05-11T17:40:09.689Z",
+              "date_reviewed" : "2020-07-26T19:00:00.000Z",
+              "external_id" : "pointing-griffon-wire",
+              "external_source" : "airtable",
+              "external_updated_at" : "2021-03-29T19:20:31.000Z",
+              "facts" : {
+                 "en" : "The Wirehaired Pointing Griffon is an intelligent, active, and affectionate breed. With excellent hunting, pointing, and retrieving skills, Griffons make supreme gundogs. But these pups can be exceptional family dogs, too."
+              },
+              "head_image_id" : "0f15ecdf-eac1-4df2-8f29-f6b37da97c98",
+              "height_range_max" : "61.0",
+              "height_range_min" : "51.0",
+              "history" : {
+                 "en" : "The Wirehaired Pointing Griffon originated in Holland in the late 19th century. Eduard Korthalsâa Dutch sportsman and breeder who studied canine geneticsâwanted to create the ultimate walking hunter's gundog.\n\nKorthals owned many different dogs and carefully planned his breeding program. He wanted a breed that could hunt a variety of game on all types of terrain. So, he selected dogs with high strength and endurance, talented noses, water-repellent coats, and cooperative natures. The result was a robust dog that had all the characteristics of an exceptional pointer and retriever.\n\nKorthals continued his breeding program when he moved to Germany, and eventually France. The breed standard was established in 1886, and the Wirehaired Pointing Griffon quickly gained popularity throughout Europe. The breed earned AKC recognition in 1887, though it was mistakenly labeled a Russian Setter. Today, most Wirehaired Pointing Griffons are still bred in France."
+              },
+              "id" : "874e9fcc-9eaf-556a-8fff-9030e6330c81",
+              "internal_name" : "Pointing Griffon (Wire)",
+              "life_span_range_max" : "15.0",
+              "life_span_range_min" : "10.0",
+              "locales" : [
+                 "US",
+                 "UK"
+              ],
+              "name" : {
+                 "en" : "Wirehaired Pointing Griffon"
+              },
+              "plural_name" : {
+                 "en" : "Wirehaired Pointing Griffons"
+              },
+              "published_at" : "2023-07-05T16:27:26.614Z",
+              "recommended_activity_mins_adult" : 55,
+              "recommended_activity_mins_senior" : 37,
+              "recommended_activity_mins_young" : 92,
+              "references" : "https://www.awpga.com\n\nhttps://www.akc.org/expert-advice/lifestyle/5-things-you-didnt-know/\n\nhttps://www.akc.org/dog-breeds/wirehaired-pointing-griffon/\n\nhttp://images.akc.org/pdf/breeds/standards/WirehairedPointingGriffon.pdf\n\nhttp://www.fci.be/Nomenclature/Standards/107g07-en.pdf",
+              "reviewed_by" : "Annette Louviere, DVM",
+              "slug" : "pointing-griffon-wire",
+              "species" : "dog",
+              "temperament" : {
+                 "en" : "Wirehaired Pointing Griffons are intelligent, energetic dogs with outgoing personalities that make them a fun breed for active families. They're very loyal to their people and gentle and loving with kids. All that said, they can be nervous around strangers.\n\nThis breed loves outdoor activities. But Griffons are also happy to curl up on the couch for a nap when they return home."
+              },
+              "traits_appearance" : {
+                 "en" : "The Wirehaired Pointing Griffon is a medium-sized dog with a square-shaped head and catlike gracefulness."
+              },
+              "traits_coat_and_coloring" : {
+                 "en" : "The Wirehaired Pointing Griffon's functional coat is one of its most distinguishing features. The outer coat is straight and wiry with a harsh texture that protects the breed when hunting in rough terrain. The undercoat is thick, insulating, and water-repellent.\n\nWirehaired Pointing Griffons come in steel gray with brown markingsâwhich vary from shades of chestnut to white and orange. Ticking and roan are also common."
+              },
+              "traits_physical" : {
+                 "en" : "The Wirehaired Pointing Griffon is famous for its facial furnishings. These extensions of its undercoat create prominent eyebrows and a mustacheâgiving the Griffon a somewhat unkempt appearance and friendly expression. Large, slightly rounded eyes that range from dark yellow to brown contribute to the breed's casual look."
+              },
+              "updated_at" : "2024-02-05T15:11:38.890Z",
+              "weight_range_pet_max" : "30.4",
+              "weight_range_pet_min" : "18.1",
+              "weight_range_show_max" : "24.9",
+              "weight_range_show_min" : "20.0"
+           },
+           "percentage" : 1
+        }
+     ],
+     "ideal_weight_result" : {
+        "created_at" : "2024-04-16T15:06:50.863Z",
+        "female_max_size" : 30.8,
+        "female_min_size" : 18.1,
+        "female_pred_size" : 23.5,
+        "id" : "a7fb06cc-2a5e-42df-bbbb-d96cd6250c79",
+        "male_max_size" : 38.1,
+        "male_min_size" : 22.7,
+        "male_pred_size" : 28.9,
+        "neutered_max_size" : 38.6,
+        "neutered_min_size" : 24,
+        "neutered_pred_size" : 30.5,
+        "result_set_id" : "33ea366e-9abd-4d48-8896-909a1e065430",
+        "spayed_max_size" : 31.8,
+        "spayed_min_size" : 19.1,
+        "spayed_pred_size" : 24.8,
+        "updated_at" : "2024-04-16T15:06:50.863Z"
+     },
+     "notable_and_at_risk_health_test_results" : [
+        {
+           "copies" : 1,
+           "created_at" : "2024-04-16T15:06:52.066Z",
+           "health_result_id" : "db13c418-f014-446c-9dab-e8c4414e0956",
+           "health_test" : {
+              "article_link" : null,
+              "article_link_title" : null,
+              "background" : {
+                 "en" : "A mutation in the multidrug resistance 1 (MDR1) gene alters a dog's ability to limit the absorption and distribution of many medications. Affected dogs are slower to eliminate these drugs from the body and can suffer side effects when exposed to certain medications. This condition is sometimes called \"ivermectin sensitivity.\" However, the name is a misnomer as several other drugs pose a risk to MDR1 positive dogs. Adverse reactions can occur when affected dogs are exposed to some common drugs, however, all FDA approved heartworm preventatives are safe to administer to MDR1 positive dogs. This mutation is inherited in a dominant fashion though dogs with two copies of the mutation will exhibit more severe clinical signs.\n"
+              },
+              "breed_ids" : [
+                 "14131534-5879-5fd3-bd4d-724f371f3fb0",
+                 "3ae2ded6-89ff-5df9-9763-ef8ffcc71550",
+                 "4f42878f-f843-5593-958d-323fda539d7c",
+                 "5530d67c-c96f-5e52-a6a5-efad42104668",
+                 "5b6210a8-f2a6-5749-9316-1c244b0185f1",
+                 "6b0d761a-a5be-5206-ae7e-dd39b2d6e734",
+                 "6c150073-dca5-5718-9cf4-04317faa1535",
+                 "ae464e6c-321c-58ad-adc6-b6691bc1c9fa",
+                 "b65374a8-e58e-5a0c-ae70-024816a0d6b5",
+                 "c37be7cf-0bfc-5464-bb87-6970fe3a1356",
+                 "cbfdba93-0c1b-5f73-b74e-3de062affc3d",
+                 "d1df737b-2d80-583d-a265-d02cab65ac0a",
+                 "f7566a63-ecd6-5400-9092-adc01c489b87",
+                 "fa7ea1e3-75df-5cb1-8607-446392f9cd4a"
+              ],
+              "breeder_advice_disease_specific" : {
+                 "en" : "This disease is autosomal dominant meaning that one copy of the mutation is needed for signs of this disorder to occur.  For some breeds where the MDR1 mutation frequency is particular high, breeders may consider matings using dogs that have one or two copies of the MDR1 mutation to maintain genetic diversity within their breed. IMPORTANT: Resulting puppies must be tested for the MDR1 mutation to ensure safe future medical treatment. If a dog with one copy of the MDR1 mutation is bred with a clear dog with no copies of the MDR1 mutation, about half of the puppies will have one copy and half will have no copies of the MDR1 mutation. If a dog with two copies of the MDR1 mutation is bred with a clear dog, the resulting puppies will all have one copy of the mutation. Please note: It is possible that disease signs similar to the ones caused by the MDR1 mutation could develop due to a different genetic or clinical cause.",
+                 "pt" : "Esta doenÃ§a Ã© autossÃ³mica dominante, pelo que sÃ³ Ã© necessÃ¡ria uma cÃ³pia da mutaÃ§Ã£o para que ocorram os sinais da doenÃ§a. Os criadores desta raÃ§a podem considerar o acasalamento com cÃ£es que tenham uma ou duas cÃ³pias da mutaÃ§Ã£o MDR1 (em inglÃªs) para manter a diversidade genÃ©tica, nos casos em que a frequÃªncia da mutaÃ§Ã£o MDR1 seja particularmente elevada. IMPORTANTE: Os cachorros que nasÃ§am devem ser submetidos a testes de presenÃ§a da mutaÃ§Ã£o MDR1 para garantir um tratamento mÃ©dico seguro no futuro. Se um cÃ£o com uma cÃ³pia da mutaÃ§Ã£o MDR1 for cruzado com um cÃ£o sem cÃ³pias desta mutaÃ§Ã£o, a ninhada que nascer terÃ¡ perto de metade dos cachorros com uma cÃ³pia e outra metade sem qualquer cÃ³pia da mutaÃ§Ã£o MDR1. Se um cÃ£o com duas cÃ³pias da mutaÃ§Ã£o MDR1 for cruzado com um cÃ£o sem cÃ³pias da mutaÃ§Ã£o, toda a ninhada terÃ¡ uma cÃ³pia da mutaÃ§Ã£o. Nota: Pode ocorrer o desenvolvimento de sinais da doenÃ§a semelhantes aos causados pela mutaÃ§Ã£o MDR1 devido a uma causa genÃ©tica ou clÃ­nica diferente."
+              },
+              "category" : "complication",
+              "chromosome" : "14",
+              "clinical_description" : {
+                 "en" : "Dogs that carry this mutation are asymptomatic until they are exposed to a medication that uses the pump that is rendered defective by the mutation in the MDR1 (also called ABCB1) gene. Drugs known to use this P-glycoprotein pump are macrocyclic lactones (antiparasitic drugs), loperamide (antidiarrheal), erythromycin (antibiotic), acepromazine (tranquilizer), butorphanol (opioid), and certain drugs used in cancer treatment (vincristine, vinblastine, and doxorubicin). When these medications are administered, they accumulate in the brain which results in the adverse reactions. Typical symptoms include tremors, loss of balance, seizures, obtundation, excessive salivation, dilated pupils, and bradycardia. If untreated, the condition may lead to respiratory arrest, coma or death. Because dogs with one copy of the mutation will have some P-glycoprotein function, the most severe cases tend to occur in dogs that have two copies of the mutation and therefore lack any functional P-glycoprotein pumps. However, the condition can still be very severe in dogs that have only one copy of the mutation.\n",
+                 "pt" : "Os cÃ£es portadores desta mutaÃ§Ã£o sÃ£o assintomÃ¡ticos atÃ© serem expostos a um medicamento que utiliza a bomba de glicoproteÃ­na-P que se torna defeituosa devido Ã  mutaÃ§Ã£o no gene MDR1 (tambÃ©m conhecido por ABCB1). Os medicamentos que utilizam esta bomba de glicoproteÃ­na-P sÃ£o as lactonas macrocÃ­clicas (antiparasitÃ¡rios), a loperamida (antidiarreico), a eritromicina (antibiÃ³tico), a acepromazina (tranquilizante), o butorfanol (opiÃ¡ceo) e alguns medicamentos utilizados no tratamento do cancro (vincristina, vinblastina e doxorrubicina). Quando estes medicamentos sÃ£o administrados, acumulam-se no cÃ©rebro, o que resulta em reaÃ§Ãµes adversas. Os sinais tÃ­picos sÃ£o tremores, perda de equilÃ­brio, convulsÃµes, obtundaÃ§Ã£o, excesso de salivaÃ§Ã£o, pupilas dilatadas e bradicardia. Se nÃ£o for tratada, a doenÃ§a pode conduzir a uma paragem respiratÃ³ria, coma ou morte. Os cÃ£es com uma cÃ³pia da mutaÃ§Ã£o apresentam alguma funÃ§Ã£o da glicoproteÃ­na-P, sendo que os casos mais graves se detetam em cÃ£es com duas cÃ³pias da mutaÃ§Ã£o e que por carecem de bombas da glicoproteÃ­na-P funcionais. No entanto, mesmo nos cÃ£es que tenham apenas uma cÃ³pia da mutaÃ§Ã£o, a doenÃ§a pode ser igualmente grave."
+              },
+              "consumer_text" : {
+                 "en" : "It is important that you let your veterinarian know the results of this test. Any concerns about your dogâs wellbeing should be discussed with your veterinarian."
+              },
+              "content_status" : null,
+              "coordinate_end" : 13726596,
+              "coordinate_start" : 13726599,
+              "country_codes" : [
+                 "US",
+                 "GB"
+              ],
+              "created_at" : "2020-05-15T20:39:59.049Z",
+              "credits" : null,
+              "disease_category" : "Drug response",
+              "disease_long_name" : {
+                 "en" : "Multidrug Resistance 1, (MDR1)"
+              },
+              "disease_name" : {
+                 "en" : "MDR1 Medication Sensitivity",
+                 "pt" : "Sensibilidade a Medicamentos MDR1"
+              },
+              "disease_severity" : 3,
+              "disease_short_name" : {
+                 "en" : "MDR1"
+              },
+              "enabled" : true,
+              "enabled_product_versions" : "WH,RC,BFMX",
+              "enabled_v3" : true,
+              "excluded_region" : null,
+              "feature_ids" : [
+                 "00d2d08b-26e9-4cab-b3f2-7f82b4d7f283",
+                 "19d35030-f9c5-42c7-976e-b36d2282f88b",
+                 "23849098-2198-42ca-8837-78a48e757702",
+                 "2b5599d1-0cd5-4137-9d92-1dc75a549e4b",
+                 "3d38186a-a70c-4614-abe4-794c41a99174",
+                 "3f449d92-44e2-5fc5-ae5c-7134b6c279b8",
+                 "43e18883-5250-4da7-b3e1-910d6fd8db5a",
+                 "53780c75-e965-5cfb-9166-1e6668894de3",
+                 "55b9369a-c326-42c1-bf87-d6a982b7f32c",
+                 "5cb459b6-a9a8-4d97-b115-97b514825871",
+                 "6f6c96b9-7717-40d6-b9e9-d11c2dfd0f8b",
+                 "7195e9f2-22f5-436c-bd83-6289e7566b2f",
+                 "97aebd4e-0987-4a65-a531-5b4c6298b944",
+                 "b04bc2c6-047a-4e49-bb9d-ff4a43465465",
+                 "c18ad980-48af-40b5-8c0d-5ce53e76f727",
+                 "eb6ffa19-1605-4c10-81e9-a672f8cd5008",
+                 "ed3c5261-9d6d-43b6-8ca0-bb2696b0c3d8"
+              ],
+              "frequency_one_or_more" : 0.02009799,
+              "gene" : "MDR1/ABCB1",
+              "health_version_ids" : [
+                 "3e0336c4-42da-46c7-a8d2-e1ec840d4c53",
+                 "71b67ca0-e715-439c-87e6-0fe7c1d72c2b"
+              ],
+              "id" : "11eb1d26-7603-596b-a00c-e697076b5bb8",
+              "key_signs" : {
+                 "en" : "Some medications may cause prolonged sedation, stupor, coma, seizures.\n"
+              },
+              "lab_platform_ids" : [
+                 "242cf941-1d98-404d-80ad-6e2230d1ff3a",
+                 "48634f71-8819-5670-b4e9-b9981643887b",
+                 "dbf48483-5c65-5f2c-a335-5c71b7c06df0",
+                 "e76ae706-4292-5c2d-8b2a-3b4b578dafc3"
+              ],
+              "licensed_regions" : null,
+              "likelihood" : 5,
+              "locales" : [
+                 "US",
+                 "UK"
+              ],
+              "locus_name" : "MDR1",
+              "mode_of_inheritance" : "autosomal dominant",
+              "next_steps" : {
+                 "en" : "For dogs with copies of the MDR1 mutation it is important to be aware of medications which may result in an adverse reaction. These include: Acepromazine, Butorphanol, Doxorubicin, Doramectin, Emodepside, Erythromycin, Ivermectin, Loperamide, Milbemycin, Moxidectin, Paclitaxel, Rifampin, Selamectin, Vinblastine, Vincristine. It is best to explore alternative medications that will not use this P-glycoprotein pump or, at minimum, consider reduction of the dose to levels safe for an MDR1 positive dog.\n"
+              },
+              "one_copy_female" : {
+                 "en" : "{{name}} has one copy of the MDR1 Medication Sensitivity mutation and will be affected by this condition.  Dogs with the MDR1 mutation may have severe adverse reactions to some common medications, so it is important that the results of this test are taken into consideration when medical treatment is needed for {{name}}.  For dogs with the MDR1 mutation it is important to be aware of drugs which may result in an adverse reaction. These include: Acepromazine, Butorphanol, Doxorubicin, Doramectin, Emodepside, Erythromycin, Ivermectin, Loperamide, Milbemycin, Moxidectin, Paclitaxel, Rifampin, Selamectin, Vinblastine, Vincristine. \n"
+              },
+              "one_copy_male" : {
+                 "en" : "{{name}} has one copy of the MDR1 Medication Sensitivity mutation and will be affected by this condition.  Dogs with the MDR1 mutation may have severe adverse reactions to some common medications, so it is important that the results of this test are taken into consideration when medical treatment is needed for {{name}}.  For dogs with the MDR1 mutation it is important to be aware of drugs which may result in an adverse reaction. These include: Acepromazine, Butorphanol, Doxorubicin, Doramectin, Emodepside, Erythromycin, Ivermectin, Loperamide, Milbemycin, Moxidectin, Paclitaxel, Rifampin, Selamectin, Vinblastine, Vincristine.\n"
+              },
+              "onset_age" : 1,
+              "pmid" : null,
+              "references" : {
+                 "en" : "Mealey, K. L., Bentjen, S. A., Gay, J. M., & Cantor, G. H. (2001). Ivermectin sensitivity in collies is associated with a deletion mutation of the mdr1 gene. Pharmacogenetics, 11(8), 727â733. [View the article](https://doi.org/10.1097/00008571-200111000-00012)"
+              },
+              "show_technical_details" : true,
+              "slug" : "mdr1",
+              "species" : "dog",
+              "strict_breeds" : false,
+              "strict_purebreeds" : false,
+              "test_name" : "025_MDR1",
+              "two_copy_female" : {
+                 "en" : "{{name}} has two copies of the MDR1 Medication Sensitivity mutation and will be affected by this condition.  Dogs with the MDR1 mutation may have severe adverse reactions to some common medications, so it is important that the results of this test are taken into consideration when medical treatment is needed for {{name}}.  For dogs with the MDR1 mutation it is important to be aware of drugs which may result in an adverse reaction. These include: Acepromazine, Butorphanol, Doxorubicin, Doramectin, Emodepside, Erythromycin, Ivermectin, Loperamide, Milbemycin, Moxidectin, Paclitaxel, Rifampin, Selamectin, Vinblastine, Vincristine. \n"
+              },
+              "two_copy_male" : {
+                 "en" : "{{name}} has two copies of the MDR1 Medication Sensitivity mutation and will be affected by this condition.  Dogs with the MDR1 mutation may have severe adverse reactions to some common medications, so it is important that the results of this test are taken into consideration when medical treatment is needed for {{name}}.  For dogs with the MDR1 mutation it is important to be aware of drugs which may result in an adverse reaction. These include: Acepromazine, Butorphanol, Doxorubicin, Doramectin, Emodepside, Erythromycin, Ivermectin, Loperamide, Milbemycin, Moxidectin, Paclitaxel, Rifampin, Selamectin, Vinblastine, Vincristine. \n"
+              },
+              "typical_allele" : "I",
+              "updated_at" : "2024-02-29T22:52:13.240Z",
+              "variant_allele" : "D",
+              "version" : null,
+              "vet_and_consumer_text" : {
+                 "en" : "For detailed information about this disorder, including veterinary advice, click here."
+              },
+              "video_link" : null,
+              "video_link_title" : null,
+              "what_is_the_disease" : {
+                 "en" : "The MDR1 gene mutation causes a defect to a drug pumping protein that plays an important role in limiting drug absorption and distribution (particularly to the brain). Dogs with the MDR1 mutation may have severe adverse reactions to some commonly used medications. \n"
+              },
+              "zero_copy_female" : {
+                 "en" : "As {{name}} has no copies of the MDR1 Medication Sensitivity mutation, there should be no signs of this disease.  Although {{name}} should not show signs of MDR1 Medication Sensitivity due to this particular mutation, it is possible that similar signs could develop due to a different genetic or clinical cause."
+              },
+              "zero_copy_male" : {
+                 "en" : "As {{name}} has no copies of the MDR1 Medication Sensitivity mutation, there should be no signs of this disease.  Although {{name}} should not show signs of MDR1 Medication Sensitivity due to this particular mutation, it is possible that similar signs could develop due to a different genetic or clinical cause."
+              }
+           },
+           "health_test_id" : "11eb1d26-7603-596b-a00c-e697076b5bb8",
+           "id" : "269675f2-7248-49f5-8d12-d3074f2ce6ad",
+           "result_female" : "clear",
+           "result_male" : "clear",
+           "updated_at" : "2024-04-16T15:22:52.105Z"
+        }
+     ]
+  },
+  "message" : "success"
+}
