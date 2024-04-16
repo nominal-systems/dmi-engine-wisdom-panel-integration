@@ -6,6 +6,7 @@ import {
   calculateHash,
   CreateOrderPayload,
   Device,
+  FileUtils,
   IdPayload,
   NullPayloadPayload,
   Order,
@@ -118,6 +119,11 @@ export class WisdomPanelService extends BaseProviderService<WisdomPanelMessageDa
 
         this.logger.debug(`Found result set ${resultSet.id} (kit code: ${kit.attributes.code})`)
         const simplifiedResults = await this.wisdomPanelApiService.getSimplifiedResultSets(kit.id, metadata.providerConfiguration)
+
+        if (this.configService.get('debug.wisdomApiRequests')) {
+          FileUtils.saveFile(`simplified-results-${kit.attributes.code}.json`, JSON.stringify(simplifiedResults.data, null, 2))
+        }
+
         batchResults.results.push(this.wisdomPanelMapper.mapWisdomPanelResult(resultSet, kit, simplifiedResults.data))
       }
     } catch (error) {
