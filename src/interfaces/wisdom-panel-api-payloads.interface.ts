@@ -15,12 +15,11 @@ export interface WisdomPanelCreatePetPayload {
   data: {
     organization_unit_id: string
     code: string
-  } & Omit<WisdomPanelPet, 'id'>
-    & WisdomPanelClient
-    & WisdomPanelHospital
-    & WisdomPanelVeterinarian
+  } & Omit<WisdomPanelPet, 'id'> &
+    WisdomPanelClient &
+    WisdomPanelHospital &
+    WisdomPanelVeterinarian
 }
-
 
 export interface WisdomPanelKitFiler {
   unacknowledged?: boolean

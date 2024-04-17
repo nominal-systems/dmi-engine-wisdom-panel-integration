@@ -13,19 +13,21 @@ import { debugFetchedOrders } from '../common/debug-utils'
 export class OrdersProcessor {
   private readonly logger = new Logger(OrdersProcessor.name)
 
-  constructor (
+  constructor(
     private readonly configService: ConfigService,
     private readonly wisdomPanelService: WisdomPanelService,
     @Inject('API_SERVICE') private readonly apiClient: ClientProxy
   ) {}
 
   @Process()
-  async fetchOrders (job: Job<WisdomPanelMessageData>) {
+  async fetchOrders(job: Job<WisdomPanelMessageData>) {
     const { payload, ...metadata } = job.data
     const orders: Order[] = await this.wisdomPanelService.getBatchOrders(payload, metadata)
 
     if (orders.length > 0) {
-      this.logger.log(`Fetched ${orders.length} order${orders.length > 1 ? 's' : ''} for integration ${payload.integrationId}`)
+      this.logger.log(
+        `Fetched ${orders.length} order${orders.length > 1 ? 's' : ''} for integration ${payload.integrationId}`
+      )
 
       if (this.configService.get('debug.api')) {
         debugFetchedOrders(orders)

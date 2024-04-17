@@ -3,11 +3,11 @@ export interface Configuration {
     http: boolean
     api: boolean
     wisdomApiRequests: boolean
-  },
+  }
   processors: {
     orders: {
       dryRun: boolean
-    },
+    }
     results: {
       dryRun: boolean
     }

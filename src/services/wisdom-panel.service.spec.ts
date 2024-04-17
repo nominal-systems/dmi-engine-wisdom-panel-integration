@@ -16,8 +16,6 @@ describe('WisdomPanelService', () => {
   }
 
   beforeEach(async () => {
-
-
     const module: TestingModule = await Test.createTestingModule({
       providers: [
         WisdomPanelService,
@@ -66,7 +64,7 @@ describe('WisdomPanelService', () => {
         status: expect.any(String),
         manifest: expect.objectContaining({
           data: expect.any(String)
-        }),
+        })
       })
     })
   })

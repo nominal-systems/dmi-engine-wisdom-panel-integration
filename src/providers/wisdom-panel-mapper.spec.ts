@@ -38,49 +38,54 @@ describe('WisdomPanelMapper', () => {
 
   describe('mapCreateOrderPayload()', () => {
     it('should map to the create pet payload', () => {
-      expect(mapper.mapCreateOrderPayload({
-        patient: {
-          id: 'aa8093d3-0447-4022-8d73-4608178e46d4',
-          name: 'Miso',
-          identifier: [
-            {
-              system: 'pims:patient:id',
-              value: '434956978',
-            }
-          ],
-          sex: 'male',
-          species: 'dog',
-          birthdate: '2023-04-24'
-        },
-        client: {
-          id: '3da0246d-be43-4ea8-965d-597e3a93d98b',
-          lastName: 'Bellver',
-          firstName: 'Gonzalo',
-          identifier: [
-            {
-              system: 'pims:client:id',
-              value: 'UAT2JWU',
-            }
-          ],
-        },
-        veterinarian: {
-          id: '1e9f3603-013b-4cdd-aa07-f3a4fd11eaf2',
-          lastName: 'Foo',
-          firstName: 'Dr.',
-          identifier: [
-            {
-              system: 'pims:veterinarian:id',
-              value: '9999',
-            }
-          ]
-        },
-        tests: [
+      expect(
+        mapper.mapCreateOrderPayload(
           {
-            code: 'SA804'
-          }
-        ],
-        editable: false,
-      } as unknown as CreateOrderPayload, metadataMock)).toEqual({
+            patient: {
+              id: 'aa8093d3-0447-4022-8d73-4608178e46d4',
+              name: 'Miso',
+              identifier: [
+                {
+                  system: 'pims:patient:id',
+                  value: '434956978'
+                }
+              ],
+              sex: 'male',
+              species: 'dog',
+              birthdate: '2023-04-24'
+            },
+            client: {
+              id: '3da0246d-be43-4ea8-965d-597e3a93d98b',
+              lastName: 'Bellver',
+              firstName: 'Gonzalo',
+              identifier: [
+                {
+                  system: 'pims:client:id',
+                  value: 'UAT2JWU'
+                }
+              ]
+            },
+            veterinarian: {
+              id: '1e9f3603-013b-4cdd-aa07-f3a4fd11eaf2',
+              lastName: 'Foo',
+              firstName: 'Dr.',
+              identifier: [
+                {
+                  system: 'pims:veterinarian:id',
+                  value: '9999'
+                }
+              ]
+            },
+            tests: [
+              {
+                code: 'SA804'
+              }
+            ],
+            editable: false
+          } as unknown as CreateOrderPayload,
+          metadataMock
+        )
+      ).toEqual({
         data: {
           organization_unit_id: '{{organizationUnitId}}',
           code: 'SA804',
@@ -107,16 +112,16 @@ describe('WisdomPanelMapper', () => {
   describe('mapWisdomPanelKit()', () => {
     it('should map a kit to an order', () => {
       const kit: WisdomPanelKitItem = {
-        'id': '1cdf3f85-e3e0-4795-b582-a716fac2ad4c',
-        'type': 'kits',
-        'links': {
-          'self': 'https://staging.wisdompanel.com/api/v1/kits/1cdf3f85-e3e0-4795-b582-a716fac2ad4c'
+        id: '1cdf3f85-e3e0-4795-b582-a716fac2ad4c',
+        type: 'kits',
+        links: {
+          self: 'https://staging.wisdompanel.com/api/v1/kits/1cdf3f85-e3e0-4795-b582-a716fac2ad4c'
         },
-        'attributes': {
-          'code': 'VSMQCZR',
-          'active': true,
-          'enabled': true,
-          'activated': true,
+        attributes: {
+          code: 'VSMQCZR',
+          active: true,
+          enabled: true,
+          activated: true,
           'current-stage': 'shipped',
           'organization-identity': 'BANFIELD-VOYAGER-VSMQCZR',
           'veterinarian-name': 'Dr. Foo',
@@ -124,25 +129,25 @@ describe('WisdomPanelMapper', () => {
           'hospital-number': '123',
           'created-at': '2024-02-27T17:41:56.028Z'
         },
-        'relationships': {}
+        relationships: {}
       }
       const pet: WisdomPanelPetItem = {
-        'id': '8b85c33e-d689-4534-99e8-b4071c170a7f',
-        'type': 'pets',
-        'links': {
-          'self': 'https://staging.wisdompanel.com/api/v1/pets/8b85c33e-d689-4534-99e8-b4071c170a7f'
+        id: '8b85c33e-d689-4534-99e8-b4071c170a7f',
+        type: 'pets',
+        links: {
+          self: 'https://staging.wisdompanel.com/api/v1/pets/8b85c33e-d689-4534-99e8-b4071c170a7f'
         },
-        'attributes': {
-          'name': 'Miso',
-          'sex': 'male',
-          'species': 'dog',
-          'intact': true,
+        attributes: {
+          name: 'Miso',
+          sex: 'male',
+          species: 'dog',
+          intact: true,
           'organization-identity': 'BANFIELD-VOYAGER-VYJKWVD',
           'owner-first-name': 'Gonzalo',
           'owner-last-name': 'Bellver',
-          'created-at': '2024-04-10T00:51:05.994Z',
+          'created-at': '2024-04-10T00:51:05.994Z'
         },
-        'relationships': {}
+        relationships: {}
       }
       expect(mapper.mapWisdomPanelKit(kit, pet)).toEqual({
         externalId: '1cdf3f85-e3e0-4795-b582-a716fac2ad4c',
@@ -156,9 +161,7 @@ describe('WisdomPanelMapper', () => {
           firstName: 'Gonzalo',
           lastName: 'Bellver'
         },
-        tests: [
-          { code: 'VSMQCZR' }
-        ],
+        tests: [{ code: 'VSMQCZR' }],
         veterinarian: {
           firstName: 'Dr. Foo'
         }
@@ -168,15 +171,17 @@ describe('WisdomPanelMapper', () => {
 
   describe('mapWisdomPanelResult()', () => {
     it('should map a Wisdom Panel result set to a DMI result', () => {
-      expect(mapper.mapWisdomPanelResult(
-        {
-          id: 'result-set-id',
-        } as unknown as WisdomPanelResultSetItem,
-        {
-          id: 'kit-id'
-        } as unknown as WisdomPanelKitItem,
-        {} as unknown as WisdomPanelSimpleResult
-      )).toEqual({
+      expect(
+        mapper.mapWisdomPanelResult(
+          {
+            id: 'result-set-id'
+          } as unknown as WisdomPanelResultSetItem,
+          {
+            id: 'kit-id'
+          } as unknown as WisdomPanelKitItem,
+          {} as unknown as WisdomPanelSimpleResult
+        )
+      ).toEqual({
         id: 'result-set-id',
         orderId: 'kit-id',
         status: ResultStatus.COMPLETED,
@@ -186,7 +191,9 @@ describe('WisdomPanelMapper', () => {
   })
 
   describe('extractTestResults()', () => {
-    const simpleResultResponse = FileUtils.loadFile('test/examples/simplified-result_01.json') as WisdomPanelSimpleResultResponse
+    const simpleResultResponse = FileUtils.loadFile(
+      'test/examples/simplified-result_01.json'
+    ) as WisdomPanelSimpleResultResponse
     it('should extract test results from a simplified result', () => {
       const testResults: TestResult[] = mapper.extractTestResults(simpleResultResponse.data)
       expect(testResults).toEqual(expect.any(Array))
@@ -213,47 +220,74 @@ describe('WisdomPanelMapper', () => {
   })
 
   describe('mapWisdomPanelTestResultItem()', () => {
-    const simpleResultResponse01 = FileUtils.loadFile('test/examples/simplified-result_01.json') as WisdomPanelSimpleResultResponse
-    const simpleResultResponse04 = FileUtils.loadFile('test/examples/simplified-result_04.json') as WisdomPanelSimpleResultResponse
+    const simpleResultResponse01 = FileUtils.loadFile(
+      'test/examples/simplified-result_01.json'
+    ) as WisdomPanelSimpleResultResponse
+    const simpleResultResponse04 = FileUtils.loadFile(
+      'test/examples/simplified-result_04.json'
+    ) as WisdomPanelSimpleResultResponse
 
     it('should map breed percentages results', () => {
-      expect(mapper.mapWisdomPanelTestResultItem(simpleResultResponse01.data.breed_percentages as WisdomPanelTestResult, 'breed_percentages', 0)).toEqual({
+      expect(
+        mapper.mapWisdomPanelTestResultItem(
+          simpleResultResponse01.data.breed_percentages as WisdomPanelTestResult,
+          'breed_percentages',
+          0
+        )
+      ).toEqual({
         seq: 0,
         code: 'breed_percentages',
         name: 'Breed Percentages',
         status: TestResultItemStatus.DONE,
-        valueString: '48% Boxer, 31% Bulldog (Standard), 14% Bulldog (American), 4% Staffordshire Bull Terrier, 2% Mastiff, 1% American Pit Bull Terrier',
+        valueString:
+          '48% Boxer, 31% Bulldog (Standard), 14% Bulldog (American), 4% Staffordshire Bull Terrier, 2% Mastiff, 1% American Pit Bull Terrier'
       })
     })
 
     it('should map ideal weight results', () => {
-      expect(mapper.mapWisdomPanelTestResultItem(simpleResultResponse01.data.ideal_weight_result as WisdomPanelTestResult, 'ideal_weight_result', 0)).toEqual({
+      expect(
+        mapper.mapWisdomPanelTestResultItem(
+          simpleResultResponse01.data.ideal_weight_result as WisdomPanelTestResult,
+          'ideal_weight_result',
+          0
+        )
+      ).toEqual({
         seq: 0,
         code: 'ideal_weight_result',
         name: 'Ideal Weight Result',
         status: TestResultItemStatus.DONE,
-        valueString: 'Ideal weight: 22.2 - 37.2 lbs',
+        valueString: 'Ideal weight: 22.2 - 37.2 lbs'
       })
     })
 
     it('should map notable and at risk health test results', () => {
-      expect(mapper.mapWisdomPanelTestResultItem(simpleResultResponse01.data.notable_and_at_risk_health_test_results as WisdomPanelTestResult, 'notable_and_at_risk_health_test_results', 0)).toEqual({
+      expect(
+        mapper.mapWisdomPanelTestResultItem(
+          simpleResultResponse01.data.notable_and_at_risk_health_test_results as WisdomPanelTestResult,
+          'notable_and_at_risk_health_test_results',
+          0
+        )
+      ).toEqual({
         seq: 0,
         code: 'notable_and_at_risk_health_test_results',
         name: 'Notable and At Risk Health Test Results',
         status: TestResultItemStatus.DONE,
-        valueString: 'Complement 3 Deficiency: clear. MDR1 Medication Sensitivity: clear',
+        valueString: 'Complement 3 Deficiency: clear. MDR1 Medication Sensitivity: clear'
       })
 
-      expect(mapper.mapWisdomPanelTestResultItem(simpleResultResponse04.data.notable_and_at_risk_health_test_results as WisdomPanelTestResult, 'notable_and_at_risk_health_test_results', 0)).toEqual({
+      expect(
+        mapper.mapWisdomPanelTestResultItem(
+          simpleResultResponse04.data.notable_and_at_risk_health_test_results as WisdomPanelTestResult,
+          'notable_and_at_risk_health_test_results',
+          0
+        )
+      ).toEqual({
         seq: 0,
         code: 'notable_and_at_risk_health_test_results',
         name: 'Notable and At Risk Health Test Results',
         status: TestResultItemStatus.DONE,
-        valueString: 'MDR1 Medication Sensitivity: clear',
+        valueString: 'MDR1 Medication Sensitivity: clear'
       })
     })
-
   })
-
 })
