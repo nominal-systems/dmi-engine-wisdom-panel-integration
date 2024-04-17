@@ -1,6 +1,6 @@
 {
   "name": "@nominal-systems/dmi-engine-wisdom-panel-integration",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "DMI Engine integration package for Wisdom Panel",
   "author": "Gonzalo Bellver",
   "license": "MIT",
