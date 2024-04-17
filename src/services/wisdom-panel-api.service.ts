@@ -114,21 +114,12 @@ export class WisdomPanelApiService extends BaseApiService {
   }
 
   async getUnacknowledgedResultSetsForHospital (hospitalNumber: string, config: WisdomPanelApiConfig): Promise<WisdomPanelResultSetsResponse> {
-    // TODO(gb): filter by hospital-number
-    const response = await this.getResultSets({ unacknowledged: true }, { include: 'kit' }, config)
+    const filter: WisdomPanelResultSetsFilter = {
+      unacknowledged: true,
+      hospital_number: hospitalNumber
+    }
 
-    // Filter kits for hospital
-    const kitsForHospital: Array<WisdomPanelKitItem> = response.included.filter((include) => include.attributes['hospital-number'] === hospitalNumber)
-    response.included = kitsForHospital
-
-    // Filter result sets for hospital
-    const kitIds = kitsForHospital.map(kit => kit.id)
-    response.data = response.data.filter((resultSet) => {
-      const kitId: string = resultSet.relationships.kit.data !== undefined ? resultSet.relationships.kit.data.id : ''
-      return kitIds.includes(kitId)
-    })
-
-    return response
+    return await this.getResultSets(filter, { include: 'kit' }, config)
   }
 
   async getUnacknowledgedKitsForHospital (hospitalNumber: string, config: WisdomPanelApiConfig): Promise<WisdomPanelKitsResponse> {
@@ -145,8 +136,9 @@ export class WisdomPanelApiService extends BaseApiService {
 
   async getAvailableKits (config: WisdomPanelApiConfig): Promise<WisdomPanelKitItem[]> {
     // TODO(gb): add filter activated=false
-    // TODO(gb): add filter voyager-only=true
-    const filter: WisdomPanelKitFiler = {}
+    const filter: WisdomPanelKitFiler = {
+      voyager_kits: true
+    }
     const response = await this.getKits(filter, {}, config)
 
     response.data = response.data.filter((kit) => kit.attributes['active'] && !kit.attributes['activated'])

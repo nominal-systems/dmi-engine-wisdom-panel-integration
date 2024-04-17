@@ -25,10 +25,12 @@ export interface WisdomPanelCreatePetPayload {
 export interface WisdomPanelKitFiler {
   unacknowledged?: boolean
   hospital_number?: string
+  voyager_kits?: boolean
 }
 
 export interface WisdomPanelResultSetsFilter {
   unacknowledged?: boolean
+  hospital_number?: string
 }
 
 export interface WisdomPanelInclude {
