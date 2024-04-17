@@ -1,7 +1,7 @@
 import { CreateOrderPayload, Order, OrderStatus, Result } from '@nominal-systems/dmi-engine-common'
 import { WisdomPanelPetCreatedResponse } from '../interfaces/wisdom-panel-api-responses.interface'
 
-export function debugOrderCreated (payload: CreateOrderPayload, response: WisdomPanelPetCreatedResponse): void {
+export function debugOrderCreated(payload: CreateOrderPayload, response: WisdomPanelPetCreatedResponse): void {
   const order = {
     externalId: response.data.kit.id,
     status: OrderStatus.SUBMITTED,
@@ -10,11 +10,11 @@ export function debugOrderCreated (payload: CreateOrderPayload, response: Wisdom
   console.log('===============================================================================')
   console.log('EVENT: order:created')
   console.log('===============================================================================')
-  console.log(`order= ${JSON.stringify(order, null, 2)}`) // TODO(gb): remove trace
+  console.log(`order= ${JSON.stringify(order, null, 2)}`)
   console.log('===============================================================================\n')
 }
 
-export function debugFetchedOrders (orders: Order[]): void {
+export function debugFetchedOrders(orders: Order[]): void {
   for (const order of orders) {
     console.log('===============================================================================')
     console.log('EVENT: order:update')
@@ -24,7 +24,7 @@ export function debugFetchedOrders (orders: Order[]): void {
   }
 }
 
-export function debugFetchedResults (results: Result[]): void {
+export function debugFetchedResults(results: Result[]): void {
   for (const result of results) {
     console.log('===============================================================================')
     console.log('EVENT: report:update')

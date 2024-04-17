@@ -43,16 +43,8 @@ import configuration from './config/configuration'
       })
     })
   ],
-  providers: [
-    WisdomPanelService,
-    WisdomPanelApiService,
-    WisdomPanelMapper,
-    OrdersProcessor,
-    ResultsProcessor
-  ],
-  controllers: [
-    WisdomPanelController
-  ],
+  providers: [WisdomPanelService, WisdomPanelApiService, WisdomPanelMapper, OrdersProcessor, ResultsProcessor],
+  controllers: [WisdomPanelController],
   exports: [BullModule]
 })
 export class WisdomPanelModule {}

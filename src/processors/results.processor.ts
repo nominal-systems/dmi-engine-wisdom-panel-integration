@@ -12,21 +12,23 @@ import { debugFetchedResults } from '../common/debug-utils'
 export class ResultsProcessor {
   private readonly logger = new Logger(ResultsProcessor.name)
 
-  constructor (
+  constructor(
     private readonly configService: ConfigService,
     private readonly wisdomPanelService: WisdomPanelService,
     @Inject('API_SERVICE') private readonly apiClient: ClientProxy
   ) {}
 
   @Process()
-  async fetchResults (job: Job<WisdomPanelMessageData>) {
+  async fetchResults(job: Job<WisdomPanelMessageData>) {
     const { payload, ...metadata } = job.data
 
     try {
       const batchResults = await this.wisdomPanelService.getBatchResults(payload, metadata)
 
       if (batchResults.results.length > 0) {
-        this.logger.log(`Fetched ${batchResults.results.length} result${batchResults.results.length > 1 ? 's' : ''} for integration ${payload.integrationId}`)
+        this.logger.log(
+          `Fetched ${batchResults.results.length} result${batchResults.results.length > 1 ? 's' : ''} for integration ${payload.integrationId}`
+        )
 
         if (this.configService.get('debug.api')) {
           debugFetchedResults(batchResults.results)

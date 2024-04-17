@@ -23,14 +23,14 @@ import { CACHE_MANAGER, CacheStore } from '@nestjs/cache-manager'
 export class WisdomPanelApiService extends BaseApiService {
   private readonly logger: Logger = new Logger(WisdomPanelApiService.name)
 
-  constructor (
+  constructor(
     @Inject(CACHE_MANAGER) private cacheManager: CacheStore,
     private readonly httpService: HttpService
   ) {
     super(httpService)
   }
 
-  private async authenticate (config: WisdomPanelApiConfig): Promise<string> {
+  private async authenticate(config: WisdomPanelApiConfig): Promise<string> {
     let token = await this.cacheManager.get<string>('access_token')
     if (!token) {
       try {
@@ -38,12 +38,12 @@ export class WisdomPanelApiService extends BaseApiService {
           username: config.username,
           password: config.password,
           grant_type: 'password',
-          scope: 'organization',
+          scope: 'organization'
         }
         const response = await this.post<OAuthTokenResponse>(
           `${config.baseUrl}${WisdomPanelApiEndpoints.AUTH}`,
           payload,
-          {},
+          {}
         )
         token = response.access_token
         await this.cacheManager.set('access_token', token, { ttl: response.expires_in * 0.8 })
@@ -54,7 +54,11 @@ export class WisdomPanelApiService extends BaseApiService {
     return token
   }
 
-  async getKits (filter: WisdomPanelKitFiler = {}, include: WisdomPanelInclude = {}, config: WisdomPanelApiConfig): Promise<WisdomPanelKitsResponse> {
+  async getKits(
+    filter: WisdomPanelKitFiler = {},
+    include: WisdomPanelInclude = {},
+    config: WisdomPanelApiConfig
+  ): Promise<WisdomPanelKitsResponse> {
     try {
       const token = await this.authenticate(config)
       const query = {
@@ -76,7 +80,11 @@ export class WisdomPanelApiService extends BaseApiService {
     }
   }
 
-  async getResultSets (filter: WisdomPanelResultSetsFilter = {}, include: WisdomPanelInclude = {}, config: WisdomPanelApiConfig): Promise<WisdomPanelResultSetsResponse> {
+  async getResultSets(
+    filter: WisdomPanelResultSetsFilter = {},
+    include: WisdomPanelInclude = {},
+    config: WisdomPanelApiConfig
+  ): Promise<WisdomPanelResultSetsResponse> {
     try {
       const token = await this.authenticate(config)
       const query = {
@@ -92,13 +100,16 @@ export class WisdomPanelApiService extends BaseApiService {
           Authorization: `Bearer ${token}`
         }
       }
-      return await this.get<WisdomPanelResultSetsResponse>(`${config.baseUrl}${WisdomPanelApiEndpoints.GET_RESULT_SETS}`, reqConfig)
+      return await this.get<WisdomPanelResultSetsResponse>(
+        `${config.baseUrl}${WisdomPanelApiEndpoints.GET_RESULT_SETS}`,
+        reqConfig
+      )
     } catch (error) {
       throw new Error(`[HTTP ${error.status}] ${error.message}`)
     }
   }
 
-  async getSimplifiedResultSets (kitId: string, config: WisdomPanelApiConfig): Promise<WisdomPanelSimpleResultResponse> {
+  async getSimplifiedResultSets(kitId: string, config: WisdomPanelApiConfig): Promise<WisdomPanelSimpleResultResponse> {
     try {
       const token = await this.authenticate(config)
       const reqConfig = {
@@ -107,13 +118,19 @@ export class WisdomPanelApiService extends BaseApiService {
           Authorization: `Bearer ${token}`
         }
       }
-      return await this.get<WisdomPanelSimpleResultResponse>(`${config.baseUrl}${WisdomPanelApiEndpoints.GET_SIMPLIFIED_RESULT_SETS}/${kitId}`, reqConfig)
+      return await this.get<WisdomPanelSimpleResultResponse>(
+        `${config.baseUrl}${WisdomPanelApiEndpoints.GET_SIMPLIFIED_RESULT_SETS}/${kitId}`,
+        reqConfig
+      )
     } catch (error) {
       throw new Error(`[HTTP ${error.status}] ${error.message}`)
     }
   }
 
-  async getUnacknowledgedResultSetsForHospital (hospitalNumber: string, config: WisdomPanelApiConfig): Promise<WisdomPanelResultSetsResponse> {
+  async getUnacknowledgedResultSetsForHospital(
+    hospitalNumber: string,
+    config: WisdomPanelApiConfig
+  ): Promise<WisdomPanelResultSetsResponse> {
     const filter: WisdomPanelResultSetsFilter = {
       unacknowledged: true,
       hospital_number: hospitalNumber
@@ -122,7 +139,10 @@ export class WisdomPanelApiService extends BaseApiService {
     return await this.getResultSets(filter, { include: 'kit' }, config)
   }
 
-  async getUnacknowledgedKitsForHospital (hospitalNumber: string, config: WisdomPanelApiConfig): Promise<WisdomPanelKitsResponse> {
+  async getUnacknowledgedKitsForHospital(
+    hospitalNumber: string,
+    config: WisdomPanelApiConfig
+  ): Promise<WisdomPanelKitsResponse> {
     const filter: WisdomPanelKitFiler = {
       unacknowledged: true,
       hospital_number: hospitalNumber
@@ -134,7 +154,7 @@ export class WisdomPanelApiService extends BaseApiService {
     return await this.getKits(filter, include, config)
   }
 
-  async getAvailableKits (config: WisdomPanelApiConfig): Promise<WisdomPanelKitItem[]> {
+  async getAvailableKits(config: WisdomPanelApiConfig): Promise<WisdomPanelKitItem[]> {
     // TODO(gb): add filter activated=false
     const filter: WisdomPanelKitFiler = {
       voyager_kits: true
@@ -145,7 +165,10 @@ export class WisdomPanelApiService extends BaseApiService {
     return response.data
   }
 
-  async createPet (payload: WisdomPanelCreatePetPayload, config: WisdomPanelApiConfig): Promise<WisdomPanelPetCreatedResponse> {
+  async createPet(
+    payload: WisdomPanelCreatePetPayload,
+    config: WisdomPanelApiConfig
+  ): Promise<WisdomPanelPetCreatedResponse> {
     try {
       const token = await this.authenticate(config)
       const reqConfig = {
@@ -164,7 +187,7 @@ export class WisdomPanelApiService extends BaseApiService {
     }
   }
 
-  async acknowledgeKits (kitIds: string[], config: WisdomPanelApiConfig): Promise<void> {
+  async acknowledgeKits(kitIds: string[], config: WisdomPanelApiConfig): Promise<void> {
     try {
       const token = await this.authenticate(config)
       const reqConfig = {
@@ -175,7 +198,7 @@ export class WisdomPanelApiService extends BaseApiService {
       }
       const payload = {
         data: {
-          'kit_ids': kitIds
+          kit_ids: kitIds
         }
       }
       await this.post(`${config.baseUrl}${WisdomPanelApiEndpoints.ACKNOWLEDGE_KITS}`, payload, reqConfig)
@@ -185,7 +208,7 @@ export class WisdomPanelApiService extends BaseApiService {
     }
   }
 
-  async acknowledgeResultSets (resultSetIds: string[], config: WisdomPanelApiConfig): Promise<void> {
+  async acknowledgeResultSets(resultSetIds: string[], config: WisdomPanelApiConfig): Promise<void> {
     try {
       const token = await this.authenticate(config)
       const reqConfig = {
@@ -196,11 +219,13 @@ export class WisdomPanelApiService extends BaseApiService {
       }
       const payload = {
         data: {
-          'result_set_ids': resultSetIds
+          result_set_ids: resultSetIds
         }
       }
       await this.post(`${config.baseUrl}${WisdomPanelApiEndpoints.ACKNOWLEDGE_RESULT_SETS}`, payload, reqConfig)
-      this.logger.debug(`Acknowledged ${resultSetIds.length} result set${resultSetIds.length > 1 ? 's' : ''}: ${resultSetIds.join(', ')}`)
+      this.logger.debug(
+        `Acknowledged ${resultSetIds.length} result set${resultSetIds.length > 1 ? 's' : ''}: ${resultSetIds.join(', ')}`
+      )
     } catch (error) {
       throw new Error(`[HTTP ${error.status}] ${error.message}`)
     }
