@@ -89,11 +89,6 @@ export class WisdomPanelService extends BaseProviderService<WisdomPanelMessageDa
           continue
         }
 
-        // TODO(gb): do we need the included statuses?
-        // const status = response.included.find((include): include is WisdomPanelStatusesItem => {
-        //   return include.type === 'statuses' && include.id === kit.relationships?.statuses?.data?.id
-        // })
-
         const order: Order = this.wisdomPanelMapper.mapWisdomPanelKit(kit, pet)
         orders.push(order)
         this.logger.debug(`Found kit ${order.externalId} (kit code: ${kit.attributes.code})`)

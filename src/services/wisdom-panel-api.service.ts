@@ -147,16 +147,16 @@ export class WisdomPanelApiService extends BaseApiService {
       unacknowledged: true,
       hospital_number: hospitalNumber
     }
-    // TODO(gb): do we need to include the statuses?
+
     const include: WisdomPanelInclude = {
-      include: ['pet', 'pet.owner', 'statuses'].join(',')
+      include: ['pet', 'pet.owner'].join(',')
     }
     return await this.getKits(filter, include, config)
   }
 
   async getAvailableKits(config: WisdomPanelApiConfig): Promise<WisdomPanelKitItem[]> {
-    // TODO(gb): add filter activated=false
     const filter: WisdomPanelKitFiler = {
+      activated: false,
       voyager_kits: true
     }
     const response = await this.getKits(filter, {}, config)
