@@ -1,0 +1,42 @@
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - 'v*'
+
+name: Publish NPM package
+
+jobs:
+  publish-ghp:
+    name: Publish GitHub Package
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 20
+          registry-url: https://npm.pkg.github.com/
+      - run: npm install
+        env:
+          GHP_TOKEN: ${{ secrets.GHP_TOKEN }}
+      - run: npm publish
+        env:
+          GHP_TOKEN: ${{ secrets.GHP_TOKEN }}
+  build:
+    name: Create Release
+    needs: publish-ghp
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          draft: false
+          prerelease: false
+
