@@ -5,10 +5,14 @@ import {
   OrderStatus,
   ResultStatus,
   TestResult,
+  TestResultItem,
   TestResultItemStatus
 } from '@nominal-systems/dmi-engine-common'
 import {
+  WisdomPanelBreedPercentagesResult,
+  WisdomPanelIdealWeightResult,
   WisdomPanelKitItem,
+  WisdomPanelNotableAndAtRiskHealthTestResult,
   WisdomPanelPetItem,
   WisdomPanelResultSetItem,
   WisdomPanelSimpleResult,
@@ -191,11 +195,11 @@ describe('WisdomPanelMapper', () => {
   })
 
   describe('extractTestResults()', () => {
-    const simpleResultResponse = FileUtils.loadFile(
-      'test/examples/simplified-result_01.json'
+    const simpleResult = FileUtils.loadFile(
+      'test/examples/simplified-results/BBBFCVH.json'
     ) as WisdomPanelSimpleResultResponse
     it('should extract test results from a simplified result', () => {
-      const testResults: TestResult[] = mapper.extractTestResults(simpleResultResponse.data)
+      const testResults: TestResult[] = mapper.extractTestResults(simpleResult.data)
       expect(testResults).toEqual(expect.any(Array))
       expect(testResults.length).toEqual(3)
       expect(testResults[0]).toEqual({
@@ -219,75 +223,66 @@ describe('WisdomPanelMapper', () => {
     })
   })
 
-  describe('mapWisdomPanelTestResultItem()', () => {
-    const simpleResultResponse01 = FileUtils.loadFile(
-      'test/examples/simplified-result_01.json'
-    ) as WisdomPanelSimpleResultResponse
-    const simpleResultResponse04 = FileUtils.loadFile(
-      'test/examples/simplified-result_04.json'
+  describe('mapWisdomPanelTestResultItems()', () => {
+    const simpleResult = FileUtils.loadFile(
+      'test/examples/simplified-results/BBBFCVH.json'
     ) as WisdomPanelSimpleResultResponse
 
     it('should map breed percentages results', () => {
-      expect(
-        mapper.mapWisdomPanelTestResultItem(
-          simpleResultResponse01.data.breed_percentages as WisdomPanelTestResult,
-          'breed_percentages',
-          0
-        )
-      ).toEqual({
-        seq: 0,
-        code: 'breed_percentages',
-        name: 'Breed Percentages',
-        status: TestResultItemStatus.DONE,
-        valueString:
-          '48% Boxer, 31% Bulldog (Standard), 14% Bulldog (American), 4% Staffordshire Bull Terrier, 2% Mastiff, 1% American Pit Bull Terrier'
+      const breedPercentages: WisdomPanelTestResult = simpleResult.data.breed_percentages as WisdomPanelTestResult
+      const items: TestResultItem[] = mapper.mapWisdomPanelTestResultItems(
+        breedPercentages,
+        'breed_percentages',
+        0
+      )
+      expect(items).toEqual(expect.any(Array))
+      expect(items.length).toEqual(simpleResult.data.breed_percentages?.length)
+      items.forEach((item, index) => {
+        const breedPercentage: WisdomPanelBreedPercentagesResult = simpleResult.data.breed_percentages?.[index] as WisdomPanelBreedPercentagesResult
+        expect(item.seq).toEqual(index)
+        expect(item.code).toEqual(breedPercentage.breed.slug)
+        expect(item.name).toEqual(breedPercentage.breed.name.en)
+        expect(item.status).toEqual(TestResultItemStatus.DONE)
+        expect(item.valueQuantity).toEqual({
+          value: breedPercentage.percentage,
+          units: '%'
+        })
+        expect(item.notes).toEqual(`${breedPercentage.percentage}% ${breedPercentage.breed.name.en}`)
       })
     })
 
     it('should map ideal weight results', () => {
-      expect(
-        mapper.mapWisdomPanelTestResultItem(
-          simpleResultResponse01.data.ideal_weight_result as WisdomPanelTestResult,
-          'ideal_weight_result',
-          0
-        )
-      ).toEqual({
-        seq: 0,
-        code: 'ideal_weight_result',
-        name: 'Ideal Weight Result',
-        status: TestResultItemStatus.DONE,
-        valueString: 'Ideal weight: 22.2 - 37.2 lbs'
-      })
+      const idealWeightResult: WisdomPanelIdealWeightResult = simpleResult.data.ideal_weight_result as WisdomPanelIdealWeightResult
+      const items: TestResultItem[] = mapper.mapWisdomPanelTestResultItems(
+        idealWeightResult,
+        'ideal_weight_result',
+        0
+      )
+      expect(items).toEqual(expect.any(Array))
+      expect(items.length).toEqual(3)   // Min, Max, Predicted
+      expect(items[0]).toEqual(expect.objectContaining({
+        code: 'ideal_weight_result_male_min_size',
+        name: 'Minimal Ideal Weight Result'
+      }))
+      expect(items[1]).toEqual(expect.objectContaining({
+        code: 'ideal_weight_result_male_max_size',
+        name: 'Maximum Ideal Weight Result',
+      }))
+      expect(items[2]).toEqual(expect.objectContaining({
+        code: 'ideal_weight_result_male_pred_size',
+        name: 'Predicted Ideal Weight Result'
+      }))
     })
 
     it('should map notable and at risk health test results', () => {
-      expect(
-        mapper.mapWisdomPanelTestResultItem(
-          simpleResultResponse01.data.notable_and_at_risk_health_test_results as WisdomPanelTestResult,
-          'notable_and_at_risk_health_test_results',
-          0
-        )
-      ).toEqual({
-        seq: 0,
-        code: 'notable_and_at_risk_health_test_results',
-        name: 'Notable and At Risk Health Test Results',
-        status: TestResultItemStatus.DONE,
-        valueString: 'Complement 3 Deficiency: clear. MDR1 Medication Sensitivity: clear'
-      })
-
-      expect(
-        mapper.mapWisdomPanelTestResultItem(
-          simpleResultResponse04.data.notable_and_at_risk_health_test_results as WisdomPanelTestResult,
-          'notable_and_at_risk_health_test_results',
-          0
-        )
-      ).toEqual({
-        seq: 0,
-        code: 'notable_and_at_risk_health_test_results',
-        name: 'Notable and At Risk Health Test Results',
-        status: TestResultItemStatus.DONE,
-        valueString: 'MDR1 Medication Sensitivity: clear'
-      })
+      const notableAndAtRiskHealthTestResults: WisdomPanelTestResult = simpleResult.data.notable_and_at_risk_health_test_results as WisdomPanelNotableAndAtRiskHealthTestResult[]
+      const items: TestResultItem[] = mapper.mapWisdomPanelTestResultItems(
+        notableAndAtRiskHealthTestResults,
+        'notable_and_at_risk_health_test_results',
+        0
+      )
+      expect(items).toEqual(expect.any(Array))
+      expect(items.length).toEqual(simpleResult.data.notable_and_at_risk_health_test_results?.length * 2) // 2 items per result
     })
   })
 })

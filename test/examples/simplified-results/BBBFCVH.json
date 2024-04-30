@@ -1,0 +1,945 @@
+{
+  "message": "success",
+  "data": {
+    "breed_percentages": [
+      {
+        "percentage": 52,
+        "breed": {
+          "id": "21dfc143-9420-5e0f-84b9-1e7240fe88ed",
+          "slug": "chihuahua",
+          "breed_group_id": "7c942f6a-db5b-540b-8530-5f1df4c36de3",
+          "weight_range_pet_min": "0.9",
+          "weight_range_pet_max": "4.1",
+          "weight_range_show_min": "0.9",
+          "weight_range_show_max": "3.4",
+          "height_range_min": "15.0",
+          "height_range_max": "23.0",
+          "life_span_range_min": "14.0",
+          "life_span_range_max": "20.0",
+          "created_at": "2020-05-11T17:40:41.266Z",
+          "updated_at": "2024-02-05T15:11:38.890Z",
+          "external_updated_at": "2021-03-29T19:20:31.000Z",
+          "external_id": "chihuahua",
+          "external_source": "airtable",
+          "head_image_id": "430ef163-ca6d-481b-91f4-a24a5083b395",
+          "color_image_id": "55f6b43e-8f68-4fb8-9c1c-90bd9cd4673f",
+          "bw_image_id": "f44f907b-3bae-48d2-b8be-77b4aa6666f2",
+          "breed_size_group_id": "aead4602-2328-5af5-8ac2-206d2d4668f1",
+          "internal_name": "Chihuahua",
+          "references": "https://vcahospitals.com/know-your-pet/dog-breeds/chihuahua-smooth-coat\n\nhttp://www.fci.be/Nomenclature/Standards/218g09-en.pdf\n\nhttps://vcahospitals.com/know-your-pet/dog-breeds/chihuahua-long\n\nhttps://www.royalcanin.com/us/dogs/products/retail-products/small-adult-dry-dog-food\n\nhttps://www.akc.org/dog-breeds/chihuahua/\n\nhttps://www.chihuahuawardrobe.com/deer-head-vs-apple-head-chihuahua-whats-the-difference/",
+          "reviewed_by": "Cindy Elston, DVM, MPH",
+          "date_reviewed": "2020-07-26T19:00:00.000Z",
+          "species": "dog",
+          "recommended_activity_mins_young": 71,
+          "recommended_activity_mins_adult": 46,
+          "recommended_activity_mins_senior": 34,
+          "allow_user_entry": true,
+          "locales": [
+            "US",
+            "UK"
+          ],
+          "name": {
+            "en": "Chihuahua"
+          },
+          "plural_name": {
+            "en": "Chihuahuas"
+          },
+          "history": {
+            "en": "Despite being one of the most well-known dog breeds today, the origins of the Chihuahua are a bit of a mystery. Some experts believe they once belonged to the ancient Mayans. The breed may have been the result of crossing the Techichi—a dog that played an important role in both the Toltec and Aztec cultures—and the [Chinese Crested dog]({%breedURL chinese-crested%}).\n\nThough the ancient civilizations were eventually destroyed, the resilient breed survived in Chihuahua, Mexico. It came to the United States in the late 1800s when Americans visiting Mexico took an interest in the dogs and brought them back home as souvenirs from their trips.\n\nAs more of these dogs made their way to the U.S., they were called many names—including Arizona Dogs, Texas Dogs, and Mexican Dogs. However, the name \"Chihuahua\" is what eventually stuck.\n\nThe Chihuahua became an AKC-recognized breed in 1904. It now consistently enjoys a spot on the list of most popular dog breeds in the U.S."
+          },
+          "facts": {
+            "en": "Chihuahuas are the smallest dog breed in the world, but these tiny pups have big personalities and even bigger hearts. When properly socialized, Chihuahuas make for quirky, alert companions that are well-suited for living in apartments and small homes."
+          },
+          "traits_appearance": {
+            "en": "In addition to their small size, Chihuahuas have tall, upright ears and large, rounded eyes, compact bodies, short muzzles, and moderately long tails. Despite their tiny stature, they have muscular bodies."
+          },
+          "traits_coat_and_coloring": {
+            "en": "The Chihuahua's coat comes in two varieties: smooth-haired and long-haired. The smooth-haired Chihuahua's coat is short, smooth, and glossy. Some have undercoats made up of hair that is slightly longer. Smooth-haired Chihuahuas inherit their coats by carrying one or two copies of the dominant gene for short hair.\n\nLong-haired Chihuahuas have longer coats that are silky and either smooth or slightly wavy. Often they have fringe around the ears and tail. Long-haired Chihuahuas inherit their coats by carrying two copies of the recessive gene for long hair. A Chihuahua's coat can come in almost all possible colors and patterns and may include dark masks, merle, and white markings."
+          },
+          "traits_physical": {
+            "en": "There are two main types of Chihuahuas—apple head and deer head—though only the apple head adheres to AKC standards.\n\nAs the name suggests, apple head Chihuahuas have well-rounded, apple-shaped skulls. Deer head Chihuahuas have a longer, deer-like head with a more gradual slope where the muzzle joins the forehead. Deer heads typically have longer legs, larger ears, and tend to be larger in size.\n\nThe tail of the Chihuahua is set high and tapers as it reaches the tip. The carriage of the tail is an important trait—it's generally carried high and in a curved or semi-circular shape."
+          },
+          "temperament": {
+            "en": "The Chihuahua is an active, often playful dog with a big personality. They tend to bond closely with one or two people and will show those people great affection. Chihuahuas don't typically enjoy being left alone for long periods. Luckily, their small size makes them an easy breed to take on frequent outings.\n\nIf not [properly socialized]({%blogURL puppy-socialization%}), Chihuahuas can be apprehensive and nervous around strangers or other dogs and pets. This may result in barking or even snapping when the dog feels anxious or threatened.\n\nChihuahuas can do well around children as long as kids aren't too rambunctious and are mindful not to scare these little pups. Very young children may struggle to keep their energy levels and movements subdued enough to make a Chihuahua feel safe.\n\n[House-breaking]({%blogURL potty-train-a-puppy%}) Chihuahuas can sometimes be challenging, requiring patience and more frequent potty breaks. Some Chihuahuas can be trained to use indoor potty areas."
+          },
+          "care_nutrition": {
+            "en": "Chihuahuas require more calories per pound of bodyweight than larger dogs. Because their small stomachs don't allow them to eat large meals, it's best to feed them several small meals throughout the day to fulfill their caloric requirements. However, take care not to overfeed Chihuahuas. For such a small dog, even a couple extra treats can add up and lead to weight gain.\n\nChihuahuas should eat a diet created for small breed dogs (as well as their specific life stage). These diets will have the appropriate blend of nutrients and a smaller kibble size, allowing the tiny pups to properly chew and digest their food."
+          },
+          "care_grooming": {
+            "en": "Smooth-haired Chihuahuas need only occasional brushing due to their short, tidy coats. Long-haired Chihuahuas should be brushed at least weekly to prevent their coats from becoming tangled or matted.\n\nAll dogs require regular [dental care]({%blogURL dog-dental-care%}), including at-home teeth brushing and professional dental cleanings. Chihuahuas are particularly susceptible to dental issues due to their small mouths and crowded teeth. So, they may require more frequent cleanings beginning at an early age."
+          },
+          "care_exercise": {
+            "en": "Though Chihuahuas are perfectly happy to curl up in their favorite person's lap, they do need daily exercise. However, they don't require long walks or rigorous physical activity.\n\nShort, indoor play sessions are often enough to meet their exercise requirements. Still, for mental stimulation, Chihuahuas should be able to go outside, sniff, and explore. But keep in mind—unless they are confined to an area with other small dogs—Chihuahuas will likely be outmatched in size at dog parks."
+          },
+          "care_training": {
+            "en": "Chihuahuas have high intelligence and like to please their owners, making them a very trainable breed (and one that seems to enjoy performing entertaining tricks). However, they can be a bit stubborn and like to get their way. So, be prepared to remain firm and consistent during training sessions.\n\nChihuahuas respond well to [reward-based training]({%blogURL dog-obedience-training%}) using treats or favorite toys."
+          },
+          "care_health": null,
+          "published_at": "2023-07-05T16:27:26.614Z",
+          "country_codes": [
+            "US",
+            "GB"
+          ],
+          "ancestry_version_ids": [
+            "a726d077-0886-57b4-81d5-01362be36a09",
+            "b5bb33f8-400e-43f7-a48f-d6dfdcb8a6fa",
+            "ff9d3dfa-fad7-449e-bb69-ad820473897c"
+          ]
+        }
+      },
+      {
+        "percentage": 14,
+        "breed": {
+          "id": "25a1e9a6-45e5-561e-9986-5414caddcf1a",
+          "slug": "pekingese",
+          "breed_group_id": "df5efa2b-90ff-5dbc-9b25-773a4413936c",
+          "weight_range_pet_min": "2.7",
+          "weight_range_pet_max": "6.8",
+          "weight_range_show_min": "2.5",
+          "weight_range_show_max": "5.4",
+          "height_range_min": "18.0",
+          "height_range_max": "20.0",
+          "life_span_range_min": "10.0",
+          "life_span_range_max": "14.0",
+          "created_at": "2020-05-11T17:40:57.004Z",
+          "updated_at": "2024-02-05T15:11:38.890Z",
+          "external_updated_at": "2021-03-29T19:20:31.000Z",
+          "external_id": "pekingese",
+          "external_source": "airtable",
+          "head_image_id": "3f7f8f93-4a75-468f-90d1-b62e9bc9e1d5",
+          "color_image_id": "d9ab0fc5-82f9-480d-b468-2d75ff7767e6",
+          "bw_image_id": "6076f2fc-48c6-4651-a9a1-dfec83425f5e",
+          "breed_size_group_id": "aead4602-2328-5af5-8ac2-206d2d4668f1",
+          "internal_name": "Pekingese",
+          "references": "https://vcahospitals.com/know-your-pet/dog-breeds/Pekingese\n\nhttps://www.akc.org/dog-breeds/pekingese/\n\nhttp://images.akc.org/pdf/breeds/standards/Pekingese.pdf",
+          "reviewed_by": "Annette Louviere, DVM",
+          "date_reviewed": "2020-07-26T19:00:00.000Z",
+          "species": "dog",
+          "recommended_activity_mins_young": 78,
+          "recommended_activity_mins_adult": 47,
+          "recommended_activity_mins_senior": 35,
+          "allow_user_entry": true,
+          "locales": [
+            "US",
+            "UK"
+          ],
+          "name": {
+            "en": "Pekingese"
+          },
+          "plural_name": {
+            "en": "Pekingese"
+          },
+          "history": {
+            "en": "Pekingese are among the oldest recorded dog breeds in the world. The breed dates back to ancient China, where it was known as the “ha pa dog”—and later, the famous “foo dog”—and bred to resemble the lion as a sign of good luck.\n\nNobles kept Pekingese as pampered lapdogs. Sometimes called “sleeve dogs” because they could hide in the large sleeves of Chinese robes, Pekingese were accustomed to going everywhere with their doting owners. Palace eunuchs oversaw strict breeding programs, and Pekingese ownership was limited to those in the highest social classes. The dogs were so esteemed that commoners had to bow in their presence, and stealing a Pekingese was punishable by death.\n\nA British captain found five Pekingese dogs in a palace when troops invaded Peking (Beijing) in 1860. The dogs were transported back to England and given to Queen Victoria. These dogs with royal bearing fast became popular across Europe and, later, America. Ownership was once accessible to only the wealthiest families, but Pekingese are now among the most popular toy breeds."
+          },
+          "facts": {
+            "en": "Pekingese are little dogs with big personalities. Known as an independent, headstrong, and confident breed, Pekingese know just how to charm their ways into their family’s hearts."
+          },
+          "traits_appearance": {
+            "en": "The toy breed is small in stature with well-balanced proportions and a regal bearing. Pekingese are known for their “rolling” gait and bold demeanors."
+          },
+          "traits_coat_and_coloring": {
+            "en": "Pekingese have thick, soft undercoats and long, straight, coarse-textured outer coats that stand off of their small bodies. Their hair is longest around the neck and shoulders, creating the “mane” that defines the breed. The forelegs, backs of the thighs, and toes have long feathering, and there is fringing on the ears and tail. The breed standard does not permit trimming their coats.\n\nPekingnese come in several colors with biscuit, black, black and tan, cream, fawn, fawn sable, red, gray, red sable, and white being the most common. The breed standard permits all colors and markings."
+          },
+          "traits_physical": {
+            "en": "Pekingese are a flat-faced breed. Their topskull is massive, broad, and flat. In profile, their faces are flat with the chin, nose, and brow all lying on one plane that slants back from chin to forehead.\n\nPekingnese also have heart-shaped ears that lie flat against their heads, large, dark, round, wide-set eyes with black rims, and wide, open nostrils. Their bodies are compact and low to the ground, and their tails have long, profuse straight fringing and are carried well over their backs."
+          },
+          "temperament": {
+            "en": "Pekingese have never forgotten their noble beginnings. These dogs are dignified, self-important, and intelligent. Although their owners often call them “opinionated,” Pekingese are not known for being big barkers. Their quiet natures make them popular as apartment dogs. These little pups can also learn to use indoor potty pads.\n\nPekingese might be small in size, but these dogs have big hearts. Consummate lapdogs, “Pekes” are loyal and affectionate with their owners. The breed tolerates gentle children but tends to develop a strong bond with a single person. They are suspicious of strangers, including unfamiliar dogs, but proper introductions can help them feel more at ease.\n\nThis breed is outgoing and alert and makes an effective little watchdog. However, their stubborn, willful natures can make Pekingese hard to train."
+          },
+          "care_nutrition": {
+            "en": "Feed Pekingese a high-quality dog food that is appropriate for their age and small size. To keep this breed from becoming overweight, portion out their food with a measuring cup to avoid overfeeding, and limit treats to no more than 10% of their daily calories."
+          },
+          "care_grooming": {
+            "en": "Pekingese have thick double coats that require regular grooming. Occasional baths (with conditioner) and brushing at least once per week can keep their hair from becoming tangled or matted. Pekingese will require almost-daily brushing during shedding season (in spring and fall) to help remove their dead coat.\n\nTheir nails need regular trimming to keep them from cracking, splitting, or becoming overgrown and making it painful to walk or run.\n\nStart a regular [dental care]({%blogURL dog-dental-care%}) routine when Pekingese are puppies. Brushing their teeth and scheduling professional cleanings ensures good oral hygiene throughout their lives."
+          },
+          "care_exercise": {
+            "en": "Pekingese do not require a lot of exercise. An occasional walk around the block or romp in a fenced yard are enough to satisfy these little dogs. Pekingese overheat easily and are not well-suited to vigorous exercise, especially during hot weather.\n\nProvide opportunities for mental and physical stimulation, such as games and puzzle toys, to keep this intelligent breed engaged and active. Some Pekingese may enjoy activities such as competitive obedience or agility."
+          },
+          "care_training": {
+            "en": "Pekingese are outgoing, intelligent, and loving—but also stubborn. This combination can make them both want to please their owners and unwilling to follow directions. A consistent training program that incorporates positive reinforcement and rewards can encourage this breed to participate in training sessions. Engage their outgoing personalities with group sessions and games. Regular [socialization]({%blogURL puppy-socialization%}) is also important to make these dogs feel comfortable with unfamiliar people, pets, and places."
+          },
+          "care_health": null,
+          "published_at": "2023-07-05T16:27:26.614Z",
+          "country_codes": [
+            "US",
+            "GB"
+          ],
+          "ancestry_version_ids": [
+            "a726d077-0886-57b4-81d5-01362be36a09",
+            "b5bb33f8-400e-43f7-a48f-d6dfdcb8a6fa",
+            "ff9d3dfa-fad7-449e-bb69-ad820473897c"
+          ]
+        }
+      },
+      {
+        "percentage": 11,
+        "breed": {
+          "id": "73a9f88d-5f67-5305-9bb8-0cd1eb359541",
+          "slug": "russell-terrier",
+          "breed_group_id": "7c942f6a-db5b-540b-8530-5f1df4c36de3",
+          "weight_range_pet_min": "5.4",
+          "weight_range_pet_max": "10.9",
+          "weight_range_show_min": "6.4",
+          "weight_range_show_max": "8.2",
+          "height_range_min": "25.0",
+          "height_range_max": "38.0",
+          "life_span_range_min": "12.0",
+          "life_span_range_max": "16.0",
+          "created_at": "2020-05-11T17:40:26.887Z",
+          "updated_at": "2024-02-05T15:11:38.890Z",
+          "external_updated_at": "2021-03-29T19:20:31.000Z",
+          "external_id": "russell-terrier",
+          "external_source": "airtable",
+          "head_image_id": "b98c7f3f-5e96-4ff0-a9a7-e0034f56663b",
+          "color_image_id": "1ac15c82-da5a-4ec4-85d7-e38c85fd1e79",
+          "bw_image_id": "605ad948-1ef5-4e18-b07e-c91465439fa3",
+          "breed_size_group_id": "ed6e43af-7803-59d9-bf2a-9959bccfa7b2",
+          "internal_name": "Russell Terrier",
+          "references": "https://www.google.com/books/edition/The_Giant_Book_of_Dog_Names/K1G7cqB-o9wC\n\nhttp://www.fci.be/Nomenclature/Standards/345g03-en.pdf\n\nhttps://www.akc.org/dog-breeds/russell-terrier/",
+          "reviewed_by": "Laura Inman, DVM",
+          "date_reviewed": "2020-07-26T19:00:00.000Z",
+          "species": "dog",
+          "recommended_activity_mins_young": 90,
+          "recommended_activity_mins_adult": 56,
+          "recommended_activity_mins_senior": 42,
+          "allow_user_entry": true,
+          "locales": [
+            "US",
+            "UK"
+          ],
+          "name": {
+            "en": "Russell Terrier"
+          },
+          "plural_name": {
+            "en": "Russell Terriers"
+          },
+          "history": {
+            "en": "Russell Terriers are also commonly referred to as Jack Russell Terriers. They're named after Reverend John Russell, who developed the breed to hunt fox during the 1800s. These small-bodied dogs helped drive foxes from their lairs, giving the hunters easy access.\n\nIn the mid-1990s, many children learned about the breed from Wishbone—a children's show centered around an inspirational Russell Terrier. A clever and adventurous pup, Wishbone dreamt about playing the lead character in stories of classic literature."
+          },
+          "facts": {
+            "en": "The Russell Terrier is a cheerful little breed that packs plenty of spunk and personality into its pocket-sized body. These intelligent, cute, and charming dogs are feisty, fearless, and fun to be around."
+          },
+          "traits_appearance": {
+            "en": "The Russell Terrier is a strong and agile working dog that sports a medium-sized flexible body. Its effortless movements complement a lively, intelligent expression."
+          },
+          "traits_coat_and_coloring": {
+            "en": "Russell Terriers can have three coat types: smooth, rough, or broken. The three types are all predominantly white with tan, black, or brown markings."
+          },
+          "traits_physical": {
+            "en": "Dark, almond-shaped eyes, V-shaped ears, and a bright expression set the Russell Terrier apart from other breeds."
+          },
+          "temperament": {
+            "en": "Performers at heart, Russell Terriers can become skilled at tricks and love entertaining people. But they may be undistractable once engaged in an activity they enjoy.\n\nDespite their reputation for being good family dogs, Russell Terriers can develop small dog syndrome (when little dogs think they're the boss). Without proper training, they might constantly bark, nip at strangers, or challenge their owners. Firm and consistent correction should nip this problem in the bud.\n\nOverall, Russell Terriers make wonderful family pets and do well with children—provided the young ones know how to behave around dogs."
+          },
+          "care_nutrition": {
+            "en": "Russell Terriers need to eat high-quality dog food that's appropriate for their life stage (e.g., puppy, adult, senior). To keep them at a healthy weight, monitor food portions carefully. And be sure to take treats into account when tracking their daily calorie intake. As a guideline, treats should make up no more than 10% of a dog's calories."
+          },
+          "care_grooming": {
+            "en": "The Russell Terrier's spirited look requires little maintenance. You can keep the smooth coat in top form with a weekly spruce-up using a hound glove or soft brush. Similarly, a weekly brush or comb for dogs with rough or broken coats will ensure they look their finest.\n\nMonthly nail trimming is also important, along with a weekly check of your dog's ears for wax buildup or accumulated debris."
+          },
+          "care_exercise": {
+            "en": "Russell Terriers aren't the best dogs for inactive lifestyles. These peppy pooches enjoy getting out and moving with the family. Think hiking, biking, walking, and playing games.\n\nThe breed requires plenty of energetic pursuits that will exercise both its body and mind. Russell Terriers seem to have an almost boundless supply of get-up-and-go. As such, they enjoy fetching, agility, flyball, and more."
+          },
+          "care_training": {
+            "en": "Russell Terriers have a strong prey drive, so they should always be on a leash when out and about. This will help control your dog's urge to bolt and chase the neighbor's cat, a small animal, or another dog. [Early socialization]({%blogURL puppy-socialization%}) can also help curb any problems that might arise from this impulse.\n\nBecause the Russell Terrier is an extremely intelligent breed, boredom can easily set in if training sessions are not engaging. So, keep it interesting!"
+          },
+          "care_health": null,
+          "published_at": "2023-07-05T16:27:26.614Z",
+          "country_codes": [
+            "US",
+            "GB"
+          ],
+          "ancestry_version_ids": [
+            "a726d077-0886-57b4-81d5-01362be36a09",
+            "b5bb33f8-400e-43f7-a48f-d6dfdcb8a6fa",
+            "ff9d3dfa-fad7-449e-bb69-ad820473897c"
+          ]
+        }
+      },
+      {
+        "percentage": 7,
+        "breed": {
+          "id": "561d8689-01a1-58ed-84aa-d2f61a0b66ef",
+          "slug": "parson-russell-terrier",
+          "breed_group_id": "7c942f6a-db5b-540b-8530-5f1df4c36de3",
+          "weight_range_pet_min": "5.0",
+          "weight_range_pet_max": "10.4",
+          "weight_range_show_min": "5.9",
+          "weight_range_show_max": "7.7",
+          "height_range_min": "28.0",
+          "height_range_max": "38.0",
+          "life_span_range_min": "13.0",
+          "life_span_range_max": "15.0",
+          "created_at": "2020-05-11T17:40:26.673Z",
+          "updated_at": "2024-02-05T15:11:38.890Z",
+          "external_updated_at": "2021-05-21T19:48:28.000Z",
+          "external_id": "parson-russell-terrier",
+          "external_source": "airtable",
+          "head_image_id": "612d0808-6c0a-41a6-92df-fc131000f746",
+          "color_image_id": "176927b8-aad3-4f50-87d7-f1bdacf09921",
+          "bw_image_id": "a0101bbd-eb84-4edd-805c-eaebb42c5e66",
+          "breed_size_group_id": "ed6e43af-7803-59d9-bf2a-9959bccfa7b2",
+          "internal_name": "Parson Russell Terrier",
+          "references": "https://www.akc.org/dog-breeds/parson-russell-terrier/",
+          "reviewed_by": "Laura Inman, DVM",
+          "date_reviewed": "2020-07-26T19:00:00.000Z",
+          "species": "dog",
+          "recommended_activity_mins_young": 111,
+          "recommended_activity_mins_adult": 64,
+          "recommended_activity_mins_senior": 45,
+          "allow_user_entry": true,
+          "locales": [
+            "US",
+            "UK"
+          ],
+          "name": {
+            "en": "Parson Russell Terrier"
+          },
+          "plural_name": {
+            "en": "Parson Russell Terriers"
+          },
+          "history": {
+            "en": "The Parson Russell descends from early, white-bodied working terriers.\n\nReverend John Russell developed the breed to hunt fox during the 1800s. The small-bodied dogs helped drive foxes from their lairs, giving the hunters easy access.\n\nThe Kennel Club of the United Kingdom first recognized Parson Russell Terriers in 1990. And the breed received American Kennel Club recognition in 1997."
+          },
+          "facts": {
+            "en": "The Parson Russell Terrier is the show dog version of the Jack Russell and Russell Terrier. These feisty and energetic pups make high-spirited, affectionate companions."
+          },
+          "traits_appearance": {
+            "en": "Parson Russell Terriers have square bodies and narrow chests—along with a smart and scruffy look."
+          },
+          "traits_coat_and_coloring": {
+            "en": "White with brown, black, tan, cream, or tricolor markings, the Parson Russell Terrier's double coat may be a combination of smooth and rough (wiry). This mixture of textures gives the coat a broken appearance."
+          },
+          "traits_physical": {
+            "en": "Square and balanced, the Parson Russell Terrier has a slender build and an outgoing and animated step."
+          },
+          "temperament": {
+            "en": "Known worldwide for being an active and confident breed, the Parson Russell Terrier has a fearless and happy disposition. These dogs make loving companions and always want to be a part of the family fun.\n\nKeep in mind that, if restricted to a small area and left alone, the Parson Russell will take matters into its own paws. This may mean digging up the yard or crawling under the fence to explore—or anything in between.\n\nParson Russell Terriers may chase wildlife or other dogs. And they're often challenging to disengage from an activity that has their attention."
+          },
+          "care_nutrition": {
+            "en": "Parson Russell Terriers need to eat high-quality food that's appropriate for their life stage (e.g., puppy, adult, senior). To keep them at a healthy weight, monitor food portions carefully. And be sure to take treats into account when tracking their daily calorie intake. As a guideline, treats should make up no more than 10% of a dog's calories."
+          },
+          "care_grooming": {
+            "en": "The Parson Russell Terrier can have one of two coat types: smooth or broken. Both require regular brushing.\n\nUse a thick brush or hound glove on the smooth part of the coat and a pin or slicker brush—to lift loose hair and debris—on the rough parts. The rough coat of a Parson Russell Terrier will need plucking or clipping to avoid matting of the longer hairs.\n\nMonthly bathing and nail trims are adequate for this breed. But you should check and clean the ears of your Parson Russell Terrier weekly to avoid wax buildup and the accumulation of debris."
+          },
+          "care_exercise": {
+            "en": "Parson Russell Terriers love to run—whether in an open field, woodsy trail, or neighborhood park. This high-energy breed enjoys fetching, agility, flyball, and frisbee. Parson Russell Terriers also have the keen sense of smell necessary to participate in earthdog trials.\n\nThis breed has a strong prey drive, so a leash (or fenced-in yard) is mandatory. The Parson Russell Terrier won't be satisfied sitting alone in a secluded spot for any length of time."
+          },
+          "care_training": {
+            "en": "Eager to learn, and well-suited for reward-based training, the Parson Russell Terrier needs consistent and strong guidance. This breed tends to get bored easily, so aim to keep training fun and interesting.\n\nAnd remember, [early socialization]({%blogURL puppy-socialization%}) helps puppies of all breeds develop into well-mannered adult dogs."
+          },
+          "care_health": null,
+          "published_at": "2023-07-05T16:27:26.614Z",
+          "country_codes": [
+            "US",
+            "GB"
+          ],
+          "ancestry_version_ids": [
+            "a726d077-0886-57b4-81d5-01362be36a09",
+            "b5bb33f8-400e-43f7-a48f-d6dfdcb8a6fa",
+            "ff9d3dfa-fad7-449e-bb69-ad820473897c"
+          ]
+        }
+      },
+      {
+        "percentage": 5,
+        "breed": {
+          "id": "9c266543-e2ef-5229-92b0-f5e089c8ca79",
+          "slug": "biewer-terrier",
+          "breed_group_id": "7c942f6a-db5b-540b-8530-5f1df4c36de3",
+          "weight_range_pet_min": "1.4",
+          "weight_range_pet_max": "5.0",
+          "weight_range_show_min": "1.8",
+          "weight_range_show_max": "3.6",
+          "height_range_min": "20.0",
+          "height_range_max": "25.0",
+          "life_span_range_min": "12.0",
+          "life_span_range_max": "16.0",
+          "created_at": "2020-05-11T17:40:39.821Z",
+          "updated_at": "2024-02-05T15:11:38.890Z",
+          "external_updated_at": "2021-03-29T19:20:31.000Z",
+          "external_id": "biewer-terrier",
+          "external_source": "airtable",
+          "head_image_id": "711b8463-1ab6-4b5e-97bd-b4472c969e80",
+          "color_image_id": "9312b699-de7d-49c3-a565-235c13f582a4",
+          "bw_image_id": "5413e0c7-23c7-4702-8262-7899de7c87a6",
+          "breed_size_group_id": "aead4602-2328-5af5-8ac2-206d2d4668f1",
+          "internal_name": "Biewer Terrier",
+          "references": "http://biewerterrierclubofamerica.org/biewer_terrier_standard.htm\n\nhttps://www.akc.org/dog-breeds/biewer-terrier/\n\nhttp://biewerterrierclubofamerica.org/about_the_biewer_terrier.htm\n\nhttps://s3.amazonaws.com/cdn-origin-etr.akc.org/wp-content/uploads/2017/11/25150640/Official-Standard-for-the-Biewer-Terrier-07.03.19-CORRECTED-02.25.19.pdf",
+          "reviewed_by": "Cindy Elston, DVM, MPH",
+          "date_reviewed": "2020-07-26T19:00:00.000Z",
+          "species": "dog",
+          "recommended_activity_mins_young": 69,
+          "recommended_activity_mins_adult": 48,
+          "recommended_activity_mins_senior": 35,
+          "allow_user_entry": true,
+          "locales": [
+            "US",
+            "UK"
+          ],
+          "name": {
+            "en": "Biewer Terrier"
+          },
+          "plural_name": {
+            "en": "Biewer-Terriers"
+          },
+          "history": {
+            "en": "The Biewer Terriers are a breed named after the couple that started their line: Werner and Gertrud Biewer. The Biewers loved their animals, and throughout the 1970s and into the early 1980s, they had a successful Yorkshire Terrier breeding program. On January 20, 1984, the first documented black, white, and tan Yorkshire puppy was born into their pack, and three months later, another arrived. These rare puppies possessed the piebald gene not usually found in Yorkies.\n\nThey eventually settled on the name Biewer Yorkshire Terrier. Margo Eskens, a German singer, purchased the unique puppies and renamed them the Biewer Yorkshire Terrier a la Pom Pon. This new breed made its debut to the public in 1986.\n\nBecause of their popularity, the Biewers couldn’t keep up with the business of breeding their namesake terriers, though other breeders have worked to replicate the same type of dog.\n\nSince this is a relatively new breed, there are no specific standards for the Biewer Terrier."
+          },
+          "facts": {
+            "en": "This small breed is intelligent and devoted, and they make great companions for families. They can be mischievous, but they quickly make friends with any people they meet, as well as other dogs and animals.They are mellower than other terrier breeds, and while they do still require some exercise and mental stimulation, a game of fetch or short walk is plenty for the Biewer."
+          },
+          "traits_appearance": {
+            "en": "The Biewer Terrier has an elegant, longhaired coat that parts down the middle. They have a level back, with a high-set, plumed tail."
+          },
+          "traits_coat_and_coloring": {
+            "en": "The Biewer Terrier has a long and flowing coat that’s silky in texture. Their coloring comes in any combination of black or blue with gold or tan, as well as white."
+          },
+          "traits_physical": {
+            "en": "This breed is known for its long, silky, flowing coat, but it was the coat’s color that caught the attention of the original Biewer breeders, Mr. and Mrs. Biewer. These rare puppies possessed the piebald gene—not usually found in their ancestor, the Yorkie—and it exhibited itself as a black, white, and tan dog. Today, the breed continues to have a unique color scheme, including blue/black, gold/tan, and white."
+          },
+          "temperament": {
+            "en": "The Biewer Terrier is a real companion dog. Although they have a mischievous, childlike curiosity, they are relatively easy to train, and they tend to be mellow and easygoing, which makes them an excellent option for families.\n\nThey get along well with other animals, and their fun-loving attitude is easy to love."
+          },
+          "care_nutrition": {
+            "en": "The Biewer Terrier does best with high-quality dog food that’s suited to their particular age, as well as any additional health concerns. Consider a small-breed food for this breed.\n\nAs with any dog, it’s important to monitor the amount of food and treats that you give your Biewer Terrier, especially since some dogs may be prone to gaining weight as they age. Your veterinarian is always a good source to help provide you with appropriate nutrition and feeding guidelines."
+          },
+          "care_grooming": {
+            "en": "The Biewer Terrier’s long, silky coat requires more care than other terriers. Daily brushing should help keep mats and loose hairs at bay. You can also keep your Biewer’s coat shorter, which will require less care.\n\nAll dogs require regular [dental care]({%blogURL dog-dental-care%}), including at-home teeth brushing and professional dental cleanings, and the Biewer Terrier is no exception. Maintaining good dental hygiene is important for their overall long-term health."
+          },
+          "care_exercise": {
+            "en": "These small dogs are easy-going, including when it comes to their exercise routine. Unlike other terriers, they tend to be pretty mellow, and a game of fetch or short walk will be plenty to keep them healthy and happy."
+          },
+          "care_training": {
+            "en": "Dedicated, loyal, and smart, the Biewer Terrier is both easy to please and train."
+          },
+          "care_health": null,
+          "published_at": "2023-07-05T16:27:26.614Z",
+          "country_codes": [
+            "US",
+            "GB"
+          ],
+          "ancestry_version_ids": [
+            "a726d077-0886-57b4-81d5-01362be36a09",
+            "b5bb33f8-400e-43f7-a48f-d6dfdcb8a6fa",
+            "ff9d3dfa-fad7-449e-bb69-ad820473897c"
+          ]
+        }
+      },
+      {
+        "percentage": 4,
+        "breed": {
+          "id": "e0698da2-03bb-57ff-88df-76dfd38d59e7",
+          "slug": "dachshund-miniature-shorthaired",
+          "breed_group_id": "7c942f6a-db5b-540b-8530-5f1df4c36de3",
+          "weight_range_pet_min": "2.3",
+          "weight_range_pet_max": "5.9",
+          "weight_range_show_min": "1.8",
+          "weight_range_show_max": "5.0",
+          "height_range_min": "13.0",
+          "height_range_max": "18.0",
+          "life_span_range_min": "12.0",
+          "life_span_range_max": "16.0",
+          "created_at": "2020-05-11T17:40:39.316Z",
+          "updated_at": "2024-02-05T15:11:38.890Z",
+          "external_updated_at": "2021-03-29T19:20:31.000Z",
+          "external_id": "dachshund-miniature-shorthaired",
+          "external_source": "airtable",
+          "head_image_id": "e81c0768-6137-45c1-928d-00512482be83",
+          "color_image_id": "81cebf96-5d92-47e8-9188-5344971f999b",
+          "bw_image_id": "2b4def2d-2f0b-4867-82a2-ebc973088e2c",
+          "breed_size_group_id": "ed6e43af-7803-59d9-bf2a-9959bccfa7b2",
+          "internal_name": "Dachshund (Miniature Shorthaired)",
+          "references": "https://www.akc.org/dog-breeds/dachshund/",
+          "reviewed_by": "Annette Louviere, DVM",
+          "date_reviewed": "2020-07-26T19:00:00.000Z",
+          "species": "dog",
+          "recommended_activity_mins_young": 94,
+          "recommended_activity_mins_adult": 57,
+          "recommended_activity_mins_senior": 39,
+          "allow_user_entry": true,
+          "locales": [
+            "US",
+            "UK"
+          ],
+          "name": {
+            "en": "Miniature Shorthaired Dachshund"
+          },
+          "plural_name": {
+            "en": "Miniature Shorthaired Dachshunds"
+          },
+          "history": {
+            "en": "The Dachshund dates back to the 15th century. Many believe the breed originated in Germany, though some evidence suggests it was also present in Greece, Egypt, China, and Mexico. Originally bred to hunt badgers, Dachshunds also succeeded in hunting larger animals.\n\n[The Shorthaired Dachshund]({%breedURL dachshund-shorthaired%}) is the original type of Dachshund breed. Experts believe the miniature shorthaired variety resulted from crossbreeding with toy terriers and miniature pinschers. Then, breeders created stricter criteria to uphold the breed standardization. They achieved the desired miniaturization of the breed through many generations of selective breeding.\n\nThe breed came to the United States in 1885 and received American Kennel Club recognition at that time."
+          },
+          "facts": {
+            "en": "Miniature Shorthaired Dachshunds are alert, lively, and active dogs. Their protective natures make them vigilant watch dogs. They may be smaller versions of the original Dachshund, but their personalities are as big as they come."
+          },
+          "traits_appearance": {
+            "en": "Affectionately called a \"hot dog,\" or \"wiener dog,\" the Miniature Shorthaired Dachshund has a famously long body and very short legs."
+          },
+          "traits_coat_and_coloring": {
+            "en": "Miniature Shorthaired Dachshunds come in various colors, including solid or bicolor combinations of light and dark black, red, and tan shades. Brindle and dapple patterns are also possible. Their sleek, short hair should not be too long or thick. Some Mini Shorthaired Doxies have blue eyes."
+          },
+          "traits_physical": {
+            "en": "The Miniature Shorthaired Dachshunds has an instantly recognizable long-backed body, pointy nose, and short, strong legs."
+          },
+          "temperament": {
+            "en": "Mini Shorthaired Doxies are friendly, affectionate dogs that love spending time with their humans. These pups want to be part of family activities and outings. That also means Doxies don’t like being left alone.\n\nBecause of their background as hunting dogs, Dachshunds may bark, scratch at the ground, dig, or chase wildlife. They are also sometimes suspicious or fearful of strangers. In some cases, this might be because they're trying to avoid being picked up, which can cause discomfort to their long-backed body."
+          },
+          "care_nutrition": {
+            "en": "Mini Shorthaired Dachshunds need high-quality dog food appropriate for their age and small size. It's critical that this breed not become overweight. In addition to other health concerns, any extra weight strains their long backs, potentially leading to disc problems. To keep them at a healthy weight, monitor their food intake carefully, and avoid feeding them too many treats."
+          },
+          "care_grooming": {
+            "en": "The Miniature Shorthaired Dachshund is a clean breed, with little or no smell. They do need their nails clipped regularly, as overgrown nails can cause pain or lead to issues walking."
+          },
+          "care_exercise": {
+            "en": "Due to their build, not every activity is appropriate or safe for Mini Dachshunds. Long runs, hurdling fences, and vigorous swims are out of the question. That said, this active breed is always eager to get out and burn some energy.\n\nDachshunds need regular exercise to maintain a healthy weight and build the muscles needed to protect their backs. To avoid injuries, steer clear of activities that involve jumping or climbing stairs."
+          },
+          "care_training": {
+            "en": "Because of their strong hunting instinct and independent nature, Miniature Shorthaired Dachshunds may not always follow instructions. With their keen sense of smell and strong prey drive, they may choose to pick up a scent and follow it instead of listening to you. Patience and consistency—as well as a kind tone and reward-based approach—are the best tools for training these sensitive dogs.\n\nDachshunds are very protective of their family and territory. [Socializing them as puppies]({%blogURL puppy-socialization%}) will ensure they develop into well-mannered adult dogs."
+          },
+          "care_health": null,
+          "published_at": null,
+          "country_codes": [
+            "US",
+            "GB"
+          ],
+          "ancestry_version_ids": [
+            "a726d077-0886-57b4-81d5-01362be36a09"
+          ]
+        }
+      },
+      {
+        "percentage": 3,
+        "breed": {
+          "id": "2a524f73-676b-5043-b4c2-111e8c32643a",
+          "slug": "fox-terrier-toy",
+          "breed_group_id": "7c942f6a-db5b-540b-8530-5f1df4c36de3",
+          "weight_range_pet_min": "1.4",
+          "weight_range_pet_max": "4.5",
+          "weight_range_show_min": "2.0",
+          "weight_range_show_max": "2.9",
+          "height_range_min": "23.0",
+          "height_range_max": "28.0",
+          "life_span_range_min": "13.0",
+          "life_span_range_max": "15.0",
+          "created_at": "2020-05-11T17:40:25.247Z",
+          "updated_at": "2024-02-05T15:11:38.890Z",
+          "external_updated_at": "2021-03-29T19:20:31.000Z",
+          "external_id": "fox-terrier-toy",
+          "external_source": "airtable",
+          "head_image_id": "d95f736e-9d5e-43d6-87dd-3b00909fd82b",
+          "color_image_id": "6f200ebf-06da-4839-9110-745c5cfb2966",
+          "bw_image_id": "3426900e-0849-4f39-94e6-32dbce036cec",
+          "breed_size_group_id": "aead4602-2328-5af5-8ac2-206d2d4668f1",
+          "internal_name": "Fox Terrier (Toy)",
+          "references": "https://www.akc.org/dog-breeds/toy-fox-terrier/\n\nhttps://www.google.com/books/edition/Toy_Fox_Terrier/lLYJBgAAQBAJ\n\nhttps://www.google.com/books/edition/Toy_Fox_Terrier/Q7l0v0OxpAAC",
+          "reviewed_by": "Cindy Elston, DVM, MPH",
+          "date_reviewed": "2020-07-26T19:00:00.000Z",
+          "species": "dog",
+          "recommended_activity_mins_young": 94,
+          "recommended_activity_mins_adult": 57,
+          "recommended_activity_mins_senior": 39,
+          "allow_user_entry": true,
+          "locales": [
+            "US",
+            "UK"
+          ],
+          "name": {
+            "en": "Toy Fox Terrier"
+          },
+          "plural_name": {
+            "en": "Toy Fox Terriers"
+          },
+          "history": {
+            "en": "In the 1930s, American breeders crossed the [Smooth Fox Terrier]({%breedURL fox-terrier-smooth%}) with the [Chihuahua]({%breedURL chihuahua%}) and [Italian Greyhound]({%breedURL italian-greyhound%}). The resulting Toy Fox Terrier originally served as a farmyard ratter. But it ultimately became a companion breed.\n\nToy Fox Terriers—also called American Toy Terriers and Amertoys—gained United Kennel Club recognition in 1936. And the American Kennel Club recognized the breed in 2000."
+          },
+          "facts": {
+            "en": "If you're looking for an agile, energetic, intelligent, and playful dog, the Toy Fox Terrier fits the bill. These dogs excel at hunting squirrels and other small animals. And with a protective nature and tendency to bark, the Toy Fox Terrier also makes an excellent watchdog."
+          },
+          "traits_appearance": {
+            "en": "A balanced and athletic dog, the Toy Fox Terrier is both nimble and strong."
+          },
+          "traits_coat_and_coloring": {
+            "en": "The Toy Fox Terrier's close, smooth coat is mostly white with black, tan, black and tan, chocolate, or chocolate and tan patches."
+          },
+          "traits_physical": {
+            "en": "Large, upright ears, dark eyes, and a sleek, satin coat are among the Toy Fox Terrier's unique features."
+          },
+          "temperament": {
+            "en": "Toy Fox Terriers are good-natured, playful, loving, and loyal toward their people. And when socialized in puppyhood, the breed is also generally friendly around other pets and well-behaved children.\n\nThat said, Toy Fox Terriers can be unpredictable with other dogs, and they love to bark and dig."
+          },
+          "care_nutrition": {
+            "en": "Toy Fox Terriers require a high-quality, age-appropriate (e.g., puppy, adult, senior) diet. To prevent weight-related health problems, monitor how much your Toy Fox Terrier eats, and reduce portions if necessary. Also, remember that giving too many treats can contribute to obesity."
+          },
+          "care_grooming": {
+            "en": "Though they do shed, Toy Fox Terriers need little grooming. Regularly brushing or combing your dog's short coat (and giving occasional baths) is usually adequate.\n\nTrimming nails, cleaning ears, and [brushing teeth]({%blogURL dog-dental-care%}) should also be part of your pup's grooming routine."
+          },
+          "care_exercise": {
+            "en": "Speedy and agile, Toy Fox Terriers have a seemingly boundless supply of energy. They're considered one of the most athletic of the smaller breeds and excel at canine sports—such as agility, flyball, and tracking.\n\nBut be sure to always keep your Toy Fox Terrier on a leash when not safely in your home or fenced yard. This breed's curiosity can get it into trouble!"
+          },
+          "care_training": {
+            "en": "Toy Fox Terriers are very intelligent and relatively easy to train. But they can also be stubborn and willful on occasions. The solution? Provide firm and consistent reward-based training (using treats or favorite toys) from an early age."
+          },
+          "care_health": null,
+          "published_at": "2023-07-05T16:27:26.614Z",
+          "country_codes": [
+            "US",
+            "GB"
+          ],
+          "ancestry_version_ids": [
+            "a726d077-0886-57b4-81d5-01362be36a09",
+            "b5bb33f8-400e-43f7-a48f-d6dfdcb8a6fa",
+            "ff9d3dfa-fad7-449e-bb69-ad820473897c"
+          ]
+        }
+      },
+      {
+        "percentage": 2,
+        "breed": {
+          "id": "1bd2c6a9-a0f6-5553-90ad-6323bd520e7a",
+          "slug": "german-wirehaired-pointer",
+          "breed_group_id": "dd928076-d2c2-5ffa-89e7-739092b29eb2",
+          "weight_range_pet_min": "19.1",
+          "weight_range_pet_max": "37.2",
+          "weight_range_show_min": "20.4",
+          "weight_range_show_max": "32.2",
+          "height_range_min": "56.0",
+          "height_range_max": "66.0",
+          "life_span_range_min": "14.0",
+          "life_span_range_max": "16.0",
+          "created_at": "2020-05-11T17:40:10.152Z",
+          "updated_at": "2024-02-05T15:11:38.890Z",
+          "external_updated_at": "2021-03-29T19:20:31.000Z",
+          "external_id": "german-wirehaired-pointer",
+          "external_source": "airtable",
+          "head_image_id": "4a39606c-0176-454f-9fd9-f68f79f3efdd",
+          "color_image_id": "6181304c-d4db-4570-af4a-f3f100f51e10",
+          "bw_image_id": "66624906-31cc-4259-bfcb-fa236ac8446f",
+          "breed_size_group_id": "5fba23a3-e27b-5cbc-b046-edf7bbd7ad34",
+          "internal_name": "German Wirehaired Pointer",
+          "references": "https://www.akc.org/dog-breeds/german-wirehaired-pointer/\n\nhttp://images.akc.org/pdf/breeds/standards/GermanWirehairedPointer.pdf\n\nhttps://www.akc.org/expert-advice/lifestyle/9-fun-facts-about-the-german-wirehaired-pointer/",
+          "reviewed_by": "Annette Louviere, DVM",
+          "date_reviewed": "2020-07-26T19:00:00.000Z",
+          "species": "dog",
+          "recommended_activity_mins_young": 101,
+          "recommended_activity_mins_adult": 65,
+          "recommended_activity_mins_senior": 43,
+          "allow_user_entry": true,
+          "locales": [
+            "US",
+            "UK"
+          ],
+          "name": {
+            "en": "German Wirehaired Pointer"
+          },
+          "plural_name": {
+            "en": "German Wirehaired Pointers"
+          },
+          "history": {
+            "en": "The German Wirehaired Pointer, also known as the Deutsch Drahtaar, received official recognition in its German homeland in the 1920s.\n\nUnlike British gamesmen—who were breeding specialized dogs that excelled in specific types of hunting—hunters of Continental Europe wanted breeds that could do it all. Breeders combined the Griffon, Stichelhaar, Pudelpointer, and [German Shorthaired Pointer]({%breedURL german-shorthaired-pointer%})—each of which came about in the late 1800s. The resulting dogs could point and track game, retrieve waterfowl from land or water, confront vermin, and more.\n\nThe German Wirehaired Pointer came to the United States in the early 1920s and received American Kennel Club recognition in 1959. Though the breed isn't too popular in the U.S., it has a large following in Germany."
+          },
+          "facts": {
+            "en": "The German Wirehaired Pointer is a smart, energetic breed with a distinctively bushy beard and eyebrows. These dogs make loyal, enthusiastic, and handsome hunting companions and family pets."
+          },
+          "traits_appearance": {
+            "en": "German Wirehaired Pointers are muscled, sturdy dogs best known for their weather-resistant, wire-like coats, bushy beards, and eyebrows."
+          },
+          "traits_coat_and_coloring": {
+            "en": "The German Wirehaired Pointer's coat is both functional and distinctive. The harsh, wiry outer coat is weather-resistant and somewhat water-repellant. During the winter, the undercoat is dense enough to protect the GWP from the cold. In the summer months, this undercoat thins out significantly.\n\nThe GWP's coat is liver or parti-color with white—including patches and ticking. Its head is always liver-color, though a white blaze is possible."
+          },
+          "traits_physical": {
+            "en": "German Wirehaired Pointers have medium-sized, oval, brown eyes. They're bright, clear, and—most notably—overhung with medium length eyebrows. The breed's ears are rounded (but not too broad) and hang close to the head. The tail is set high and carried in line or above the body when the dog is alert."
+          },
+          "temperament": {
+            "en": "The German Wirehaired Pointer is an excellent breed for active people and families looking for an affectionate, loyal, high-energy pet.\n\nFar from couch potatoes, German Wirehaired Pointers need plenty of outdoor exercise to be happy. A bored GWP can easily turn to a destructive one. Giving them \"jobs\" to do around the house will help keep them from destructive behaviors, such as barking or digging.\n\nGerman Wirehaired Pointers form tight bonds with their people. If they live in a home with only one person, they may turn into a one-person dog. But if raised among family, they will bond with the whole group. More than anything, GWPs enjoy human companionship and want to be included in activities as much as possible.\n\nThis breed is usually friendly toward other pets. But because of their sporting dog heritage, German Wirehaired Pointers often chase wildlife. Though sometimes aloof with strangers, they make commendable watch dogs."
+          },
+          "care_nutrition": {
+            "en": "To meet the nutritional needs of your German Wirehaired Pointer, feed a high-quality food that's appropriate for their life stage (e.g., puppy, adult, senior) and activity level.\n\nKeep them at a healthy weight by monitoring their food intake and measuring out meals. And don't forget to account for treats in their daily calorie totals. As a guideline, treats should make up no more than 10% of a dog's calories."
+          },
+          "care_grooming": {
+            "en": "The German Wirehaired Pointer's grooming needs are relatively low-maintenance. Weekly brushing with a comb and soft slicker brush is usually enough to keep their coats free of loose hair and dirt.\n\nYou should clip your dog's nails regularly to keep them short and tidy. Overgrown nails can split and become painful, or lead to issues walking or running.\n\nIn addition to professional dental cleanings, aim to establish an at-home dental care routine that includes regular teeth brushing. Maintaining good [dental hygiene]({%blogURL dog-dental-care%}) is essential for the overall long-term health of all dogs."
+          },
+          "care_exercise": {
+            "en": "German Wirehaired Pointers are busy dogs that have higher exercise needs than many other breeds. Long daily walks, playtime in enclosed yards, hiking, and swimming are all outdoor activities that they enjoy.\n\nThanks to their background, GWPs love to hunt and retrieve. Throwing a tennis ball or frisbee for them to retrieve provides exercise and lets them show off their natural abilities.\n\nGerman Wirehaired Pointers also enjoy participating in dog sports such as field trials, tracking, agility, and competitive obedience. These mentally stimulating activities can give your dog a productive outlet for their energy."
+          },
+          "care_training": {
+            "en": "German Wirehaired Pointers are responsive and extremely eager to please. Such characteristics make them relatively easy to train. However, they can have an independent streak and will sometimes only work for someone they like.\n\nStarting from an early age, consistent, firm training and positive reinforcement techniques are the best tools for success. As with all breeds, German Wirehaired Pointers benefit from [early socialization]({%blogURL puppy-socialization%}). Socialized puppies grow up to be well-mannered adult dogs."
+          },
+          "care_health": null,
+          "published_at": "2023-07-05T16:27:26.614Z",
+          "country_codes": [
+            "US",
+            "GB"
+          ],
+          "ancestry_version_ids": [
+            "a726d077-0886-57b4-81d5-01362be36a09",
+            "b5bb33f8-400e-43f7-a48f-d6dfdcb8a6fa",
+            "ff9d3dfa-fad7-449e-bb69-ad820473897c"
+          ]
+        }
+      },
+      {
+        "percentage": 2,
+        "breed": {
+          "id": "469ce562-d44e-51d6-9895-a800be080ac5",
+          "slug": "german-shorthaired-pointer",
+          "breed_group_id": "dd928076-d2c2-5ffa-89e7-739092b29eb2",
+          "weight_range_pet_min": "19.1",
+          "weight_range_pet_max": "35.8",
+          "weight_range_show_min": "20.4",
+          "weight_range_show_max": "32.2",
+          "height_range_min": "53.0",
+          "height_range_max": "64.0",
+          "life_span_range_min": "10.0",
+          "life_span_range_max": "14.0",
+          "created_at": "2020-05-11T17:40:09.932Z",
+          "updated_at": "2024-02-05T15:11:38.890Z",
+          "external_updated_at": "2021-03-29T19:20:31.000Z",
+          "external_id": "german-shorthaired-pointer",
+          "external_source": "airtable",
+          "head_image_id": "6e92cbee-db98-4262-9676-bc678210dfd8",
+          "color_image_id": "6356403f-2d08-490a-83b0-8eeea532bcf9",
+          "bw_image_id": "94a42795-dca0-41d2-91e4-65f57d020d10",
+          "breed_size_group_id": "5fba23a3-e27b-5cbc-b046-edf7bbd7ad34",
+          "internal_name": "German Shorthaired Pointer",
+          "references": "http://www.gspca.org/Breed/History/index.html\n\nhttps://www.akc.org/dog-breeds/german-shorthaired-pointer/\n\nhttp://images.akc.org/pdf/breeds/standards/GermanShorthairedPointer.pdf\n\nhttps://vcahospitals.com/know-your-pet/dog-breeds/german-shorthaired-pointer",
+          "reviewed_by": "Annette Louviere, DVM",
+          "date_reviewed": "2020-07-26T19:00:00.000Z",
+          "species": "dog",
+          "recommended_activity_mins_young": 101,
+          "recommended_activity_mins_adult": 65,
+          "recommended_activity_mins_senior": 43,
+          "allow_user_entry": true,
+          "locales": [
+            "US",
+            "UK"
+          ],
+          "name": {
+            "en": "German Shorthaired Pointer"
+          },
+          "plural_name": {
+            "en": "German Shorthaired Pointers"
+          },
+          "history": {
+            "en": "The German Shorthaired Pointer, or GSP, was developed in Germany in the late 19th century to meet the need for an all-round hunting dog. Breeders sought to develop an excellent pointer with a good nose—a dog that could retrieve birds as well as animals.\n\nInitially, German hunters thought that a cross between a Spanish Pointer and Hannover Hound would possess these abilities. However, the resulting breed tended to bay when trailing. They then tried crosses with the Bloodhound, Foxhound, and various French hounds. But none hit the mark precisely.\n\nBreeding with the English Pointer finally resulted in a dog that appeared perfect. Still, even this breed had an aversion to water and tracking at times. Fortunately, continuous breeding eliminated these unwanted traits. And the German Shorthaired Pointer became a lean, athletic, and responsive breed.\n\nThe German Kennel Club first registered the breed in 1872. German Shorthaired Pointers arrived in the United States in the 1920s. Impressed by the versatility of the breed after reading an article about it, a man named Charles R. Thornton shipped two dogs to his home in Missoula, Montana.\n\nThe American Kennel Club recognized the German Shorthaired Pointer as a breed in 1930. Today, it's consistently one of the top-winning breeds in competitive hunting events."
+          },
+          "facts": {
+            "en": "The German Shorthaired Pointer is an intelligent, good-natured, friendly breed. It makes an enthusiastic, versatile hunting companion as well as a happy, loyal pet for active families."
+          },
+          "traits_appearance": {
+            "en": "The German Shorthaired Pointer has an aristocratic and well-balanced look. The breed's overall structure suggests power, endurance, and agility."
+          },
+          "traits_coat_and_coloring": {
+            "en": "The German Shorthaired Pointer's hair is thick and short, though slightly longer on the haunches and tail. The breed's coat is black, liver, or a combination of liver and white—including particolor, patched, and ticked."
+          },
+          "traits_physical": {
+            "en": "German Shorthaired Pointers have long muzzles that allow them to seize game and carry it for long periods. Their eyes are medium-size, almond-shaped, and ideally dark brown. They're also very expressive, portraying intelligence, good-humor, and energy.\n\nThe breed's ears are broad and set fairly high, lying flat. They should extend to the corner of the mouth."
+          },
+          "temperament": {
+            "en": "The German Shorthaired Pointer is an excellent breed for active, outdoorsy families. These loving, loyal, protective dogs tend to be friendly towards children. GSPs enjoy being around people and want nothing more than to be included in family life.\n\nThis breed is usually safe around other pets and dogs. But it's not uncommon for them to display dominant behavior. Because of their hunting instincts, they love to play and chase. However, GSPs may choose unwilling playmates, such as cats or wildlife.\n\nGerman Shorthaired Pointers make commendable watch dogs. And though they may be reserved with strangers, they are generally very sociable dogs.\n\nGSPs are an intelligent and highly energetic breed. They mature later than other breeds. The resulting elongated \"puppy phase\" can be challenging for some owners.\n\nGerman Shorthaired Pointers need plenty of activity and exercise to be happy. If they get bored, they may take it upon themselves to find things to do, which can lead to undesired behaviors, such as barking or digging."
+          },
+          "care_nutrition": {
+            "en": "To meet their nutritional needs, feed your GSP a high-quality food appropriate for their life stage (e.g., puppy, adult, senior) and activity level.\n\nGerman Shorthaired Pointers are prone to bloat (also known as twisted stomach). To help prevent this condition, don't feed your dog immediately after any kind of vigorous activity. And wait at least an hour after meals before allowing them to run or exercise.\n\nTo keep your dog at a healthy weight, monitor their food intake carefully. Avoid accidental overfeeding by measuring out meals. And don't forget to account for treats in their daily calorie totals. As a guideline, treats should make up no more than 10% of a dog's calories."
+          },
+          "care_grooming": {
+            "en": "The German Shorthaired Pointer's grooming needs are relatively few. Most of the year, weekly brushing is all it takes to keep the breed's coat looking good. During periods of heavy shedding, your GSP will need frequent brushing to remove loose hairs and prevent them from ending up in unwanted places.\n\nIt's also smart to trim nails regularly to keep them short and tidy. Overgrown nails can split and become painful, or lead to issues walking or running.\n\nIn addition to professional dental cleanings, establish an at-home dental care routine that includes regular daily teeth brushing. Though that may seem ambitious, maintaining good [dental hygiene]({%blogURL dog-dental-care%}) is essential for the overall long-term health of all dogs."
+          },
+          "care_exercise": {
+            "en": "German Shorthaired Pointers have a higher exercise requirement than most dogs. Long daily walks, running in enclosed yards, hiking, and swimming are all outdoor activities that they enjoy. But the ultimate way to a GSP's heart is retrieving, whether that involves a tennis ball or frisbee.\n\nThis breed also seems to enjoy dog sports—such as field trials, tracking, agility, and competitive obedience—which provide both physical exercise and mental stimulation."
+          },
+          "care_training": {
+            "en": "German Shorthaired Pointers are intelligent, extremely eager to please, and hard-working—qualities that make them easy to train. Consistent, firm training starting from an early age and positive reinforcement techniques are the best ways to train a GSP.\n\nAs all breeds do, German Shorthaired Pointers benefit from[Early socialization]({%blogURL puppy-socialization%}). It helps them develop into well-adjusted adult dogs."
+          },
+          "care_health": null,
+          "published_at": "2023-07-05T16:27:26.614Z",
+          "country_codes": [
+            "US",
+            "GB"
+          ],
+          "ancestry_version_ids": [
+            "a726d077-0886-57b4-81d5-01362be36a09",
+            "b5bb33f8-400e-43f7-a48f-d6dfdcb8a6fa",
+            "ff9d3dfa-fad7-449e-bb69-ad820473897c"
+          ]
+        }
+      }
+    ],
+    "ideal_weight_result": {
+      "id": "c9ca5856-46f7-44c9-8ccc-5cf5c9c22d54",
+      "result_set_id": "7d4b73a1-27c3-4c09-ba88-f3aa0d586cc2",
+      "female_pred_size": 3.9,
+      "female_min_size": 2.7,
+      "female_max_size": 5.0,
+      "male_pred_size": 4.0,
+      "male_min_size": 2.7,
+      "male_max_size": 5.4,
+      "spayed_pred_size": 4.0,
+      "spayed_min_size": 2.7,
+      "spayed_max_size": 5.9,
+      "neutered_pred_size": 4.4,
+      "neutered_min_size": 3.2,
+      "neutered_max_size": 6.4,
+      "created_at": "2024-04-16T21:34:26.436Z",
+      "updated_at": "2024-04-16T21:34:26.436Z"
+    },
+    "notable_and_at_risk_health_test_results": [
+      {
+        "id": "5dcdaffb-e650-498a-a792-6955fb14927a",
+        "health_result_id": "ab95c0d0-8423-4662-9391-fceea3ddeb14",
+        "health_test_id": "11eb1d26-7603-596b-a00c-e697076b5bb8",
+        "copies": 1,
+        "result_male": "at-risk",
+        "result_female": "at-risk",
+        "created_at": "2024-04-16T21:34:26.459Z",
+        "updated_at": "2024-04-16T21:34:26.459Z",
+        "health_test": {
+          "id": "11eb1d26-7603-596b-a00c-e697076b5bb8",
+          "test_name": "025_MDR1",
+          "slug": "mdr1",
+          "onset_age": 1,
+          "likelihood": 5,
+          "disease_severity": 3,
+          "mode_of_inheritance": "autosomal dominant",
+          "gene": "MDR1/ABCB1",
+          "typical_allele": "I",
+          "variant_allele": "D",
+          "chromosome": "14",
+          "coordinate_start": 13726599,
+          "coordinate_end": 13726596,
+          "show_technical_details": true,
+          "locus_name": "MDR1",
+          "disease_category": "Drug response",
+          "version": null,
+          "excluded_region": null,
+          "licensed_regions": null,
+          "enabled": true,
+          "enabled_v3": true,
+          "enabled_product_versions": "WH,RC,BFMX",
+          "content_status": null,
+          "frequency_one_or_more": 0.02009799,
+          "pmid": null,
+          "video_link": null,
+          "article_link": null,
+          "created_at": "2020-05-15T20:39:59.049Z",
+          "updated_at": "2024-02-29T22:52:13.240Z",
+          "species": "dog",
+          "category": "complication",
+          "locales": [
+            "US",
+            "UK"
+          ],
+          "disease_name": {
+            "en": "MDR1 Medication Sensitivity"
+          },
+          "disease_long_name": {
+            "en": "Multidrug Resistance 1, (MDR1)"
+          },
+          "disease_short_name": {
+            "en": "MDR1"
+          },
+          "what_is_the_disease": {
+            "en": "The MDR1 gene mutation causes a defect to a drug pumping protein that plays an important role in limiting drug absorption and distribution (particularly to the brain). Dogs with the MDR1 mutation may have severe adverse reactions to some commonly used medications. \n"
+          },
+          "zero_copy_male": {
+            "en": "As {{name}} has no copies of the MDR1 Medication Sensitivity mutation, there should be no signs of this disease.  Although {{name}} should not show signs of MDR1 Medication Sensitivity due to this particular mutation, it is possible that similar signs could develop due to a different genetic or clinical cause."
+          },
+          "zero_copy_female": {
+            "en": "As {{name}} has no copies of the MDR1 Medication Sensitivity mutation, there should be no signs of this disease.  Although {{name}} should not show signs of MDR1 Medication Sensitivity due to this particular mutation, it is possible that similar signs could develop due to a different genetic or clinical cause."
+          },
+          "one_copy_male": {
+            "en": "{{name}} has one copy of the MDR1 Medication Sensitivity mutation and will be affected by this condition.  Dogs with the MDR1 mutation may have severe adverse reactions to some common medications, so it is important that the results of this test are taken into consideration when medical treatment is needed for {{name}}.  For dogs with the MDR1 mutation it is important to be aware of drugs which may result in an adverse reaction. These include: Acepromazine, Butorphanol, Doxorubicin, Doramectin, Emodepside, Erythromycin, Ivermectin, Loperamide, Milbemycin, Moxidectin, Paclitaxel, Rifampin, Selamectin, Vinblastine, Vincristine.\n"
+          },
+          "one_copy_female": {
+            "en": "{{name}} has one copy of the MDR1 Medication Sensitivity mutation and will be affected by this condition.  Dogs with the MDR1 mutation may have severe adverse reactions to some common medications, so it is important that the results of this test are taken into consideration when medical treatment is needed for {{name}}.  For dogs with the MDR1 mutation it is important to be aware of drugs which may result in an adverse reaction. These include: Acepromazine, Butorphanol, Doxorubicin, Doramectin, Emodepside, Erythromycin, Ivermectin, Loperamide, Milbemycin, Moxidectin, Paclitaxel, Rifampin, Selamectin, Vinblastine, Vincristine. \n"
+          },
+          "two_copy_male": {
+            "en": "{{name}} has two copies of the MDR1 Medication Sensitivity mutation and will be affected by this condition.  Dogs with the MDR1 mutation may have severe adverse reactions to some common medications, so it is important that the results of this test are taken into consideration when medical treatment is needed for {{name}}.  For dogs with the MDR1 mutation it is important to be aware of drugs which may result in an adverse reaction. These include: Acepromazine, Butorphanol, Doxorubicin, Doramectin, Emodepside, Erythromycin, Ivermectin, Loperamide, Milbemycin, Moxidectin, Paclitaxel, Rifampin, Selamectin, Vinblastine, Vincristine. \n"
+          },
+          "two_copy_female": {
+            "en": "{{name}} has two copies of the MDR1 Medication Sensitivity mutation and will be affected by this condition.  Dogs with the MDR1 mutation may have severe adverse reactions to some common medications, so it is important that the results of this test are taken into consideration when medical treatment is needed for {{name}}.  For dogs with the MDR1 mutation it is important to be aware of drugs which may result in an adverse reaction. These include: Acepromazine, Butorphanol, Doxorubicin, Doramectin, Emodepside, Erythromycin, Ivermectin, Loperamide, Milbemycin, Moxidectin, Paclitaxel, Rifampin, Selamectin, Vinblastine, Vincristine. \n"
+          },
+          "consumer_text": {
+            "en": "It is important that you let your veterinarian know the results of this test. Any concerns about your dog’s wellbeing should be discussed with your veterinarian."
+          },
+          "vet_and_consumer_text": {
+            "en": "For detailed information about this disorder, including veterinary advice, click here."
+          },
+          "key_signs": {
+            "en": "Some medications may cause prolonged sedation, stupor, coma, seizures.\n"
+          },
+          "background": {
+            "en": "A mutation in the multidrug resistance 1 (MDR1) gene alters a dog's ability to limit the absorption and distribution of many medications. Affected dogs are slower to eliminate these drugs from the body and can suffer side effects when exposed to certain medications. This condition is sometimes called \"ivermectin sensitivity.\" However, the name is a misnomer as several other drugs pose a risk to MDR1 positive dogs. Adverse reactions can occur when affected dogs are exposed to some common drugs, however, all FDA approved heartworm preventatives are safe to administer to MDR1 positive dogs. This mutation is inherited in a dominant fashion though dogs with two copies of the mutation will exhibit more severe clinical signs.\n"
+          },
+          "clinical_description": {
+            "en": "Dogs that carry this mutation are asymptomatic until they are exposed to a medication that uses the pump that is rendered defective by the mutation in the MDR1 (also called ABCB1) gene. Drugs known to use this P-glycoprotein pump are macrocyclic lactones (antiparasitic drugs), loperamide (antidiarrheal), erythromycin (antibiotic), acepromazine (tranquilizer), butorphanol (opioid), and certain drugs used in cancer treatment (vincristine, vinblastine, and doxorubicin). When these medications are administered, they accumulate in the brain which results in the adverse reactions. Typical symptoms include tremors, loss of balance, seizures, obtundation, excessive salivation, dilated pupils, and bradycardia. If untreated, the condition may lead to respiratory arrest, coma or death. Because dogs with one copy of the mutation will have some P-glycoprotein function, the most severe cases tend to occur in dogs that have two copies of the mutation and therefore lack any functional P-glycoprotein pumps. However, the condition can still be very severe in dogs that have only one copy of the mutation.\n"
+          },
+          "next_steps": {
+            "en": "For dogs with copies of the MDR1 mutation it is important to be aware of medications which may result in an adverse reaction. These include: Acepromazine, Butorphanol, Doxorubicin, Doramectin, Emodepside, Erythromycin, Ivermectin, Loperamide, Milbemycin, Moxidectin, Paclitaxel, Rifampin, Selamectin, Vinblastine, Vincristine. It is best to explore alternative medications that will not use this P-glycoprotein pump or, at minimum, consider reduction of the dose to levels safe for an MDR1 positive dog.\n"
+          },
+          "breeder_advice_disease_specific": {
+            "en": "This disease is autosomal dominant meaning that one copy of the mutation is needed for signs of this disorder to occur.  For some breeds where the MDR1 mutation frequency is particular high, breeders may consider matings using dogs that have one or two copies of the MDR1 mutation to maintain genetic diversity within their breed. IMPORTANT: Resulting puppies must be tested for the MDR1 mutation to ensure safe future medical treatment. If a dog with one copy of the MDR1 mutation is bred with a clear dog with no copies of the MDR1 mutation, about half of the puppies will have one copy and half will have no copies of the MDR1 mutation. If a dog with two copies of the MDR1 mutation is bred with a clear dog, the resulting puppies will all have one copy of the mutation. Please note: It is possible that disease signs similar to the ones caused by the MDR1 mutation could develop due to a different genetic or clinical cause."
+          },
+          "video_link_title": null,
+          "article_link_title": null,
+          "references": {
+            "en": "Mealey, K. L., Bentjen, S. A., Gay, J. M., \u0026 Cantor, G. H. (2001). Ivermectin sensitivity in collies is associated with a deletion mutation of the mdr1 gene. Pharmacogenetics, 11(8), 727–733. [View the article](https://doi.org/10.1097/00008571-200111000-00012)"
+          },
+          "credits": null,
+          "strict_breeds": false,
+          "strict_purebreeds": false,
+          "country_codes": [
+            "US",
+            "GB"
+          ],
+          "breed_ids": [
+            "14131534-5879-5fd3-bd4d-724f371f3fb0",
+            "3ae2ded6-89ff-5df9-9763-ef8ffcc71550",
+            "4f42878f-f843-5593-958d-323fda539d7c",
+            "5530d67c-c96f-5e52-a6a5-efad42104668",
+            "5b6210a8-f2a6-5749-9316-1c244b0185f1",
+            "6b0d761a-a5be-5206-ae7e-dd39b2d6e734",
+            "6c150073-dca5-5718-9cf4-04317faa1535",
+            "ae464e6c-321c-58ad-adc6-b6691bc1c9fa",
+            "b65374a8-e58e-5a0c-ae70-024816a0d6b5",
+            "c37be7cf-0bfc-5464-bb87-6970fe3a1356",
+            "cbfdba93-0c1b-5f73-b74e-3de062affc3d",
+            "d1df737b-2d80-583d-a265-d02cab65ac0a",
+            "f7566a63-ecd6-5400-9092-adc01c489b87",
+            "fa7ea1e3-75df-5cb1-8607-446392f9cd4a"
+          ],
+          "lab_platform_ids": [
+            "242cf941-1d98-404d-80ad-6e2230d1ff3a",
+            "48634f71-8819-5670-b4e9-b9981643887b",
+            "dbf48483-5c65-5f2c-a335-5c71b7c06df0",
+            "e76ae706-4292-5c2d-8b2a-3b4b578dafc3"
+          ],
+          "feature_ids": [
+            "00d2d08b-26e9-4cab-b3f2-7f82b4d7f283",
+            "19d35030-f9c5-42c7-976e-b36d2282f88b",
+            "23849098-2198-42ca-8837-78a48e757702",
+            "2b5599d1-0cd5-4137-9d92-1dc75a549e4b",
+            "3d38186a-a70c-4614-abe4-794c41a99174",
+            "3f449d92-44e2-5fc5-ae5c-7134b6c279b8",
+            "43e18883-5250-4da7-b3e1-910d6fd8db5a",
+            "53780c75-e965-5cfb-9166-1e6668894de3",
+            "55b9369a-c326-42c1-bf87-d6a982b7f32c",
+            "5cb459b6-a9a8-4d97-b115-97b514825871",
+            "6f6c96b9-7717-40d6-b9e9-d11c2dfd0f8b",
+            "7195e9f2-22f5-436c-bd83-6289e7566b2f",
+            "97aebd4e-0987-4a65-a531-5b4c6298b944",
+            "b04bc2c6-047a-4e49-bb9d-ff4a43465465",
+            "c18ad980-48af-40b5-8c0d-5ce53e76f727",
+            "eb6ffa19-1605-4c10-81e9-a672f8cd5008",
+            "ed3c5261-9d6d-43b6-8ca0-bb2696b0c3d8"
+          ],
+          "health_version_ids": [
+            "3e0336c4-42da-46c7-a8d2-e1ec840d4c53",
+            "71b67ca0-e715-439c-87e6-0fe7c1d72c2b"
+          ]
+        }
+      }
+    ]
+  }
+}

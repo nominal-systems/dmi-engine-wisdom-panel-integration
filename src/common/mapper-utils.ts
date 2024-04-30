@@ -4,16 +4,17 @@ import {
   OrderPatient,
   OrderStatus,
   PimsIdentifiers,
-  Test
+  Test,
+  TestResultItem,
+  TestResultItemStatus
 } from '@nominal-systems/dmi-engine-common'
 import {
   WisdomPanelBreedPercentagesResult,
   WisdomPanelIdealWeightResult,
-  WisdomPanelNotableAndAtRiskHealthTestResult,
-  WisdomPanelTestResult
+  WisdomPanelNotableAndAtRiskHealthTestResult
 } from '../interfaces/wisdom-panel-api-responses.interface'
 
-export function mapPetSpecies(species: string): 'dog' | 'cat' {
+export function mapPetSpecies (species: string): 'dog' | 'cat' {
   switch (species) {
     case 'dog':
       return 'dog'
@@ -24,7 +25,7 @@ export function mapPetSpecies(species: string): 'dog' | 'cat' {
   }
 }
 
-export function mapPetSex(sex: string): 'male' | 'female' {
+export function mapPetSex (sex: string): 'male' | 'female' {
   switch (sex) {
     case 'male':
       return 'male'
@@ -35,7 +36,7 @@ export function mapPetSex(sex: string): 'male' | 'female' {
   }
 }
 
-export function mapKitStatus(status: string): OrderStatus {
+export function mapKitStatus (status: string): OrderStatus {
   switch (status) {
     case 'shipped':
     case 'waiting':
@@ -51,11 +52,11 @@ export function mapKitStatus(status: string): OrderStatus {
   }
 }
 
-export function extractKitCode(tests: Test[]): string {
+export function extractKitCode (tests: Test[]): string {
   return tests[0].code
 }
 
-export function extractPetId(patient: OrderPatient): string {
+export function extractPetId (patient: OrderPatient): string {
   if (patient.identifier !== undefined && patient.identifier !== null) {
     return extractValueFromIdentifier(patient.identifier, PimsIdentifiers.PatientID)
   } else {
@@ -63,7 +64,7 @@ export function extractPetId(patient: OrderPatient): string {
   }
 }
 
-export function extractClientPetId(client: ClientPayload): string {
+export function extractClientPetId (client: ClientPayload): string {
   if (client.identifier !== undefined && client.identifier !== null) {
     return extractValueFromIdentifier(client.identifier, PimsIdentifiers.ClientID)
   } else {
@@ -71,12 +72,12 @@ export function extractClientPetId(client: ClientPayload): string {
   }
 }
 
-export function extractValueFromIdentifier(identifier: Identifier[], system: string): string {
+export function extractValueFromIdentifier (identifier: Identifier[], system: string): string {
   const id = identifier.find((idElement) => idElement.system === system)
   return id ? id.value : ''
 }
 
-export function mapTestResultName(key: string): string {
+export function mapTestResultName (key: string): string {
   switch (key) {
     case 'breed_percentages':
       return 'Breed Percentages'
@@ -89,32 +90,82 @@ export function mapTestResultName(key: string): string {
   }
 }
 
-export function mapTestResultItemValue(key: string, item: WisdomPanelTestResult): string {
-  let valueString = ''
-  switch (key) {
-    case 'breed_percentages':
-      const breedPercentages: string[] = []
-      for (const breedPercentage of item as WisdomPanelBreedPercentagesResult[]) {
-        breedPercentages.push(`${breedPercentage.percentage}% ${breedPercentage.breed.internal_name}`)
-      }
-      valueString = breedPercentages.join(', ')
-      break
-    case 'ideal_weight_result':
-      const idealWeightResult = item as WisdomPanelIdealWeightResult
-      valueString += `Ideal weight: ${idealWeightResult.male_min_size} - ${idealWeightResult.male_max_size} lbs`
-      break
-    case 'notable_and_at_risk_health_test_results':
-      const notableAndAtRiskHealthTestResults: string[] = []
-      for (const healthTestResult of item as WisdomPanelNotableAndAtRiskHealthTestResult[]) {
-        notableAndAtRiskHealthTestResults.push(
-          `${healthTestResult.health_test.disease_name.en}: ${healthTestResult.result_male}`
-        )
-      }
-      valueString = notableAndAtRiskHealthTestResults.join('. ')
-      break
-    default:
-      valueString = 'N/A'
-  }
+export function mapBreedPercentage (percentagesResults: WisdomPanelBreedPercentagesResult[], index: number): TestResultItem[] {
+  return percentagesResults.map((result: WisdomPanelBreedPercentagesResult, i) => {
+    return {
+      seq: i,
+      code: result.breed.slug,
+      name: result.breed.name.en,
+      status: TestResultItemStatus.DONE,
+      valueQuantity: {
+        value: result.percentage,
+        units: '%'
+      },
+      notes: `${result.percentage}% ${result.breed.name.en}`
+    }
+  })
+}
 
-  return valueString
+export function mapIdealWeightResult (result: WisdomPanelIdealWeightResult, index: number): TestResultItem[] {
+  // TODO(gb): should determine ideal weights by sex/sterility status
+  return [
+    {
+      seq: 0,
+      code: 'ideal_weight_result_male_min_size',
+      name: 'Minimal Ideal Weight Result',
+      status: TestResultItemStatus.DONE,
+      valueQuantity: {
+        value: result.male_min_size,
+        units: 'kg'
+      }
+    },
+    {
+      seq: 1,
+      code: 'ideal_weight_result_male_max_size',
+      name: 'Maximum Ideal Weight Result',
+      status: TestResultItemStatus.DONE,
+      valueQuantity: {
+        value: result.male_max_size,
+        units: 'kg'
+      }
+    },
+    {
+      seq: 2,
+      code: 'ideal_weight_result_male_pred_size',
+      name: 'Predicted Ideal Weight Result',
+      status: TestResultItemStatus.DONE,
+      valueQuantity: {
+        value: result.male_pred_size,
+        units: 'kg'
+      }
+    }
+  ]
+}
+
+export function mapNotableAndAtRiskHealthTestResults (notableAndAtRiskHealthTestResults: WisdomPanelNotableAndAtRiskHealthTestResult[], index: number): TestResultItem[] {
+  const items: TestResultItem[] = []
+  notableAndAtRiskHealthTestResults.forEach((result: WisdomPanelNotableAndAtRiskHealthTestResult, i) => {
+    items.push({
+      seq: i * 2,
+      code: result.health_test.slug,
+      name: result.health_test.disease_name.en,
+      status: TestResultItemStatus.DONE,
+      // TODO(gb): should determine result by sex/sterility status
+      valueString: result.result_male
+    })
+    items.push({
+      seq: i * 2 + 1,
+      code: `${result.health_test.slug}_copies`,
+      name: `${result.health_test.disease_name.en} Copies`,
+      status: TestResultItemStatus.DONE,
+      valueQuantity: {
+        value: result.copies,
+        units: ''
+      },
+      // TODO(gb): should determine copy by sex/sterility status
+      notes: result.health_test[`${'zero'}_copy_male`].en
+    })
+  })
+
+  return items
 }

@@ -196,17 +196,24 @@ export interface WisdomPanelBreedPercentagesResult {
   percentage: number
   breed: {
     internal_name: string
+    slug: string
+    name: {
+      en: string
+    }
   }
 }
 
 export interface WisdomPanelIdealWeightResult {
   male_min_size: number
   male_max_size: number
+  male_pred_size: number
 }
 
 export interface WisdomPanelNotableAndAtRiskHealthTestResult {
+  copies: number
   result_male: string
   health_test: {
+    slug: string
     disease_name: {
       en: string
     }
