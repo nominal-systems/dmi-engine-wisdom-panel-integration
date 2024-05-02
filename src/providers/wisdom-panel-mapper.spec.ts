@@ -242,15 +242,13 @@ describe('WisdomPanelMapper', () => {
 
     it('should map breed percentages results', () => {
       const breedPercentages: WisdomPanelTestResult = simpleResult.data.breed_percentages as WisdomPanelTestResult
-      const items: TestResultItem[] = mapper.mapWisdomPanelTestResultItems(
-        breedPercentages,
-        'breed_percentages',
-        0
-      )
+      const items: TestResultItem[] = mapper.mapWisdomPanelTestResultItems(breedPercentages, 'breed_percentages', 0)
       expect(items).toEqual(expect.any(Array))
       expect(items.length).toEqual(simpleResult.data.breed_percentages?.length)
       items.forEach((item, index) => {
-        const breedPercentage: WisdomPanelBreedPercentagesResult = simpleResult.data.breed_percentages?.[index] as WisdomPanelBreedPercentagesResult
+        const breedPercentage: WisdomPanelBreedPercentagesResult = simpleResult.data.breed_percentages?.[
+          index
+        ] as WisdomPanelBreedPercentagesResult
         expect(item.seq).toEqual(index)
         expect(item.code).toEqual(breedPercentage.breed.slug)
         expect(item.name).toEqual(breedPercentage.breed.name.en)
@@ -264,30 +262,34 @@ describe('WisdomPanelMapper', () => {
     })
 
     it('should map ideal weight results', () => {
-      const idealWeightResult: WisdomPanelIdealWeightResult = simpleResult.data.ideal_weight_result as WisdomPanelIdealWeightResult
-      const items: TestResultItem[] = mapper.mapWisdomPanelTestResultItems(
-        idealWeightResult,
-        'ideal_weight_result',
-        0
-      )
+      const idealWeightResult: WisdomPanelIdealWeightResult = simpleResult.data
+        .ideal_weight_result as WisdomPanelIdealWeightResult
+      const items: TestResultItem[] = mapper.mapWisdomPanelTestResultItems(idealWeightResult, 'ideal_weight_result', 0)
       expect(items).toEqual(expect.any(Array))
-      expect(items.length).toEqual(3)   // Min, Max, Predicted
-      expect(items[0]).toEqual(expect.objectContaining({
-        code: 'ideal_weight_result_male_min_size',
-        name: 'Minimal Ideal Weight Result'
-      }))
-      expect(items[1]).toEqual(expect.objectContaining({
-        code: 'ideal_weight_result_male_max_size',
-        name: 'Maximum Ideal Weight Result',
-      }))
-      expect(items[2]).toEqual(expect.objectContaining({
-        code: 'ideal_weight_result_male_pred_size',
-        name: 'Predicted Ideal Weight Result'
-      }))
+      expect(items.length).toEqual(3) // Min, Max, Predicted
+      expect(items[0]).toEqual(
+        expect.objectContaining({
+          code: 'ideal_weight_result_male_min_size',
+          name: 'Minimal Ideal Weight Result'
+        })
+      )
+      expect(items[1]).toEqual(
+        expect.objectContaining({
+          code: 'ideal_weight_result_male_max_size',
+          name: 'Maximum Ideal Weight Result'
+        })
+      )
+      expect(items[2]).toEqual(
+        expect.objectContaining({
+          code: 'ideal_weight_result_male_pred_size',
+          name: 'Predicted Ideal Weight Result'
+        })
+      )
     })
 
     it('should map notable and at risk health test results', () => {
-      const notableAndAtRiskHealthTestResults: WisdomPanelTestResult = simpleResult.data.notable_and_at_risk_health_test_results as WisdomPanelNotableAndAtRiskHealthTestResult[]
+      const notableAndAtRiskHealthTestResults: WisdomPanelTestResult = simpleResult.data
+        .notable_and_at_risk_health_test_results as WisdomPanelNotableAndAtRiskHealthTestResult[]
       const items: TestResultItem[] = mapper.mapWisdomPanelTestResultItems(
         notableAndAtRiskHealthTestResults,
         'notable_and_at_risk_health_test_results',
