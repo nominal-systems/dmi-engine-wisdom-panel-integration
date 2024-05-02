@@ -91,9 +91,11 @@ export class WisdomPanelMapper {
   extractTestResults (simpleResult: WisdomPanelSimpleResult): TestResult[] {
     const testResults: Record<string, WisdomPanelTestResult>[] = []
     Object.keys(simpleResult).forEach((key) => {
-      testResults.push({
-        [key]: simpleResult[key]
-      })
+      if (!(key === 'notable_and_at_risk_health_test_results' && simpleResult[key].length === 0)) {
+        testResults.push({
+          [key]: simpleResult[key]
+        })
+      }
     })
 
     return testResults.map(this.mapWisdomPanelTestResult, this)

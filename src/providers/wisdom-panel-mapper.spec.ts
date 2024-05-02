@@ -198,6 +198,7 @@ describe('WisdomPanelMapper', () => {
     const simpleResult = FileUtils.loadFile(
       'test/examples/simplified-results/BBBFCVH.json'
     ) as WisdomPanelSimpleResultResponse
+
     it('should extract test results from a simplified result', () => {
       const testResults: TestResult[] = mapper.extractTestResults(simpleResult.data)
       expect(testResults).toEqual(expect.any(Array))
@@ -219,6 +220,17 @@ describe('WisdomPanelMapper', () => {
         code: 'notable_and_at_risk_health_test_results',
         name: 'Notable and At Risk Health Test Results',
         items: expect.any(Array)
+      })
+    })
+
+    it('should not extract notable and at risk health test results if empty', () => {
+      simpleResult.data.notable_and_at_risk_health_test_results = []
+
+      const testResults: TestResult[] = mapper.extractTestResults(simpleResult.data)
+      expect(testResults).toEqual(expect.any(Array))
+      expect(testResults.length).toEqual(2)
+      testResults.forEach((testResult) => {
+        expect(testResult.code).not.toEqual('notable_and_at_risk_health_test_results')
       })
     })
   })
