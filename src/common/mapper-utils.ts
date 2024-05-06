@@ -13,7 +13,7 @@ import {
   WisdomPanelNotableAndAtRiskHealthTestResult
 } from '../interfaces/wisdom-panel-api-responses.interface'
 
-export function mapPetSpecies (species: string): 'dog' | 'cat' {
+export function mapPetSpecies(species: string): 'dog' | 'cat' {
   switch (species) {
     case 'dog':
       return 'dog'
@@ -24,7 +24,7 @@ export function mapPetSpecies (species: string): 'dog' | 'cat' {
   }
 }
 
-export function mapPetSex (sex: string): 'male' | 'female' {
+export function mapPetSex(sex: string): 'male' | 'female' {
   switch (sex) {
     case 'male':
       return 'male'
@@ -35,7 +35,7 @@ export function mapPetSex (sex: string): 'male' | 'female' {
   }
 }
 
-export function mapKitStatus (status: string): OrderStatus {
+export function mapKitStatus(status: string): OrderStatus {
   switch (status) {
     case 'shipped':
     case 'waiting':
@@ -51,11 +51,11 @@ export function mapKitStatus (status: string): OrderStatus {
   }
 }
 
-export function extractKitCode (labRequisitionInfo: any): string {
+export function extractKitCode(labRequisitionInfo: any): string {
   return labRequisitionInfo.kitCode
 }
 
-export function extractPetId (patient: OrderPatient): string {
+export function extractPetId(patient: OrderPatient): string {
   if (patient.identifier !== undefined && patient.identifier !== null) {
     return extractValueFromIdentifier(patient.identifier, PimsIdentifiers.PatientID)
   } else {
@@ -63,7 +63,7 @@ export function extractPetId (patient: OrderPatient): string {
   }
 }
 
-export function extractClientPetId (client: ClientPayload): string {
+export function extractClientPetId(client: ClientPayload): string {
   if (client.identifier !== undefined && client.identifier !== null) {
     return extractValueFromIdentifier(client.identifier, PimsIdentifiers.ClientID)
   } else {
@@ -71,12 +71,12 @@ export function extractClientPetId (client: ClientPayload): string {
   }
 }
 
-export function extractValueFromIdentifier (identifier: Identifier[], system: string): string {
+export function extractValueFromIdentifier(identifier: Identifier[], system: string): string {
   const id = identifier.find((idElement) => idElement.system === system)
   return id ? id.value : ''
 }
 
-export function mapTestResultName (key: string): string {
+export function mapTestResultName(key: string): string {
   switch (key) {
     case 'breed_percentages':
       return 'Breed Percentages'
@@ -89,7 +89,7 @@ export function mapTestResultName (key: string): string {
   }
 }
 
-export function mapBreedPercentage (
+export function mapBreedPercentage(
   percentagesResults: WisdomPanelBreedPercentagesResult[],
   index: number
 ): TestResultItem[] {
@@ -108,7 +108,7 @@ export function mapBreedPercentage (
   })
 }
 
-export function mapIdealWeightResult (result: WisdomPanelIdealWeightResult, index: number): TestResultItem[] {
+export function mapIdealWeightResult(result: WisdomPanelIdealWeightResult, index: number): TestResultItem[] {
   // TODO(gb): should determine ideal weights by sex/sterility status
   return [
     {
@@ -144,7 +144,7 @@ export function mapIdealWeightResult (result: WisdomPanelIdealWeightResult, inde
   ]
 }
 
-export function mapNotableAndAtRiskHealthTestResults (
+export function mapNotableAndAtRiskHealthTestResults(
   notableAndAtRiskHealthTestResults: WisdomPanelNotableAndAtRiskHealthTestResult[],
   index: number
 ): TestResultItem[] {

@@ -47,9 +47,9 @@ import { Client } from '@nominal-systems/dmi-engine-common/lib/interfaces/provid
 
 @Injectable()
 export class WisdomPanelMapper {
-  constructor () {}
+  constructor() {}
 
-  mapCreateOrderPayload (payload: CreateOrderPayload, metadata: WisdomPanelMessageData): WisdomPanelCreatePetPayload {
+  mapCreateOrderPayload(payload: CreateOrderPayload, metadata: WisdomPanelMessageData): WisdomPanelCreatePetPayload {
     return {
       data: {
         organization_unit_id: metadata.providerConfiguration.organizationUnitId,
@@ -62,7 +62,7 @@ export class WisdomPanelMapper {
     }
   }
 
-  mapWisdomPanelKit (kit: WisdomPanelKitItem, pet: WisdomPanelPetItem, kitStatus?: WisdomPanelStatusesItem): Order {
+  mapWisdomPanelKit(kit: WisdomPanelKitItem, pet: WisdomPanelPetItem, kitStatus?: WisdomPanelStatusesItem): Order {
     return {
       externalId: kit.id,
       status: mapKitStatus(kit.attributes['current-stage']),
@@ -73,7 +73,7 @@ export class WisdomPanelMapper {
     }
   }
 
-  mapWisdomPanelResult (
+  mapWisdomPanelResult(
     resultSet: WisdomPanelResultSetItem,
     kit: WisdomPanelKitItem,
     simpleResult: WisdomPanelSimpleResult
@@ -88,7 +88,7 @@ export class WisdomPanelMapper {
     }
   }
 
-  extractTestResults (simpleResult: WisdomPanelSimpleResult): TestResult[] {
+  extractTestResults(simpleResult: WisdomPanelSimpleResult): TestResult[] {
     const testResults: Record<string, WisdomPanelTestResult>[] = []
     Object.keys(simpleResult).forEach((key) => {
       if (!(key === 'notable_and_at_risk_health_test_results' && simpleResult[key].length === 0)) {
@@ -101,7 +101,7 @@ export class WisdomPanelMapper {
     return testResults.map(this.mapWisdomPanelTestResult, this)
   }
 
-  mapWisdomPanelTestResult (result: Record<string, WisdomPanelTestResult>, index: number): TestResult {
+  mapWisdomPanelTestResult(result: Record<string, WisdomPanelTestResult>, index: number): TestResult {
     const key = Object.keys(result)[0]
     return {
       seq: index,
@@ -111,7 +111,7 @@ export class WisdomPanelMapper {
     }
   }
 
-  mapWisdomPanelTestResultItems (item: WisdomPanelTestResult, key: string, index: number): TestResultItem[] {
+  mapWisdomPanelTestResultItems(item: WisdomPanelTestResult, key: string, index: number): TestResultItem[] {
     switch (key) {
       case 'breed_percentages':
         return mapBreedPercentage(item as WisdomPanelBreedPercentagesResult[], index)
@@ -124,7 +124,7 @@ export class WisdomPanelMapper {
     }
   }
 
-  mapPatient (pet: WisdomPanelPetItem): Patient {
+  mapPatient(pet: WisdomPanelPetItem): Patient {
     return {
       name: pet.attributes.name,
       // TODO(gb): map sex
@@ -134,20 +134,20 @@ export class WisdomPanelMapper {
     }
   }
 
-  mapClient (pet: WisdomPanelPetItem): Client {
+  mapClient(pet: WisdomPanelPetItem): Client {
     return {
       firstName: pet.attributes['owner-first-name'],
       lastName: pet.attributes['owner-last-name']
     }
   }
 
-  mapVeterinarian (kit: WisdomPanelKitItem): Veterinarian {
+  mapVeterinarian(kit: WisdomPanelKitItem): Veterinarian {
     return {
       firstName: kit.attributes['veterinarian-name']
     }
   }
 
-  extractPet (patient: OrderPatient): Omit<WisdomPanelPet, 'id'> {
+  extractPet(patient: OrderPatient): Omit<WisdomPanelPet, 'id'> {
     const pet: Omit<WisdomPanelPet, 'id'> = {
       species: mapPetSpecies(patient.species),
       name: patient.name,
@@ -164,7 +164,7 @@ export class WisdomPanelMapper {
     return pet
   }
 
-  extractClient (client: ClientPayload): WisdomPanelClient {
+  extractClient(client: ClientPayload): WisdomPanelClient {
     return {
       client_first_name: client.firstName || '',
       client_last_name: client.lastName,
@@ -173,7 +173,7 @@ export class WisdomPanelMapper {
     }
   }
 
-  extractHospital (metadata: WisdomPanelMessageData): WisdomPanelHospital {
+  extractHospital(metadata: WisdomPanelMessageData): WisdomPanelHospital {
     const hospital: WisdomPanelHospital = {
       hospital_name: metadata.integrationOptions.hospitalName,
       hospital_number: metadata.integrationOptions.hospitalNumber
@@ -186,7 +186,7 @@ export class WisdomPanelMapper {
     return hospital
   }
 
-  extractVeterinarian (veterinarian: VeterinarianPayload): WisdomPanelVeterinarian {
+  extractVeterinarian(veterinarian: VeterinarianPayload): WisdomPanelVeterinarian {
     return {
       veterinarian_name: `${veterinarian.firstName} ${veterinarian.lastName}`
     }
