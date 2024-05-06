@@ -11,6 +11,7 @@ import { OrdersProcessor } from './processors/orders.processors'
 import { ResultsProcessor } from './processors/results.processor'
 import { CacheModule } from '@nestjs/cache-manager'
 import configuration from './config/configuration'
+import { WisdomPanelApiInterceptor } from './interceptors/wisdom-panel-api.interceptor'
 
 @Module({
   imports: [
@@ -43,7 +44,14 @@ import configuration from './config/configuration'
       })
     })
   ],
-  providers: [WisdomPanelService, WisdomPanelApiService, WisdomPanelMapper, OrdersProcessor, ResultsProcessor],
+  providers: [
+    WisdomPanelService,
+    WisdomPanelApiService,
+    WisdomPanelApiInterceptor,
+    WisdomPanelMapper,
+    OrdersProcessor,
+    ResultsProcessor
+  ],
   controllers: [WisdomPanelController],
   exports: [BullModule]
 })

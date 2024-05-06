@@ -17,7 +17,13 @@ export interface WisdomPanelPetCreatedResponse {
   }
 }
 
-export interface WisdomPanelKitsResponse {
+export interface WisdomPanelBaseResponse {
+  meta: {
+    'record-count': number
+  }
+}
+
+export interface WisdomPanelKitsResponse extends WisdomPanelBaseResponse {
   data: WisdomPanelKitItem[]
   included: Array<WisdomPanelPetItem | WisdomPanelStatusesItem>
 }
@@ -163,7 +169,7 @@ export interface WisdomPanelPetItemRelationships {
   'organization-unit'?: WisdomPanelLinks
 }
 
-export interface WisdomPanelResultSetsResponse {
+export interface WisdomPanelResultSetsResponse extends WisdomPanelBaseResponse{
   data: WisdomPanelResultSetItem[]
   included: Array<WisdomPanelKitItem>
 }
