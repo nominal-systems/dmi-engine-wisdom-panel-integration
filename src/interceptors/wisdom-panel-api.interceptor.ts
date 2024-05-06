@@ -5,25 +5,17 @@ import { WisdomPanelApiEndpoints } from '../interfaces/wisdom-panel-api-endpoint
 import { WisdomPanelBaseResponse } from '../interfaces/wisdom-panel-api-responses.interface'
 import { PROVIDER_NAME } from '../constants/provider-name'
 
-const EXCLUDED_ENDPOINTS = [
-  WisdomPanelApiEndpoints.AUTH
-]
+const EXCLUDED_ENDPOINTS = [WisdomPanelApiEndpoints.AUTH]
 
-const SEARCH_ENDPOINTS = [
-  WisdomPanelApiEndpoints.GET_KITS,
-  WisdomPanelApiEndpoints.GET_RESULT_SETS,
-]
+const SEARCH_ENDPOINTS = [WisdomPanelApiEndpoints.GET_KITS, WisdomPanelApiEndpoints.GET_RESULT_SETS]
 
 export class WisdomPanelApiInterceptor extends AxiosInterceptor {
-  constructor (
-    httpService: HttpService,
-    client
-  ) {
+  constructor(httpService: HttpService, client) {
     super(httpService, client)
     this.provider = PROVIDER_NAME
   }
 
-  public filter (url: string, body: any, response: AxiosResponse): boolean {
+  public filter(url: string, body: any, response: AxiosResponse): boolean {
     if (EXCLUDED_ENDPOINTS.some((endpoint) => url.includes(endpoint))) {
       return false
     }
