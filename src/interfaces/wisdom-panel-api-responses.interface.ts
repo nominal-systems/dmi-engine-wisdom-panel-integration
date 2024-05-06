@@ -169,7 +169,7 @@ export interface WisdomPanelPetItemRelationships {
   'organization-unit'?: WisdomPanelLinks
 }
 
-export interface WisdomPanelResultSetsResponse extends WisdomPanelBaseResponse{
+export interface WisdomPanelResultSetsResponse extends WisdomPanelBaseResponse {
   data: WisdomPanelResultSetItem[]
   included: Array<WisdomPanelKitItem>
 }
