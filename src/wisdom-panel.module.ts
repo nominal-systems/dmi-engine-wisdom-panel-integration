@@ -12,6 +12,7 @@ import { ResultsProcessor } from './processors/results.processor'
 import { CacheModule } from '@nestjs/cache-manager'
 import configuration from './config/configuration'
 import { WisdomPanelApiInterceptor } from './interceptors/wisdom-panel-api.interceptor'
+import { RpcExceptionFilter } from './filters/rcp-exception-filter'
 
 @Module({
   imports: [
@@ -50,7 +51,11 @@ import { WisdomPanelApiInterceptor } from './interceptors/wisdom-panel-api.inter
     WisdomPanelApiInterceptor,
     WisdomPanelMapper,
     OrdersProcessor,
-    ResultsProcessor
+    ResultsProcessor,
+    {
+      provide: 'APP_FILTER',
+      useClass: RpcExceptionFilter
+    }
   ],
   controllers: [WisdomPanelController],
   exports: [BullModule]
