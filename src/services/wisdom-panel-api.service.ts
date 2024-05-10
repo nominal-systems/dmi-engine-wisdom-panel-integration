@@ -1,4 +1,4 @@
-import { Inject, Injectable, Logger } from '@nestjs/common'
+import { HttpException, Inject, Injectable, Logger } from '@nestjs/common'
 import { HttpService } from '@nestjs/axios'
 import { BaseApiService } from '@nominal-systems/dmi-engine-common'
 import {
@@ -179,11 +179,13 @@ export class WisdomPanelApiService extends BaseApiService {
       }
       return await this.post(`${config.baseUrl}${WisdomPanelApiEndpoints.CREATE_PET}`, payload, reqConfig)
     } catch (error) {
-      // TODO(gb): handle HTTP 422
-      // {
-      //     "message": "WIS_VOY__104: Cannot process kit VSMQCZR because it already has a pet."
-      // }
-      throw new Error(`[HTTP ${error.status}] ${error.message}`)
+      // TODO(gb): gather all the information needed to respond to the user
+      throw new HttpException(error.response, error.status, {
+        ...error.response.data,
+        message: error.options.message,
+        payload,
+        path: WisdomPanelApiEndpoints.CREATE_PET
+      })
     }
   }
 

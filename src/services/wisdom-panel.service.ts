@@ -32,6 +32,7 @@ import {
 } from '../interfaces/wisdom-panel-api-responses.interface'
 import { ConfigService } from '@nestjs/config'
 import { debugOrderCreated } from '../common/debug-utils'
+import { RpcException } from '@nestjs/microservices'
 
 @Injectable()
 export class WisdomPanelService extends BaseProviderService<WisdomPanelMessageData> {
@@ -51,7 +52,7 @@ export class WisdomPanelService extends BaseProviderService<WisdomPanelMessageDa
         payload,
         metadata
       )
-      const response = await this.wisdomPanelApiService.createPet(createPetPayload, metadata.providerConfiguration)
+      const response = await this.wisdomPanelApiService.createPet({ } as unknown as WisdomPanelCreatePetPayload, metadata.providerConfiguration)
 
       if (this.configService.get('debug.api')) {
         debugOrderCreated(payload, response)
@@ -64,8 +65,16 @@ export class WisdomPanelService extends BaseProviderService<WisdomPanelMessageDa
           data: response.data.requisition_form
         }
       }
-    } catch (error) {
-      throw new Error(`Failed to create order: ${error.message}`)
+    } catch (err) {
+      // TODO(gb): process the error?
+      throw new RpcException(err)
+      // throw new RpcException(new BadRequestException({
+      //   statusCode: err.status || 500,
+      //   message: `Failed to create order`,
+      //   errors,
+      //   path: err.options?.path,
+      //   requestPayload: err.options?.payload?.data
+      // }))
     }
   }
 
