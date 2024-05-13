@@ -9,7 +9,7 @@ import { WisdomApiException } from '../exceptions/wisdom-api.exception'
 export class RpcExceptionFilter implements ExceptionFilter<RpcException> {
   private readonly logger = new Logger(RpcExceptionFilter.name)
 
-  catch (exception: WisdomApiException, host: ArgumentsHost): Observable<any> {
+  catch(exception: WisdomApiException, host: ArgumentsHost): Observable<any> {
     this.logger.error(exception)
 
     const providerError: ProviderError = new ProviderError({
