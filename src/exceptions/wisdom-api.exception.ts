@@ -4,7 +4,7 @@ export class WisdomApiException extends RpcException {
   private _errors: string[] = []
   private _statusCode: number = 500
 
-  constructor (message: string, statusCode: number, error: any) {
+  constructor(message: string, statusCode: number, error: any) {
     super(message)
     this._statusCode = statusCode
 
@@ -27,11 +27,11 @@ export class WisdomApiException extends RpcException {
     }
   }
 
-  public get statusCode (): number {
+  public get statusCode(): number {
     return this._statusCode
   }
 
-  public get errors (): string[] {
+  public get errors(): string[] {
     return this._errors
   }
 }
