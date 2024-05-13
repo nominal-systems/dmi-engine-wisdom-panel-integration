@@ -13,6 +13,7 @@ import { CacheModule } from '@nestjs/cache-manager'
 import configuration from './config/configuration'
 import { WisdomPanelApiInterceptor } from './interceptors/wisdom-panel-api.interceptor'
 import { RpcExceptionFilter } from './filters/rcp-exception-filter'
+import { APP_FILTER } from '@nestjs/core'
 
 @Module({
   imports: [
@@ -53,7 +54,7 @@ import { RpcExceptionFilter } from './filters/rcp-exception-filter'
     OrdersProcessor,
     ResultsProcessor,
     {
-      provide: 'APP_FILTER',
+      provide: APP_FILTER,
       useClass: RpcExceptionFilter
     }
   ],
