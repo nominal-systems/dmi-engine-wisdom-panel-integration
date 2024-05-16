@@ -82,7 +82,7 @@ describe('WisdomPanelMapper', () => {
             },
             editable: false,
             labRequisitionInfo: {
-              kitCode: 'SA804'
+              KitCode: 'SA804'
             }
           } as unknown as CreateOrderPayload,
           metadataMock
