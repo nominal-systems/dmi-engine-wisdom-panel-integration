@@ -63,7 +63,7 @@ export class WisdomPanelService extends BaseProviderService<WisdomPanelMessageDa
       }
 
       return {
-        externalId: response.data.kit.id,
+        externalId: response.data.kit.code,
         requisitionId: response.data.kit.code,
         status: OrderStatus.SUBMITTED,
         manifest: {
