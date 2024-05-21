@@ -53,7 +53,10 @@ export class WisdomPanelService extends BaseProviderService<WisdomPanelMessageDa
         payload,
         metadata
       )
-      const response: WisdomPanelPetCreatedResponse = await this.wisdomPanelApiService.createPet(createPetPayload, metadata.providerConfiguration)
+      const response: WisdomPanelPetCreatedResponse = await this.wisdomPanelApiService.createPet(
+        createPetPayload,
+        metadata.providerConfiguration
+      )
 
       if (this.configService.get('debug.api')) {
         debugOrderCreated(payload, response)

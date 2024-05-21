@@ -12,6 +12,7 @@ import {
   WisdomPanelIdealWeightResult,
   WisdomPanelNotableAndAtRiskHealthTestResult
 } from '../interfaces/wisdom-panel-api-responses.interface'
+import { TestResultItemInterpretationCode } from '@nominal-systems/dmi-engine-common/lib/interfaces/results.interface'
 
 export function mapPetSpecies(species: string): 'dog' | 'cat' {
   switch (species) {
@@ -156,7 +157,11 @@ export function mapNotableAndAtRiskHealthTestResults(
       name: result.health_test.disease_name.en,
       status: TestResultItemStatus.DONE,
       // TODO(gb): should determine result by sex/sterility status
-      valueString: result.result_male
+      valueString: result.result_male,
+      interpretation: {
+        code: TestResultItemInterpretationCode.POSITIVE,
+        text: 'Positive'
+      }
     })
     items.push({
       seq: i * 2 + 1,
