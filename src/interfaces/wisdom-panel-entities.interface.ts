@@ -41,5 +41,6 @@ export interface WisdomPanelHospital {
 }
 
 export interface WisdomPanelKit {
-  id: string
+  id: string,
+  code: string
 }

@@ -27,6 +27,7 @@ import { WisdomPanelCreatePetPayload } from '../interfaces/wisdom-panel-api-payl
 import {
   WisdomPanelKitItem,
   WisdomPanelKitsResponse,
+  WisdomPanelPetCreatedResponse,
   WisdomPanelPetItem,
   WisdomPanelResultSetsResponse
 } from '../interfaces/wisdom-panel-api-responses.interface'
@@ -38,7 +39,7 @@ import { WisdomApiException } from '../exceptions/wisdom-api.exception'
 export class WisdomPanelService extends BaseProviderService<WisdomPanelMessageData> {
   private readonly logger: Logger = new Logger(WisdomPanelService.name)
 
-  constructor(
+  constructor (
     private readonly configService: ConfigService,
     private readonly wisdomPanelApiService: WisdomPanelApiService,
     private readonly wisdomPanelMapper: WisdomPanelMapper
@@ -46,13 +47,13 @@ export class WisdomPanelService extends BaseProviderService<WisdomPanelMessageDa
     super()
   }
 
-  async createOrder(payload: CreateOrderPayload, metadata: WisdomPanelMessageData): Promise<OrderCreatedResponse> {
+  async createOrder (payload: CreateOrderPayload, metadata: WisdomPanelMessageData): Promise<OrderCreatedResponse> {
     try {
       const createPetPayload: WisdomPanelCreatePetPayload = this.wisdomPanelMapper.mapCreateOrderPayload(
         payload,
         metadata
       )
-      const response = await this.wisdomPanelApiService.createPet(createPetPayload, metadata.providerConfiguration)
+      const response: WisdomPanelPetCreatedResponse = await this.wisdomPanelApiService.createPet(createPetPayload, metadata.providerConfiguration)
 
       if (this.configService.get('debug.api')) {
         debugOrderCreated(payload, response)
@@ -60,6 +61,7 @@ export class WisdomPanelService extends BaseProviderService<WisdomPanelMessageDa
 
       return {
         externalId: response.data.kit.id,
+        requisitionId: response.data.kit.code,
         status: OrderStatus.SUBMITTED,
         manifest: {
           data: response.data.requisition_form
@@ -70,7 +72,7 @@ export class WisdomPanelService extends BaseProviderService<WisdomPanelMessageDa
     }
   }
 
-  async getBatchOrders(payload: NullPayloadPayload, metadata: WisdomPanelMessageData): Promise<Order[]> {
+  async getBatchOrders (payload: NullPayloadPayload, metadata: WisdomPanelMessageData): Promise<Order[]> {
     const orders: Order[] = []
     try {
       const response: WisdomPanelKitsResponse = await this.wisdomPanelApiService.getUnacknowledgedKitsForHospital(
@@ -101,7 +103,7 @@ export class WisdomPanelService extends BaseProviderService<WisdomPanelMessageDa
     return orders
   }
 
-  async getBatchResults(payload: NullPayloadPayload, metadata: WisdomPanelMessageData): Promise<BatchResultsResponse> {
+  async getBatchResults (payload: NullPayloadPayload, metadata: WisdomPanelMessageData): Promise<BatchResultsResponse> {
     const batchResults: BatchResultsResponse = {
       results: []
     }
@@ -147,39 +149,39 @@ export class WisdomPanelService extends BaseProviderService<WisdomPanelMessageDa
     return batchResults
   }
 
-  async acknowledgeOrder(payload: IdPayload, metadata: WisdomPanelMessageData): Promise<void> {
+  async acknowledgeOrder (payload: IdPayload, metadata: WisdomPanelMessageData): Promise<void> {
     await this.wisdomPanelApiService.acknowledgeKits([payload.id], metadata.providerConfiguration)
   }
 
-  async acknowledgeResult(payload: IdPayload, metadata: WisdomPanelMessageData): Promise<void> {
+  async acknowledgeResult (payload: IdPayload, metadata: WisdomPanelMessageData): Promise<void> {
     await this.wisdomPanelApiService.acknowledgeResultSets([payload.id], metadata.providerConfiguration)
   }
 
-  cancelOrder(payload: IdPayload, metadata: WisdomPanelMessageData): Promise<void> {
+  cancelOrder (payload: IdPayload, metadata: WisdomPanelMessageData): Promise<void> {
     throw new Error('Method not implemented')
   }
 
-  cancelOrderTest(payload: OrderTestPayload, metadata: WisdomPanelMessageData): Promise<void> {
+  cancelOrderTest (payload: OrderTestPayload, metadata: WisdomPanelMessageData): Promise<void> {
     throw new Error('Method not implemented')
   }
 
-  createRequisitionId(payload: NullPayloadPayload, metadata: WisdomPanelMessageData): string {
+  createRequisitionId (payload: NullPayloadPayload, metadata: WisdomPanelMessageData): string {
     throw new Error('Method not implemented')
   }
 
-  getOrder(payload: IdPayload, metadata: WisdomPanelMessageData): Promise<Order> {
+  getOrder (payload: IdPayload, metadata: WisdomPanelMessageData): Promise<Order> {
     throw new Error('Method not implemented')
   }
 
-  getOrderResult(payload: IdPayload, metadata: WisdomPanelMessageData): Promise<Result> {
+  getOrderResult (payload: IdPayload, metadata: WisdomPanelMessageData): Promise<Result> {
     throw new Error('Method not implemented')
   }
 
-  getServiceByCode(payload: ServiceCodePayload, metadata: WisdomPanelMessageData): Promise<Service> {
+  getServiceByCode (payload: ServiceCodePayload, metadata: WisdomPanelMessageData): Promise<Service> {
     throw new Error('Method not implemented')
   }
 
-  async getServices(payload: NullPayloadPayload, metadata: WisdomPanelMessageData): Promise<Service[]> {
+  async getServices (payload: NullPayloadPayload, metadata: WisdomPanelMessageData): Promise<Service[]> {
     const kits: WisdomPanelKitItem[] = await this.wisdomPanelApiService.getAvailableKits(metadata.providerConfiguration)
     return kits.map((kit) => ({
       code: kit.attributes.code,
@@ -187,7 +189,7 @@ export class WisdomPanelService extends BaseProviderService<WisdomPanelMessageDa
     }))
   }
 
-  getSexes(): Promise<ReferenceDataResponse<Sex>> {
+  getSexes (): Promise<ReferenceDataResponse<Sex>> {
     const items: Sex[] = [
       {
         code: 'male',
@@ -205,11 +207,11 @@ export class WisdomPanelService extends BaseProviderService<WisdomPanelMessageDa
     })
   }
 
-  getDevices(): Promise<Device[]> {
+  getDevices (): Promise<Device[]> {
     return Promise.resolve([])
   }
 
-  getSpecies(): Promise<ReferenceDataResponse<Species>> {
+  getSpecies (): Promise<ReferenceDataResponse<Species>> {
     const items: Species[] = [
       {
         code: 'dog',
@@ -227,7 +229,7 @@ export class WisdomPanelService extends BaseProviderService<WisdomPanelMessageDa
     })
   }
 
-  getBreeds(): Promise<ReferenceDataResponse<Breed>> {
+  getBreeds (): Promise<ReferenceDataResponse<Breed>> {
     return Promise.resolve({
       items: [],
       hash: calculateHash([])
