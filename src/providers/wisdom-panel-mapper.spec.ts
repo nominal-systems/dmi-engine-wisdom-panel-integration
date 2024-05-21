@@ -19,6 +19,7 @@ import {
   WisdomPanelSimpleResultResponse,
   WisdomPanelTestResult
 } from '../interfaces/wisdom-panel-api-responses.interface'
+import { TestResultItemInterpretationCode } from '@nominal-systems/dmi-engine-common/lib/interfaces/results.interface'
 
 describe('WisdomPanelMapper', () => {
   let mapper: WisdomPanelMapper
@@ -295,6 +296,16 @@ describe('WisdomPanelMapper', () => {
       )
       expect(items).toEqual(expect.any(Array))
       expect(items.length).toEqual(simpleResult.data.notable_and_at_risk_health_test_results?.length * 2) // 2 items per result
+      items.forEach((item, index) => {
+        if (item.valueString !== undefined) {
+          expect(item.interpretation).toEqual({
+            code: TestResultItemInterpretationCode.POSITIVE,
+            text: 'Positive'
+          })
+        } else {
+          expect(item.interpretation).toBeUndefined()
+        }
+      })
     })
   })
 })
