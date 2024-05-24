@@ -222,7 +222,7 @@ export interface WisdomPanelNotableAndAtRiskHealthTestResult {
     slug: string
     disease_name: {
       en: string
-    },
+    }
     ui_description: string
   }
 }

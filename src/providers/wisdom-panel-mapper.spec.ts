@@ -297,7 +297,7 @@ describe('WisdomPanelMapper', () => {
       expect(items).toEqual(expect.any(Array))
       expect(items.length).toEqual(simpleResult.data.notable_and_at_risk_health_test_results?.length * 2) // 2 items per result
       items.forEach((item, index) => {
-        const isDiseaseResult = item.valueString !== undefined;
+        const isDiseaseResult = item.valueString !== undefined
         if (isDiseaseResult) {
           expect(item.valueString).toEqual(notableAndAtRiskHealthTestResults[0].resolved_result)
           expect(item.interpretation).toEqual({
@@ -320,14 +320,14 @@ describe('WisdomPanelMapper', () => {
       )
 
       expect(items).toHaveLength(1)
-      expect(items[0]).toEqual(expect.objectContaining(
-        {
+      expect(items[0]).toEqual(
+        expect.objectContaining({
           code: 'notable_and_at_risk_health_test_results',
           name: 'Notable and At Risk Health Test Results',
           status: TestResultItemStatus.DONE,
           valueString: 'There are no notable or at-risk health test results found for Spot.'
-        }
-      ))
+        })
+      )
     })
   })
 })
