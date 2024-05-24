@@ -118,7 +118,7 @@ export class WisdomPanelMapper {
       case 'ideal_weight_result':
         return mapIdealWeightResult(item as WisdomPanelIdealWeightResult, index)
       case 'notable_and_at_risk_health_test_results':
-        return mapNotableAndAtRiskHealthTestResults(item as WisdomPanelNotableAndAtRiskHealthTestResult[], index)
+        return mapNotableAndAtRiskHealthTestResults(item as WisdomPanelNotableAndAtRiskHealthTestResult[] | string, index)
       default:
         return []
     }
