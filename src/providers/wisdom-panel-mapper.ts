@@ -47,7 +47,8 @@ import { Client } from '@nominal-systems/dmi-engine-common/lib/interfaces/provid
 
 @Injectable()
 export class WisdomPanelMapper {
-  constructor() {}
+  constructor() {
+  }
 
   mapCreateOrderPayload(payload: CreateOrderPayload, metadata: WisdomPanelMessageData): WisdomPanelCreatePetPayload {
     return {
@@ -76,16 +77,26 @@ export class WisdomPanelMapper {
   mapWisdomPanelResult(
     resultSet: WisdomPanelResultSetItem,
     kit: WisdomPanelKitItem,
-    simpleResult: WisdomPanelSimpleResult
+    simpleResult: WisdomPanelSimpleResult,
+    pdfReport?: string
   ): Result {
-    return {
+    const result: Result = {
       id: resultSet.id,
       orderId: kit.id,
-      // order?: Order;
-      // accession?: string;
       status: ResultStatus.COMPLETED,
       testResults: this.extractTestResults(simpleResult)
     }
+
+    if (pdfReport !== undefined) {
+      result.pdfReport = [
+        {
+          contentType: 'application/pdf',
+          data: pdfReport
+        }
+      ]
+    }
+
+    return result
   }
 
   extractTestResults(simpleResult: WisdomPanelSimpleResult): TestResult[] {
