@@ -217,12 +217,13 @@ export interface WisdomPanelIdealWeightResult {
 
 export interface WisdomPanelNotableAndAtRiskHealthTestResult {
   copies: number
-  result_male: string
+  resolved_result: string
   health_test: {
     slug: string
     disease_name: {
       en: string
-    }
+    },
+    ui_description: string
   }
 }
 
@@ -230,6 +231,7 @@ export type WisdomPanelTestResult =
   | WisdomPanelBreedPercentagesResult[]
   | WisdomPanelIdealWeightResult
   | WisdomPanelNotableAndAtRiskHealthTestResult[]
+  | string
 
 export interface WisdomPanelStatusesItem extends WisdomPanelLinks {
   id: string

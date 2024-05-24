@@ -297,15 +297,37 @@ describe('WisdomPanelMapper', () => {
       expect(items).toEqual(expect.any(Array))
       expect(items.length).toEqual(simpleResult.data.notable_and_at_risk_health_test_results?.length * 2) // 2 items per result
       items.forEach((item, index) => {
-        if (item.valueString !== undefined) {
+        const isDiseaseResult = item.valueString !== undefined;
+        if (isDiseaseResult) {
+          expect(item.valueString).toEqual(notableAndAtRiskHealthTestResults[0].resolved_result)
           expect(item.interpretation).toEqual({
             code: TestResultItemInterpretationCode.POSITIVE,
             text: 'Positive'
           })
         } else {
+          expect(item.valueQuantity?.value).toEqual(notableAndAtRiskHealthTestResults[0].copies)
+          expect(item.notes).toEqual(notableAndAtRiskHealthTestResults[0].health_test.ui_description)
           expect(item.interpretation).toBeUndefined()
         }
       })
+    })
+
+    it('should send when no notable and at risk results are found', () => {
+      const items: TestResultItem[] = mapper.mapWisdomPanelTestResultItems(
+        'There are no notable or at-risk health test results found for Spot.',
+        'notable_and_at_risk_health_test_results',
+        0
+      )
+
+      expect(items).toHaveLength(1)
+      expect(items[0]).toEqual(expect.objectContaining(
+        {
+          code: 'notable_and_at_risk_health_test_results',
+          name: 'Notable and At Risk Health Test Results',
+          status: TestResultItemStatus.DONE,
+          valueString: 'There are no notable or at-risk health test results found for Spot.'
+        }
+      ))
     })
   })
 })
