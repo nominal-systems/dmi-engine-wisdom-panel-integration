@@ -1,0 +1,267 @@
+{
+  "data": [
+    {
+      "id": "066485f9-07c3-4471-8425-b1d3881ef901",
+      "type": "result-sets",
+      "links": {
+        "self": "https://staging.wisdompanel.com/api/v1/result-sets/066485f9-07c3-4471-8425-b1d3881ef901"
+      },
+      "attributes": {
+        "created-at": "2022-11-14T18:54:41.967Z",
+        "genotype-chip-version": "v5",
+        "acknowledged-at": null
+      },
+      "relationships": {
+        "kit": {
+          "links": {
+            "self": "https://staging.wisdompanel.com/api/v1/result-sets/066485f9-07c3-4471-8425-b1d3881ef901/relationships/kit",
+            "related": "https://staging.wisdompanel.com/api/v1/result-sets/066485f9-07c3-4471-8425-b1d3881ef901/kit"
+          },
+          "data": {
+            "type": "kits",
+            "id": "dbe2dc34-ab5a-4062-ac98-141cae2682c8"
+          }
+        },
+        "health-result": {
+          "links": {
+            "self": "https://staging.wisdompanel.com/api/v1/result-sets/066485f9-07c3-4471-8425-b1d3881ef901/relationships/health-result",
+            "related": "https://staging.wisdompanel.com/api/v1/result-sets/066485f9-07c3-4471-8425-b1d3881ef901/health-result"
+          }
+        },
+        "trait-result": {
+          "links": {
+            "self": "https://staging.wisdompanel.com/api/v1/result-sets/066485f9-07c3-4471-8425-b1d3881ef901/relationships/trait-result",
+            "related": "https://staging.wisdompanel.com/api/v1/result-sets/066485f9-07c3-4471-8425-b1d3881ef901/trait-result"
+          }
+        },
+        "ideal-weight-result": {
+          "links": {
+            "self": "https://staging.wisdompanel.com/api/v1/result-sets/066485f9-07c3-4471-8425-b1d3881ef901/relationships/ideal-weight-result",
+            "related": "https://staging.wisdompanel.com/api/v1/result-sets/066485f9-07c3-4471-8425-b1d3881ef901/ideal-weight-result"
+          }
+        },
+        "ancestry-result": {
+          "links": {
+            "self": "https://staging.wisdompanel.com/api/v1/result-sets/066485f9-07c3-4471-8425-b1d3881ef901/relationships/ancestry-result",
+            "related": "https://staging.wisdompanel.com/api/v1/result-sets/066485f9-07c3-4471-8425-b1d3881ef901/ancestry-result"
+          }
+        },
+        "processed-breed-result": {
+          "links": {
+            "self": "https://staging.wisdompanel.com/api/v1/result-sets/066485f9-07c3-4471-8425-b1d3881ef901/relationships/processed-breed-result",
+            "related": "https://staging.wisdompanel.com/api/v1/result-sets/066485f9-07c3-4471-8425-b1d3881ef901/processed-breed-result"
+          }
+        },
+        "diversity-result": {
+          "links": {
+            "self": "https://staging.wisdompanel.com/api/v1/result-sets/066485f9-07c3-4471-8425-b1d3881ef901/relationships/diversity-result",
+            "related": "https://staging.wisdompanel.com/api/v1/result-sets/066485f9-07c3-4471-8425-b1d3881ef901/diversity-result"
+          }
+        },
+        "sex-result": {
+          "links": {
+            "self": "https://staging.wisdompanel.com/api/v1/result-sets/066485f9-07c3-4471-8425-b1d3881ef901/relationships/sex-result",
+            "related": "https://staging.wisdompanel.com/api/v1/result-sets/066485f9-07c3-4471-8425-b1d3881ef901/sex-result"
+          }
+        },
+        "blood-type-result": {
+          "links": {
+            "self": "https://staging.wisdompanel.com/api/v1/result-sets/066485f9-07c3-4471-8425-b1d3881ef901/relationships/blood-type-result",
+            "related": "https://staging.wisdompanel.com/api/v1/result-sets/066485f9-07c3-4471-8425-b1d3881ef901/blood-type-result"
+          }
+        },
+        "lab-result": {
+          "links": {
+            "self": "https://staging.wisdompanel.com/api/v1/result-sets/066485f9-07c3-4471-8425-b1d3881ef901/relationships/lab-result",
+            "related": "https://staging.wisdompanel.com/api/v1/result-sets/066485f9-07c3-4471-8425-b1d3881ef901/lab-result"
+          }
+        },
+        "lab-platform": {
+          "links": {
+            "self": "https://staging.wisdompanel.com/api/v1/result-sets/066485f9-07c3-4471-8425-b1d3881ef901/relationships/lab-platform",
+            "related": "https://staging.wisdompanel.com/api/v1/result-sets/066485f9-07c3-4471-8425-b1d3881ef901/lab-platform"
+          }
+        },
+        "ancestry-version": {
+          "links": {
+            "self": "https://staging.wisdompanel.com/api/v1/result-sets/066485f9-07c3-4471-8425-b1d3881ef901/relationships/ancestry-version",
+            "related": "https://staging.wisdompanel.com/api/v1/result-sets/066485f9-07c3-4471-8425-b1d3881ef901/ancestry-version"
+          }
+        },
+        "chromosome-result": {
+          "links": {
+            "self": "https://staging.wisdompanel.com/api/v1/result-sets/066485f9-07c3-4471-8425-b1d3881ef901/relationships/chromosome-result",
+            "related": "https://staging.wisdompanel.com/api/v1/result-sets/066485f9-07c3-4471-8425-b1d3881ef901/chromosome-result"
+          }
+        },
+        "profiling-result": {
+          "links": {
+            "self": "https://staging.wisdompanel.com/api/v1/result-sets/066485f9-07c3-4471-8425-b1d3881ef901/relationships/profiling-result",
+            "related": "https://staging.wisdompanel.com/api/v1/result-sets/066485f9-07c3-4471-8425-b1d3881ef901/profiling-result"
+          }
+        },
+        "health-version": {
+          "links": {
+            "self": "https://staging.wisdompanel.com/api/v1/result-sets/066485f9-07c3-4471-8425-b1d3881ef901/relationships/health-version",
+            "related": "https://staging.wisdompanel.com/api/v1/result-sets/066485f9-07c3-4471-8425-b1d3881ef901/health-version"
+          }
+        },
+        "trait-version": {
+          "links": {
+            "self": "https://staging.wisdompanel.com/api/v1/result-sets/066485f9-07c3-4471-8425-b1d3881ef901/relationships/trait-version",
+            "related": "https://staging.wisdompanel.com/api/v1/result-sets/066485f9-07c3-4471-8425-b1d3881ef901/trait-version"
+          }
+        },
+        "health-tests": {
+          "links": {
+            "self": "https://staging.wisdompanel.com/api/v1/result-sets/066485f9-07c3-4471-8425-b1d3881ef901/relationships/health-tests",
+            "related": "https://staging.wisdompanel.com/api/v1/result-sets/066485f9-07c3-4471-8425-b1d3881ef901/health-tests"
+          }
+        },
+        "trait-tests": {
+          "links": {
+            "self": "https://staging.wisdompanel.com/api/v1/result-sets/066485f9-07c3-4471-8425-b1d3881ef901/relationships/trait-tests",
+            "related": "https://staging.wisdompanel.com/api/v1/result-sets/066485f9-07c3-4471-8425-b1d3881ef901/trait-tests"
+          }
+        }
+      }
+    }
+  ],
+  "included": [
+    {
+      "id": "dbe2dc34-ab5a-4062-ac98-141cae2682c8",
+      "type": "kits",
+      "links": {
+        "self": "https://staging.wisdompanel.com/api/v1/kits/1f5a7082-39a7-406a-9212-487295459a1f"
+      },
+      "attributes": {
+        "code": "VSPXCVF",
+        "inbound-tracking-code": null,
+        "outbound-tracking-code": null,
+        "current-stage": "report-ready",
+        "current-failure": null,
+        "stage-updated-at": "2024-02-27T22:51:13.288Z",
+        "legacy-url": null,
+        "active": true,
+        "enabled": true,
+        "activated": false,
+        "auto-activated": null,
+        "created-at": "2024-02-27T17:41:56.028Z",
+        "lab-order-number": null,
+        "sample-received-on": null,
+        "report-ready-on": "2024-02-27T22:51:13.288Z",
+        "can-upgrade": false,
+        "disabled-at": null,
+        "kit-type-name-override": null,
+        "available-upgrades": [],
+        "relative-counts": {},
+        "organization-identity": null,
+        "activated-on": null,
+        "acknowledged-at": null,
+        "resend-banfield-claim-email": null,
+        "veterinarian-name": null,
+        "hospital-street": null,
+        "hospital-city": null,
+        "hospital-state": null,
+        "hospital-country": null,
+        "hospital-postal-code": null,
+        "profiling-result-present": true,
+        "hospital-name": null,
+        "hospital-number": null
+      },
+      "relationships": {
+        "pet": {
+          "links": {
+            "self": "https://staging.wisdompanel.com/api/v1/kits/1f5a7082-39a7-406a-9212-487295459a1f/relationships/pet",
+            "related": "https://staging.wisdompanel.com/api/v1/kits/1f5a7082-39a7-406a-9212-487295459a1f/pet"
+          }
+        },
+        "statuses": {
+          "links": {
+            "self": "https://staging.wisdompanel.com/api/v1/kits/1f5a7082-39a7-406a-9212-487295459a1f/relationships/statuses",
+            "related": "https://staging.wisdompanel.com/api/v1/kits/1f5a7082-39a7-406a-9212-487295459a1f/statuses"
+          }
+        },
+        "kit-type": {
+          "links": {
+            "self": "https://staging.wisdompanel.com/api/v1/kits/1f5a7082-39a7-406a-9212-487295459a1f/relationships/kit-type",
+            "related": "https://staging.wisdompanel.com/api/v1/kits/1f5a7082-39a7-406a-9212-487295459a1f/kit-type"
+          }
+        },
+        "applied-kit-upgrades": {
+          "links": {
+            "self": "https://staging.wisdompanel.com/api/v1/kits/1f5a7082-39a7-406a-9212-487295459a1f/relationships/applied-kit-upgrades",
+            "related": "https://staging.wisdompanel.com/api/v1/kits/1f5a7082-39a7-406a-9212-487295459a1f/applied-kit-upgrades"
+          }
+        },
+        "active-result-set": {
+          "links": {
+            "self": "https://staging.wisdompanel.com/api/v1/kits/1f5a7082-39a7-406a-9212-487295459a1f/relationships/active-result-set",
+            "related": "https://staging.wisdompanel.com/api/v1/kits/1f5a7082-39a7-406a-9212-487295459a1f/active-result-set"
+          }
+        },
+        "previous-result-set": {
+          "links": {
+            "self": "https://staging.wisdompanel.com/api/v1/kits/1f5a7082-39a7-406a-9212-487295459a1f/relationships/previous-result-set",
+            "related": "https://staging.wisdompanel.com/api/v1/kits/1f5a7082-39a7-406a-9212-487295459a1f/previous-result-set"
+          }
+        },
+        "vet-calls": {
+          "links": {
+            "self": "https://staging.wisdompanel.com/api/v1/kits/1f5a7082-39a7-406a-9212-487295459a1f/relationships/vet-calls",
+            "related": "https://staging.wisdompanel.com/api/v1/kits/1f5a7082-39a7-406a-9212-487295459a1f/vet-calls"
+          }
+        },
+        "kit-issues": {
+          "links": {
+            "self": "https://staging.wisdompanel.com/api/v1/kits/1f5a7082-39a7-406a-9212-487295459a1f/relationships/kit-issues",
+            "related": "https://staging.wisdompanel.com/api/v1/kits/1f5a7082-39a7-406a-9212-487295459a1f/kit-issues"
+          }
+        },
+        "result-sets": {
+          "links": {
+            "self": "https://staging.wisdompanel.com/api/v1/kits/1f5a7082-39a7-406a-9212-487295459a1f/relationships/result-sets",
+            "related": "https://staging.wisdompanel.com/api/v1/kits/1f5a7082-39a7-406a-9212-487295459a1f/result-sets"
+          },
+          "data": [
+            {
+              "type": "result-sets",
+              "id": "436f620f-2ee2-41ac-aeb5-46a51bc64a0e"
+            }
+          ]
+        },
+        "organization": {
+          "links": {
+            "self": "https://staging.wisdompanel.com/api/v1/kits/1f5a7082-39a7-406a-9212-487295459a1f/relationships/organization",
+            "related": "https://staging.wisdompanel.com/api/v1/kits/1f5a7082-39a7-406a-9212-487295459a1f/organization"
+          }
+        },
+        "filiation-results": {
+          "links": {
+            "self": "https://staging.wisdompanel.com/api/v1/kits/1f5a7082-39a7-406a-9212-487295459a1f/relationships/filiation-results",
+            "related": "https://staging.wisdompanel.com/api/v1/kits/1f5a7082-39a7-406a-9212-487295459a1f/filiation-results"
+          }
+        },
+        "profiling-result": {
+          "links": {
+            "self": "https://staging.wisdompanel.com/api/v1/kits/1f5a7082-39a7-406a-9212-487295459a1f/relationships/profiling-result",
+            "related": "https://staging.wisdompanel.com/api/v1/kits/1f5a7082-39a7-406a-9212-487295459a1f/profiling-result"
+          }
+        },
+        "parentage-result": {
+          "links": {
+            "self": "https://staging.wisdompanel.com/api/v1/kits/1f5a7082-39a7-406a-9212-487295459a1f/relationships/parentage-result",
+            "related": "https://staging.wisdompanel.com/api/v1/kits/1f5a7082-39a7-406a-9212-487295459a1f/parentage-result"
+          }
+        }
+      }
+    }
+  ],
+  "meta": {
+    "record-count": 1
+  },
+  "links": {
+    "first": "https://staging.wisdompanel.com/api/v1/result-sets?filter%5Bunacknowledged%5D=true&include=kit&page%5Blimit%5D=600&page%5Boffset%5D=0&page%5Bskip-count%5D=false",
+    "last": "https://staging.wisdompanel.com/api/v1/result-sets?filter%5Bunacknowledged%5D=true&include=kit&page%5Blimit%5D=600&page%5Boffset%5D=0&page%5Bskip-count%5D=false"
+  }
+}

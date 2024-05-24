@@ -19,6 +19,7 @@ import {
 import { WisdomPanelApiEndpoints } from '../interfaces/wisdom-panel-api-endpoints.interface'
 import { CACHE_MANAGER, CacheStore } from '@nestjs/cache-manager'
 import { WisdomApiException } from '../exceptions/wisdom-api.exception'
+import { ResponseType } from 'axios'
 
 @Injectable()
 export class WisdomPanelApiService extends BaseApiService {
@@ -47,7 +48,7 @@ export class WisdomPanelApiService extends BaseApiService {
           {}
         )
         token = response.access_token
-        await this.cacheManager.set('access_token', token, { ttl: response.expires_in * 0.8 })
+        await this.cacheManager.set('access_token', token, {ttl: response.expires_in * 0.8})
       } catch (error) {
         throw new Error(`[HTTP ${error.status}] ${error.message}`)
       }
@@ -128,6 +129,23 @@ export class WisdomPanelApiService extends BaseApiService {
     }
   }
 
+  async getReportPdfBase64(kitId: string, config: WisdomPanelApiConfig): Promise<string> {
+    try {
+      const token = await this.authenticate(config)
+      const reqConfig = {
+        responseType: 'arraybuffer' as ResponseType,
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        }
+      }
+      const response = await this.get<ArrayBuffer>(`${config.baseUrl}${WisdomPanelApiEndpoints.GET_REPORT_PDF}/${kitId}`, reqConfig)
+      return Buffer.from(response).toString('base64')
+    } catch (error) {
+      throw new Error(`[HTTP ${error.status}] ${error.message}`)
+    }
+  }
+
   async getUnacknowledgedResultSetsForHospital(
     hospitalNumber: string,
     config: WisdomPanelApiConfig
@@ -137,7 +155,7 @@ export class WisdomPanelApiService extends BaseApiService {
       hospital_number: hospitalNumber
     }
 
-    return await this.getResultSets(filter, { include: 'kit' }, config)
+    return await this.getResultSets(filter, {include: 'kit'}, config)
   }
 
   async getUnacknowledgedKitsForHospital(

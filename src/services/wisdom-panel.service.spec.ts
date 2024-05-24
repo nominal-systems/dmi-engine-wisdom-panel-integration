@@ -51,7 +51,8 @@ describe('WisdomPanelService', () => {
         data: {
           pet: {},
           kit: {
-            id: 'test-id'
+            id: 'test-id',
+            code: 'AAA'
           },
           requisition_form: 'base64 pdf'
         }
@@ -60,7 +61,8 @@ describe('WisdomPanelService', () => {
       expect(mapperMock.mapCreateOrderPayload).toHaveBeenCalled()
       expect(apiServiceMock.createPet).toHaveBeenCalled()
       expect(response).toEqual({
-        externalId: expect.any(String),
+        externalId: 'AAA',
+        requisitionId: 'AAA',
         status: expect.any(String),
         manifest: expect.objectContaining({
           data: expect.any(String)
