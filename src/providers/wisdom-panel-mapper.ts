@@ -64,7 +64,7 @@ export class WisdomPanelMapper {
 
   mapWisdomPanelKit(kit: WisdomPanelKitItem, pet: WisdomPanelPetItem, kitStatus?: WisdomPanelStatusesItem): Order {
     return {
-      externalId: kit.attributes.code,
+      externalId: kit.id,
       status: mapKitStatus(kit.attributes['current-stage']),
       patient: this.mapPatient(pet),
       client: this.mapClient(pet),
