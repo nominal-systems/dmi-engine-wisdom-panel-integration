@@ -61,7 +61,7 @@ describe('WisdomPanelService', () => {
       expect(mapperMock.mapCreateOrderPayload).toHaveBeenCalled()
       expect(apiServiceMock.createPet).toHaveBeenCalled()
       expect(response).toEqual({
-        externalId: 'AAA',
+        externalId: 'test-id',
         requisitionId: 'AAA',
         status: expect.any(String),
         manifest: expect.objectContaining({
