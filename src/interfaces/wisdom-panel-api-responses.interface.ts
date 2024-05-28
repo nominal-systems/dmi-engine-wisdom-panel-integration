@@ -218,12 +218,12 @@ export interface WisdomPanelIdealWeightResult {
 export interface WisdomPanelNotableAndAtRiskHealthTestResult {
   copies: number
   resolved_result: string
+  ui_description: string
   health_test: {
     slug: string
     disease_name: {
       en: string
     }
-    ui_description: string
   }
 }
 

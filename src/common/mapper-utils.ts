@@ -180,7 +180,7 @@ export function mapNotableAndAtRiskHealthTestResults(
           value: result.copies,
           units: ''
         },
-        notes: result.health_test.ui_description
+        notes: result.ui_description
       })
     })
   }
