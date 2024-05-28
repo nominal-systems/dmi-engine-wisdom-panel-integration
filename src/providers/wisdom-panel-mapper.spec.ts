@@ -306,7 +306,7 @@ describe('WisdomPanelMapper', () => {
           })
         } else {
           expect(item.valueQuantity?.value).toEqual(notableAndAtRiskHealthTestResults[0].copies)
-          expect(item.notes).toEqual(notableAndAtRiskHealthTestResults[0].health_test.ui_description)
+          expect(item.notes).toEqual(notableAndAtRiskHealthTestResults[0].ui_description)
           expect(item.interpretation).toBeUndefined()
         }
       })
