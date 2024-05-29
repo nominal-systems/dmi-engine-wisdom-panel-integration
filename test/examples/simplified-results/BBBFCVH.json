@@ -792,6 +792,7 @@
         "copies": 1,
         "result_male": "at-risk",
         "result_female": "at-risk",
+        "resolved_result": "at-risk",
         "created_at": "2024-04-16T21:34:26.459Z",
         "updated_at": "2024-04-16T21:34:26.459Z",
         "health_test": {
@@ -842,6 +843,7 @@
           "what_is_the_disease": {
             "en": "The MDR1 gene mutation causes a defect to a drug pumping protein that plays an important role in limiting drug absorption and distribution (particularly to the brain). Dogs with the MDR1 mutation may have severe adverse reactions to some commonly used medications. \n"
           },
+          "ui_description": "Spot has one copy of the MDR1 Medication Sensitivity mutation and will be affected by this condition.  Dogs with the MDR1 mutation may have severe adverse reactions to some common medications, so it is important that the results of this test are taken into consideration when medical treatment is needed for Spot.  For dogs with the MDR1 mutation it is important to be aware of drugs which may result in an adverse reaction. These include: Acepromazine, Butorphanol, Doxorubicin, Doramectin, Emodepside, Erythromycin, Ivermectin, Loperamide, Milbemycin, Moxidectin, Paclitaxel, Rifampin, Selamectin, Vinblastine, Vincristine.\n",
           "zero_copy_male": {
             "en": "As {{name}} has no copies of the MDR1 Medication Sensitivity mutation, there should be no signs of this disease.  Although {{name}} should not show signs of MDR1 Medication Sensitivity due to this particular mutation, it is possible that similar signs could develop due to a different genetic or clinical cause."
           },

@@ -146,36 +146,44 @@ export function mapIdealWeightResult(result: WisdomPanelIdealWeightResult, index
 }
 
 export function mapNotableAndAtRiskHealthTestResults(
-  notableAndAtRiskHealthTestResults: WisdomPanelNotableAndAtRiskHealthTestResult[],
+  notableAndAtRiskHealthTestResults: WisdomPanelNotableAndAtRiskHealthTestResult[] | string,
   index: number
 ): TestResultItem[] {
   const items: TestResultItem[] = []
-  notableAndAtRiskHealthTestResults.forEach((result: WisdomPanelNotableAndAtRiskHealthTestResult, i) => {
+  if (typeof notableAndAtRiskHealthTestResults === 'string') {
     items.push({
-      seq: i * 2,
-      code: result.health_test.slug,
-      name: result.health_test.disease_name.en,
+      seq: 0,
+      code: 'notable_and_at_risk_health_test_results',
+      name: 'Notable and At Risk Health Test Results',
       status: TestResultItemStatus.DONE,
-      // TODO(gb): should determine result by sex/sterility status
-      valueString: result.result_male,
-      interpretation: {
-        code: TestResultItemInterpretationCode.POSITIVE,
-        text: 'Positive'
-      }
+      valueString: notableAndAtRiskHealthTestResults
     })
-    items.push({
-      seq: i * 2 + 1,
-      code: `${result.health_test.slug}_copies`,
-      name: `${result.health_test.disease_name.en} Copies`,
-      status: TestResultItemStatus.DONE,
-      valueQuantity: {
-        value: result.copies,
-        units: ''
-      },
-      // TODO(gb): should determine copy by sex/sterility status
-      notes: result.health_test[`${'zero'}_copy_male`].en
+  } else {
+    notableAndAtRiskHealthTestResults.forEach((result: WisdomPanelNotableAndAtRiskHealthTestResult, i) => {
+      items.push({
+        seq: i * 2,
+        code: result.health_test.slug,
+        name: result.health_test.disease_name.en,
+        status: TestResultItemStatus.DONE,
+        valueString: result.resolved_result,
+        interpretation: {
+          code: TestResultItemInterpretationCode.POSITIVE,
+          text: 'Positive'
+        }
+      })
+      items.push({
+        seq: i * 2 + 1,
+        code: `${result.health_test.slug}_copies`,
+        name: `${result.health_test.disease_name.en} Copies`,
+        status: TestResultItemStatus.DONE,
+        valueQuantity: {
+          value: result.copies,
+          units: ''
+        },
+        notes: result.ui_description
+      })
     })
-  })
+  }
 
   return items
 }
