@@ -138,7 +138,10 @@ export class WisdomPanelService extends BaseProviderService<WisdomPanelMessageDa
         )
 
         // Get PDF report
-        const base64PdfReport = await this.wisdomPanelApiService.getReportPdfBase64(kit.id, metadata.providerConfiguration)
+        const base64PdfReport = await this.wisdomPanelApiService.getReportPdfBase64(
+          kit.id,
+          metadata.providerConfiguration
+        )
 
         if (this.configService.get('debug.wisdomApiResults')) {
           FileUtils.saveFile(
@@ -147,7 +150,9 @@ export class WisdomPanelService extends BaseProviderService<WisdomPanelMessageDa
           )
         }
 
-        batchResults.results.push(this.wisdomPanelMapper.mapWisdomPanelResult(resultSet, kit, simplifiedResults.data, base64PdfReport))
+        batchResults.results.push(
+          this.wisdomPanelMapper.mapWisdomPanelResult(resultSet, kit, simplifiedResults.data, base64PdfReport)
+        )
       }
     } catch (error) {
       throw new Error(`Failed to get batch results: ${error.message}`)
