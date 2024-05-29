@@ -47,8 +47,7 @@ import { Client } from '@nominal-systems/dmi-engine-common/lib/interfaces/provid
 
 @Injectable()
 export class WisdomPanelMapper {
-  constructor() {
-  }
+  constructor() {}
 
   mapCreateOrderPayload(payload: CreateOrderPayload, metadata: WisdomPanelMessageData): WisdomPanelCreatePetPayload {
     return {

@@ -48,7 +48,7 @@ export class WisdomPanelApiService extends BaseApiService {
           {}
         )
         token = response.access_token
-        await this.cacheManager.set('access_token', token, {ttl: response.expires_in * 0.8})
+        await this.cacheManager.set('access_token', token, { ttl: response.expires_in * 0.8 })
       } catch (error) {
         throw new Error(`[HTTP ${error.status}] ${error.message}`)
       }
@@ -136,10 +136,13 @@ export class WisdomPanelApiService extends BaseApiService {
         responseType: 'arraybuffer' as ResponseType,
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${token}`
         }
       }
-      const response = await this.get<ArrayBuffer>(`${config.baseUrl}${WisdomPanelApiEndpoints.GET_REPORT_PDF}/${kitId}`, reqConfig)
+      const response = await this.get<ArrayBuffer>(
+        `${config.baseUrl}${WisdomPanelApiEndpoints.GET_REPORT_PDF}/${kitId}`,
+        reqConfig
+      )
       return Buffer.from(response).toString('base64')
     } catch (error) {
       throw new Error(`[HTTP ${error.status}] ${error.message}`)
@@ -155,7 +158,7 @@ export class WisdomPanelApiService extends BaseApiService {
       hospital_number: hospitalNumber
     }
 
-    return await this.getResultSets(filter, {include: 'kit'}, config)
+    return await this.getResultSets(filter, { include: 'kit' }, config)
   }
 
   async getUnacknowledgedKitsForHospital(
