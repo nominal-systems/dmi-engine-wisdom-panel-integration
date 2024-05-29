@@ -191,6 +191,44 @@ describe('WisdomPanelMapper', () => {
         testResults: expect.any(Array)
       })
     })
+    it('should map the PDF report', () => {
+      expect(
+        mapper.mapWisdomPanelResult(
+          {
+            id: 'result-set-id'
+          } as unknown as WisdomPanelResultSetItem,
+          {
+            id: 'kit-id'
+          } as unknown as WisdomPanelKitItem,
+          {} as unknown as WisdomPanelSimpleResult,
+          'base64 pdf'
+        )
+      ).toEqual({
+        id: 'result-set-id',
+        orderId: 'kit-id',
+        status: ResultStatus.COMPLETED,
+        testResults: expect.any(Array),
+        pdfReport: [
+          {
+            contentType: 'application/pdf',
+            data: 'base64 pdf'
+          }
+        ]
+      })
+    })
+    it('should ignore PDF report if not provided', () => {
+      expect(
+        mapper.mapWisdomPanelResult(
+          {
+            id: 'result-set-id'
+          } as unknown as WisdomPanelResultSetItem,
+          {
+            id: 'kit-id'
+          } as unknown as WisdomPanelKitItem,
+          {} as unknown as WisdomPanelSimpleResult
+        )
+      ).not.toEqual(expect.objectContaining({ pdfReport: expect.any(Array) }))
+    })
   })
 
   describe('extractTestResults()', () => {

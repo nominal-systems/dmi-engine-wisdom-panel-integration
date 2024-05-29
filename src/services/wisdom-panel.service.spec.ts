@@ -2,17 +2,21 @@ import { WisdomPanelService } from './wisdom-panel.service'
 import { Test, TestingModule } from '@nestjs/testing'
 import { WisdomPanelApiService } from './wisdom-panel-api.service'
 import { WisdomPanelMapper } from '../providers/wisdom-panel-mapper'
-import { CreateOrderPayload, OrderCreatedResponse } from '@nominal-systems/dmi-engine-common'
+import { CreateOrderPayload, NullPayloadPayload, OrderCreatedResponse } from '@nominal-systems/dmi-engine-common'
 import { WisdomPanelMessageData } from '../interfaces/wisdom-panel-message-data.interface'
 import { ConfigService } from '@nestjs/config'
 
 describe('WisdomPanelService', () => {
   let service: WisdomPanelService
   const mapperMock = {
-    mapCreateOrderPayload: jest.fn()
+    mapCreateOrderPayload: jest.fn(),
+    mapWisdomPanelResult: jest.fn()
   }
   const apiServiceMock = {
-    createPet: jest.fn()
+    createPet: jest.fn(),
+    getUnacknowledgedResultSetsForHospital: jest.fn(),
+    getSimplifiedResultSets: jest.fn(),
+    getReportPdfBase64: jest.fn()
   }
 
   beforeEach(async () => {
@@ -68,6 +72,44 @@ describe('WisdomPanelService', () => {
           data: expect.any(String)
         })
       })
+    })
+  })
+
+  describe('getBatchResults()', () => {
+    it("should fetch the PDF report from Wisdom's API", async () => {
+      const payload = {} as unknown as NullPayloadPayload
+      const metadata = {
+        integrationOptions: {
+          hospitalNumber: '123'
+        },
+        providerConfiguration: {}
+      } as unknown as WisdomPanelMessageData
+      apiServiceMock.getUnacknowledgedResultSetsForHospital.mockResolvedValueOnce({
+        data: [
+          {
+            id: 'result-set-id',
+            relationships: {
+              kit: {
+                data: {
+                  id: 'kit-id'
+                }
+              }
+            }
+          }
+        ],
+        included: [
+          {
+            type: 'kits',
+            id: 'kit-id',
+            attributes: {
+              code: 'XOXOXO'
+            }
+          }
+        ]
+      })
+      apiServiceMock.getSimplifiedResultSets.mockResolvedValueOnce({})
+      await service.getBatchResults(payload, metadata)
+      expect(apiServiceMock.getReportPdfBase64).toBeCalledWith('kit-id', expect.any(Object))
     })
   })
 })
