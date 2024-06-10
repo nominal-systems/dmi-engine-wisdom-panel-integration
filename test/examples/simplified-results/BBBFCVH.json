@@ -769,6 +769,9 @@
     "ideal_weight_result": {
       "id": "c9ca5856-46f7-44c9-8ccc-5cf5c9c22d54",
       "result_set_id": "7d4b73a1-27c3-4c09-ba88-f3aa0d586cc2",
+      "pred_size": 4.0,
+      "min_size": 2.7,
+      "max_size": 5.4,
       "female_pred_size": 3.9,
       "female_min_size": 2.7,
       "female_max_size": 5.0,

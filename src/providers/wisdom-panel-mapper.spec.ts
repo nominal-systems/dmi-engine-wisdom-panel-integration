@@ -306,19 +306,19 @@ describe('WisdomPanelMapper', () => {
       expect(items.length).toEqual(3) // Min, Max, Predicted
       expect(items[0]).toEqual(
         expect.objectContaining({
-          code: 'ideal_weight_result_male_min_size',
+          code: 'ideal_weight_result_min_size',
           name: 'Minimal Ideal Weight Result'
         })
       )
       expect(items[1]).toEqual(
         expect.objectContaining({
-          code: 'ideal_weight_result_male_max_size',
+          code: 'ideal_weight_result_max_size',
           name: 'Maximum Ideal Weight Result'
         })
       )
       expect(items[2]).toEqual(
         expect.objectContaining({
-          code: 'ideal_weight_result_male_pred_size',
+          code: 'ideal_weight_result_pred_size',
           name: 'Predicted Ideal Weight Result'
         })
       )

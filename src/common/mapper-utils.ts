@@ -110,35 +110,34 @@ export function mapBreedPercentage(
 }
 
 export function mapIdealWeightResult(result: WisdomPanelIdealWeightResult, index: number): TestResultItem[] {
-  // TODO(gb): should determine ideal weights by sex/sterility status
   return [
     {
       seq: 0,
-      code: 'ideal_weight_result_male_min_size',
+      code: 'ideal_weight_result_min_size',
       name: 'Minimal Ideal Weight Result',
       status: TestResultItemStatus.DONE,
       valueQuantity: {
-        value: result.male_min_size,
+        value: result.min_size,
         units: 'kg'
       }
     },
     {
       seq: 1,
-      code: 'ideal_weight_result_male_max_size',
+      code: 'ideal_weight_result_max_size',
       name: 'Maximum Ideal Weight Result',
       status: TestResultItemStatus.DONE,
       valueQuantity: {
-        value: result.male_max_size,
+        value: result.max_size,
         units: 'kg'
       }
     },
     {
       seq: 2,
-      code: 'ideal_weight_result_male_pred_size',
+      code: 'ideal_weight_result_pred_size',
       name: 'Predicted Ideal Weight Result',
       status: TestResultItemStatus.DONE,
       valueQuantity: {
-        value: result.male_pred_size,
+        value: result.pred_size,
         units: 'kg'
       }
     }

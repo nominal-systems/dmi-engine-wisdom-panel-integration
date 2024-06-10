@@ -210,9 +210,9 @@ export interface WisdomPanelBreedPercentagesResult {
 }
 
 export interface WisdomPanelIdealWeightResult {
-  male_min_size: number
-  male_max_size: number
-  male_pred_size: number
+  min_size: number
+  max_size: number
+  pred_size: number
 }
 
 export interface WisdomPanelNotableAndAtRiskHealthTestResult {
