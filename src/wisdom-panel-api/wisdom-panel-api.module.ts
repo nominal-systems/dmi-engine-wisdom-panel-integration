@@ -26,7 +26,7 @@ import { APP_FILTER } from '@nestjs/core'
           }
         })
       }
-    ]),
+    ])
   ],
   providers: [
     {
@@ -38,9 +38,7 @@ import { APP_FILTER } from '@nestjs/core'
       useClass: WisdomPanelApiInterceptor
     }
   ],
-  exports: [
-    WisdomPanelApiHttpService
-  ]
+  exports: [WisdomPanelApiHttpService]
 })
 export class WisdomPanelApiModule {
   constructor(private readonly httpService: HttpService) {}

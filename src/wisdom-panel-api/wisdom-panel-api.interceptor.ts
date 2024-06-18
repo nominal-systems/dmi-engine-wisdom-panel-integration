@@ -30,11 +30,7 @@ export class WisdomPanelApiInterceptor extends AxiosInterceptor {
     return true
   }
 
-  public debug(
-    url: string,
-    body: any,
-    response: AxiosResponse
-  ): boolean {
+  public debug(url: string, body: any, response: AxiosResponse): boolean {
     return true
   }
 }
