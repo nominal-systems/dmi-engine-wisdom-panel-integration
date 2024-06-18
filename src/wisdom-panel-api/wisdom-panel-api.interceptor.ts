@@ -1,16 +1,16 @@
 import { AxiosInterceptor } from '@nominal-systems/dmi-engine-common'
-import { HttpService } from '@nestjs/axios'
 import { AxiosResponse } from 'axios'
 import { WisdomPanelApiEndpoints } from '../interfaces/wisdom-panel-api-endpoints.interface'
 import { WisdomPanelBaseResponse } from '../interfaces/wisdom-panel-api-responses.interface'
 import { PROVIDER_NAME } from '../constants/provider-name'
+import { WisdomPanelApiHttpService } from './wisdom-panel-api-http.service'
 
 const EXCLUDED_ENDPOINTS = [WisdomPanelApiEndpoints.AUTH]
 
 const SEARCH_ENDPOINTS = [WisdomPanelApiEndpoints.GET_KITS, WisdomPanelApiEndpoints.GET_RESULT_SETS]
 
 export class WisdomPanelApiInterceptor extends AxiosInterceptor {
-  constructor(httpService: HttpService, client) {
+  constructor(httpService: WisdomPanelApiHttpService, client) {
     super(httpService, client)
     this.provider = PROVIDER_NAME
   }
@@ -27,6 +27,14 @@ export class WisdomPanelApiInterceptor extends AxiosInterceptor {
       }
     }
 
+    return true
+  }
+
+  public debug(
+    url: string,
+    body: any,
+    response: AxiosResponse
+  ): boolean {
     return true
   }
 }

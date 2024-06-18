@@ -1,5 +1,4 @@
 import { Module } from '@nestjs/common'
-import { HttpModule } from '@nestjs/axios'
 import { ClientsModule, Transport } from '@nestjs/microservices'
 import { ConfigModule, ConfigService } from '@nestjs/config'
 import { BullModule } from '@nestjs/bull'
@@ -11,13 +10,12 @@ import { OrdersProcessor } from './processors/orders.processors'
 import { ResultsProcessor } from './processors/results.processor'
 import { CacheModule } from '@nestjs/cache-manager'
 import configuration from './config/configuration'
-import { WisdomPanelApiInterceptor } from './interceptors/wisdom-panel-api.interceptor'
 import { RpcExceptionFilter } from './filters/rcp-exception-filter'
 import { APP_FILTER } from '@nestjs/core'
+import { WisdomPanelApiModule } from './wisdom-panel-api/wisdom-panel-api.module'
 
 @Module({
   imports: [
-    HttpModule,
     ConfigModule.forRoot({
       isGlobal: true,
       load: [configuration]
@@ -25,6 +23,7 @@ import { APP_FILTER } from '@nestjs/core'
     CacheModule.register({
       ttl: 24 * 60 * 60 * 1000
     }),
+    // TODO(gb): extract this to a separate module?
     ClientsModule.registerAsync([
       {
         name: 'API_SERVICE',
@@ -44,12 +43,12 @@ import { APP_FILTER } from '@nestjs/core'
       useFactory: (configService: ConfigService) => ({
         redis: configService.get('redis')
       })
-    })
+    }),
+    WisdomPanelApiModule
   ],
   providers: [
     WisdomPanelService,
     WisdomPanelApiService,
-    WisdomPanelApiInterceptor,
     WisdomPanelMapper,
     OrdersProcessor,
     ResultsProcessor,
