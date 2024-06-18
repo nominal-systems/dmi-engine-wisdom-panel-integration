@@ -1,4 +1,4 @@
-import { Module, OnModuleInit } from '@nestjs/common'
+import { Module } from '@nestjs/common'
 import { HttpModule, HttpService } from '@nestjs/axios'
 import { WisdomPanelApiHttpService } from './wisdom-panel-api-http.service'
 import { WisdomPanelApiInterceptor } from './wisdom-panel-api.interceptor'
