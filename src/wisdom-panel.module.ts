@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common'
+import { DynamicModule, Module } from '@nestjs/common'
 import { ClientsModule, Transport } from '@nestjs/microservices'
 import { ConfigModule, ConfigService } from '@nestjs/config'
 import { BullModule } from '@nestjs/bull'
@@ -60,4 +60,10 @@ import { WisdomPanelApiModule } from './wisdom-panel-api/wisdom-panel-api.module
   controllers: [WisdomPanelController],
   exports: [BullModule]
 })
-export class WisdomPanelModule {}
+export class WisdomPanelModule {
+  static register(): DynamicModule {
+    return {
+      module: WisdomPanelModule
+    }
+  }
+}
