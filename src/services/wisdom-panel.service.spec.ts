@@ -1,6 +1,6 @@
 import { WisdomPanelService } from './wisdom-panel.service'
 import { Test, TestingModule } from '@nestjs/testing'
-import { WisdomPanelApiService } from './wisdom-panel-api.service'
+import { WisdomPanelApiService } from '../wisdom-panel-api/wisdom-panel-api.service'
 import { WisdomPanelMapper } from '../providers/wisdom-panel-mapper'
 import { CreateOrderPayload, NullPayloadPayload, OrderCreatedResponse } from '@nominal-systems/dmi-engine-common'
 import { WisdomPanelMessageData } from '../interfaces/wisdom-panel-message-data.interface'

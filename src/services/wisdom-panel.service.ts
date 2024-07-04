@@ -21,7 +21,7 @@ import {
   Species
 } from '@nominal-systems/dmi-engine-common'
 import { WisdomPanelMessageData } from '../interfaces/wisdom-panel-message-data.interface'
-import { WisdomPanelApiService } from './wisdom-panel-api.service'
+import { WisdomPanelApiService } from '../wisdom-panel-api/wisdom-panel-api.service'
 import { WisdomPanelMapper } from '../providers/wisdom-panel-mapper'
 import { WisdomPanelCreatePetPayload } from '../interfaces/wisdom-panel-api-payloads.interface'
 import {

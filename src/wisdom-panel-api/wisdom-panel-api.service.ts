@@ -19,7 +19,7 @@ import { WisdomPanelApiEndpoints } from '../interfaces/wisdom-panel-api-endpoint
 import { CACHE_MANAGER, CacheStore } from '@nestjs/cache-manager'
 import { WisdomApiException } from '../exceptions/wisdom-api.exception'
 import { ResponseType } from 'axios'
-import { WisdomPanelApiHttpService } from '../wisdom-panel-api/wisdom-panel-api-http.service'
+import { WisdomPanelApiHttpService } from './wisdom-panel-api-http.service'
 
 @Injectable()
 export class WisdomPanelApiService extends BaseApiService {
