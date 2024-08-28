@@ -53,7 +53,7 @@ export function mapKitStatus(status: string): OrderStatus {
 }
 
 export function extractKitCode(labRequisitionInfo: any): string {
-  return labRequisitionInfo.KitCode
+  return labRequisitionInfo.KitCode.toUpperCase().trim()
 }
 
 export function extractPetId(patient: OrderPatient): string {
