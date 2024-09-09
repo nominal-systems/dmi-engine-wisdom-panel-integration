@@ -67,6 +67,7 @@ export class WisdomPanelService extends BaseProviderService<WisdomPanelMessageDa
         requisitionId: response.data.kit.code,
         status: OrderStatus.SUBMITTED,
         manifest: {
+          contentType: 'application/pdf',
           data: response.data.requisition_form
         }
       }
