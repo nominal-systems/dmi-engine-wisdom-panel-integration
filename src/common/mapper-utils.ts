@@ -29,7 +29,7 @@ export function mapPetSex(sex: string): 'male' | 'female' {
   switch (sex) {
     case 'male':
       return 'male'
-    case 'females':
+    case 'female':
       return 'female'
     default:
       return 'male'
