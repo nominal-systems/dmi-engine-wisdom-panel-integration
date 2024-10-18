@@ -1,0 +1,43 @@
+### Create an order
+< {% client.global.set("requisitionId", $random.alphanumeric(10).toUpperCase()) %}
+POST {{baseUrl}}/orders
+Content-Type: application/json
+X-API-Key: {{apiKey}}
+
+{
+    "requisitionId": "{{requisitionId}}",
+    "integrationId": "{{integrationId}}",
+    "patient": {
+        "name": "Miso",
+        "sex": "{{referenceData.sex.male}}",
+        "species": "{{referenceData.species.dog}}",
+        "breed": "{{referenceData.breed.jack-russell-terrier}}",
+        "birthdate": "2023-03-05"
+    },
+    "client": {
+        "firstName": "Gonzalo",
+        "lastName": "Bellver"
+    },
+    "veterinarian": {
+        "firstName": "Foo",
+        "lastName": "Bar",
+        "identifier": [
+			{
+				"system": "pims:veterinarian:id",
+				"value": "9999"
+			}
+		]
+    },
+    "testCodes": [
+		{ "code": "foo"}
+	],
+    "labRequisitionInfo": {
+        "KitCode": "{{requisitionId}}"
+    }
+}
+
+> {%
+  client.test("Order was created successfully", function () {
+    client.assert(response.status === 201, "Order creation failed");
+  });
+%}

@@ -60,3 +60,6 @@ report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 .yalc
 yalc.lock
 .env
+
+# Test
+test/dmi-api/*.private.env.json
