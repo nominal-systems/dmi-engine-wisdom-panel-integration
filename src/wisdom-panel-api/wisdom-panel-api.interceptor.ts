@@ -50,26 +50,11 @@ export class WisdomPanelApiInterceptor extends AxiosInterceptor {
         accessionIds.push(kit.attributes.code)
       })
     } else if (url.includes(WisdomPanelApiEndpoints.GET_RESULT_SETS)) {
-      // TODO(gb): extract accession Ids from get result sets
-      console.log(`${url} => ${JSON.stringify(data.body, null, 2)}`) // TODO(gb): remove trace
-      process.exit(1)  // TODO(gb): remove
+      body.included.forEach((kit: any) => {
+        accessionIds.push(kit.attributes.code)
+      })
     } else if (url.includes(WisdomPanelApiEndpoints.GET_SIMPLIFIED_RESULT_SETS)) {
-      // TODO(gb): extract accession Ids from get simplified result sets
-      console.log(`${url} => ${JSON.stringify(data.body, null, 2)}`) // TODO(gb): remove trace
-      process.exit(1)  // TODO(gb): remove
-    } else if (url.includes(WisdomPanelApiEndpoints.GET_REPORT_PDF)) {
-      // TODO(gb): extract accession Ids from get report pdf
-      console.log(`url= ${JSON.stringify(url, null, 2)}`) // TODO(gb): remove trace
-      process.exit(1)  // TODO(gb): remove
-    } else if (url.includes(WisdomPanelApiEndpoints.ACKNOWLEDGE_KITS)) {
-      // TODO(gb): extract accession Ids from acknowledge kits
-      const payload: any = JSON.parse(data.payload)
-      console.log(`${url}= ${JSON.stringify(payload, null, 2)}`) // TODO(gb): remove trace
-      process.exit(1)  // TODO(gb): remove
-    } else if (url.includes(WisdomPanelApiEndpoints.ACKNOWLEDGE_RESULT_SETS)) {
-      const payload: any = JSON.parse(data.payload)
-      console.log(`${url}= ${JSON.stringify(payload, null, 2)}`) // TODO(gb): remove trace
-      process.exit(1)  // TODO(gb): remove
+      // TODO(gb): there is no link to the kit code. Can the kit be included?
     }
     if (accessionIds.length > 0) {
       data.accessionIds = accessionIds
