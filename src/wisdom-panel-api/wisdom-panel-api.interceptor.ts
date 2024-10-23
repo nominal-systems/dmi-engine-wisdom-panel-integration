@@ -4,7 +4,6 @@ import { WisdomPanelApiEndpoints } from '../interfaces/wisdom-panel-api-endpoint
 import { WisdomPanelBaseResponse } from '../interfaces/wisdom-panel-api-responses.interface'
 import { PROVIDER_NAME } from '../constants/provider-name'
 import { WisdomPanelApiHttpService } from './wisdom-panel-api-http.service'
-import * as process from 'node:process'
 
 const EXCLUDED_ENDPOINTS = [WisdomPanelApiEndpoints.AUTH]
 
@@ -61,5 +60,28 @@ export class WisdomPanelApiInterceptor extends AxiosInterceptor {
     }
 
     return data
+  }
+
+  public extractAccessionIds(url: string, body: any, response: AxiosResponse): string[] {
+    const accessionIds: string[] = []
+
+    if (url.includes(WisdomPanelApiEndpoints.CREATE_PET)) {
+      const payload: any = JSON.parse(response.config.data.payload)
+      if (payload.data.code !== undefined) {
+        accessionIds.push(payload.data.code)
+      }
+    } else if (url.includes(WisdomPanelApiEndpoints.GET_KITS)) {
+      body.data.forEach((kit: any) => {
+        accessionIds.push(kit.attributes.code)
+      })
+    } else if (url.includes(WisdomPanelApiEndpoints.GET_RESULT_SETS)) {
+      body.included.forEach((kit: any) => {
+        accessionIds.push(kit.attributes.code)
+      })
+    } else if (url.includes(WisdomPanelApiEndpoints.GET_SIMPLIFIED_RESULT_SETS)) {
+      // TODO(gb): there is no link to the kit code. Can the kit be included?
+    }
+
+    return accessionIds
   }
 }
