@@ -2,7 +2,12 @@ import { WisdomPanelService } from './wisdom-panel.service'
 import { Test, TestingModule } from '@nestjs/testing'
 import { WisdomPanelApiService } from '../wisdom-panel-api/wisdom-panel-api.service'
 import { WisdomPanelMapper } from '../providers/wisdom-panel-mapper'
-import { CreateOrderPayload, NullPayloadPayload, OrderCreatedResponse } from '@nominal-systems/dmi-engine-common'
+import {
+  BatchResultsResponse,
+  CreateOrderPayload,
+  NullPayloadPayload,
+  OrderCreatedResponse
+} from '@nominal-systems/dmi-engine-common'
 import { WisdomPanelMessageData } from '../interfaces/wisdom-panel-message-data.interface'
 import { ConfigService } from '@nestjs/config'
 
@@ -16,7 +21,9 @@ describe('WisdomPanelService', () => {
     createPet: jest.fn(),
     getUnacknowledgedResultSetsForHospital: jest.fn(),
     getSimplifiedResultSets: jest.fn(),
-    getReportPdfBase64: jest.fn()
+    getReportPdfBase64: jest.fn(),
+    acknowledgeKits: jest.fn(),
+    acknowledgeResultSets: jest.fn()
   }
 
   beforeEach(async () => {
@@ -41,6 +48,7 @@ describe('WisdomPanelService', () => {
     }).compile()
 
     service = module.get<WisdomPanelService>(WisdomPanelService)
+    jest.clearAllMocks()
   })
 
   it('should be defined', () => {
@@ -108,8 +116,92 @@ describe('WisdomPanelService', () => {
         ]
       })
       apiServiceMock.getSimplifiedResultSets.mockResolvedValueOnce({})
-      await service.getBatchResults(payload, metadata)
+      const batchResultsResponse: BatchResultsResponse = await service.getBatchResults(payload, metadata)
+      expect(batchResultsResponse.results).toHaveLength(1)
       expect(apiServiceMock.getReportPdfBase64).toBeCalledWith('kit-id', expect.any(Object))
+    })
+
+    it('should not continue processing if the result set is not ready yet', async () => {
+      const payload = {} as unknown as NullPayloadPayload
+      const metadata = {
+        integrationOptions: {
+          hospitalNumber: '123'
+        },
+        providerConfiguration: {}
+      } as unknown as WisdomPanelMessageData
+      apiServiceMock.getUnacknowledgedResultSetsForHospital.mockResolvedValueOnce({
+        data: [
+          {
+            id: 'result-set-id',
+            relationships: {
+              kit: {
+                data: {
+                  id: 'kit-id'
+                }
+              }
+            }
+          }
+        ],
+        included: [
+          {
+            type: 'kits',
+            id: 'kit-id',
+            attributes: {
+              code: 'XOXOXO'
+            }
+          }
+        ]
+      })
+      apiServiceMock.getSimplifiedResultSets.mockResolvedValueOnce({
+        message: "WIS_VOY__107: Results for kit with id kit-id are not ready yet."
+      })
+      const batchResultsResponse: BatchResultsResponse = await service.getBatchResults(payload, metadata)
+      expect(batchResultsResponse.results).toHaveLength(0)
+      expect(apiServiceMock.getReportPdfBase64).not.toHaveBeenCalled()
+      expect(mapperMock.mapWisdomPanelResult).not.toHaveBeenCalled()
+
+    })
+
+    it('should acknowledge the kit and result set if result sets have failed', async () => {
+      const payload = {} as unknown as NullPayloadPayload
+      const metadata = {
+        integrationOptions: {
+          hospitalNumber: '123'
+        },
+        providerConfiguration: {}
+      } as unknown as WisdomPanelMessageData
+      apiServiceMock.getUnacknowledgedResultSetsForHospital.mockResolvedValueOnce({
+        data: [
+          {
+            id: 'result-set-id',
+            relationships: {
+              kit: {
+                data: {
+                  id: 'kit-id'
+                }
+              }
+            }
+          }
+        ],
+        included: [
+          {
+            type: 'kits',
+            id: 'kit-id',
+            attributes: {
+              code: 'XOXOXO'
+            }
+          }
+        ]
+      })
+      apiServiceMock.getSimplifiedResultSets.mockResolvedValueOnce({
+        message: "WIS_VOY__108: Kit analysis has resulted in a failure during the [stage] stage with status code [failure_status]."
+      })
+      const batchResultsResponse: BatchResultsResponse = await service.getBatchResults(payload, metadata)
+      expect(batchResultsResponse.results).toHaveLength(0)
+      expect(apiServiceMock.acknowledgeKits).toBeCalledWith(['kit-id'], expect.any(Object))
+      expect(apiServiceMock.acknowledgeResultSets).toBeCalledWith(['result-set-id'], expect.any(Object))
+      expect(apiServiceMock.getReportPdfBase64).not.toHaveBeenCalled()
+      expect(mapperMock.mapWisdomPanelResult).not.toHaveBeenCalled()
     })
   })
 })

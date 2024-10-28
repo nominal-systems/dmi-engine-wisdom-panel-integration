@@ -138,6 +138,19 @@ export class WisdomPanelService extends BaseProviderService<WisdomPanelMessageDa
           metadata.providerConfiguration
         )
 
+        // If results are not ready or have failed, skip the rest of the processing
+        if (simplifiedResults.data === undefined && simplifiedResults.message !== undefined) {
+          if (simplifiedResults.message.startsWith('WIS_VOY__107: ')) {
+            this.logger.warn(simplifiedResults.message.split('WIS_VOY__107: ')[1])
+          } else if (simplifiedResults.message.startsWith('WIS_VOY__108: ')) {
+            this.logger.warn(simplifiedResults.message.split('WIS_VOY__108: ')[1])
+            await this.wisdomPanelApiService.acknowledgeKits([kit.id], metadata.providerConfiguration)
+            await this.wisdomPanelApiService.acknowledgeResultSets([resultSet.id], metadata.providerConfiguration)
+            // TODO(gb): notify DMI?
+          }
+          break
+        }
+
         // Get PDF report
         const base64PdfReport = await this.wisdomPanelApiService.getReportPdfBase64(
           kit.id,
