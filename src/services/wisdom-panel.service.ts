@@ -63,7 +63,6 @@ export class WisdomPanelService extends BaseProviderService<WisdomPanelMessageDa
     }
   }
 
-
   async createOrder(payload: CreateOrderPayload, metadata: WisdomPanelMessageData): Promise<OrderCreatedResponse> {
     try {
       const createPetPayload: WisdomPanelCreatePetPayload = this.wisdomPanelMapper.mapCreateOrderPayload(
