@@ -43,7 +43,7 @@
     "@nestjs/core": "^10.0.0",
     "@nestjs/microservices": "^10.3.3",
     "@nestjs/platform-express": "^10.0.0",
-    "@nominal-systems/dmi-engine-common": "^1.1.4",
+    "@nominal-systems/dmi-engine-common": "^1.1.5",
     "axios": "^1.6.7",
     "bull": "^4.12.2",
     "cache-manager": "^5.5.1",

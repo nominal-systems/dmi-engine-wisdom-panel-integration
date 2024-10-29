@@ -4,6 +4,7 @@ import {
   ApiEvent,
   Breed,
   Device,
+  IntegrationTestResponse,
   Operation,
   OrderCreatedResponse,
   ProviderOrderCreation,
@@ -22,6 +23,12 @@ import { MessagePattern } from '@nestjs/microservices'
 @Controller(`engine/${PROVIDER_NAME}`)
 export class WisdomPanelController implements ProviderOrderCreation, ProviderReferenceData, ProviderServices {
   constructor(private readonly wisdomPanelService: WisdomPanelService) {}
+
+  @MessagePattern(`${PROVIDER_NAME}/${Resource.Integration}/${Operation.Test}`)
+  public async testCredentials(msg: ApiEvent<WisdomPanelMessageData>): Promise<IntegrationTestResponse> {
+    const { payload, ...metadata } = msg.data
+    return await this.wisdomPanelService.testAuth(payload, metadata)
+  }
 
   @MessagePattern(`${PROVIDER_NAME}/${Resource.Orders}/${Operation.Create}`)
   public async createOrder(msg: ApiEvent<WisdomPanelMessageData>): Promise<OrderCreatedResponse> {

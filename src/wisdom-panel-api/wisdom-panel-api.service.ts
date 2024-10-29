@@ -32,8 +32,11 @@ export class WisdomPanelApiService extends BaseApiService {
     super(httpService)
   }
 
-  private async authenticate(config: WisdomPanelApiConfig): Promise<string> {
-    let token = await this.cacheManager.get<string>('access_token')
+  private async authenticate(config: WisdomPanelApiConfig, useCache = true): Promise<string> {
+    let token: string | undefined = undefined
+    if (useCache) {
+      token = await this.cacheManager.get<string>('access_token')
+    }
     if (!token) {
       try {
         const payload = {
@@ -246,6 +249,14 @@ export class WisdomPanelApiService extends BaseApiService {
       )
     } catch (error) {
       throw new Error(`[HTTP ${error.status}] ${error.message}`)
+    }
+  }
+
+  async testAuth(config: WisdomPanelApiConfig): Promise<void> {
+    try {
+      await this.authenticate(config)
+    } catch (error) {
+      throw new WisdomApiException('Failed to authenticate', error.status, error)
     }
   }
 }
