@@ -38,7 +38,7 @@ export class WisdomPanelApiInterceptor extends AxiosInterceptor {
     const accessionIds: string[] = []
 
     if (url.includes(WisdomPanelApiEndpoints.CREATE_PET)) {
-      const payload: any = JSON.parse(response.config.data.payload)
+      const payload: any = JSON.parse(response.config.data)
       if (payload.data.code !== undefined) {
         accessionIds.push(payload.data.code)
       }
