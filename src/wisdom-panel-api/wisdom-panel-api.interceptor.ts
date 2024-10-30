@@ -34,39 +34,11 @@ export class WisdomPanelApiInterceptor extends AxiosInterceptor {
     return true
   }
 
-  public extract(url: string, body: any, response: AxiosResponse): ProviderRawData {
-    const data = super.extract(url, body, response)
-
-    // Accession IDs
-    const accessionIds: string[] = []
-    if (url.includes(WisdomPanelApiEndpoints.CREATE_PET)) {
-      const payload: any = JSON.parse(data.payload)
-      if (payload.data.code !== undefined) {
-        accessionIds.push(payload.data.code)
-      }
-    } else if (url.includes(WisdomPanelApiEndpoints.GET_KITS)) {
-      body.data.forEach((kit: any) => {
-        accessionIds.push(kit.attributes.code)
-      })
-    } else if (url.includes(WisdomPanelApiEndpoints.GET_RESULT_SETS)) {
-      body.included.forEach((kit: any) => {
-        accessionIds.push(kit.attributes.code)
-      })
-    } else if (url.includes(WisdomPanelApiEndpoints.GET_SIMPLIFIED_RESULT_SETS)) {
-      // TODO(gb): there is no link to the kit code. Can the kit be included?
-    }
-    if (accessionIds.length > 0) {
-      data.accessionIds = accessionIds
-    }
-
-    return data
-  }
-
   public extractAccessionIds(url: string, body: any, response: AxiosResponse): string[] {
     const accessionIds: string[] = []
 
     if (url.includes(WisdomPanelApiEndpoints.CREATE_PET)) {
-      const payload: any = JSON.parse(response.config.data.payload)
+      const payload: any = JSON.parse(response.config.data)
       if (payload.data.code !== undefined) {
         accessionIds.push(payload.data.code)
       }
