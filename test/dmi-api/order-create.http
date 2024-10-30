@@ -1,5 +1,5 @@
 ### Create an order
-< {% client.global.set("requisitionId", $random.alphanumeric(10).toUpperCase()) %}
+< {% client.global.set("requisitionId", "") %}
 POST {{baseUrl}}/orders
 Content-Type: application/json
 X-API-Key: {{apiKey}}
