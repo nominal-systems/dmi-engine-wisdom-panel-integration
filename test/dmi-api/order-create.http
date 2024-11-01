@@ -1,11 +1,10 @@
 ### Create an order
-< {% client.global.set("requisitionId", "") %}
 POST {{baseUrl}}/orders
 Content-Type: application/json
 X-API-Key: {{apiKey}}
 
 {
-    "requisitionId": "{{requisitionId}}",
+    "requisitionId": "{{kitCode}}",
     "integrationId": "{{integrationId}}",
     "patient": {
         "name": "Miso",
@@ -32,7 +31,7 @@ X-API-Key: {{apiKey}}
 		{ "code": "foo"}
 	],
     "labRequisitionInfo": {
-        "KitCode": "{{requisitionId}}"
+        "KitCode": "{{kitCode}}"
     }
 }
 
