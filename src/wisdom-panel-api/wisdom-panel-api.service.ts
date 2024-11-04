@@ -32,7 +32,7 @@ export class WisdomPanelApiService extends BaseApiService {
     super(httpService)
   }
 
-  private async authenticate(config: WisdomPanelApiConfig, useCache = true): Promise<string> {
+  async authenticate(config: WisdomPanelApiConfig, useCache = true): Promise<string> {
     let token: string | undefined = undefined
     if (useCache) {
       token = await this.cacheManager.get<string>('access_token')
