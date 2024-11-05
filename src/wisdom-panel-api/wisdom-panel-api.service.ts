@@ -30,6 +30,20 @@ export class WisdomPanelApiService extends BaseApiService {
     private readonly httpService: WisdomPanelApiHttpService
   ) {
     super(httpService)
+    this.httpService.axiosRef.interceptors.response.use(
+      response => response,
+      async error => {
+        if (error.response !== undefined && error.response.status === 401) {
+          const requestHeaders = error.config.headers
+          const username = requestHeaders['X-Username']
+          if (username) {
+            const key = `access_token-${username}`
+            // TODO(gb): delete key
+          }
+        }
+        return Promise.reject(error)
+      },
+    )
   }
 
   private async authenticate(config: WisdomPanelApiConfig, useCache = true): Promise<string> {
