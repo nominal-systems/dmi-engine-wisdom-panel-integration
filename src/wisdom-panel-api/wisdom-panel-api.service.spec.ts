@@ -94,7 +94,7 @@ describe('WisdomPanelApiService', () => {
       const token: string = await service.authenticate(configMock, false)
       expect(cacheManager.get).not.toHaveBeenCalled()
       expect(httpService.post).toHaveBeenCalled()
-      expect(cacheManager.set).toHaveBeenCalledWith(`access_token-${configMock.username}`, 'mockAccessToken', tokenResponseMock.expires_in * 0.25 * 1000)
+      expect(cacheManager.set).not.toHaveBeenCalledWith(`access_token-${configMock.username}`, 'mockAccessToken', tokenResponseMock.expires_in * 0.25 * 1000)
       expect(token).toEqual('mockAccessToken')
     })
 

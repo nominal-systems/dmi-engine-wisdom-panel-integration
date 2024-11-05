@@ -53,9 +53,11 @@ export class WisdomPanelApiService extends BaseApiService {
         )
         token = response.access_token
         this.logger.debug(`Got new token: ${token.slice(-4)} (expires in ${response.expires_in} seconds)`)
-        const ttl = response.expires_in * 0.25 * 1000
-        await this.cacheManager.set(key, token, ttl)
-        this.logger.debug(`Saved new token '${key}' in cache: ${token.slice(-4)} (ttl: ${ttl / 1000}s)`)
+        if (useCache) {
+          const ttl = response.expires_in * 0.25 * 1000
+          await this.cacheManager.set(key, token, ttl)
+          this.logger.debug(`Saved new token '${key}' in cache: ${token.slice(-4)} (ttl: ${ttl / 1000}s)`)
+        }
       } catch (error) {
         throw new Error(`[HTTP ${error.status}] ${error.message}`)
       }
@@ -258,7 +260,7 @@ export class WisdomPanelApiService extends BaseApiService {
 
   async testAuth(config: WisdomPanelApiConfig): Promise<void> {
     try {
-      await this.authenticate(config)
+      await this.authenticate(config, false)
     } catch (error) {
       throw new WisdomApiException('Failed to authenticate', error.status, error)
     }
