@@ -73,7 +73,7 @@ describe('WisdomPanelApiService', () => {
     it('should use a token from the cache if available', async () => {
       jest.spyOn(cacheManager, 'get').mockReturnValue('mockAccessToken')
       const token: string = await service.authenticate(configMock)
-      expect(cacheManager.get).toHaveBeenCalledWith('access_token')
+      expect(cacheManager.get).toHaveBeenCalledWith(`access_token-${configMock.username}`)
       expect(httpService.post).not.toHaveBeenCalled()
       expect(cacheManager.set).not.toHaveBeenCalled()
       expect(token).toEqual('mockAccessToken')
@@ -83,9 +83,9 @@ describe('WisdomPanelApiService', () => {
       jest.spyOn(cacheManager, 'get').mockReturnValue(undefined)
       jest.spyOn(httpService, 'post').mockReturnValue(httpResponseMock(200, 'OK', tokenResponseMock))
       const token: string = await service.authenticate(configMock)
-      expect(cacheManager.get).toHaveBeenCalledWith('access_token')
+      expect(cacheManager.get).toHaveBeenCalledWith(`access_token-${configMock.username}`)
       expect(httpService.post).toHaveBeenCalled()
-      expect(cacheManager.set).toHaveBeenCalledWith('access_token', 'mockAccessToken', { ttl: 2880 })
+      expect(cacheManager.set).toHaveBeenCalledWith(`access_token-${configMock.username}`, 'mockAccessToken', tokenResponseMock.expires_in * 0.25 * 1000)
       expect(token).toEqual('mockAccessToken')
     })
 
@@ -94,7 +94,7 @@ describe('WisdomPanelApiService', () => {
       const token: string = await service.authenticate(configMock, false)
       expect(cacheManager.get).not.toHaveBeenCalled()
       expect(httpService.post).toHaveBeenCalled()
-      expect(cacheManager.set).toHaveBeenCalledWith('access_token', 'mockAccessToken', { ttl: 2880 })
+      expect(cacheManager.set).toHaveBeenCalledWith(`access_token-${configMock.username}`, 'mockAccessToken', tokenResponseMock.expires_in * 0.25 * 1000)
       expect(token).toEqual('mockAccessToken')
     })
 

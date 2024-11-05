@@ -34,8 +34,9 @@ export class WisdomPanelApiService extends BaseApiService {
 
   async authenticate(config: WisdomPanelApiConfig, useCache = true): Promise<string> {
     let token: string | undefined = undefined
+    const key = `access_token-${config.username}`
     if (useCache) {
-      token = await this.cacheManager.get<string>('access_token')
+      token = await this.cacheManager.get<string>(key)
     }
     if (!token) {
       try {
@@ -51,7 +52,10 @@ export class WisdomPanelApiService extends BaseApiService {
           {}
         )
         token = response.access_token
-        await this.cacheManager.set('access_token', token, { ttl: response.expires_in * 0.8 })
+        this.logger.debug(`Got new token: ${token.slice(-4)} (expires in ${response.expires_in} seconds)`)
+        const ttl = response.expires_in * 0.25 * 1000
+        await this.cacheManager.set(key, token, ttl)
+        this.logger.debug(`Saved new token '${key}' in cache: ${token.slice(-4)} (ttl: ${ttl / 1000}s)`)
       } catch (error) {
         throw new Error(`[HTTP ${error.status}] ${error.message}`)
       }
