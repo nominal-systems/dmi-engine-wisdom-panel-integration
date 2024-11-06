@@ -1,0 +1,20 @@
+### Authorize
+POST {{baseUrl}}/admin/login
+Content-Type: application/json
+
+{
+  "username": "{{admin.username}}",
+  "password": "{{admin.password}}"
+}
+
+> {% client.global.set("auth_token", response.body.token); %}
+
+### Test integration
+POST {{baseUrl}}/admin/integrations/{{integrationId}}/test
+Authorization: Bearer {{auth_token}}
+
+> {%
+  client.test("Integration auth ok", function () {
+    client.assert(response.status === 200, "Authentication failed");
+  });
+%}

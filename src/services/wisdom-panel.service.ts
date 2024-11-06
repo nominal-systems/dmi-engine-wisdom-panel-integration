@@ -8,6 +8,7 @@ import {
   Device,
   FileUtils,
   IdPayload,
+  IntegrationTestResponse,
   NullPayloadPayload,
   Order,
   OrderCreatedResponse,
@@ -45,6 +46,21 @@ export class WisdomPanelService extends BaseProviderService<WisdomPanelMessageDa
     private readonly wisdomPanelMapper: WisdomPanelMapper
   ) {
     super()
+  }
+
+  async testAuth(payload: NullPayloadPayload, metadata: any): Promise<IntegrationTestResponse> {
+    try {
+      await this.wisdomPanelApiService.testAuth(metadata.providerConfiguration)
+      return {
+        success: true,
+        message: 'Successfully authenticated with Wisdom Panel API'
+      }
+    } catch (error) {
+      return {
+        success: false,
+        message: error.message
+      }
+    }
   }
 
   async createOrder(payload: CreateOrderPayload, metadata: WisdomPanelMessageData): Promise<OrderCreatedResponse> {
