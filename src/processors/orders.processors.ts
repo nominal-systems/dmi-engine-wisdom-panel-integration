@@ -7,7 +7,7 @@ import { WisdomPanelMessageData } from '../interfaces/wisdom-panel-message-data.
 import { Job } from 'bull'
 import { Order } from '@nominal-systems/dmi-engine-common'
 import { ConfigService } from '@nestjs/config'
-import { debugFetchedOrders } from '../common/debug-utils'
+import { debugApiEvent } from '../common/debug-utils'
 
 @Processor(`${PROVIDER_NAME}.orders`)
 export class OrdersProcessor {
@@ -29,14 +29,15 @@ export class OrdersProcessor {
         `Fetched ${orders.length} order${orders.length > 1 ? 's' : ''} for integration ${payload.integrationId}`
       )
 
-      if (this.configService.get('debug.api')) {
-        debugFetchedOrders(orders)
-      }
-
-      this.apiClient.emit('external_orders', {
+      const data = {
         integrationId: payload.integrationId,
         orders
-      })
+      }
+      this.apiClient.emit('external_orders', data)
+
+      if (this.configService.get('debug.api')) {
+        debugApiEvent('external_orders', data)
+      }
 
       // TODO(gb): this could be done in batch
       for (const order of orders) {

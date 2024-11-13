@@ -6,7 +6,7 @@ import { ClientProxy } from '@nestjs/microservices'
 import { WisdomPanelMessageData } from '../interfaces/wisdom-panel-message-data.interface'
 import { Job } from 'bull'
 import { ConfigService } from '@nestjs/config'
-import { debugFetchedResults } from '../common/debug-utils'
+import { debugApiEvent } from '../common/debug-utils'
 
 @Processor(`${PROVIDER_NAME}.results`)
 export class ResultsProcessor {
@@ -30,16 +30,17 @@ export class ResultsProcessor {
           `Fetched ${batchResults.results.length} result${batchResults.results.length > 1 ? 's' : ''} for integration ${payload.integrationId}`
         )
 
-        if (this.configService.get('debug.api')) {
-          debugFetchedResults(batchResults.results)
-        }
-
         const data = {
           integrationId: payload.integrationId,
           results: batchResults.results
         }
         this.apiClient.emit('external_order_results', data)
         this.apiClient.emit('external_results', data)
+
+        if (this.configService.get('debug.api')) {
+          debugApiEvent('external_results', data)
+          debugApiEvent('external_order_results', data)
+        }
 
         // TODO(gb): this could be done in batch
         for (const result of batchResults.results) {

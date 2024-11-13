@@ -33,7 +33,6 @@ import {
   WisdomPanelResultSetsResponse
 } from '../interfaces/wisdom-panel-api-responses.interface'
 import { ConfigService } from '@nestjs/config'
-import { debugOrderCreated } from '../common/debug-utils'
 import { WisdomApiException } from '../exceptions/wisdom-api.exception'
 
 @Injectable()
@@ -74,10 +73,6 @@ export class WisdomPanelService extends BaseProviderService<WisdomPanelMessageDa
         metadata.providerConfiguration
       )
 
-      if (this.configService.get('debug.api')) {
-        debugOrderCreated(payload, response)
-      }
-
       return {
         externalId: response.data.kit.id,
         requisitionId: response.data.kit.code,
@@ -92,7 +87,10 @@ export class WisdomPanelService extends BaseProviderService<WisdomPanelMessageDa
     }
   }
 
-  async getBatchOrders(payload: NullPayloadPayload, metadata: WisdomPanelMessageData): Promise<Order[]> {
+  async getBatchOrders(
+    payload: NullPayloadPayload,
+    metadata: WisdomPanelMessageData
+  ): Promise<Order[]> {
     const orders: Order[] = []
     try {
       const response: WisdomPanelKitsResponse = await this.wisdomPanelApiService.getUnacknowledgedKitsForHospital(
@@ -153,19 +151,6 @@ export class WisdomPanelService extends BaseProviderService<WisdomPanelMessageDa
           kit.id,
           metadata.providerConfiguration
         )
-
-        // If results are not ready or have failed, skip the rest of the processing
-        if (simplifiedResults.data === undefined && simplifiedResults.message !== undefined) {
-          if (simplifiedResults.message.startsWith('WIS_VOY__107: ')) {
-            this.logger.warn(simplifiedResults.message.split('WIS_VOY__107: ')[1])
-          } else if (simplifiedResults.message.startsWith('WIS_VOY__108: ')) {
-            this.logger.warn(simplifiedResults.message.split('WIS_VOY__108: ')[1])
-            await this.wisdomPanelApiService.acknowledgeKits([kit.id], metadata.providerConfiguration)
-            await this.wisdomPanelApiService.acknowledgeResultSets([resultSet.id], metadata.providerConfiguration)
-            // TODO(gb): notify DMI?
-          }
-          break
-        }
 
         // Get PDF report
         const base64PdfReport = await this.wisdomPanelApiService.getReportPdfBase64(

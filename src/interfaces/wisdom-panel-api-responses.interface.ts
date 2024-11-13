@@ -1,4 +1,5 @@
 import { WisdomPanelKit, WisdomPanelPet } from './wisdom-panel-entities.interface'
+import { KitStage } from './wisdom-panel-api.types'
 
 export interface OAuthTokenResponse {
   access_token: string
@@ -37,11 +38,11 @@ export interface WisdomPanelKitItem extends WisdomPanelLinks {
     active: boolean
     enabled: boolean
     activated: boolean
-    'current-stage': string
+    'current-stage': KitStage
     'created-at': string
-    'veterinarian-name': 'Dr. Foo'
-    'hospital-name': 'Test Hospital'
-    'hospital-number': '123'
+    'veterinarian-name': string
+    'hospital-name': string
+    'hospital-number': string
     'inbound-tracking-code'?: string
     'outbound-tracking-code'?: string
     'current-failure'?: string

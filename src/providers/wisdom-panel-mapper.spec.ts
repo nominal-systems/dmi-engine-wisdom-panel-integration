@@ -2,6 +2,7 @@ import { WisdomPanelMapper } from './wisdom-panel-mapper'
 import {
   CreateOrderPayload,
   FileUtils,
+  Order,
   OrderStatus,
   ResultStatus,
   TestResult,
@@ -170,6 +171,40 @@ describe('WisdomPanelMapper', () => {
         }
       })
     })
+
+    it('should mark orders in error if they failed', async () => {
+      const kit = {
+        id: 'kit-id',
+        attributes: {
+          code: 'XOXOXO',
+          'current-stage': 'processing',
+          'current-failure': 'sample-failed',
+          'veterinarian-name': 'Dr. Doe'
+        },
+        relationships: {
+          pet: {
+            data: {
+              id: 'pet-id',
+              attributes: {
+                name: 'Miso',
+                sex: 'male',
+                species: 'dog',
+                'owner-first-name': 'John',
+                'owner-last-name': 'Doe'
+              }
+            }
+          }
+        }
+      } as unknown as WisdomPanelKitItem
+      const pet = {
+        type: 'pets',
+        id: 'pet-id',
+        attributes: {}
+      } as unknown as WisdomPanelPetItem
+      const order: Order = mapper.mapWisdomPanelKit(kit, pet)
+      expect(order.status).toEqual(OrderStatus.ERROR)
+      expect(order.notes).toBeDefined()
+    })
   })
 
   describe('mapWisdomPanelResult()', () => {
@@ -285,7 +320,7 @@ describe('WisdomPanelMapper', () => {
       items.forEach((item, index) => {
         const breedPercentage: WisdomPanelBreedPercentagesResult = simpleResult.data.breed_percentages?.[
           index
-        ] as WisdomPanelBreedPercentagesResult
+          ] as WisdomPanelBreedPercentagesResult
         expect(item.seq).toEqual(index)
         expect(item.code).toEqual(breedPercentage.breed.slug)
         expect(item.name).toEqual(breedPercentage.breed.name.en)

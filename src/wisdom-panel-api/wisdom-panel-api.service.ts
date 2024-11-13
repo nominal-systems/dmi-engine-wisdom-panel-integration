@@ -182,6 +182,7 @@ export class WisdomPanelApiService extends BaseApiService {
     const include: WisdomPanelInclude = {
       include: ['pet', 'pet.owner'].join(',')
     }
+
     return await this.getKits(filter, include, config)
   }
 

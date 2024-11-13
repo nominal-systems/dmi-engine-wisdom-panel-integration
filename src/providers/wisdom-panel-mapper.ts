@@ -44,6 +44,7 @@ import {
   WisdomPanelTestResult
 } from '../interfaces/wisdom-panel-api-responses.interface'
 import { Client } from '@nominal-systems/dmi-engine-common/lib/interfaces/provider-service'
+import { isNullOrUndefined } from '@nominal-systems/dmi-engine-common/lib/utils/is-null-or-undefined'
 
 @Injectable()
 export class WisdomPanelMapper {
@@ -62,14 +63,19 @@ export class WisdomPanelMapper {
     }
   }
 
-  mapWisdomPanelKit(kit: WisdomPanelKitItem, pet: WisdomPanelPetItem, kitStatus?: WisdomPanelStatusesItem): Order {
+  mapWisdomPanelKit(
+    kit: WisdomPanelKitItem,
+    pet: WisdomPanelPetItem,
+    kitStatus?: WisdomPanelStatusesItem
+  ): Order {
     return {
       externalId: kit.id,
-      status: mapKitStatus(kit.attributes['current-stage']),
+      status: mapKitStatus(kit.attributes['current-stage'], kit.attributes['current-failure']),
       patient: this.mapPatient(pet),
       client: this.mapClient(pet),
       tests: [{ code: kit.attributes.code }],
-      veterinarian: this.mapVeterinarian(kit)
+      veterinarian: this.mapVeterinarian(kit),
+      ...this.extractNotes(kit)
     }
   }
 
@@ -203,5 +209,15 @@ export class WisdomPanelMapper {
     return {
       veterinarian_name: `${veterinarian.firstName} ${veterinarian.lastName}`
     }
+  }
+
+  extractNotes(kit: WisdomPanelKitItem): { notes?: string } {
+    if (!isNullOrUndefined(kit.attributes['current-failure'])) {
+      return {
+        notes: `Failure reason: ${kit.attributes['current-failure']}`
+      }
+    }
+
+    return {}
   }
 }

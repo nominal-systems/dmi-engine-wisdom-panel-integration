@@ -13,6 +13,8 @@ import {
   WisdomPanelNotableAndAtRiskHealthTestResult
 } from '../interfaces/wisdom-panel-api-responses.interface'
 import { TestResultItemInterpretationCode } from '@nominal-systems/dmi-engine-common/lib/interfaces/results.interface'
+import { KitStage } from '../interfaces/wisdom-panel-api.types'
+import { isNullOrUndefined } from '@nominal-systems/dmi-engine-common/lib/utils/is-null-or-undefined'
 
 export function mapPetSpecies(species: string): 'dog' | 'cat' {
   switch (species) {
@@ -36,8 +38,12 @@ export function mapPetSex(sex: string): 'male' | 'female' {
   }
 }
 
-export function mapKitStatus(status: string): OrderStatus {
-  switch (status) {
+export function mapKitStatus(currentStage: KitStage, currentFailure?: string): OrderStatus {
+  if (!isNullOrUndefined(currentFailure)) {
+    return OrderStatus.ERROR
+  }
+
+  switch (currentStage) {
     case 'shipped':
     case 'waiting':
       return OrderStatus.SUBMITTED

@@ -19,6 +19,7 @@ describe('WisdomPanelService', () => {
   }
   const apiServiceMock = {
     createPet: jest.fn(),
+    getUnacknowledgedKitsForHospital: jest.fn(),
     getUnacknowledgedResultSetsForHospital: jest.fn(),
     getSimplifiedResultSets: jest.fn(),
     getReportPdfBase64: jest.fn(),
@@ -119,89 +120,6 @@ describe('WisdomPanelService', () => {
       const batchResultsResponse: BatchResultsResponse = await service.getBatchResults(payload, metadata)
       expect(batchResultsResponse.results).toHaveLength(1)
       expect(apiServiceMock.getReportPdfBase64).toBeCalledWith('kit-id', expect.any(Object))
-    })
-
-    it('should not continue processing if the result set is not ready yet', async () => {
-      const payload = {} as unknown as NullPayloadPayload
-      const metadata = {
-        integrationOptions: {
-          hospitalNumber: '123'
-        },
-        providerConfiguration: {}
-      } as unknown as WisdomPanelMessageData
-      apiServiceMock.getUnacknowledgedResultSetsForHospital.mockResolvedValueOnce({
-        data: [
-          {
-            id: 'result-set-id',
-            relationships: {
-              kit: {
-                data: {
-                  id: 'kit-id'
-                }
-              }
-            }
-          }
-        ],
-        included: [
-          {
-            type: 'kits',
-            id: 'kit-id',
-            attributes: {
-              code: 'XOXOXO'
-            }
-          }
-        ]
-      })
-      apiServiceMock.getSimplifiedResultSets.mockResolvedValueOnce({
-        message: "WIS_VOY__107: Results for kit with id kit-id are not ready yet."
-      })
-      const batchResultsResponse: BatchResultsResponse = await service.getBatchResults(payload, metadata)
-      expect(batchResultsResponse.results).toHaveLength(0)
-      expect(apiServiceMock.getReportPdfBase64).not.toHaveBeenCalled()
-      expect(mapperMock.mapWisdomPanelResult).not.toHaveBeenCalled()
-
-    })
-
-    it('should acknowledge the kit and result set if result sets have failed', async () => {
-      const payload = {} as unknown as NullPayloadPayload
-      const metadata = {
-        integrationOptions: {
-          hospitalNumber: '123'
-        },
-        providerConfiguration: {}
-      } as unknown as WisdomPanelMessageData
-      apiServiceMock.getUnacknowledgedResultSetsForHospital.mockResolvedValueOnce({
-        data: [
-          {
-            id: 'result-set-id',
-            relationships: {
-              kit: {
-                data: {
-                  id: 'kit-id'
-                }
-              }
-            }
-          }
-        ],
-        included: [
-          {
-            type: 'kits',
-            id: 'kit-id',
-            attributes: {
-              code: 'XOXOXO'
-            }
-          }
-        ]
-      })
-      apiServiceMock.getSimplifiedResultSets.mockResolvedValueOnce({
-        message: "WIS_VOY__108: Kit analysis has resulted in a failure during the [stage] stage with status code [failure_status]."
-      })
-      const batchResultsResponse: BatchResultsResponse = await service.getBatchResults(payload, metadata)
-      expect(batchResultsResponse.results).toHaveLength(0)
-      expect(apiServiceMock.acknowledgeKits).toBeCalledWith(['kit-id'], expect.any(Object))
-      expect(apiServiceMock.acknowledgeResultSets).toBeCalledWith(['result-set-id'], expect.any(Object))
-      expect(apiServiceMock.getReportPdfBase64).not.toHaveBeenCalled()
-      expect(mapperMock.mapWisdomPanelResult).not.toHaveBeenCalled()
     })
   })
 })

@@ -5,7 +5,7 @@ import { WisdomPanelBaseResponse } from '../interfaces/wisdom-panel-api-response
 import { PROVIDER_NAME } from '../constants/provider-name'
 import { WisdomPanelApiHttpService } from './wisdom-panel-api-http.service'
 
-const EXCLUDED_ENDPOINTS = [WisdomPanelApiEndpoints.AUTH]
+const EXCLUDED_ENDPOINTS = []
 
 const SEARCH_ENDPOINTS = [WisdomPanelApiEndpoints.GET_KITS, WisdomPanelApiEndpoints.GET_RESULT_SETS]
 
