@@ -1,11 +1,10 @@
 ### Create an order
-< {% client.global.set("requisitionId", $random.alphanumeric(10).toUpperCase()) %}
 POST {{baseUrl}}/orders
 Content-Type: application/json
 X-API-Key: {{apiKey}}
 
 {
-    "requisitionId": "{{requisitionId}}",
+    "requisitionId": "{{kitCode}}",
     "integrationId": "{{integrationId}}",
     "patient": {
         "name": "Miso",
@@ -16,7 +15,11 @@ X-API-Key: {{apiKey}}
     },
     "client": {
         "firstName": "Gonzalo",
-        "lastName": "Bellver"
+        "lastName": "Bellver",
+        "contact": {
+            "email": "gonzalo@linehq.com",
+            "phone": "1234567890"
+        }
     },
     "veterinarian": {
         "firstName": "Foo",
@@ -32,7 +35,7 @@ X-API-Key: {{apiKey}}
 		{ "code": "foo"}
 	],
     "labRequisitionInfo": {
-        "KitCode": "{{requisitionId}}"
+        "KitCode": "{{kitCode}}"
     }
 }
 

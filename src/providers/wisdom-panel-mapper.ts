@@ -10,7 +10,8 @@ import {
   TestResult,
   TestResultItem,
   Veterinarian,
-  VeterinarianPayload
+  VeterinarianPayload,
+  isNullOrUndefinedOrEmpty
 } from '@nominal-systems/dmi-engine-common'
 import { WisdomPanelMessageData } from '../interfaces/wisdom-panel-message-data.interface'
 import { WisdomPanelCreatePetPayload } from '../interfaces/wisdom-panel-api-payloads.interface'
@@ -178,12 +179,22 @@ export class WisdomPanelMapper {
   }
 
   extractClient(client: ClientPayload): WisdomPanelClient {
-    return {
+    const wisdomPanelClient: WisdomPanelClient = {
       client_first_name: client.firstName || '',
       client_last_name: client.lastName,
       client_pet_id: extractClientPetId(client)
-      // TODO(gb): extract client contact/address
+      // TODO(gb): extract client address
     }
+
+    if (!isNullOrUndefinedOrEmpty(client.contact?.email)) {
+      wisdomPanelClient.client_email = client.contact?.email
+    }
+
+    if (!isNullOrUndefinedOrEmpty(client.contact?.phone)) {
+      wisdomPanelClient.client_phone = client.contact?.phone
+    }
+
+    return wisdomPanelClient
   }
 
   extractHospital(metadata: WisdomPanelMessageData): WisdomPanelHospital {
