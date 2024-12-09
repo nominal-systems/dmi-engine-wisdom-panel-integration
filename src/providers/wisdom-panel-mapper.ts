@@ -1,7 +1,9 @@
 import { Injectable } from '@nestjs/common'
 import {
+  Client,
   ClientPayload,
   CreateOrderPayload,
+  isNullOrUndefinedOrEmpty,
   Order,
   OrderPatient,
   Patient,
@@ -43,8 +45,6 @@ import {
   WisdomPanelStatusesItem,
   WisdomPanelTestResult
 } from '../interfaces/wisdom-panel-api-responses.interface'
-import { Client } from '@nominal-systems/dmi-engine-common/lib/interfaces/provider-service'
-import { isNullOrUndefined } from '@nominal-systems/dmi-engine-common/lib/utils/is-null-or-undefined'
 
 @Injectable()
 export class WisdomPanelMapper {
@@ -212,7 +212,7 @@ export class WisdomPanelMapper {
   }
 
   extractNotes(kit: WisdomPanelKitItem): { notes?: string } {
-    if (!isNullOrUndefined(kit.attributes['current-failure'])) {
+    if (!isNullOrUndefinedOrEmpty(kit.attributes['current-failure'])) {
       return {
         notes: `Failure reason: ${kit.attributes['current-failure']}`
       }
