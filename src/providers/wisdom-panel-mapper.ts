@@ -63,11 +63,7 @@ export class WisdomPanelMapper {
     }
   }
 
-  mapWisdomPanelKit(
-    kit: WisdomPanelKitItem,
-    pet: WisdomPanelPetItem,
-    kitStatus?: WisdomPanelStatusesItem
-  ): Order {
+  mapWisdomPanelKit(kit: WisdomPanelKitItem, pet: WisdomPanelPetItem, kitStatus?: WisdomPanelStatusesItem): Order {
     return {
       externalId: kit.id,
       status: mapKitStatus(kit.attributes['current-stage'], kit.attributes['current-failure']),

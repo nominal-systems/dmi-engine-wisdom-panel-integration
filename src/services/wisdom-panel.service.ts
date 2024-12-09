@@ -87,10 +87,7 @@ export class WisdomPanelService extends BaseProviderService<WisdomPanelMessageDa
     }
   }
 
-  async getBatchOrders(
-    payload: NullPayloadPayload,
-    metadata: WisdomPanelMessageData
-  ): Promise<Order[]> {
+  async getBatchOrders(payload: NullPayloadPayload, metadata: WisdomPanelMessageData): Promise<Order[]> {
     const orders: Order[] = []
     try {
       const response: WisdomPanelKitsResponse = await this.wisdomPanelApiService.getUnacknowledgedKitsForHospital(

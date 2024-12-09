@@ -320,7 +320,7 @@ describe('WisdomPanelMapper', () => {
       items.forEach((item, index) => {
         const breedPercentage: WisdomPanelBreedPercentagesResult = simpleResult.data.breed_percentages?.[
           index
-          ] as WisdomPanelBreedPercentagesResult
+        ] as WisdomPanelBreedPercentagesResult
         expect(item.seq).toEqual(index)
         expect(item.code).toEqual(breedPercentage.breed.slug)
         expect(item.name).toEqual(breedPercentage.breed.name.en)
