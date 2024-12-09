@@ -7,6 +7,7 @@ import {
   ResultStatus,
   TestResult,
   TestResultItem,
+  TestResultItemInterpretationCode,
   TestResultItemStatus
 } from '@nominal-systems/dmi-engine-common'
 import {
@@ -20,7 +21,6 @@ import {
   WisdomPanelSimpleResultResponse,
   WisdomPanelTestResult
 } from '../interfaces/wisdom-panel-api-responses.interface'
-import { TestResultItemInterpretationCode } from '@nominal-systems/dmi-engine-common/lib/interfaces/results.interface'
 
 describe('WisdomPanelMapper', () => {
   let mapper: WisdomPanelMapper

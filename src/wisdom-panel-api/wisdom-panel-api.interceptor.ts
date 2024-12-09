@@ -1,4 +1,4 @@
-import { AxiosInterceptor, ProviderRawData } from '@nominal-systems/dmi-engine-common'
+import { AxiosInterceptor } from '@nominal-systems/dmi-engine-common'
 import { AxiosResponse } from 'axios'
 import { WisdomPanelApiEndpoints } from '../interfaces/wisdom-panel-api-endpoints.interface'
 import { WisdomPanelBaseResponse } from '../interfaces/wisdom-panel-api-responses.interface'

@@ -12,8 +12,7 @@ import {
   TestResult,
   TestResultItem,
   Veterinarian,
-  VeterinarianPayload,
-  isNullOrUndefinedOrEmpty
+  VeterinarianPayload
 } from '@nominal-systems/dmi-engine-common'
 import { WisdomPanelMessageData } from '../interfaces/wisdom-panel-message-data.interface'
 import { WisdomPanelCreatePetPayload } from '../interfaces/wisdom-panel-api-payloads.interface'
