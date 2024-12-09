@@ -32,10 +32,10 @@ describe('WisdomPanelApiService', () => {
       headers: {},
       config: {
         url: 'ss',
-        headers: {} as AxiosRequestHeaders,
+        headers: {} as AxiosRequestHeaders
       },
       status,
-      statusText,
+      statusText
     })
   }
 
@@ -85,7 +85,11 @@ describe('WisdomPanelApiService', () => {
       const token: string = await service.authenticate(configMock)
       expect(cacheManager.get).toHaveBeenCalledWith(`access_token-${configMock.username}`)
       expect(httpService.post).toHaveBeenCalled()
-      expect(cacheManager.set).toHaveBeenCalledWith(`access_token-${configMock.username}`, 'mockAccessToken', tokenResponseMock.expires_in * 0.25 * 1000)
+      expect(cacheManager.set).toHaveBeenCalledWith(
+        `access_token-${configMock.username}`,
+        'mockAccessToken',
+        tokenResponseMock.expires_in * 0.25 * 1000
+      )
       expect(token).toEqual('mockAccessToken')
     })
 
@@ -94,7 +98,11 @@ describe('WisdomPanelApiService', () => {
       const token: string = await service.authenticate(configMock, false)
       expect(cacheManager.get).not.toHaveBeenCalled()
       expect(httpService.post).toHaveBeenCalled()
-      expect(cacheManager.set).not.toHaveBeenCalledWith(`access_token-${configMock.username}`, 'mockAccessToken', tokenResponseMock.expires_in * 0.25 * 1000)
+      expect(cacheManager.set).not.toHaveBeenCalledWith(
+        `access_token-${configMock.username}`,
+        'mockAccessToken',
+        tokenResponseMock.expires_in * 0.25 * 1000
+      )
       expect(token).toEqual('mockAccessToken')
     })
 

@@ -15,7 +15,11 @@ X-API-Key: {{apiKey}}
     },
     "client": {
         "firstName": "Gonzalo",
-        "lastName": "Bellver"
+        "lastName": "Bellver",
+        "contact": {
+            "email": "gonzalo@linehq.com",
+            "phone": "1234567890"
+        }
     },
     "veterinarian": {
         "firstName": "Foo",
