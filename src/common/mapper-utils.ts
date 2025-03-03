@@ -170,7 +170,7 @@ export function mapNotableAndAtRiskHealthTestResults(
         code: result.health_test.slug,
         name: result.health_test.disease_name.en,
         status: TestResultItemStatus.DONE,
-        valueString: result.resolved_result,
+        valueString: result.result_value ?? result.resolved_result,
         interpretation: {
           code: TestResultItemInterpretationCode.POSITIVE,
           text: 'Positive'
