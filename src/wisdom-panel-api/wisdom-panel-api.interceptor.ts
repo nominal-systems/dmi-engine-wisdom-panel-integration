@@ -16,6 +16,11 @@ export class WisdomPanelApiInterceptor extends AxiosInterceptor {
   }
 
   public filter(url: string, body: any, response: AxiosResponse): boolean {
+    // Do not filter out failed requests
+    if (response.status >= 400) {
+      return true
+    }
+
     if (EXCLUDED_ENDPOINTS.some((endpoint) => url.includes(endpoint))) {
       return false
     }
