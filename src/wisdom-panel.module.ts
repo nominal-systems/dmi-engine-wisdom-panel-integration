@@ -18,10 +18,10 @@ import { WisdomPanelApiModule } from './wisdom-panel-api/wisdom-panel-api.module
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
-      load: [configuration]
+      load: [configuration],
     }),
     CacheModule.register({
-      ttl: 24 * 60 * 60 * 1000
+      ttl: 24 * 60 * 60 * 1000,
     }),
     // TODO(gb): extract this to a separate module?
     ClientsModule.registerAsync([
@@ -32,19 +32,19 @@ import { WisdomPanelApiModule } from './wisdom-panel-api/wisdom-panel-api.module
         useFactory: async (configService: ConfigService) => ({
           transport: Transport.MQTT,
           options: {
-            ...configService.get('mqtt')
-          }
-        })
-      }
+            ...configService.get('mqtt'),
+          },
+        }),
+      },
     ]),
     BullModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
       useFactory: (configService: ConfigService) => ({
-        redis: configService.get('redis')
-      })
+        redis: configService.get('redis'),
+      }),
     }),
-    WisdomPanelApiModule
+    WisdomPanelApiModule,
   ],
   providers: [
     WisdomPanelService,
@@ -54,16 +54,16 @@ import { WisdomPanelApiModule } from './wisdom-panel-api/wisdom-panel-api.module
     ResultsProcessor,
     {
       provide: APP_FILTER,
-      useClass: RpcExceptionFilter
-    }
+      useClass: RpcExceptionFilter,
+    },
   ],
   controllers: [WisdomPanelController],
-  exports: [BullModule]
+  exports: [BullModule],
 })
 export class WisdomPanelModule {
   static register(): DynamicModule {
     return {
-      module: WisdomPanelModule
+      module: WisdomPanelModule,
     }
   }
 }

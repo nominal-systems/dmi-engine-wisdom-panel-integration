@@ -7,12 +7,12 @@ import {
   PimsIdentifiers,
   TestResultItem,
   TestResultItemInterpretationCode,
-  TestResultItemStatus
+  TestResultItemStatus,
 } from '@nominal-systems/dmi-engine-common'
 import {
   WisdomPanelBreedPercentagesResult,
   WisdomPanelIdealWeightResult,
-  WisdomPanelNotableAndAtRiskHealthTestResult
+  WisdomPanelNotableAndAtRiskHealthTestResult,
 } from '../interfaces/wisdom-panel-api-responses.interface'
 import { KitStage } from '../interfaces/wisdom-panel-api.types'
 
@@ -98,7 +98,7 @@ export function mapTestResultName(key: string): string {
 
 export function mapBreedPercentage(
   percentagesResults: WisdomPanelBreedPercentagesResult[],
-  index: number
+  index: number,
 ): TestResultItem[] {
   return percentagesResults.map((result: WisdomPanelBreedPercentagesResult, i) => {
     return {
@@ -108,14 +108,17 @@ export function mapBreedPercentage(
       status: TestResultItemStatus.DONE,
       valueQuantity: {
         value: result.percentage,
-        units: '%'
+        units: '%',
       },
-      notes: `${result.percentage}% ${result.breed.name.en}`
+      notes: `${result.percentage}% ${result.breed.name.en}`,
     }
   })
 }
 
-export function mapIdealWeightResult(result: WisdomPanelIdealWeightResult, index: number): TestResultItem[] {
+export function mapIdealWeightResult(
+  result: WisdomPanelIdealWeightResult,
+  index: number,
+): TestResultItem[] {
   return [
     {
       seq: 0,
@@ -124,8 +127,8 @@ export function mapIdealWeightResult(result: WisdomPanelIdealWeightResult, index
       status: TestResultItemStatus.DONE,
       valueQuantity: {
         value: result.min_size,
-        units: 'kg'
-      }
+        units: 'kg',
+      },
     },
     {
       seq: 1,
@@ -134,8 +137,8 @@ export function mapIdealWeightResult(result: WisdomPanelIdealWeightResult, index
       status: TestResultItemStatus.DONE,
       valueQuantity: {
         value: result.max_size,
-        units: 'kg'
-      }
+        units: 'kg',
+      },
     },
     {
       seq: 2,
@@ -144,15 +147,15 @@ export function mapIdealWeightResult(result: WisdomPanelIdealWeightResult, index
       status: TestResultItemStatus.DONE,
       valueQuantity: {
         value: result.pred_size,
-        units: 'kg'
-      }
-    }
+        units: 'kg',
+      },
+    },
   ]
 }
 
 export function mapNotableAndAtRiskHealthTestResults(
   notableAndAtRiskHealthTestResults: WisdomPanelNotableAndAtRiskHealthTestResult[] | string,
-  index: number
+  index: number,
 ): TestResultItem[] {
   const items: TestResultItem[] = []
   if (typeof notableAndAtRiskHealthTestResults === 'string') {
@@ -161,33 +164,35 @@ export function mapNotableAndAtRiskHealthTestResults(
       code: 'notable_and_at_risk_health_test_results',
       name: 'Notable and At Risk Health Test Results',
       status: TestResultItemStatus.DONE,
-      valueString: notableAndAtRiskHealthTestResults
+      valueString: notableAndAtRiskHealthTestResults,
     })
   } else {
-    notableAndAtRiskHealthTestResults.forEach((result: WisdomPanelNotableAndAtRiskHealthTestResult, i) => {
-      items.push({
-        seq: i * 2,
-        code: result.health_test.slug,
-        name: result.health_test.disease_name.en,
-        status: TestResultItemStatus.DONE,
-        valueString: result.result_value ?? result.resolved_result,
-        interpretation: {
-          code: TestResultItemInterpretationCode.POSITIVE,
-          text: 'Positive'
-        }
-      })
-      items.push({
-        seq: i * 2 + 1,
-        code: `${result.health_test.slug}_copies`,
-        name: `${result.health_test.disease_name.en} Copies`,
-        status: TestResultItemStatus.DONE,
-        valueQuantity: {
-          value: result.copies,
-          units: ''
-        },
-        notes: result.ui_description
-      })
-    })
+    notableAndAtRiskHealthTestResults.forEach(
+      (result: WisdomPanelNotableAndAtRiskHealthTestResult, i) => {
+        items.push({
+          seq: i * 2,
+          code: result.health_test.slug,
+          name: result.health_test.disease_name.en,
+          status: TestResultItemStatus.DONE,
+          valueString: result.result_value ?? result.resolved_result,
+          interpretation: {
+            code: TestResultItemInterpretationCode.POSITIVE,
+            text: 'Positive',
+          },
+        })
+        items.push({
+          seq: i * 2 + 1,
+          code: `${result.health_test.slug}_copies`,
+          name: `${result.health_test.disease_name.en} Copies`,
+          status: TestResultItemStatus.DONE,
+          valueQuantity: {
+            value: result.copies,
+            units: '',
+          },
+          notes: result.ui_description,
+        })
+      },
+    )
   }
 
   return items

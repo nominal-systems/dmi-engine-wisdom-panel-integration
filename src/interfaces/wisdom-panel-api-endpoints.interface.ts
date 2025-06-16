@@ -6,5 +6,5 @@ export enum WisdomPanelApiEndpoints {
   GET_REPORT_PDF = '/pdf-generator/vet-report',
   CREATE_PET = '/api/voyager/pet',
   ACKNOWLEDGE_KITS = '/api/voyager/acknowledge-kits',
-  ACKNOWLEDGE_RESULT_SETS = '/api/voyager/acknowledge-result-sets'
+  ACKNOWLEDGE_RESULT_SETS = '/api/voyager/acknowledge-result-sets',
 }

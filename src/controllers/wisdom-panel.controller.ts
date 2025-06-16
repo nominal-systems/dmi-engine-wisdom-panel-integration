@@ -14,18 +14,22 @@ import {
   Resource,
   Service,
   Sex,
-  Species
+  Species,
 } from '@nominal-systems/dmi-engine-common'
 import { WisdomPanelService } from '../services/wisdom-panel.service'
 import { WisdomPanelMessageData } from '../interfaces/wisdom-panel-message-data.interface'
 import { MessagePattern } from '@nestjs/microservices'
 
 @Controller(`engine/${PROVIDER_NAME}`)
-export class WisdomPanelController implements ProviderOrderCreation, ProviderReferenceData, ProviderServices {
+export class WisdomPanelController
+  implements ProviderOrderCreation, ProviderReferenceData, ProviderServices
+{
   constructor(private readonly wisdomPanelService: WisdomPanelService) {}
 
   @MessagePattern(`${PROVIDER_NAME}/${Resource.Integration}/${Operation.Test}`)
-  public async testCredentials(msg: ApiEvent<WisdomPanelMessageData>): Promise<IntegrationTestResponse> {
+  public async testCredentials(
+    msg: ApiEvent<WisdomPanelMessageData>,
+  ): Promise<IntegrationTestResponse> {
     const { payload, ...metadata } = msg.data
     return await this.wisdomPanelService.testAuth(payload, metadata)
   }
@@ -37,28 +41,38 @@ export class WisdomPanelController implements ProviderOrderCreation, ProviderRef
   }
 
   @MessagePattern(`${PROVIDER_NAME}/${Resource.Sexes}/${Operation.List}`)
-  public getSexes(msg: ApiEvent<WisdomPanelMessageData>): Promise<ReferenceDataResponse<Sex> | Sex[]> {
+  public getSexes(
+    msg: ApiEvent<WisdomPanelMessageData>,
+  ): Promise<ReferenceDataResponse<Sex> | Sex[]> {
     return this.wisdomPanelService.getSexes()
   }
 
   @MessagePattern(`${PROVIDER_NAME}/${Resource.Species}/${Operation.List}`)
-  public getSpecies(msg: ApiEvent<WisdomPanelMessageData>): Promise<ReferenceDataResponse<Species> | Species[]> {
+  public getSpecies(
+    msg: ApiEvent<WisdomPanelMessageData>,
+  ): Promise<ReferenceDataResponse<Species> | Species[]> {
     return this.wisdomPanelService.getSpecies()
   }
 
   @MessagePattern(`${PROVIDER_NAME}/${Resource.Breeds}/${Operation.List}`)
-  public getBreeds(msg: ApiEvent<WisdomPanelMessageData>): Promise<ReferenceDataResponse<Breed> | Breed[]> {
+  public getBreeds(
+    msg: ApiEvent<WisdomPanelMessageData>,
+  ): Promise<ReferenceDataResponse<Breed> | Breed[]> {
     return this.wisdomPanelService.getBreeds()
   }
 
   @MessagePattern(`${PROVIDER_NAME}/${Resource.Services}/${Operation.List}`)
-  public getServices(msg: ApiEvent<WisdomPanelMessageData>): Promise<ReferenceDataResponse<Service> | Service[]> {
+  public getServices(
+    msg: ApiEvent<WisdomPanelMessageData>,
+  ): Promise<ReferenceDataResponse<Service> | Service[]> {
     const { payload, ...metadata } = msg.data
     return this.wisdomPanelService.getServices(payload, metadata)
   }
 
   @MessagePattern(`${PROVIDER_NAME}/${Resource.Devices}/${Operation.List}`)
-  public getDevices(msg: ApiEvent<WisdomPanelMessageData>): Promise<ReferenceDataResponse<Device> | Device[]> {
+  public getDevices(
+    msg: ApiEvent<WisdomPanelMessageData>,
+  ): Promise<ReferenceDataResponse<Device> | Device[]> {
     return this.wisdomPanelService.getDevices()
   }
 }

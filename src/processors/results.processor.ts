@@ -15,7 +15,7 @@ export class ResultsProcessor {
   constructor(
     private readonly configService: ConfigService,
     private readonly wisdomPanelService: WisdomPanelService,
-    @Inject('API_SERVICE') private readonly apiClient: ClientProxy
+    @Inject('API_SERVICE') private readonly apiClient: ClientProxy,
   ) {}
 
   @Process()
@@ -27,12 +27,12 @@ export class ResultsProcessor {
 
       if (batchResults.results.length > 0) {
         this.logger.log(
-          `Fetched ${batchResults.results.length} result${batchResults.results.length > 1 ? 's' : ''} for integration ${payload.integrationId}`
+          `Fetched ${batchResults.results.length} result${batchResults.results.length > 1 ? 's' : ''} for integration ${payload.integrationId}`,
         )
 
         const data = {
           integrationId: payload.integrationId,
-          results: batchResults.results
+          results: batchResults.results,
         }
         this.apiClient.emit('external_order_results', data)
         this.apiClient.emit('external_results', data)
@@ -50,7 +50,9 @@ export class ResultsProcessor {
         }
       }
     } catch (error) {
-      this.logger.error(`Error fetching results for integration ${payload.integrationId}: ${error.message}`)
+      this.logger.error(
+        `Error fetching results for integration ${payload.integrationId}: ${error.message}`,
+      )
     }
   }
 }

@@ -16,7 +16,7 @@ export class RpcExceptionFilter implements ExceptionFilter<RpcException> {
       provider: PROVIDER_NAME,
       code: exception.statusCode || 500,
       message: exception.message,
-      error: exception.errors
+      error: exception.errors,
     })
 
     return throwError(() => providerError)

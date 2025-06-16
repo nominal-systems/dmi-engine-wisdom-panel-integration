@@ -5,7 +5,7 @@ import {
   WisdomPanelCreatePetPayload,
   WisdomPanelInclude,
   WisdomPanelKitFiler,
-  WisdomPanelResultSetsFilter
+  WisdomPanelResultSetsFilter,
 } from '../interfaces/wisdom-panel-api-payloads.interface'
 import {
   OAuthTokenResponse,
@@ -13,7 +13,7 @@ import {
   WisdomPanelKitsResponse,
   WisdomPanelPetCreatedResponse,
   WisdomPanelResultSetsResponse,
-  WisdomPanelSimpleResultResponse
+  WisdomPanelSimpleResultResponse,
 } from '../interfaces/wisdom-panel-api-responses.interface'
 import { WisdomPanelApiEndpoints } from '../interfaces/wisdom-panel-api-endpoints.interface'
 import { CACHE_MANAGER, CacheStore } from '@nestjs/cache-manager'
@@ -27,7 +27,7 @@ export class WisdomPanelApiService extends BaseApiService {
 
   constructor(
     @Inject(CACHE_MANAGER) private cacheManager: CacheStore,
-    private readonly httpService: WisdomPanelApiHttpService
+    private readonly httpService: WisdomPanelApiHttpService,
   ) {
     super(httpService)
   }
@@ -44,19 +44,23 @@ export class WisdomPanelApiService extends BaseApiService {
           username: config.username,
           password: config.password,
           grant_type: 'password',
-          scope: 'organization'
+          scope: 'organization',
         }
         const response = await this.post<OAuthTokenResponse>(
           `${config.baseUrl}${WisdomPanelApiEndpoints.AUTH}`,
           payload,
-          {}
+          {},
         )
         token = response.access_token
-        this.logger.debug(`Got new token: ${token.slice(-4)} (expires in ${response.expires_in} seconds)`)
+        this.logger.debug(
+          `Got new token: ${token.slice(-4)} (expires in ${response.expires_in} seconds)`,
+        )
         if (useCache) {
           const ttl = response.expires_in * 0.25 * 1000
           await this.cacheManager.set(key, token, ttl)
-          this.logger.debug(`Saved new token '${key}' in cache: ${token.slice(-4)} (ttl: ${ttl / 1000}s)`)
+          this.logger.debug(
+            `Saved new token '${key}' in cache: ${token.slice(-4)} (ttl: ${ttl / 1000}s)`,
+          )
         }
       } catch (error) {
         throw new Error(`[HTTP ${error.status}] ${error.message}`)
@@ -68,12 +72,12 @@ export class WisdomPanelApiService extends BaseApiService {
   async getKits(
     filter: WisdomPanelKitFiler = {},
     include: WisdomPanelInclude = {},
-    config: WisdomPanelApiConfig
+    config: WisdomPanelApiConfig,
   ): Promise<WisdomPanelKitsResponse> {
     try {
       const token = await this.authenticate(config)
       const query = {
-        ...include
+        ...include,
       }
       for (const key of Object.keys(filter)) {
         query[`filter[${key}]`] = filter[key]
@@ -82,10 +86,13 @@ export class WisdomPanelApiService extends BaseApiService {
         params: query,
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`
-        }
+          Authorization: `Bearer ${token}`,
+        },
       }
-      return await this.get<WisdomPanelKitsResponse>(`${config.baseUrl}${WisdomPanelApiEndpoints.GET_KITS}`, reqConfig)
+      return await this.get<WisdomPanelKitsResponse>(
+        `${config.baseUrl}${WisdomPanelApiEndpoints.GET_KITS}`,
+        reqConfig,
+      )
     } catch (error) {
       throw new WisdomApiException('Failed to get kits', error.status, error)
     }
@@ -94,12 +101,12 @@ export class WisdomPanelApiService extends BaseApiService {
   async getResultSets(
     filter: WisdomPanelResultSetsFilter = {},
     include: WisdomPanelInclude = {},
-    config: WisdomPanelApiConfig
+    config: WisdomPanelApiConfig,
   ): Promise<WisdomPanelResultSetsResponse> {
     try {
       const token = await this.authenticate(config)
       const query = {
-        ...include
+        ...include,
       }
       for (const key of Object.keys(filter)) {
         query[`filter[${key}]`] = filter[key]
@@ -108,30 +115,33 @@ export class WisdomPanelApiService extends BaseApiService {
         params: query,
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`
-        }
+          Authorization: `Bearer ${token}`,
+        },
       }
       return await this.get<WisdomPanelResultSetsResponse>(
         `${config.baseUrl}${WisdomPanelApiEndpoints.GET_RESULT_SETS}`,
-        reqConfig
+        reqConfig,
       )
     } catch (error) {
       throw new Error(`[HTTP ${error.status}] ${error.message}`)
     }
   }
 
-  async getSimplifiedResultSets(kitId: string, config: WisdomPanelApiConfig): Promise<WisdomPanelSimpleResultResponse> {
+  async getSimplifiedResultSets(
+    kitId: string,
+    config: WisdomPanelApiConfig,
+  ): Promise<WisdomPanelSimpleResultResponse> {
     try {
       const token = await this.authenticate(config)
       const reqConfig = {
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`
-        }
+          Authorization: `Bearer ${token}`,
+        },
       }
       return await this.get<WisdomPanelSimpleResultResponse>(
         `${config.baseUrl}${WisdomPanelApiEndpoints.GET_SIMPLIFIED_RESULT_SETS}/${kitId}`,
-        reqConfig
+        reqConfig,
       )
     } catch (error) {
       throw new Error(`[HTTP ${error.status}] ${error.message}`)
@@ -145,12 +155,12 @@ export class WisdomPanelApiService extends BaseApiService {
         responseType: 'arraybuffer' as ResponseType,
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`
-        }
+          Authorization: `Bearer ${token}`,
+        },
       }
       const response = await this.get<ArrayBuffer>(
         `${config.baseUrl}${WisdomPanelApiEndpoints.GET_REPORT_PDF}/${kitId}`,
-        reqConfig
+        reqConfig,
       )
       return Buffer.from(response).toString('base64')
     } catch (error) {
@@ -160,11 +170,11 @@ export class WisdomPanelApiService extends BaseApiService {
 
   async getUnacknowledgedResultSetsForHospital(
     hospitalNumber: string,
-    config: WisdomPanelApiConfig
+    config: WisdomPanelApiConfig,
   ): Promise<WisdomPanelResultSetsResponse> {
     const filter: WisdomPanelResultSetsFilter = {
       unacknowledged: true,
-      hospital_number: hospitalNumber
+      hospital_number: hospitalNumber,
     }
 
     return await this.getResultSets(filter, { include: 'kit' }, config)
@@ -172,15 +182,15 @@ export class WisdomPanelApiService extends BaseApiService {
 
   async getUnacknowledgedKitsForHospital(
     hospitalNumber: string,
-    config: WisdomPanelApiConfig
+    config: WisdomPanelApiConfig,
   ): Promise<WisdomPanelKitsResponse> {
     const filter: WisdomPanelKitFiler = {
       unacknowledged: true,
-      hospital_number: hospitalNumber
+      hospital_number: hospitalNumber,
     }
 
     const include: WisdomPanelInclude = {
-      include: ['pet', 'pet.owner'].join(',')
+      include: ['pet', 'pet.owner'].join(','),
     }
 
     return await this.getKits(filter, include, config)
@@ -189,27 +199,33 @@ export class WisdomPanelApiService extends BaseApiService {
   async getAvailableKits(config: WisdomPanelApiConfig): Promise<WisdomPanelKitItem[]> {
     const filter: WisdomPanelKitFiler = {
       activated: false,
-      voyager_kits: true
+      voyager_kits: true,
     }
     const response = await this.getKits(filter, {}, config)
 
-    response.data = response.data.filter((kit) => kit.attributes['active'] && !kit.attributes['activated'])
+    response.data = response.data.filter(
+      (kit) => kit.attributes['active'] && !kit.attributes['activated'],
+    )
     return response.data
   }
 
   async createPet(
     payload: WisdomPanelCreatePetPayload,
-    config: WisdomPanelApiConfig
+    config: WisdomPanelApiConfig,
   ): Promise<WisdomPanelPetCreatedResponse> {
     try {
       const token = await this.authenticate(config)
       const reqConfig = {
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`
-        }
+          Authorization: `Bearer ${token}`,
+        },
       }
-      return await this.post(`${config.baseUrl}${WisdomPanelApiEndpoints.CREATE_PET}`, payload, reqConfig)
+      return await this.post(
+        `${config.baseUrl}${WisdomPanelApiEndpoints.CREATE_PET}`,
+        payload,
+        reqConfig,
+      )
     } catch (err) {
       throw new WisdomApiException('Failed to create pet', err.status, err)
     }
@@ -221,16 +237,22 @@ export class WisdomPanelApiService extends BaseApiService {
       const reqConfig = {
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`
-        }
+          Authorization: `Bearer ${token}`,
+        },
       }
       const payload = {
         data: {
-          kit_ids: kitIds
-        }
+          kit_ids: kitIds,
+        },
       }
-      await this.post(`${config.baseUrl}${WisdomPanelApiEndpoints.ACKNOWLEDGE_KITS}`, payload, reqConfig)
-      this.logger.debug(`Acknowledged ${kitIds.length} kit${kitIds.length > 1 ? 's' : ''}: ${kitIds.join(', ')}`)
+      await this.post(
+        `${config.baseUrl}${WisdomPanelApiEndpoints.ACKNOWLEDGE_KITS}`,
+        payload,
+        reqConfig,
+      )
+      this.logger.debug(
+        `Acknowledged ${kitIds.length} kit${kitIds.length > 1 ? 's' : ''}: ${kitIds.join(', ')}`,
+      )
     } catch (err) {
       throw new WisdomApiException('Failed to acknowledge kits', err.status, err)
     }
@@ -242,17 +264,21 @@ export class WisdomPanelApiService extends BaseApiService {
       const reqConfig = {
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`
-        }
+          Authorization: `Bearer ${token}`,
+        },
       }
       const payload = {
         data: {
-          result_set_ids: resultSetIds
-        }
+          result_set_ids: resultSetIds,
+        },
       }
-      await this.post(`${config.baseUrl}${WisdomPanelApiEndpoints.ACKNOWLEDGE_RESULT_SETS}`, payload, reqConfig)
+      await this.post(
+        `${config.baseUrl}${WisdomPanelApiEndpoints.ACKNOWLEDGE_RESULT_SETS}`,
+        payload,
+        reqConfig,
+      )
       this.logger.debug(
-        `Acknowledged ${resultSetIds.length} result set${resultSetIds.length > 1 ? 's' : ''}: ${resultSetIds.join(', ')}`
+        `Acknowledged ${resultSetIds.length} result set${resultSetIds.length > 1 ? 's' : ''}: ${resultSetIds.join(', ')}`,
       )
     } catch (error) {
       throw new Error(`[HTTP ${error.status}] ${error.message}`)

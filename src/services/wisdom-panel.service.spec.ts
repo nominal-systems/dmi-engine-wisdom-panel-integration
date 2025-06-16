@@ -6,7 +6,7 @@ import {
   BatchResultsResponse,
   CreateOrderPayload,
   NullPayloadPayload,
-  OrderCreatedResponse
+  OrderCreatedResponse,
 } from '@nominal-systems/dmi-engine-common'
 import { WisdomPanelMessageData } from '../interfaces/wisdom-panel-message-data.interface'
 import { ConfigService } from '@nestjs/config'
@@ -15,7 +15,7 @@ describe('WisdomPanelService', () => {
   let service: WisdomPanelService
   const mapperMock = {
     mapCreateOrderPayload: jest.fn(),
-    mapWisdomPanelResult: jest.fn()
+    mapWisdomPanelResult: jest.fn(),
   }
   const apiServiceMock = {
     createPet: jest.fn(),
@@ -24,7 +24,7 @@ describe('WisdomPanelService', () => {
     getSimplifiedResultSets: jest.fn(),
     getReportPdfBase64: jest.fn(),
     acknowledgeKits: jest.fn(),
-    acknowledgeResultSets: jest.fn()
+    acknowledgeResultSets: jest.fn(),
   }
 
   beforeEach(async () => {
@@ -34,18 +34,18 @@ describe('WisdomPanelService', () => {
         {
           provide: ConfigService,
           useValue: {
-            get: jest.fn()
-          }
+            get: jest.fn(),
+          },
         },
         {
           provide: WisdomPanelApiService,
-          useValue: apiServiceMock
+          useValue: apiServiceMock,
         },
         {
           provide: WisdomPanelMapper,
-          useValue: mapperMock
-        }
-      ]
+          useValue: mapperMock,
+        },
+      ],
     }).compile()
 
     service = module.get<WisdomPanelService>(WisdomPanelService)
@@ -65,10 +65,10 @@ describe('WisdomPanelService', () => {
           pet: {},
           kit: {
             id: 'test-id',
-            code: 'AAA'
+            code: 'AAA',
           },
-          requisition_form: 'base64 pdf'
-        }
+          requisition_form: 'base64 pdf',
+        },
       })
       const response: OrderCreatedResponse = await service.createOrder(payload, metadata)
       expect(mapperMock.mapCreateOrderPayload).toHaveBeenCalled()
@@ -78,8 +78,8 @@ describe('WisdomPanelService', () => {
         requisitionId: 'AAA',
         status: expect.any(String),
         manifest: expect.objectContaining({
-          data: expect.any(String)
-        })
+          data: expect.any(String),
+        }),
       })
     })
   })
@@ -89,9 +89,9 @@ describe('WisdomPanelService', () => {
       const payload = {} as unknown as NullPayloadPayload
       const metadata = {
         integrationOptions: {
-          hospitalNumber: '123'
+          hospitalNumber: '123',
         },
-        providerConfiguration: {}
+        providerConfiguration: {},
       } as unknown as WisdomPanelMessageData
       apiServiceMock.getUnacknowledgedResultSetsForHospital.mockResolvedValueOnce({
         data: [
@@ -100,24 +100,27 @@ describe('WisdomPanelService', () => {
             relationships: {
               kit: {
                 data: {
-                  id: 'kit-id'
-                }
-              }
-            }
-          }
+                  id: 'kit-id',
+                },
+              },
+            },
+          },
         ],
         included: [
           {
             type: 'kits',
             id: 'kit-id',
             attributes: {
-              code: 'XOXOXO'
-            }
-          }
-        ]
+              code: 'XOXOXO',
+            },
+          },
+        ],
       })
       apiServiceMock.getSimplifiedResultSets.mockResolvedValueOnce({})
-      const batchResultsResponse: BatchResultsResponse = await service.getBatchResults(payload, metadata)
+      const batchResultsResponse: BatchResultsResponse = await service.getBatchResults(
+        payload,
+        metadata,
+      )
       expect(batchResultsResponse.results).toHaveLength(1)
       expect(apiServiceMock.getReportPdfBase64).toBeCalledWith('kit-id', expect.any(Object))
     })

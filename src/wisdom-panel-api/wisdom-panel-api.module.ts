@@ -12,7 +12,7 @@ import { APP_FILTER } from '@nestjs/core'
     HttpModule.register({}),
     ConfigModule.forRoot({
       isGlobal: true,
-      load: [configuration]
+      load: [configuration],
     }),
     ClientsModule.registerAsync([
       {
@@ -22,23 +22,23 @@ import { APP_FILTER } from '@nestjs/core'
         useFactory: async (configService: ConfigService) => ({
           transport: Transport.MQTT,
           options: {
-            ...configService.get('mqtt')
-          }
-        })
-      }
-    ])
+            ...configService.get('mqtt'),
+          },
+        }),
+      },
+    ]),
   ],
   providers: [
     {
       provide: WisdomPanelApiHttpService,
-      useExisting: HttpService
+      useExisting: HttpService,
     },
     {
       provide: APP_FILTER,
-      useClass: WisdomPanelApiInterceptor
-    }
+      useClass: WisdomPanelApiInterceptor,
+    },
   ],
-  exports: [WisdomPanelApiHttpService]
+  exports: [WisdomPanelApiHttpService],
 })
 export class WisdomPanelApiModule {
   constructor(private readonly httpService: HttpService) {}

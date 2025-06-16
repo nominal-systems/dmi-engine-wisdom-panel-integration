@@ -20,10 +20,10 @@ describe('mapper-utils', () => {
           health_test: {
             slug: 'test-slug',
             disease_name: {
-              en: 'Test Disease'
-            }
-          }
-        }
+              en: 'Test Disease',
+            },
+          },
+        },
       ]
 
       const items = mapNotableAndAtRiskHealthTestResults(results, 0)
@@ -39,10 +39,10 @@ describe('mapper-utils', () => {
           health_test: {
             slug: 'test-slug',
             disease_name: {
-              en: 'Test Disease'
-            }
-          }
-        }
+              en: 'Test Disease',
+            },
+          },
+        },
       ]
 
       const items = mapNotableAndAtRiskHealthTestResults(results, 0)

@@ -16,7 +16,7 @@ export class OrdersProcessor {
   constructor(
     private readonly configService: ConfigService,
     private readonly wisdomPanelService: WisdomPanelService,
-    @Inject('API_SERVICE') private readonly apiClient: ClientProxy
+    @Inject('API_SERVICE') private readonly apiClient: ClientProxy,
   ) {}
 
   @Process()
@@ -26,12 +26,12 @@ export class OrdersProcessor {
 
     if (orders.length > 0) {
       this.logger.log(
-        `Fetched ${orders.length} order${orders.length > 1 ? 's' : ''} for integration ${payload.integrationId}`
+        `Fetched ${orders.length} order${orders.length > 1 ? 's' : ''} for integration ${payload.integrationId}`,
       )
 
       const data = {
         integrationId: payload.integrationId,
-        orders
+        orders,
       }
       this.apiClient.emit('external_orders', data)
 

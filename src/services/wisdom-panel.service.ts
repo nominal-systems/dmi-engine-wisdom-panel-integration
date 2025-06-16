@@ -19,7 +19,7 @@ import {
   Service,
   ServiceCodePayload,
   Sex,
-  Species
+  Species,
 } from '@nominal-systems/dmi-engine-common'
 import { WisdomPanelMessageData } from '../interfaces/wisdom-panel-message-data.interface'
 import { WisdomPanelApiService } from '../wisdom-panel-api/wisdom-panel-api.service'
@@ -30,7 +30,7 @@ import {
   WisdomPanelKitsResponse,
   WisdomPanelPetCreatedResponse,
   WisdomPanelPetItem,
-  WisdomPanelResultSetsResponse
+  WisdomPanelResultSetsResponse,
 } from '../interfaces/wisdom-panel-api-responses.interface'
 import { ConfigService } from '@nestjs/config'
 import { WisdomApiException } from '../exceptions/wisdom-api.exception'
@@ -42,7 +42,7 @@ export class WisdomPanelService extends BaseProviderService<WisdomPanelMessageDa
   constructor(
     private readonly configService: ConfigService,
     private readonly wisdomPanelApiService: WisdomPanelApiService,
-    private readonly wisdomPanelMapper: WisdomPanelMapper
+    private readonly wisdomPanelMapper: WisdomPanelMapper,
   ) {
     super()
   }
@@ -52,25 +52,26 @@ export class WisdomPanelService extends BaseProviderService<WisdomPanelMessageDa
       await this.wisdomPanelApiService.testAuth(metadata.providerConfiguration)
       return {
         success: true,
-        message: 'Successfully authenticated with Wisdom Panel API'
+        message: 'Successfully authenticated with Wisdom Panel API',
       }
     } catch (error) {
       return {
         success: false,
-        message: error.message
+        message: error.message,
       }
     }
   }
 
-  async createOrder(payload: CreateOrderPayload, metadata: WisdomPanelMessageData): Promise<OrderCreatedResponse> {
+  async createOrder(
+    payload: CreateOrderPayload,
+    metadata: WisdomPanelMessageData,
+  ): Promise<OrderCreatedResponse> {
     try {
-      const createPetPayload: WisdomPanelCreatePetPayload = this.wisdomPanelMapper.mapCreateOrderPayload(
-        payload,
-        metadata
-      )
+      const createPetPayload: WisdomPanelCreatePetPayload =
+        this.wisdomPanelMapper.mapCreateOrderPayload(payload, metadata)
       const response: WisdomPanelPetCreatedResponse = await this.wisdomPanelApiService.createPet(
         createPetPayload,
-        metadata.providerConfiguration
+        metadata.providerConfiguration,
       )
 
       return {
@@ -79,23 +80,27 @@ export class WisdomPanelService extends BaseProviderService<WisdomPanelMessageDa
         status: OrderStatus.SUBMITTED,
         manifest: {
           contentType: 'application/pdf',
-          data: response.data.requisition_form
-        }
+          data: response.data.requisition_form,
+        },
       }
     } catch (err) {
       throw new WisdomApiException('Failed to create order', err.status, err)
     }
   }
 
-  async getBatchOrders(payload: NullPayloadPayload, metadata: WisdomPanelMessageData): Promise<Order[]> {
+  async getBatchOrders(
+    payload: NullPayloadPayload,
+    metadata: WisdomPanelMessageData,
+  ): Promise<Order[]> {
     const orders: Order[] = []
     try {
-      const response: WisdomPanelKitsResponse = await this.wisdomPanelApiService.getUnacknowledgedKitsForHospital(
-        metadata.integrationOptions.hospitalNumber,
-        metadata.providerConfiguration
-      )
+      const response: WisdomPanelKitsResponse =
+        await this.wisdomPanelApiService.getUnacknowledgedKitsForHospital(
+          metadata.integrationOptions.hospitalNumber,
+          metadata.providerConfiguration,
+        )
       this.logger.debug(
-        `Found ${response.data.length} kit${response.data.length === 1 ? '' : 's'} for hospital '${metadata.integrationOptions.hospitalNumber}'`
+        `Found ${response.data.length} kit${response.data.length === 1 ? '' : 's'} for hospital '${metadata.integrationOptions.hospitalNumber}'`,
       )
       for (const kit of response.data) {
         const pet = response.included.find((include): include is WisdomPanelPetItem => {
@@ -118,19 +123,22 @@ export class WisdomPanelService extends BaseProviderService<WisdomPanelMessageDa
     return orders
   }
 
-  async getBatchResults(payload: NullPayloadPayload, metadata: WisdomPanelMessageData): Promise<BatchResultsResponse> {
+  async getBatchResults(
+    payload: NullPayloadPayload,
+    metadata: WisdomPanelMessageData,
+  ): Promise<BatchResultsResponse> {
     const batchResults: BatchResultsResponse = {
-      results: []
+      results: [],
     }
 
     try {
       const response: WisdomPanelResultSetsResponse =
         await this.wisdomPanelApiService.getUnacknowledgedResultSetsForHospital(
           metadata.integrationOptions.hospitalNumber,
-          metadata.providerConfiguration
+          metadata.providerConfiguration,
         )
       this.logger.debug(
-        `Found ${response.data.length} result set${response.data.length === 1 ? '' : 's'} for hospital '${metadata.integrationOptions.hospitalNumber}'`
+        `Found ${response.data.length} result set${response.data.length === 1 ? '' : 's'} for hospital '${metadata.integrationOptions.hospitalNumber}'`,
       )
       for (const resultSet of response.data) {
         const kitId = resultSet.relationships.kit.data?.id
@@ -146,24 +154,29 @@ export class WisdomPanelService extends BaseProviderService<WisdomPanelMessageDa
         this.logger.debug(`Found result set ${resultSet.id} (kit code: ${kit.attributes.code})`)
         const simplifiedResults = await this.wisdomPanelApiService.getSimplifiedResultSets(
           kit.id,
-          metadata.providerConfiguration
+          metadata.providerConfiguration,
         )
 
         // Get PDF report
         const base64PdfReport = await this.wisdomPanelApiService.getReportPdfBase64(
           kit.id,
-          metadata.providerConfiguration
+          metadata.providerConfiguration,
         )
 
         if (this.configService.get('debug.wisdomApiResults')) {
           FileUtils.saveFile(
             `simplified-results-${kit.attributes.code}.json`,
-            JSON.stringify(simplifiedResults.data, null, 2)
+            JSON.stringify(simplifiedResults.data, null, 2),
           )
         }
 
         batchResults.results.push(
-          this.wisdomPanelMapper.mapWisdomPanelResult(resultSet, kit, simplifiedResults.data, base64PdfReport)
+          this.wisdomPanelMapper.mapWisdomPanelResult(
+            resultSet,
+            kit,
+            simplifiedResults.data,
+            base64PdfReport,
+          ),
         )
       }
     } catch (error) {
@@ -178,7 +191,10 @@ export class WisdomPanelService extends BaseProviderService<WisdomPanelMessageDa
   }
 
   async acknowledgeResult(payload: IdPayload, metadata: WisdomPanelMessageData): Promise<void> {
-    await this.wisdomPanelApiService.acknowledgeResultSets([payload.id], metadata.providerConfiguration)
+    await this.wisdomPanelApiService.acknowledgeResultSets(
+      [payload.id],
+      metadata.providerConfiguration,
+    )
   }
 
   cancelOrder(payload: IdPayload, metadata: WisdomPanelMessageData): Promise<void> {
@@ -201,15 +217,23 @@ export class WisdomPanelService extends BaseProviderService<WisdomPanelMessageDa
     throw new Error('Method not implemented')
   }
 
-  getServiceByCode(payload: ServiceCodePayload, metadata: WisdomPanelMessageData): Promise<Service> {
+  getServiceByCode(
+    payload: ServiceCodePayload,
+    metadata: WisdomPanelMessageData,
+  ): Promise<Service> {
     throw new Error('Method not implemented')
   }
 
-  async getServices(payload: NullPayloadPayload, metadata: WisdomPanelMessageData): Promise<Service[]> {
-    const kits: WisdomPanelKitItem[] = await this.wisdomPanelApiService.getAvailableKits(metadata.providerConfiguration)
+  async getServices(
+    payload: NullPayloadPayload,
+    metadata: WisdomPanelMessageData,
+  ): Promise<Service[]> {
+    const kits: WisdomPanelKitItem[] = await this.wisdomPanelApiService.getAvailableKits(
+      metadata.providerConfiguration,
+    )
     return kits.map((kit) => ({
       code: kit.attributes.code,
-      name: kit.attributes['organization-identity']
+      name: kit.attributes['organization-identity'],
     }))
   }
 
@@ -217,17 +241,17 @@ export class WisdomPanelService extends BaseProviderService<WisdomPanelMessageDa
     const items: Sex[] = [
       {
         code: 'male',
-        name: 'MALE'
+        name: 'MALE',
       },
       {
         code: 'female',
-        name: 'FEMALE'
-      }
+        name: 'FEMALE',
+      },
     ]
 
     return Promise.resolve({
       items,
-      hash: calculateHash(items)
+      hash: calculateHash(items),
     })
   }
 
@@ -239,24 +263,24 @@ export class WisdomPanelService extends BaseProviderService<WisdomPanelMessageDa
     const items: Species[] = [
       {
         code: 'dog',
-        name: 'CANINE'
+        name: 'CANINE',
       },
       {
         code: 'cat',
-        name: 'FELINE'
-      }
+        name: 'FELINE',
+      },
     ]
 
     return Promise.resolve({
       items,
-      hash: calculateHash(items)
+      hash: calculateHash(items),
     })
   }
 
   getBreeds(): Promise<ReferenceDataResponse<Breed>> {
     return Promise.resolve({
       items: [],
-      hash: calculateHash([])
+      hash: calculateHash([]),
     })
   }
 }

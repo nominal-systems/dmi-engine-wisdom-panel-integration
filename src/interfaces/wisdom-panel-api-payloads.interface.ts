@@ -2,7 +2,7 @@ import {
   WisdomPanelClient,
   WisdomPanelHospital,
   WisdomPanelPet,
-  WisdomPanelVeterinarian
+  WisdomPanelVeterinarian,
 } from './wisdom-panel-entities.interface'
 
 export interface WisdomPanelApiConfig {

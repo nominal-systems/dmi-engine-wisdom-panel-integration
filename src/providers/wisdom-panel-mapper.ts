@@ -12,7 +12,7 @@ import {
   TestResult,
   TestResultItem,
   Veterinarian,
-  VeterinarianPayload
+  VeterinarianPayload,
 } from '@nominal-systems/dmi-engine-common'
 import { WisdomPanelMessageData } from '../interfaces/wisdom-panel-message-data.interface'
 import { WisdomPanelCreatePetPayload } from '../interfaces/wisdom-panel-api-payloads.interface'
@@ -26,13 +26,13 @@ import {
   mapNotableAndAtRiskHealthTestResults,
   mapPetSex,
   mapPetSpecies,
-  mapTestResultName
+  mapTestResultName,
 } from '../common/mapper-utils'
 import {
   WisdomPanelClient,
   WisdomPanelHospital,
   WisdomPanelPet,
-  WisdomPanelVeterinarian
+  WisdomPanelVeterinarian,
 } from '../interfaces/wisdom-panel-entities.interface'
 import {
   WisdomPanelBreedPercentagesResult,
@@ -43,14 +43,17 @@ import {
   WisdomPanelResultSetItem,
   WisdomPanelSimpleResult,
   WisdomPanelStatusesItem,
-  WisdomPanelTestResult
+  WisdomPanelTestResult,
 } from '../interfaces/wisdom-panel-api-responses.interface'
 
 @Injectable()
 export class WisdomPanelMapper {
   constructor() {}
 
-  mapCreateOrderPayload(payload: CreateOrderPayload, metadata: WisdomPanelMessageData): WisdomPanelCreatePetPayload {
+  mapCreateOrderPayload(
+    payload: CreateOrderPayload,
+    metadata: WisdomPanelMessageData,
+  ): WisdomPanelCreatePetPayload {
     return {
       data: {
         organization_unit_id: metadata.providerConfiguration.organizationUnitId,
@@ -58,12 +61,16 @@ export class WisdomPanelMapper {
         ...this.extractPet(payload.patient),
         ...this.extractClient(payload.client),
         ...this.extractHospital(metadata),
-        ...this.extractVeterinarian(payload.veterinarian)
-      }
+        ...this.extractVeterinarian(payload.veterinarian),
+      },
     }
   }
 
-  mapWisdomPanelKit(kit: WisdomPanelKitItem, pet: WisdomPanelPetItem, kitStatus?: WisdomPanelStatusesItem): Order {
+  mapWisdomPanelKit(
+    kit: WisdomPanelKitItem,
+    pet: WisdomPanelPetItem,
+    kitStatus?: WisdomPanelStatusesItem,
+  ): Order {
     return {
       externalId: kit.id,
       status: mapKitStatus(kit.attributes['current-stage'], kit.attributes['current-failure']),
@@ -71,7 +78,7 @@ export class WisdomPanelMapper {
       client: this.mapClient(pet),
       tests: [{ code: kit.attributes.code }],
       veterinarian: this.mapVeterinarian(kit),
-      ...this.extractNotes(kit)
+      ...this.extractNotes(kit),
     }
   }
 
@@ -79,21 +86,21 @@ export class WisdomPanelMapper {
     resultSet: WisdomPanelResultSetItem,
     kit: WisdomPanelKitItem,
     simpleResult: WisdomPanelSimpleResult,
-    pdfReport?: string
+    pdfReport?: string,
   ): Result {
     const result: Result = {
       id: resultSet.id,
       orderId: kit.id,
       status: ResultStatus.COMPLETED,
-      testResults: this.extractTestResults(simpleResult)
+      testResults: this.extractTestResults(simpleResult),
     }
 
     if (pdfReport !== undefined) {
       result.pdfReport = [
         {
           contentType: 'application/pdf',
-          data: pdfReport
-        }
+          data: pdfReport,
+        },
       ]
     }
 
@@ -105,7 +112,7 @@ export class WisdomPanelMapper {
     Object.keys(simpleResult).forEach((key) => {
       if (!(key === 'notable_and_at_risk_health_test_results' && simpleResult[key].length === 0)) {
         testResults.push({
-          [key]: simpleResult[key]
+          [key]: simpleResult[key],
         })
       }
     })
@@ -113,17 +120,24 @@ export class WisdomPanelMapper {
     return testResults.map(this.mapWisdomPanelTestResult, this)
   }
 
-  mapWisdomPanelTestResult(result: Record<string, WisdomPanelTestResult>, index: number): TestResult {
+  mapWisdomPanelTestResult(
+    result: Record<string, WisdomPanelTestResult>,
+    index: number,
+  ): TestResult {
     const key = Object.keys(result)[0]
     return {
       seq: index,
       code: key,
       name: mapTestResultName(key),
-      items: this.mapWisdomPanelTestResultItems(result[key], key, index)
+      items: this.mapWisdomPanelTestResultItems(result[key], key, index),
     }
   }
 
-  mapWisdomPanelTestResultItems(item: WisdomPanelTestResult, key: string, index: number): TestResultItem[] {
+  mapWisdomPanelTestResultItems(
+    item: WisdomPanelTestResult,
+    key: string,
+    index: number,
+  ): TestResultItem[] {
     switch (key) {
       case 'breed_percentages':
         return mapBreedPercentage(item as WisdomPanelBreedPercentagesResult[], index)
@@ -132,7 +146,7 @@ export class WisdomPanelMapper {
       case 'notable_and_at_risk_health_test_results':
         return mapNotableAndAtRiskHealthTestResults(
           item as WisdomPanelNotableAndAtRiskHealthTestResult[] | string,
-          index
+          index,
         )
       default:
         return []
@@ -145,20 +159,20 @@ export class WisdomPanelMapper {
       // TODO(gb): map sex
       sex: pet.attributes.sex,
       // TODO(gb): map species
-      species: pet.attributes.species
+      species: pet.attributes.species,
     }
   }
 
   mapClient(pet: WisdomPanelPetItem): Client {
     return {
       firstName: pet.attributes['owner-first-name'],
-      lastName: pet.attributes['owner-last-name']
+      lastName: pet.attributes['owner-last-name'],
     }
   }
 
   mapVeterinarian(kit: WisdomPanelKitItem): Veterinarian {
     return {
-      firstName: kit.attributes['veterinarian-name']
+      firstName: kit.attributes['veterinarian-name'],
     }
   }
 
@@ -168,7 +182,7 @@ export class WisdomPanelMapper {
       name: patient.name,
       sex: mapPetSex(patient.sex),
       intact: true,
-      voyager_pet_id: extractPetId(patient)
+      voyager_pet_id: extractPetId(patient),
     }
 
     if (patient.birthdate !== undefined) {
@@ -183,7 +197,7 @@ export class WisdomPanelMapper {
     const wisdomPanelClient: WisdomPanelClient = {
       client_first_name: client.firstName || '',
       client_last_name: client.lastName,
-      client_pet_id: extractClientPetId(client)
+      client_pet_id: extractClientPetId(client),
       // TODO(gb): extract client address
     }
 
@@ -201,7 +215,7 @@ export class WisdomPanelMapper {
   extractHospital(metadata: WisdomPanelMessageData): WisdomPanelHospital {
     const hospital: WisdomPanelHospital = {
       hospital_name: metadata.integrationOptions.hospitalName,
-      hospital_number: metadata.integrationOptions.hospitalNumber
+      hospital_number: metadata.integrationOptions.hospitalNumber,
     }
 
     if (metadata.integrationOptions.hospitalPhone !== undefined) {
@@ -213,14 +227,14 @@ export class WisdomPanelMapper {
 
   extractVeterinarian(veterinarian: VeterinarianPayload): WisdomPanelVeterinarian {
     return {
-      veterinarian_name: `${veterinarian.firstName} ${veterinarian.lastName}`
+      veterinarian_name: `${veterinarian.firstName} ${veterinarian.lastName}`,
     }
   }
 
   extractNotes(kit: WisdomPanelKitItem): { notes?: string } {
     if (!isNullOrUndefinedOrEmpty(kit.attributes['current-failure'])) {
       return {
-        notes: `Failure reason: ${kit.attributes['current-failure']}`
+        notes: `Failure reason: ${kit.attributes['current-failure']}`,
       }
     }
 

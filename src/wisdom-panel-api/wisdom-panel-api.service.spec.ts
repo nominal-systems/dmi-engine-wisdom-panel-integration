@@ -15,7 +15,7 @@ describe('WisdomPanelApiService', () => {
   const configMock: WisdomPanelApiConfig = {
     baseUrl: 'https://api.example.com',
     username: 'testuser',
-    password: 'testpass'
+    password: 'testpass',
   }
 
   const tokenResponseMock: OAuthTokenResponse = {
@@ -23,7 +23,7 @@ describe('WisdomPanelApiService', () => {
     expires_in: 3600,
     token_type: 'Bearer',
     scope: 'organization',
-    created_at: 1234567890
+    created_at: 1234567890,
   }
 
   const httpResponseMock = (status, statusText, data) => {
@@ -32,10 +32,10 @@ describe('WisdomPanelApiService', () => {
       headers: {},
       config: {
         url: 'ss',
-        headers: {} as AxiosRequestHeaders
+        headers: {} as AxiosRequestHeaders,
       },
       status,
-      statusText
+      statusText,
     })
   }
 
@@ -47,17 +47,17 @@ describe('WisdomPanelApiService', () => {
           provide: CACHE_MANAGER,
           useValue: {
             get: jest.fn(),
-            set: jest.fn()
-          }
+            set: jest.fn(),
+          },
         },
         {
           provide: WisdomPanelApiHttpService,
           useValue: {
             get: jest.fn(),
-            post: jest.fn()
-          }
-        }
-      ]
+            post: jest.fn(),
+          },
+        },
+      ],
     }).compile()
 
     service = module.get<WisdomPanelApiService>(WisdomPanelApiService)
@@ -81,27 +81,31 @@ describe('WisdomPanelApiService', () => {
 
     it('should fetch a new token if not available in cache', async () => {
       jest.spyOn(cacheManager, 'get').mockReturnValue(undefined)
-      jest.spyOn(httpService, 'post').mockReturnValue(httpResponseMock(200, 'OK', tokenResponseMock))
+      jest
+        .spyOn(httpService, 'post')
+        .mockReturnValue(httpResponseMock(200, 'OK', tokenResponseMock))
       const token: string = await service.authenticate(configMock)
       expect(cacheManager.get).toHaveBeenCalledWith(`access_token-${configMock.username}`)
       expect(httpService.post).toHaveBeenCalled()
       expect(cacheManager.set).toHaveBeenCalledWith(
         `access_token-${configMock.username}`,
         'mockAccessToken',
-        tokenResponseMock.expires_in * 0.25 * 1000
+        tokenResponseMock.expires_in * 0.25 * 1000,
       )
       expect(token).toEqual('mockAccessToken')
     })
 
     it('should fetch a new token if forced', async () => {
-      jest.spyOn(httpService, 'post').mockReturnValue(httpResponseMock(200, 'OK', tokenResponseMock))
+      jest
+        .spyOn(httpService, 'post')
+        .mockReturnValue(httpResponseMock(200, 'OK', tokenResponseMock))
       const token: string = await service.authenticate(configMock, false)
       expect(cacheManager.get).not.toHaveBeenCalled()
       expect(httpService.post).toHaveBeenCalled()
       expect(cacheManager.set).not.toHaveBeenCalledWith(
         `access_token-${configMock.username}`,
         'mockAccessToken',
-        tokenResponseMock.expires_in * 0.25 * 1000
+        tokenResponseMock.expires_in * 0.25 * 1000,
       )
       expect(token).toEqual('mockAccessToken')
     })

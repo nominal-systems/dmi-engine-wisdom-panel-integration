@@ -8,7 +8,7 @@ import {
   TestResult,
   TestResultItem,
   TestResultItemInterpretationCode,
-  TestResultItemStatus
+  TestResultItemStatus,
 } from '@nominal-systems/dmi-engine-common'
 import {
   WisdomPanelBreedPercentagesResult,
@@ -19,7 +19,7 @@ import {
   WisdomPanelResultSetItem,
   WisdomPanelSimpleResult,
   WisdomPanelSimpleResultResponse,
-  WisdomPanelTestResult
+  WisdomPanelTestResult,
 } from '../interfaces/wisdom-panel-api-responses.interface'
 
 describe('WisdomPanelMapper', () => {
@@ -28,14 +28,14 @@ describe('WisdomPanelMapper', () => {
     integrationOptions: {
       hospitalName: 'Test Hospital',
       hospitalNumber: '123',
-      hospitalPhone: '555-5555'
+      hospitalPhone: '555-5555',
     },
     providerConfiguration: {
       baseUrl: 'https://staging.wisdompanel.com',
       username: 'gonzalo@linehq.com',
       password: 'password',
-      organizationUnitId: '{{organizationUnitId}}'
-    }
+      organizationUnitId: '{{organizationUnitId}}',
+    },
   }
 
   beforeAll(() => {
@@ -53,12 +53,12 @@ describe('WisdomPanelMapper', () => {
               identifier: [
                 {
                   system: 'pims:patient:id',
-                  value: '434956978'
-                }
+                  value: '434956978',
+                },
               ],
               sex: 'male',
               species: 'dog',
-              birthdate: '2023-04-24'
+              birthdate: '2023-04-24',
             },
             client: {
               id: '3da0246d-be43-4ea8-965d-597e3a93d98b',
@@ -67,9 +67,9 @@ describe('WisdomPanelMapper', () => {
               identifier: [
                 {
                   system: 'pims:client:id',
-                  value: 'UAT2JWU'
-                }
-              ]
+                  value: 'UAT2JWU',
+                },
+              ],
             },
             veterinarian: {
               id: '1e9f3603-013b-4cdd-aa07-f3a4fd11eaf2',
@@ -78,17 +78,17 @@ describe('WisdomPanelMapper', () => {
               identifier: [
                 {
                   system: 'pims:veterinarian:id',
-                  value: '9999'
-                }
-              ]
+                  value: '9999',
+                },
+              ],
             },
             editable: false,
             labRequisitionInfo: {
-              KitCode: 'SA804'
-            }
+              KitCode: 'SA804',
+            },
           } as unknown as CreateOrderPayload,
-          metadataMock
-        )
+          metadataMock,
+        ),
       ).toEqual({
         data: {
           organization_unit_id: '{{organizationUnitId}}',
@@ -107,8 +107,8 @@ describe('WisdomPanelMapper', () => {
           hospital_phone_number: metadataMock.integrationOptions.hospitalPhone,
           birth_day: '24',
           birth_month: '04',
-          birth_year: '2023'
-        }
+          birth_year: '2023',
+        },
       })
     })
   })
@@ -119,7 +119,7 @@ describe('WisdomPanelMapper', () => {
         id: '1cdf3f85-e3e0-4795-b582-a716fac2ad4c',
         type: 'kits',
         links: {
-          self: 'https://staging.wisdompanel.com/api/v1/kits/1cdf3f85-e3e0-4795-b582-a716fac2ad4c'
+          self: 'https://staging.wisdompanel.com/api/v1/kits/1cdf3f85-e3e0-4795-b582-a716fac2ad4c',
         },
         attributes: {
           code: 'VSMQCZR',
@@ -131,15 +131,15 @@ describe('WisdomPanelMapper', () => {
           'veterinarian-name': 'Dr. Foo',
           'hospital-name': 'Test Hospital',
           'hospital-number': '123',
-          'created-at': '2024-02-27T17:41:56.028Z'
+          'created-at': '2024-02-27T17:41:56.028Z',
         },
-        relationships: {}
+        relationships: {},
       }
       const pet: WisdomPanelPetItem = {
         id: '8b85c33e-d689-4534-99e8-b4071c170a7f',
         type: 'pets',
         links: {
-          self: 'https://staging.wisdompanel.com/api/v1/pets/8b85c33e-d689-4534-99e8-b4071c170a7f'
+          self: 'https://staging.wisdompanel.com/api/v1/pets/8b85c33e-d689-4534-99e8-b4071c170a7f',
         },
         attributes: {
           name: 'Miso',
@@ -149,9 +149,9 @@ describe('WisdomPanelMapper', () => {
           'organization-identity': 'BANFIELD-VOYAGER-VYJKWVD',
           'owner-first-name': 'Gonzalo',
           'owner-last-name': 'Bellver',
-          'created-at': '2024-04-10T00:51:05.994Z'
+          'created-at': '2024-04-10T00:51:05.994Z',
         },
-        relationships: {}
+        relationships: {},
       }
       expect(mapper.mapWisdomPanelKit(kit, pet)).toEqual({
         externalId: '1cdf3f85-e3e0-4795-b582-a716fac2ad4c',
@@ -159,16 +159,16 @@ describe('WisdomPanelMapper', () => {
         patient: {
           name: 'Miso',
           sex: 'male',
-          species: 'dog'
+          species: 'dog',
         },
         client: {
           firstName: 'Gonzalo',
-          lastName: 'Bellver'
+          lastName: 'Bellver',
         },
         tests: [{ code: 'VSMQCZR' }],
         veterinarian: {
-          firstName: 'Dr. Foo'
-        }
+          firstName: 'Dr. Foo',
+        },
       })
     })
 
@@ -179,7 +179,7 @@ describe('WisdomPanelMapper', () => {
           code: 'XOXOXO',
           'current-stage': 'processing',
           'current-failure': 'sample-failed',
-          'veterinarian-name': 'Dr. Doe'
+          'veterinarian-name': 'Dr. Doe',
         },
         relationships: {
           pet: {
@@ -190,16 +190,16 @@ describe('WisdomPanelMapper', () => {
                 sex: 'male',
                 species: 'dog',
                 'owner-first-name': 'John',
-                'owner-last-name': 'Doe'
-              }
-            }
-          }
-        }
+                'owner-last-name': 'Doe',
+              },
+            },
+          },
+        },
       } as unknown as WisdomPanelKitItem
       const pet = {
         type: 'pets',
         id: 'pet-id',
-        attributes: {}
+        attributes: {},
       } as unknown as WisdomPanelPetItem
       const order: Order = mapper.mapWisdomPanelKit(kit, pet)
       expect(order.status).toEqual(OrderStatus.ERROR)
@@ -212,32 +212,32 @@ describe('WisdomPanelMapper', () => {
       expect(
         mapper.mapWisdomPanelResult(
           {
-            id: 'result-set-id'
+            id: 'result-set-id',
           } as unknown as WisdomPanelResultSetItem,
           {
-            id: 'kit-id'
+            id: 'kit-id',
           } as unknown as WisdomPanelKitItem,
-          {} as unknown as WisdomPanelSimpleResult
-        )
+          {} as unknown as WisdomPanelSimpleResult,
+        ),
       ).toEqual({
         id: 'result-set-id',
         orderId: 'kit-id',
         status: ResultStatus.COMPLETED,
-        testResults: expect.any(Array)
+        testResults: expect.any(Array),
       })
     })
     it('should map the PDF report', () => {
       expect(
         mapper.mapWisdomPanelResult(
           {
-            id: 'result-set-id'
+            id: 'result-set-id',
           } as unknown as WisdomPanelResultSetItem,
           {
-            id: 'kit-id'
+            id: 'kit-id',
           } as unknown as WisdomPanelKitItem,
           {} as unknown as WisdomPanelSimpleResult,
-          'base64 pdf'
-        )
+          'base64 pdf',
+        ),
       ).toEqual({
         id: 'result-set-id',
         orderId: 'kit-id',
@@ -246,29 +246,29 @@ describe('WisdomPanelMapper', () => {
         pdfReport: [
           {
             contentType: 'application/pdf',
-            data: 'base64 pdf'
-          }
-        ]
+            data: 'base64 pdf',
+          },
+        ],
       })
     })
     it('should ignore PDF report if not provided', () => {
       expect(
         mapper.mapWisdomPanelResult(
           {
-            id: 'result-set-id'
+            id: 'result-set-id',
           } as unknown as WisdomPanelResultSetItem,
           {
-            id: 'kit-id'
+            id: 'kit-id',
           } as unknown as WisdomPanelKitItem,
-          {} as unknown as WisdomPanelSimpleResult
-        )
+          {} as unknown as WisdomPanelSimpleResult,
+        ),
       ).not.toEqual(expect.objectContaining({ pdfReport: expect.any(Array) }))
     })
   })
 
   describe('extractTestResults()', () => {
     const simpleResult = FileUtils.loadFile(
-      'test/examples/simplified-results/BBBFCVH.json'
+      'test/examples/simplified-results/BBBFCVH.json',
     ) as WisdomPanelSimpleResultResponse
 
     it('should extract test results from a simplified result', () => {
@@ -279,19 +279,19 @@ describe('WisdomPanelMapper', () => {
         seq: 0,
         code: 'breed_percentages',
         name: 'Breed Percentages',
-        items: expect.any(Array)
+        items: expect.any(Array),
       })
       expect(testResults[1]).toEqual({
         seq: 1,
         code: 'ideal_weight_result',
         name: 'Ideal Weight Result',
-        items: expect.any(Array)
+        items: expect.any(Array),
       })
       expect(testResults[2]).toEqual({
         seq: 2,
         code: 'notable_and_at_risk_health_test_results',
         name: 'Notable and At Risk Health Test Results',
-        items: expect.any(Array)
+        items: expect.any(Array),
       })
     })
 
@@ -309,53 +309,63 @@ describe('WisdomPanelMapper', () => {
 
   describe('mapWisdomPanelTestResultItems()', () => {
     const simpleResult = FileUtils.loadFile(
-      'test/examples/simplified-results/BBBFCVH.json'
+      'test/examples/simplified-results/BBBFCVH.json',
     ) as WisdomPanelSimpleResultResponse
 
     it('should map breed percentages results', () => {
-      const breedPercentages: WisdomPanelTestResult = simpleResult.data.breed_percentages as WisdomPanelTestResult
-      const items: TestResultItem[] = mapper.mapWisdomPanelTestResultItems(breedPercentages, 'breed_percentages', 0)
+      const breedPercentages: WisdomPanelTestResult = simpleResult.data
+        .breed_percentages as WisdomPanelTestResult
+      const items: TestResultItem[] = mapper.mapWisdomPanelTestResultItems(
+        breedPercentages,
+        'breed_percentages',
+        0,
+      )
       expect(items).toEqual(expect.any(Array))
       expect(items.length).toEqual(simpleResult.data.breed_percentages?.length)
       items.forEach((item, index) => {
-        const breedPercentage: WisdomPanelBreedPercentagesResult = simpleResult.data.breed_percentages?.[
-          index
-        ] as WisdomPanelBreedPercentagesResult
+        const breedPercentage: WisdomPanelBreedPercentagesResult = simpleResult.data
+          .breed_percentages?.[index] as WisdomPanelBreedPercentagesResult
         expect(item.seq).toEqual(index)
         expect(item.code).toEqual(breedPercentage.breed.slug)
         expect(item.name).toEqual(breedPercentage.breed.name.en)
         expect(item.status).toEqual(TestResultItemStatus.DONE)
         expect(item.valueQuantity).toEqual({
           value: breedPercentage.percentage,
-          units: '%'
+          units: '%',
         })
-        expect(item.notes).toEqual(`${breedPercentage.percentage}% ${breedPercentage.breed.name.en}`)
+        expect(item.notes).toEqual(
+          `${breedPercentage.percentage}% ${breedPercentage.breed.name.en}`,
+        )
       })
     })
 
     it('should map ideal weight results', () => {
       const idealWeightResult: WisdomPanelIdealWeightResult = simpleResult.data
         .ideal_weight_result as WisdomPanelIdealWeightResult
-      const items: TestResultItem[] = mapper.mapWisdomPanelTestResultItems(idealWeightResult, 'ideal_weight_result', 0)
+      const items: TestResultItem[] = mapper.mapWisdomPanelTestResultItems(
+        idealWeightResult,
+        'ideal_weight_result',
+        0,
+      )
       expect(items).toEqual(expect.any(Array))
       expect(items.length).toEqual(3) // Min, Max, Predicted
       expect(items[0]).toEqual(
         expect.objectContaining({
           code: 'ideal_weight_result_min_size',
-          name: 'Minimal Ideal Weight Result'
-        })
+          name: 'Minimal Ideal Weight Result',
+        }),
       )
       expect(items[1]).toEqual(
         expect.objectContaining({
           code: 'ideal_weight_result_max_size',
-          name: 'Maximum Ideal Weight Result'
-        })
+          name: 'Maximum Ideal Weight Result',
+        }),
       )
       expect(items[2]).toEqual(
         expect.objectContaining({
           code: 'ideal_weight_result_pred_size',
-          name: 'Predicted Ideal Weight Result'
-        })
+          name: 'Predicted Ideal Weight Result',
+        }),
       )
     })
 
@@ -365,17 +375,19 @@ describe('WisdomPanelMapper', () => {
       const items: TestResultItem[] = mapper.mapWisdomPanelTestResultItems(
         notableAndAtRiskHealthTestResults,
         'notable_and_at_risk_health_test_results',
-        0
+        0,
       )
       expect(items).toEqual(expect.any(Array))
-      expect(items.length).toEqual(simpleResult.data.notable_and_at_risk_health_test_results?.length * 2) // 2 items per result
+      expect(items.length).toEqual(
+        simpleResult.data.notable_and_at_risk_health_test_results?.length * 2,
+      ) // 2 items per result
       items.forEach((item, index) => {
         const isDiseaseResult = item.valueString !== undefined
         if (isDiseaseResult) {
           expect(item.valueString).toEqual(notableAndAtRiskHealthTestResults[0].resolved_result)
           expect(item.interpretation).toEqual({
             code: TestResultItemInterpretationCode.POSITIVE,
-            text: 'Positive'
+            text: 'Positive',
           })
         } else {
           expect(item.valueQuantity?.value).toEqual(notableAndAtRiskHealthTestResults[0].copies)
@@ -389,7 +401,7 @@ describe('WisdomPanelMapper', () => {
       const items: TestResultItem[] = mapper.mapWisdomPanelTestResultItems(
         'There are no notable or at-risk health test results found for Spot.',
         'notable_and_at_risk_health_test_results',
-        0
+        0,
       )
 
       expect(items).toHaveLength(1)
@@ -398,8 +410,8 @@ describe('WisdomPanelMapper', () => {
           code: 'notable_and_at_risk_health_test_results',
           name: 'Notable and At Risk Health Test Results',
           status: TestResultItemStatus.DONE,
-          valueString: 'There are no notable or at-risk health test results found for Spot.'
-        })
+          valueString: 'There are no notable or at-risk health test results found for Spot.',
+        }),
       )
     })
   })

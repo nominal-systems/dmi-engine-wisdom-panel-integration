@@ -12,10 +12,10 @@ async function bootstrap() {
     {
       transport: Transport.MQTT,
       options: {
-        ...configService.get('mqtt')
-      }
+        ...configService.get('mqtt'),
+      },
     },
-    { inheritAppConfig: true }
+    { inheritAppConfig: true },
   )
   app.useGlobalPipes(new ValidationPipe({ transform: true }))
   await app.startAllMicroservices()
