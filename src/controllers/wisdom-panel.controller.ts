@@ -1,4 +1,4 @@
-import { Controller } from '@nestjs/common'
+import { Controller, UseFilters } from '@nestjs/common'
 import { PROVIDER_NAME } from '../constants/provider-name'
 import {
   ApiEvent,
@@ -19,8 +19,10 @@ import {
 import { WisdomPanelService } from '../services/wisdom-panel.service'
 import { WisdomPanelMessageData } from '../interfaces/wisdom-panel-message-data.interface'
 import { MessagePattern } from '@nestjs/microservices'
+import { RpcExceptionFilter } from '../filters/rcp-exception-filter'
 
 @Controller(`engine/${PROVIDER_NAME}`)
+@UseFilters(RpcExceptionFilter)
 export class WisdomPanelController
   implements ProviderOrderCreation, ProviderReferenceData, ProviderServices
 {

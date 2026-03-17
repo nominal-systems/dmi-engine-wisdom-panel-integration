@@ -10,8 +10,6 @@ import { OrdersProcessor } from './processors/orders.processors'
 import { ResultsProcessor } from './processors/results.processor'
 import { CacheModule } from '@nestjs/cache-manager'
 import configuration from './config/configuration'
-import { RpcExceptionFilter } from './filters/rcp-exception-filter'
-import { APP_FILTER } from '@nestjs/core'
 import { WisdomPanelApiModule } from './wisdom-panel-api/wisdom-panel-api.module'
 
 @Module({
@@ -52,10 +50,6 @@ import { WisdomPanelApiModule } from './wisdom-panel-api/wisdom-panel-api.module
     WisdomPanelMapper,
     OrdersProcessor,
     ResultsProcessor,
-    {
-      provide: APP_FILTER,
-      useClass: RpcExceptionFilter,
-    },
   ],
   controllers: [WisdomPanelController],
   exports: [BullModule],
