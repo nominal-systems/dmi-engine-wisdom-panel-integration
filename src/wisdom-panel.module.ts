@@ -13,7 +13,6 @@ import configuration from './config/configuration'
 import { RpcExceptionFilter } from './filters/rcp-exception-filter'
 import { APP_FILTER } from '@nestjs/core'
 import { WisdomPanelApiModule } from './wisdom-panel-api/wisdom-panel-api.module'
-import { PROVIDER_NAME } from './constants/provider-name'
 
 @Module({
   imports: [
@@ -45,44 +44,6 @@ import { PROVIDER_NAME } from './constants/provider-name'
         redis: configService.get('redis'),
       }),
     }),
-    BullModule.registerQueue(
-      {
-        name: `${PROVIDER_NAME}.orders`,
-        defaultJobOptions: {
-          removeOnComplete: true,
-          removeOnFail: false,
-          attempts: 3,
-          backoff: {
-            type: 'exponential',
-            delay: 5000,
-          },
-        },
-        settings: {
-          lockDuration: 300000,
-          lockRenewTime: 150000,
-          stalledInterval: 30000,
-          maxStalledCount: 2,
-        },
-      },
-      {
-        name: `${PROVIDER_NAME}.results`,
-        defaultJobOptions: {
-          removeOnComplete: true,
-          removeOnFail: false,
-          attempts: 3,
-          backoff: {
-            type: 'exponential',
-            delay: 5000,
-          },
-        },
-        settings: {
-          lockDuration: 300000,
-          lockRenewTime: 150000,
-          stalledInterval: 30000,
-          maxStalledCount: 2,
-        },
-      },
-    ),
     WisdomPanelApiModule,
   ],
   providers: [
