@@ -1,4 +1,4 @@
-import { Process, Processor } from '@nestjs/bull'
+import { OnQueueError, OnQueueFailed, OnQueueStalled, Process, Processor } from '@nestjs/bull'
 import { PROVIDER_NAME } from '../constants/provider-name'
 import { Inject, Logger } from '@nestjs/common'
 import { WisdomPanelService } from '../services/wisdom-panel.service'
@@ -17,6 +17,26 @@ export class ResultsProcessor {
     private readonly wisdomPanelService: WisdomPanelService,
     @Inject('API_SERVICE') private readonly apiClient: ClientProxy,
   ) {}
+
+  @OnQueueStalled()
+  onStalled(job: Job<WisdomPanelMessageData>) {
+    this.logger.warn(
+      `Job ${job.id} stalled for integration ${job.data.payload?.integrationId}. Attempting retry...`,
+    )
+  }
+
+  @OnQueueFailed()
+  onFailed(job: Job<WisdomPanelMessageData>, error: Error) {
+    this.logger.error(
+      `Job ${job.id} failed for integration ${job.data.payload?.integrationId}: ${error.message}`,
+      error.stack,
+    )
+  }
+
+  @OnQueueError()
+  onError(error: Error) {
+    this.logger.error(`Queue error: ${error.message}`, error.stack)
+  }
 
   @Process()
   async fetchResults(job: Job<WisdomPanelMessageData>) {
@@ -52,7 +72,9 @@ export class ResultsProcessor {
     } catch (error) {
       this.logger.error(
         `Error fetching results for integration ${payload.integrationId}: ${error.message}`,
+        error.stack,
       )
+      throw error // Re-throw to trigger Bull retry mechanism
     }
   }
 }
