@@ -13,6 +13,7 @@ import configuration from './config/configuration'
 import { RpcExceptionFilter } from './filters/rcp-exception-filter'
 import { APP_FILTER } from '@nestjs/core'
 import { WisdomPanelApiModule } from './wisdom-panel-api/wisdom-panel-api.module'
+import { PROVIDER_NAME } from './constants/provider-name'
 
 @Module({
   imports: [
@@ -44,6 +45,10 @@ import { WisdomPanelApiModule } from './wisdom-panel-api/wisdom-panel-api.module
         redis: configService.get('redis'),
       }),
     }),
+    BullModule.registerQueue(
+      { name: `${PROVIDER_NAME}.orders` },
+      { name: `${PROVIDER_NAME}.results` },
+    ),
     WisdomPanelApiModule,
   ],
   providers: [

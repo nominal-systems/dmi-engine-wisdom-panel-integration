@@ -9,7 +9,9 @@ import { APP_FILTER } from '@nestjs/core'
 
 @Module({
   imports: [
-    HttpModule.register({}),
+    HttpModule.register({
+      timeout: 60000,
+    }),
     ConfigModule.forRoot({
       isGlobal: true,
       load: [configuration],
