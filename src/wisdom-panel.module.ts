@@ -11,6 +11,7 @@ import { ResultsProcessor } from './processors/results.processor'
 import { CacheModule } from '@nestjs/cache-manager'
 import configuration from './config/configuration'
 import { WisdomPanelApiModule } from './wisdom-panel-api/wisdom-panel-api.module'
+import { PROVIDER_NAME } from './constants/provider-name'
 
 @Module({
   imports: [
@@ -42,6 +43,10 @@ import { WisdomPanelApiModule } from './wisdom-panel-api/wisdom-panel-api.module
         redis: configService.get('redis'),
       }),
     }),
+    BullModule.registerQueue(
+      { name: `${PROVIDER_NAME}.orders` },
+      { name: `${PROVIDER_NAME}.results` },
+    ),
     WisdomPanelApiModule,
   ],
   providers: [
