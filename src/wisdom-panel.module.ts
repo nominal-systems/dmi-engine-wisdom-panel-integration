@@ -1,4 +1,6 @@
 import { DynamicModule, Module } from '@nestjs/common'
+import { APP_INTERCEPTOR } from '@nestjs/core'
+import { IntegrationContextInterceptor } from '@nominal-systems/dmi-engine-common'
 import { ClientsModule, Transport } from '@nestjs/microservices'
 import { ConfigModule, ConfigService } from '@nestjs/config'
 import { BullModule } from '@nestjs/bull'
@@ -55,6 +57,10 @@ import { PROVIDER_NAME } from './constants/provider-name'
     WisdomPanelMapper,
     OrdersProcessor,
     ResultsProcessor,
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: IntegrationContextInterceptor,
+    },
   ],
   controllers: [WisdomPanelController],
   exports: [BullModule],
