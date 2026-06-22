@@ -5,7 +5,7 @@ import { WisdomPanelService } from '../services/wisdom-panel.service'
 import { ClientProxy } from '@nestjs/microservices'
 import { WisdomPanelMessageData } from '../interfaces/wisdom-panel-message-data.interface'
 import { Job } from 'bull'
-import { Order } from '@nominal-systems/dmi-engine-common'
+import { Order, runWithRequestContext } from '@nominal-systems/dmi-engine-common'
 import { ConfigService } from '@nestjs/config'
 import { debugApiEvent } from '../common/debug-utils'
 
@@ -43,37 +43,39 @@ export class OrdersProcessor {
   async fetchOrders(job: Job<WisdomPanelMessageData>) {
     const { payload, ...metadata } = job.data
 
-    try {
-      const orders: Order[] = await this.wisdomPanelService.getBatchOrders(payload, metadata)
+    await runWithRequestContext({ integrationId: payload.integrationId }, async () => {
+      try {
+        const orders: Order[] = await this.wisdomPanelService.getBatchOrders(payload, metadata)
 
-      if (orders.length > 0) {
-        this.logger.log(
-          `Fetched ${orders.length} order${orders.length > 1 ? 's' : ''} for integration ${payload.integrationId}`,
-        )
+        if (orders.length > 0) {
+          this.logger.log(
+            `Fetched ${orders.length} order${orders.length > 1 ? 's' : ''} for integration ${payload.integrationId}`,
+          )
 
-        const data = {
-          integrationId: payload.integrationId,
-          orders,
-        }
-        this.apiClient.emit('external_orders', data)
+          const data = {
+            integrationId: payload.integrationId,
+            orders,
+          }
+          this.apiClient.emit('external_orders', data)
 
-        if (this.configService.get('debug.api')) {
-          debugApiEvent('external_orders', data)
-        }
+          if (this.configService.get('debug.api')) {
+            debugApiEvent('external_orders', data)
+          }
 
-        // TODO(gb): this could be done in batch
-        for (const order of orders) {
-          if (!this.configService.get('processors.orders.dryRun')) {
-            await this.wisdomPanelService.acknowledgeOrder({ id: order.externalId }, metadata)
+          // TODO(gb): this could be done in batch
+          for (const order of orders) {
+            if (!this.configService.get('processors.orders.dryRun')) {
+              await this.wisdomPanelService.acknowledgeOrder({ id: order.externalId }, metadata)
+            }
           }
         }
+      } catch (error) {
+        this.logger.error(
+          `Error fetching orders for integration ${payload.integrationId}: ${error.message}`,
+          error.stack,
+        )
+        throw error
       }
-    } catch (error) {
-      this.logger.error(
-        `Error fetching orders for integration ${payload.integrationId}: ${error.message}`,
-        error.stack,
-      )
-      throw error
-    }
+    })
   }
 }

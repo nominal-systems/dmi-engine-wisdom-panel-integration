@@ -5,6 +5,7 @@ import { WisdomPanelService } from '../services/wisdom-panel.service'
 import { ClientProxy } from '@nestjs/microservices'
 import { WisdomPanelMessageData } from '../interfaces/wisdom-panel-message-data.interface'
 import { Job } from 'bull'
+import { runWithRequestContext } from '@nominal-systems/dmi-engine-common'
 import { ConfigService } from '@nestjs/config'
 import { debugApiEvent } from '../common/debug-utils'
 
@@ -42,39 +43,41 @@ export class ResultsProcessor {
   async fetchResults(job: Job<WisdomPanelMessageData>) {
     const { payload, ...metadata } = job.data
 
-    try {
-      const batchResults = await this.wisdomPanelService.getBatchResults(payload, metadata)
+    await runWithRequestContext({ integrationId: payload.integrationId }, async () => {
+      try {
+        const batchResults = await this.wisdomPanelService.getBatchResults(payload, metadata)
 
-      if (batchResults.results.length > 0) {
-        this.logger.log(
-          `Fetched ${batchResults.results.length} result${batchResults.results.length > 1 ? 's' : ''} for integration ${payload.integrationId}`,
-        )
+        if (batchResults.results.length > 0) {
+          this.logger.log(
+            `Fetched ${batchResults.results.length} result${batchResults.results.length > 1 ? 's' : ''} for integration ${payload.integrationId}`,
+          )
 
-        const data = {
-          integrationId: payload.integrationId,
-          results: batchResults.results,
-        }
-        this.apiClient.emit('external_order_results', data)
-        this.apiClient.emit('external_results', data)
+          const data = {
+            integrationId: payload.integrationId,
+            results: batchResults.results,
+          }
+          this.apiClient.emit('external_order_results', data)
+          this.apiClient.emit('external_results', data)
 
-        if (this.configService.get('debug.api')) {
-          debugApiEvent('external_results', data)
-          debugApiEvent('external_order_results', data)
-        }
+          if (this.configService.get('debug.api')) {
+            debugApiEvent('external_results', data)
+            debugApiEvent('external_order_results', data)
+          }
 
-        // TODO(gb): this could be done in batch
-        for (const result of batchResults.results) {
-          if (!this.configService.get('processors.results.dryRun')) {
-            await this.wisdomPanelService.acknowledgeResult({ id: result.id }, metadata)
+          // TODO(gb): this could be done in batch
+          for (const result of batchResults.results) {
+            if (!this.configService.get('processors.results.dryRun')) {
+              await this.wisdomPanelService.acknowledgeResult({ id: result.id }, metadata)
+            }
           }
         }
+      } catch (error) {
+        this.logger.error(
+          `Error fetching results for integration ${payload.integrationId}: ${error.message}`,
+          error.stack,
+        )
+        throw error // Re-throw to trigger Bull retry mechanism
       }
-    } catch (error) {
-      this.logger.error(
-        `Error fetching results for integration ${payload.integrationId}: ${error.message}`,
-        error.stack,
-      )
-      throw error // Re-throw to trigger Bull retry mechanism
-    }
+    })
   }
 }
