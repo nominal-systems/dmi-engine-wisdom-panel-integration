@@ -1,5 +1,6 @@
 import { Controller, UseFilters } from '@nestjs/common'
 import { PROVIDER_NAME } from '../constants/provider-name'
+import { SHARED_SUBSCRIPTION_GROUP } from '../constants/shared-subscription-group'
 import {
   ApiEvent,
   Breed,
@@ -15,10 +16,10 @@ import {
   Service,
   Sex,
   Species,
+  SharedMessagePattern,
 } from '@nominal-systems/dmi-engine-common'
 import { WisdomPanelService } from '../services/wisdom-panel.service'
 import { WisdomPanelMessageData } from '../interfaces/wisdom-panel-message-data.interface'
-import { MessagePattern } from '@nestjs/microservices'
 import { RpcExceptionFilter } from '../filters/rcp-exception-filter'
 
 @Controller(`engine/${PROVIDER_NAME}`)
@@ -28,7 +29,10 @@ export class WisdomPanelController
 {
   constructor(private readonly wisdomPanelService: WisdomPanelService) {}
 
-  @MessagePattern(`${PROVIDER_NAME}/${Resource.Integration}/${Operation.Test}`)
+  @SharedMessagePattern(
+    SHARED_SUBSCRIPTION_GROUP,
+    `${PROVIDER_NAME}/${Resource.Integration}/${Operation.Test}`,
+  )
   public async testCredentials(
     msg: ApiEvent<WisdomPanelMessageData>,
   ): Promise<IntegrationTestResponse> {
@@ -36,34 +40,49 @@ export class WisdomPanelController
     return await this.wisdomPanelService.testAuth(payload, metadata)
   }
 
-  @MessagePattern(`${PROVIDER_NAME}/${Resource.Orders}/${Operation.Create}`)
+  @SharedMessagePattern(
+    SHARED_SUBSCRIPTION_GROUP,
+    `${PROVIDER_NAME}/${Resource.Orders}/${Operation.Create}`,
+  )
   public async createOrder(msg: ApiEvent<WisdomPanelMessageData>): Promise<OrderCreatedResponse> {
     const { payload, ...metadata } = msg.data
     return await this.wisdomPanelService.createOrder(payload, metadata)
   }
 
-  @MessagePattern(`${PROVIDER_NAME}/${Resource.Sexes}/${Operation.List}`)
+  @SharedMessagePattern(
+    SHARED_SUBSCRIPTION_GROUP,
+    `${PROVIDER_NAME}/${Resource.Sexes}/${Operation.List}`,
+  )
   public getSexes(
     msg: ApiEvent<WisdomPanelMessageData>,
   ): Promise<ReferenceDataResponse<Sex> | Sex[]> {
     return this.wisdomPanelService.getSexes()
   }
 
-  @MessagePattern(`${PROVIDER_NAME}/${Resource.Species}/${Operation.List}`)
+  @SharedMessagePattern(
+    SHARED_SUBSCRIPTION_GROUP,
+    `${PROVIDER_NAME}/${Resource.Species}/${Operation.List}`,
+  )
   public getSpecies(
     msg: ApiEvent<WisdomPanelMessageData>,
   ): Promise<ReferenceDataResponse<Species> | Species[]> {
     return this.wisdomPanelService.getSpecies()
   }
 
-  @MessagePattern(`${PROVIDER_NAME}/${Resource.Breeds}/${Operation.List}`)
+  @SharedMessagePattern(
+    SHARED_SUBSCRIPTION_GROUP,
+    `${PROVIDER_NAME}/${Resource.Breeds}/${Operation.List}`,
+  )
   public getBreeds(
     msg: ApiEvent<WisdomPanelMessageData>,
   ): Promise<ReferenceDataResponse<Breed> | Breed[]> {
     return this.wisdomPanelService.getBreeds()
   }
 
-  @MessagePattern(`${PROVIDER_NAME}/${Resource.Services}/${Operation.List}`)
+  @SharedMessagePattern(
+    SHARED_SUBSCRIPTION_GROUP,
+    `${PROVIDER_NAME}/${Resource.Services}/${Operation.List}`,
+  )
   public getServices(
     msg: ApiEvent<WisdomPanelMessageData>,
   ): Promise<ReferenceDataResponse<Service> | Service[]> {
@@ -71,7 +90,10 @@ export class WisdomPanelController
     return this.wisdomPanelService.getServices(payload, metadata)
   }
 
-  @MessagePattern(`${PROVIDER_NAME}/${Resource.Devices}/${Operation.List}`)
+  @SharedMessagePattern(
+    SHARED_SUBSCRIPTION_GROUP,
+    `${PROVIDER_NAME}/${Resource.Devices}/${Operation.List}`,
+  )
   public getDevices(
     msg: ApiEvent<WisdomPanelMessageData>,
   ): Promise<ReferenceDataResponse<Device> | Device[]> {
