@@ -46,8 +46,11 @@ import { PROVIDER_NAME } from './constants/provider-name'
       }),
     }),
     BullModule.registerQueue(
-      { name: `${PROVIDER_NAME}.orders` },
-      { name: `${PROVIDER_NAME}.results` },
+      // Hash-tagged prefix (same convention as the host app's queue registration) so that all
+      // keys of a queue hash to the same slot on clustered Redis; without it, Bull's multi-key
+      // Lua scripts fail with CROSSSLOT.
+      { name: `${PROVIDER_NAME}.orders`, prefix: `{${PROVIDER_NAME}.orders}` },
+      { name: `${PROVIDER_NAME}.results`, prefix: `{${PROVIDER_NAME}.results}` },
     ),
     WisdomPanelApiModule,
   ],
