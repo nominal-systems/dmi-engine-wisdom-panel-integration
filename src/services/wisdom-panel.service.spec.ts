@@ -7,6 +7,7 @@ import {
   CreateOrderPayload,
   NullPayloadPayload,
   OrderCreatedResponse,
+  OrderStatus,
 } from '@nominal-systems/dmi-engine-common'
 import { WisdomPanelMessageData } from '../interfaces/wisdom-panel-message-data.interface'
 import { ConfigService } from '@nestjs/config'
@@ -20,6 +21,7 @@ describe('WisdomPanelService', () => {
   }
   const apiServiceMock = {
     createPet: jest.fn(),
+    getKits: jest.fn(),
     getUnacknowledgedKitsForHospital: jest.fn(),
     getUnacknowledgedResultSetsForHospital: jest.fn(),
     getSimplifiedResultSets: jest.fn(),
@@ -86,12 +88,131 @@ describe('WisdomPanelService', () => {
 
     it('should propagate the provider status code when order creation fails', async () => {
       const payload = {} as unknown as CreateOrderPayload
-      const metadata = {} as unknown as WisdomPanelMessageData
+      const metadata = {
+        integrationOptions: { hospitalNumber: '005437' },
+        providerConfiguration: {},
+      } as unknown as WisdomPanelMessageData
+      mapperMock.mapCreateOrderPayload.mockReturnValue({ data: { code: 'AAA' } })
       apiServiceMock.createPet.mockRejectedValue(
         new WisdomApiException('Failed to create pet', 422, new Error('Unprocessable Entity')),
       )
       await expect(service.createOrder(payload, metadata)).rejects.toMatchObject({
         statusCode: 422,
+      })
+    })
+
+    describe('422 recovery', () => {
+      const payload = {} as unknown as CreateOrderPayload
+      const metadata = {
+        integrationOptions: { hospitalNumber: '005437' },
+        providerConfiguration: {},
+      } as unknown as WisdomPanelMessageData
+
+      const createPetPayload = {
+        data: {
+          code: 'VRHPBBN',
+          name: 'Firulais',
+          species: 'dog',
+          client_last_name: 'Greco',
+        },
+      }
+
+      const unprocessable = new WisdomApiException(
+        'Failed to create pet',
+        422,
+        new Error('Unprocessable Entity'),
+      )
+
+      const buildKitsResponse = (
+        kitAttributes: Record<string, unknown>,
+        petAttributes?: Record<string, unknown>,
+      ) => ({
+        data: [
+          {
+            id: 'kit-id-1',
+            type: 'kits',
+            attributes: kitAttributes,
+            relationships: { pet: { data: { type: 'pets', id: 'pet-id-1' } } },
+          },
+        ],
+        included:
+          petAttributes !== undefined
+            ? [{ id: 'pet-id-1', type: 'pets', attributes: petAttributes }]
+            : [],
+      })
+
+      beforeEach(() => {
+        mapperMock.mapCreateOrderPayload.mockReturnValue(createPetPayload)
+        apiServiceMock.createPet.mockRejectedValue(unprocessable)
+      })
+
+      it('should recover the order when the kit is activated for the same pet', async () => {
+        apiServiceMock.getKits.mockResolvedValue(
+          buildKitsResponse(
+            { code: 'VRHPBBN', activated: true },
+            { name: '  firulais ', species: 'dog', 'owner-last-name': 'Greco' },
+          ),
+        )
+        const response: OrderCreatedResponse = await service.createOrder(payload, metadata)
+        expect(apiServiceMock.getKits).toHaveBeenCalledWith(
+          { code: 'VRHPBBN', hospital_number: '005437' },
+          { include: 'pet,pet.owner' },
+          expect.any(Object),
+        )
+        expect(response).toEqual({
+          externalId: 'kit-id-1',
+          requisitionId: 'VRHPBBN',
+          status: OrderStatus.SUBMITTED,
+          manifest: null,
+        })
+      })
+
+      it('should fail with a clear 422 when the kit is activated for a different pet', async () => {
+        apiServiceMock.getKits.mockResolvedValue(
+          buildKitsResponse(
+            { code: 'VRHPBBN', activated: true },
+            { name: 'Rex', species: 'dog', 'owner-last-name': 'Greco' },
+          ),
+        )
+        await expect(service.createOrder(payload, metadata)).rejects.toThrow(
+          /already activated for pet 'Rex'/,
+        )
+      })
+
+      it('should propagate the original 422 when no kit is found', async () => {
+        apiServiceMock.getKits.mockResolvedValue({ data: [], included: [] })
+        await expect(service.createOrder(payload, metadata)).rejects.toMatchObject({
+          statusCode: 422,
+        })
+      })
+
+      it('should propagate the original 422 when the kit is not activated', async () => {
+        apiServiceMock.getKits.mockResolvedValue(
+          buildKitsResponse(
+            { code: 'VRHPBBN', activated: false },
+            { name: 'Firulais', species: 'dog', 'owner-last-name': 'Greco' },
+          ),
+        )
+        await expect(service.createOrder(payload, metadata)).rejects.toMatchObject({
+          statusCode: 422,
+        })
+      })
+
+      it('should propagate the original 422 when the kit lookup fails', async () => {
+        apiServiceMock.getKits.mockRejectedValue(new Error('connection refused'))
+        await expect(service.createOrder(payload, metadata)).rejects.toMatchObject({
+          statusCode: 422,
+        })
+      })
+
+      it('should not attempt recovery for non-422 errors', async () => {
+        apiServiceMock.createPet.mockRejectedValue(
+          new WisdomApiException('Failed to create pet', 500, new Error('Internal Server Error')),
+        )
+        await expect(service.createOrder(payload, metadata)).rejects.toMatchObject({
+          statusCode: 500,
+        })
+        expect(apiServiceMock.getKits).not.toHaveBeenCalled()
       })
     })
   })
