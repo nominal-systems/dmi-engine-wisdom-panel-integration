@@ -26,6 +26,7 @@ export interface WisdomPanelKitFiler {
   activated?: boolean
   hospital_number?: string
   voyager_kits?: boolean
+  code?: string
 }
 
 export interface WisdomPanelResultSetsFilter {
