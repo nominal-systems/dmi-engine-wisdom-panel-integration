@@ -84,7 +84,7 @@ export class WisdomPanelService extends BaseProviderService<WisdomPanelMessageDa
         },
       }
     } catch (err) {
-      throw new WisdomApiException('Failed to create order', err.status, err)
+      throw new WisdomApiException('Failed to create order', err.statusCode ?? err.status, err)
     }
   }
 
@@ -117,7 +117,7 @@ export class WisdomPanelService extends BaseProviderService<WisdomPanelMessageDa
         this.logger.debug(`Found kit ${order.externalId} (kit code: ${kit.attributes.code})`)
       }
     } catch (err) {
-      throw new WisdomApiException('Failed to get batch orders', err.status, err)
+      throw new WisdomApiException('Failed to get batch orders', err.statusCode ?? err.status, err)
     }
 
     return orders

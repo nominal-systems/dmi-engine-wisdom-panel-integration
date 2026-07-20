@@ -10,6 +10,7 @@ import {
 } from '@nominal-systems/dmi-engine-common'
 import { WisdomPanelMessageData } from '../interfaces/wisdom-panel-message-data.interface'
 import { ConfigService } from '@nestjs/config'
+import { WisdomApiException } from '../exceptions/wisdom-api.exception'
 
 describe('WisdomPanelService', () => {
   let service: WisdomPanelService
@@ -80,6 +81,33 @@ describe('WisdomPanelService', () => {
         manifest: expect.objectContaining({
           data: expect.any(String),
         }),
+      })
+    })
+
+    it('should propagate the provider status code when order creation fails', async () => {
+      const payload = {} as unknown as CreateOrderPayload
+      const metadata = {} as unknown as WisdomPanelMessageData
+      apiServiceMock.createPet.mockRejectedValue(
+        new WisdomApiException('Failed to create pet', 422, new Error('Unprocessable Entity')),
+      )
+      await expect(service.createOrder(payload, metadata)).rejects.toMatchObject({
+        statusCode: 422,
+      })
+    })
+  })
+
+  describe('getBatchOrders()', () => {
+    it('should propagate the provider status code when fetching kits fails', async () => {
+      const payload = {} as unknown as NullPayloadPayload
+      const metadata = {
+        integrationOptions: { hospitalNumber: '123' },
+        providerConfiguration: {},
+      } as unknown as WisdomPanelMessageData
+      apiServiceMock.getUnacknowledgedKitsForHospital.mockRejectedValue(
+        new WisdomApiException('Failed to get kits', 401, new Error('Unauthorized')),
+      )
+      await expect(service.getBatchOrders(payload, metadata)).rejects.toMatchObject({
+        statusCode: 401,
       })
     })
   })
