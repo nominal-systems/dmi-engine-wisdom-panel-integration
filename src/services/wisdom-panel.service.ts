@@ -67,9 +67,9 @@ export class WisdomPanelService extends BaseProviderService<WisdomPanelMessageDa
     payload: CreateOrderPayload,
     metadata: WisdomPanelMessageData,
   ): Promise<OrderCreatedResponse> {
-    const createPetPayload: WisdomPanelCreatePetPayload =
-      this.wisdomPanelMapper.mapCreateOrderPayload(payload, metadata)
+    let createPetPayload: WisdomPanelCreatePetPayload | undefined
     try {
+      createPetPayload = this.wisdomPanelMapper.mapCreateOrderPayload(payload, metadata)
       const response: WisdomPanelPetCreatedResponse = await this.wisdomPanelApiService.createPet(
         createPetPayload,
         metadata.providerConfiguration,
@@ -85,7 +85,7 @@ export class WisdomPanelService extends BaseProviderService<WisdomPanelMessageDa
         },
       }
     } catch (err) {
-      if ((err.statusCode ?? err.status) === 422) {
+      if (createPetPayload !== undefined && (err.statusCode ?? err.status) === 422) {
         return await this.recoverOrderFrom422(createPetPayload, metadata, err)
       }
       throw new WisdomApiException('Failed to create order', err.statusCode ?? err.status, err)

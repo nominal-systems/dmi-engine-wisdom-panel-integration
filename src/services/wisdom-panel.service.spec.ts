@@ -101,6 +101,19 @@ describe('WisdomPanelService', () => {
       })
     })
 
+    it('should wrap order payload mapping failures as provider errors', async () => {
+      const payload = {} as unknown as CreateOrderPayload
+      const metadata = {} as unknown as WisdomPanelMessageData
+      mapperMock.mapCreateOrderPayload.mockImplementation(() => {
+        throw new Error('Unexpected mapping failure')
+      })
+      await expect(service.createOrder(payload, metadata)).rejects.toMatchObject({
+        message: 'Failed to create order',
+      })
+      expect(apiServiceMock.createPet).not.toHaveBeenCalled()
+      expect(apiServiceMock.getKits).not.toHaveBeenCalled()
+    })
+
     describe('422 recovery', () => {
       const payload = {} as unknown as CreateOrderPayload
       const metadata = {
