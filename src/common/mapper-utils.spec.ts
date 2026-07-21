@@ -76,6 +76,11 @@ describe('mapper-utils', () => {
       expect(petMatchesCreatePetPayload(pet, payload)).toBe(true)
     })
 
+    it('should match species regardless of casing or whitespace', () => {
+      const pet = buildPet({ name: 'Firulais', species: ' Dog ', 'owner-last-name': 'Greco' })
+      expect(petMatchesCreatePetPayload(pet, payload)).toBe(true)
+    })
+
     it('should not match a different pet name', () => {
       const pet = buildPet({ name: 'Rex', species: 'dog', 'owner-last-name': 'Greco' })
       expect(petMatchesCreatePetPayload(pet, payload)).toBe(false)
