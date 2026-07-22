@@ -24,6 +24,7 @@ import {
 import { WisdomPanelMessageData } from '../interfaces/wisdom-panel-message-data.interface'
 import { WisdomPanelApiService } from '../wisdom-panel-api/wisdom-panel-api.service'
 import { WisdomPanelMapper } from '../providers/wisdom-panel-mapper'
+import { petMatchesCreatePetPayload } from '../common/mapper-utils'
 import { WisdomPanelCreatePetPayload } from '../interfaces/wisdom-panel-api-payloads.interface'
 import {
   WisdomPanelKitItem,
@@ -66,9 +67,9 @@ export class WisdomPanelService extends BaseProviderService<WisdomPanelMessageDa
     payload: CreateOrderPayload,
     metadata: WisdomPanelMessageData,
   ): Promise<OrderCreatedResponse> {
+    let createPetPayload: WisdomPanelCreatePetPayload | undefined
     try {
-      const createPetPayload: WisdomPanelCreatePetPayload =
-        this.wisdomPanelMapper.mapCreateOrderPayload(payload, metadata)
+      createPetPayload = this.wisdomPanelMapper.mapCreateOrderPayload(payload, metadata)
       const response: WisdomPanelPetCreatedResponse = await this.wisdomPanelApiService.createPet(
         createPetPayload,
         metadata.providerConfiguration,
@@ -84,8 +85,65 @@ export class WisdomPanelService extends BaseProviderService<WisdomPanelMessageDa
         },
       }
     } catch (err) {
-      throw new WisdomApiException('Failed to create order', err.status, err)
+      if (createPetPayload !== undefined && (err.statusCode ?? err.status) === 422) {
+        return await this.recoverOrderFrom422(createPetPayload, metadata, err)
+      }
+      throw new WisdomApiException('Failed to create order', err.statusCode ?? err.status, err)
     }
+  }
+
+  private async recoverOrderFrom422(
+    createPetPayload: WisdomPanelCreatePetPayload,
+    metadata: WisdomPanelMessageData,
+    originalError: any,
+  ): Promise<OrderCreatedResponse> {
+    const kitCode: string = createPetPayload.data.code
+    let kitsResponse: WisdomPanelKitsResponse
+    try {
+      kitsResponse = await this.wisdomPanelApiService.getKits(
+        { code: kitCode, hospital_number: metadata.integrationOptions.hospitalNumber },
+        { include: 'pet,pet.owner' },
+        metadata.providerConfiguration,
+      )
+    } catch (lookupErr) {
+      this.logger.warn(
+        `[RECOVERY] Kit lookup failed for kit code '${kitCode}' after 422: ${lookupErr.message}`,
+      )
+      throw new WisdomApiException('Failed to create order', 422, originalError)
+    }
+
+    const kit = kitsResponse?.data?.find((kit) => kit.attributes.activated)
+    if (kit === undefined) {
+      this.logger.warn(`[RECOVERY] No activated kit found for kit code '${kitCode}' after 422`)
+      throw new WisdomApiException('Failed to create order', 422, originalError)
+    }
+
+    const pet = kitsResponse.included.find((include): include is WisdomPanelPetItem => {
+      return include.type === 'pets' && include.id === kit.relationships?.pet?.data?.id
+    })
+
+    if (pet !== undefined && petMatchesCreatePetPayload(pet, createPetPayload)) {
+      this.logger.warn(
+        `[RECOVERY] Recovered order for kit code '${kitCode}' (kit id: ${kit.id}): ` +
+          `existing activation matches submitted pet '${pet.attributes.name}'`,
+      )
+      return {
+        externalId: kit.id,
+        requisitionId: kit.attributes.code,
+        status: OrderStatus.SUBMITTED,
+        manifest: null,
+      }
+    }
+
+    this.logger.warn(
+      `[RECOVERY] Kit code '${kitCode}' is activated for a different pet ` +
+        `('${pet?.attributes.name ?? 'unknown'}'), not recovering`,
+    )
+    throw new WisdomApiException(
+      `Kit '${kitCode}' is already activated for pet '${pet?.attributes.name ?? 'unknown'}'`,
+      422,
+      originalError,
+    )
   }
 
   async getBatchOrders(
@@ -117,7 +175,7 @@ export class WisdomPanelService extends BaseProviderService<WisdomPanelMessageDa
         this.logger.debug(`Found kit ${order.externalId} (kit code: ${kit.attributes.code})`)
       }
     } catch (err) {
-      throw new WisdomApiException('Failed to get batch orders', err.status, err)
+      throw new WisdomApiException('Failed to get batch orders', err.statusCode ?? err.status, err)
     }
 
     return orders

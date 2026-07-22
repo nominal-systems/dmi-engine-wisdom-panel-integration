@@ -1,4 +1,10 @@
-import { extractKitCode, mapNotableAndAtRiskHealthTestResults } from './mapper-utils'
+import {
+  extractKitCode,
+  mapNotableAndAtRiskHealthTestResults,
+  petMatchesCreatePetPayload,
+} from './mapper-utils'
+import { WisdomPanelCreatePetPayload } from '../interfaces/wisdom-panel-api-payloads.interface'
+import { WisdomPanelPetItem } from '../interfaces/wisdom-panel-api-responses.interface'
 
 describe('mapper-utils', () => {
   describe('extractKitCode()', () => {
@@ -47,6 +53,58 @@ describe('mapper-utils', () => {
 
       const items = mapNotableAndAtRiskHealthTestResults(results, 0)
       expect(items[0].valueString).toBe('RESOLVED_RESULT')
+    })
+  })
+  describe('petMatchesCreatePetPayload()', () => {
+    const payload = {
+      data: {
+        name: 'Firulais',
+        species: 'dog',
+        client_last_name: 'Greco',
+      },
+    } as WisdomPanelCreatePetPayload
+
+    const buildPet = (attributes: Record<string, unknown>): WisdomPanelPetItem =>
+      ({
+        id: 'pet-id-1',
+        type: 'pets',
+        attributes,
+      }) as unknown as WisdomPanelPetItem
+
+    it('should match on normalized name and species', () => {
+      const pet = buildPet({ name: '  firulais ', species: 'dog', 'owner-last-name': 'Greco' })
+      expect(petMatchesCreatePetPayload(pet, payload)).toBe(true)
+    })
+
+    it('should match species regardless of casing or whitespace', () => {
+      const pet = buildPet({ name: 'Firulais', species: ' Dog ', 'owner-last-name': 'Greco' })
+      expect(petMatchesCreatePetPayload(pet, payload)).toBe(true)
+    })
+
+    it('should not match a different pet name', () => {
+      const pet = buildPet({ name: 'Rex', species: 'dog', 'owner-last-name': 'Greco' })
+      expect(petMatchesCreatePetPayload(pet, payload)).toBe(false)
+    })
+
+    it('should not match a different species', () => {
+      const pet = buildPet({ name: 'Firulais', species: 'cat', 'owner-last-name': 'Greco' })
+      expect(petMatchesCreatePetPayload(pet, payload)).toBe(false)
+    })
+
+    it('should not match when the owner last name differs', () => {
+      const pet = buildPet({ name: 'Firulais', species: 'dog', 'owner-last-name': 'Smith' })
+      expect(petMatchesCreatePetPayload(pet, payload)).toBe(false)
+    })
+
+    it('should match when the owner last name is missing on either side', () => {
+      const noOwner = buildPet({ name: 'Firulais', species: 'dog' })
+      expect(petMatchesCreatePetPayload(noOwner, payload)).toBe(true)
+
+      const payloadNoLastName = {
+        data: { name: 'Firulais', species: 'dog', client_last_name: '' },
+      } as WisdomPanelCreatePetPayload
+      const withOwner = buildPet({ name: 'Firulais', species: 'dog', 'owner-last-name': 'Greco' })
+      expect(petMatchesCreatePetPayload(withOwner, payloadNoLastName)).toBe(true)
     })
   })
 })

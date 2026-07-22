@@ -13,7 +13,9 @@ import {
   WisdomPanelBreedPercentagesResult,
   WisdomPanelIdealWeightResult,
   WisdomPanelNotableAndAtRiskHealthTestResult,
+  WisdomPanelPetItem,
 } from '../interfaces/wisdom-panel-api-responses.interface'
+import { WisdomPanelCreatePetPayload } from '../interfaces/wisdom-panel-api-payloads.interface'
 import { KitStage } from '../interfaces/wisdom-panel-api.types'
 
 export function mapPetSpecies(species: string): 'dog' | 'cat' {
@@ -196,4 +198,23 @@ export function mapNotableAndAtRiskHealthTestResults(
   }
 
   return items
+}
+
+export function normalizeName(value: string): string {
+  return value.trim().toLowerCase()
+}
+
+export function petMatchesCreatePetPayload(
+  pet: WisdomPanelPetItem,
+  payload: WisdomPanelCreatePetPayload,
+): boolean {
+  const nameMatches = normalizeName(pet.attributes.name) === normalizeName(payload.data.name)
+  const speciesMatches = normalizeName(pet.attributes.species) === normalizeName(payload.data.species)
+  const ownerLastName = pet.attributes['owner-last-name']
+  const lastNameMatches =
+    isNullOrUndefinedOrEmpty(ownerLastName) ||
+    isNullOrUndefinedOrEmpty(payload.data.client_last_name)
+      ? true
+      : normalizeName(ownerLastName) === normalizeName(payload.data.client_last_name)
+  return nameMatches && speciesMatches && lastNameMatches
 }
