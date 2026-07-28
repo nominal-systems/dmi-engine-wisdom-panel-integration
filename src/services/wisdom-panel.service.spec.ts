@@ -5,6 +5,7 @@ import { WisdomPanelMapper } from '../providers/wisdom-panel-mapper'
 import {
   BatchResultsResponse,
   CreateOrderPayload,
+  IdPayload,
   NullPayloadPayload,
   OrderCreatedResponse,
   OrderStatus,
@@ -227,6 +228,30 @@ describe('WisdomPanelService', () => {
         })
         expect(apiServiceMock.getKits).not.toHaveBeenCalled()
       })
+    })
+  })
+
+  describe('getManifest()', () => {
+    const payload = { id: 'kit-id-1' } as unknown as IdPayload
+    const metadata = {
+      integrationOptions: { hospitalNumber: '005437' },
+      providerConfiguration: {},
+    } as unknown as WisdomPanelMessageData
+
+    it('should fail fast with an explicit provider error', async () => {
+      await expect(service.getManifest(payload, metadata)).rejects.toBeInstanceOf(
+        WisdomApiException,
+      )
+      await expect(service.getManifest(payload, metadata)).rejects.toMatchObject({
+        statusCode: 404,
+        message: expect.stringContaining('cannot be retrieved afterwards'),
+      })
+    })
+
+    it('should not call the Wisdom Panel API', async () => {
+      await expect(service.getManifest(payload, metadata)).rejects.toThrow()
+      expect(apiServiceMock.getKits).not.toHaveBeenCalled()
+      expect(apiServiceMock.createPet).not.toHaveBeenCalled()
     })
   })
 
