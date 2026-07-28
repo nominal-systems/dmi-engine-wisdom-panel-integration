@@ -209,7 +209,8 @@ export function petMatchesCreatePetPayload(
   payload: WisdomPanelCreatePetPayload,
 ): boolean {
   const nameMatches = normalizeName(pet.attributes.name) === normalizeName(payload.data.name)
-  const speciesMatches = normalizeName(pet.attributes.species) === normalizeName(payload.data.species)
+  const speciesMatches =
+    normalizeName(pet.attributes.species) === normalizeName(payload.data.species)
   const ownerLastName = pet.attributes['owner-last-name']
   const lastNameMatches =
     isNullOrUndefinedOrEmpty(ownerLastName) ||
