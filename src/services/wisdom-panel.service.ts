@@ -1,5 +1,6 @@
 import { Injectable, Logger } from '@nestjs/common'
 import {
+  Attachment,
   BaseProviderService,
   BatchResultsResponse,
   Breed,
@@ -273,6 +274,19 @@ export class WisdomPanelService extends BaseProviderService<WisdomPanelMessageDa
 
   getOrderResult(payload: IdPayload, metadata: WisdomPanelMessageData): Promise<Result> {
     throw new Error('Method not implemented')
+  }
+
+  // Wisdom Panel renders the requisition form inline in the POST /api/voyager/pet
+  // response and exposes no endpoint to retrieve it afterwards, so orders recovered
+  // from a 422 (see recoverOrderFrom422) have no manifest. Fail fast instead of
+  // leaving the caller waiting for the MQTT timeout. If Wisdom ever exposes a
+  // retrieval endpoint, fetch the PDF here.
+  async getManifest(payload: IdPayload, metadata: WisdomPanelMessageData): Promise<Attachment> {
+    throw new WisdomApiException(
+      'The requisition form is only available at kit activation time and cannot be retrieved afterwards (Wisdom Panel API limitation)',
+      404,
+      {},
+    )
   }
 
   getServiceByCode(
