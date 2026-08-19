@@ -1,4 +1,4 @@
-import { DynamicModule, Module } from '@nestjs/common'
+import { DynamicModule, Module, ModuleMetadata, Provider } from '@nestjs/common'
 import { APP_INTERCEPTOR } from '@nestjs/core'
 import { IntegrationContextInterceptor } from '@nominal-systems/dmi-engine-common'
 import { ClientsModule, Transport } from '@nestjs/microservices'
@@ -14,6 +14,8 @@ import { CacheModule } from '@nestjs/cache-manager'
 import configuration from './config/configuration'
 import { WisdomPanelApiModule } from './wisdom-panel-api/wisdom-panel-api.module'
 import { PROVIDER_NAME } from './constants/provider-name'
+import { FEATURE_FLAG_PROVIDER } from './feature-flags/feature-flag.interface'
+import { StatsigFeatureFlagProvider } from './feature-flags/statsig-feature-flag.provider'
 
 @Module({
   imports: [
@@ -69,9 +71,21 @@ import { PROVIDER_NAME } from './constants/provider-name'
   exports: [BullModule],
 })
 export class WisdomPanelModule {
-  static register(): DynamicModule {
+  static register(options: WisdomPanelModuleOptions = {}): DynamicModule {
+    const featureFlagProvider: Provider =
+      options.featureFlagProvider ??
+      ({ provide: FEATURE_FLAG_PROVIDER, useClass: StatsigFeatureFlagProvider } satisfies Provider)
+
     return {
       module: WisdomPanelModule,
+      imports: [...(options.imports ?? [])],
+      providers: [featureFlagProvider, ...(options.providers ?? [])],
     }
   }
+}
+
+export interface WisdomPanelModuleOptions {
+  imports?: ModuleMetadata['imports']
+  providers?: Provider[]
+  featureFlagProvider?: Provider
 }
