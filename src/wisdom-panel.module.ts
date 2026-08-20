@@ -14,8 +14,6 @@ import { CacheModule } from '@nestjs/cache-manager'
 import configuration from './config/configuration'
 import { WisdomPanelApiModule } from './wisdom-panel-api/wisdom-panel-api.module'
 import { PROVIDER_NAME } from './constants/provider-name'
-import { FEATURE_FLAG_PROVIDER } from './feature-flags/feature-flag.interface'
-import { StatsigFeatureFlagProvider } from './feature-flags/statsig-feature-flag.provider'
 
 @Module({
   imports: [
@@ -71,15 +69,16 @@ import { StatsigFeatureFlagProvider } from './feature-flags/statsig-feature-flag
   exports: [BullModule],
 })
 export class WisdomPanelModule {
+  // No default feature-flag provider: one declared here would shadow the host's and boot a second
+  // Statsig SDK. Opt in explicitly; without it, gates read as disabled.
   static register(options: WisdomPanelModuleOptions = {}): DynamicModule {
-    const featureFlagProvider: Provider =
-      options.featureFlagProvider ??
-      ({ provide: FEATURE_FLAG_PROVIDER, useClass: StatsigFeatureFlagProvider } satisfies Provider)
-
     return {
       module: WisdomPanelModule,
       imports: [...(options.imports ?? [])],
-      providers: [featureFlagProvider, ...(options.providers ?? [])],
+      providers: [
+        ...(options.featureFlagProvider !== undefined ? [options.featureFlagProvider] : []),
+        ...(options.providers ?? []),
+      ],
     }
   }
 }
