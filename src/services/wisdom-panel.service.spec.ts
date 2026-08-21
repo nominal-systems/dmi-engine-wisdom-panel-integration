@@ -12,9 +12,15 @@ import {
 import { WisdomPanelMessageData } from '../interfaces/wisdom-panel-message-data.interface'
 import { ConfigService } from '@nestjs/config'
 import { WisdomApiException } from '../exceptions/wisdom-api.exception'
+import {
+  FEATURE_FLAG_PROVIDER,
+  WISDOM_PANEL_ACTIVATED_KIT_RECOVERY,
+  type FeatureFlagProvider,
+} from '../feature-flags/feature-flag.interface'
 
 describe('WisdomPanelService', () => {
   let service: WisdomPanelService
+  let featureFlagProviderMock: jest.Mocked<FeatureFlagProvider>
   const mapperMock = {
     mapCreateOrderPayload: jest.fn(),
     mapWisdomPanelResult: jest.fn(),
@@ -31,6 +37,9 @@ describe('WisdomPanelService', () => {
   }
 
   beforeEach(async () => {
+    featureFlagProviderMock = {
+      isEnabled: jest.fn().mockReturnValue(false),
+    }
     const module: TestingModule = await Test.createTestingModule({
       providers: [
         WisdomPanelService,
@@ -47,6 +56,10 @@ describe('WisdomPanelService', () => {
         {
           provide: WisdomPanelMapper,
           useValue: mapperMock,
+        },
+        {
+          provide: FEATURE_FLAG_PROVIDER,
+          useValue: featureFlagProviderMock,
         },
       ],
     }).compile()
@@ -99,6 +112,7 @@ describe('WisdomPanelService', () => {
       await expect(service.createOrder(payload, metadata)).rejects.toMatchObject({
         statusCode: 422,
       })
+      expect(apiServiceMock.getKits).not.toHaveBeenCalled()
     })
 
     it('should wrap order payload mapping failures as provider errors', async () => {
@@ -157,6 +171,7 @@ describe('WisdomPanelService', () => {
       beforeEach(() => {
         mapperMock.mapCreateOrderPayload.mockReturnValue(createPetPayload)
         apiServiceMock.createPet.mockRejectedValue(unprocessable)
+        featureFlagProviderMock.isEnabled.mockReturnValue(true)
       })
 
       it('should recover the order when the kit is activated for the same pet', async () => {
@@ -167,6 +182,10 @@ describe('WisdomPanelService', () => {
           ),
         )
         const response: OrderCreatedResponse = await service.createOrder(payload, metadata)
+        expect(featureFlagProviderMock.isEnabled).toHaveBeenCalledWith(
+          WISDOM_PANEL_ACTIVATED_KIT_RECOVERY,
+          expect.objectContaining({ clinicId: '005437' }),
+        )
         expect(apiServiceMock.getKits).toHaveBeenCalledWith(
           { code: 'VRHPBBN', hospital_number: '005437' },
           { include: 'pet,pet.owner' },
@@ -178,6 +197,14 @@ describe('WisdomPanelService', () => {
           status: OrderStatus.SUBMITTED,
           manifest: null,
         })
+      })
+
+      it('should not attempt recovery when the flag is disabled', async () => {
+        featureFlagProviderMock.isEnabled.mockReturnValue(false)
+        await expect(service.createOrder(payload, metadata)).rejects.toMatchObject({
+          statusCode: 422,
+        })
+        expect(apiServiceMock.getKits).not.toHaveBeenCalled()
       })
 
       it('should fail with a clear 422 when the kit is activated for a different pet', async () => {

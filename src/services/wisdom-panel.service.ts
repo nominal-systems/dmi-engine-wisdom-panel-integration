@@ -1,4 +1,4 @@
-import { Injectable, Logger } from '@nestjs/common'
+import { Inject, Injectable, Logger, Optional } from '@nestjs/common'
 import {
   BaseProviderService,
   BatchResultsResponse,
@@ -35,6 +35,11 @@ import {
 } from '../interfaces/wisdom-panel-api-responses.interface'
 import { ConfigService } from '@nestjs/config'
 import { WisdomApiException } from '../exceptions/wisdom-api.exception'
+import {
+  FEATURE_FLAG_PROVIDER,
+  WISDOM_PANEL_ACTIVATED_KIT_RECOVERY,
+  type FeatureFlagProvider,
+} from '../feature-flags/feature-flag.interface'
 
 @Injectable()
 export class WisdomPanelService extends BaseProviderService<WisdomPanelMessageData> {
@@ -44,6 +49,9 @@ export class WisdomPanelService extends BaseProviderService<WisdomPanelMessageDa
     private readonly configService: ConfigService,
     private readonly wisdomPanelApiService: WisdomPanelApiService,
     private readonly wisdomPanelMapper: WisdomPanelMapper,
+    @Optional()
+    @Inject(FEATURE_FLAG_PROVIDER)
+    private readonly featureFlags?: FeatureFlagProvider,
   ) {
     super()
   }
@@ -86,7 +94,15 @@ export class WisdomPanelService extends BaseProviderService<WisdomPanelMessageDa
       }
     } catch (err) {
       if (createPetPayload !== undefined && (err.statusCode ?? err.status) === 422) {
-        return await this.recoverOrderFrom422(createPetPayload, metadata, err)
+        const recoveryEnabled =
+          this.featureFlags?.isEnabled(WISDOM_PANEL_ACTIVATED_KIT_RECOVERY, {
+            clinicId: metadata.integrationOptions.hospitalNumber,
+            integrationId: metadata.integrationId,
+          }) ?? false
+
+        if (recoveryEnabled) {
+          return await this.recoverOrderFrom422(createPetPayload, metadata, err)
+        }
       }
       throw new WisdomApiException('Failed to create order', err.statusCode ?? err.status, err)
     }

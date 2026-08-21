@@ -1,4 +1,4 @@
-import { DynamicModule, Module } from '@nestjs/common'
+import { DynamicModule, Module, ModuleMetadata, Provider } from '@nestjs/common'
 import { APP_INTERCEPTOR } from '@nestjs/core'
 import { IntegrationContextInterceptor } from '@nominal-systems/dmi-engine-common'
 import { ClientsModule, Transport } from '@nestjs/microservices'
@@ -69,9 +69,22 @@ import { PROVIDER_NAME } from './constants/provider-name'
   exports: [BullModule],
 })
 export class WisdomPanelModule {
-  static register(): DynamicModule {
+  // No default feature-flag provider: one declared here would shadow the host's and boot a second
+  // Statsig SDK. Opt in explicitly; without it, gates read as disabled.
+  static register(options: WisdomPanelModuleOptions = {}): DynamicModule {
     return {
       module: WisdomPanelModule,
+      imports: [...(options.imports ?? [])],
+      providers: [
+        ...(options.featureFlagProvider !== undefined ? [options.featureFlagProvider] : []),
+        ...(options.providers ?? []),
+      ],
     }
   }
+}
+
+export interface WisdomPanelModuleOptions {
+  imports?: ModuleMetadata['imports']
+  providers?: Provider[]
+  featureFlagProvider?: Provider
 }
