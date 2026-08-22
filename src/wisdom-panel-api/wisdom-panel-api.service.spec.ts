@@ -117,4 +117,46 @@ describe('WisdomPanelApiService', () => {
       await expect(service.authenticate(configMock)).rejects.toThrowError()
     })
   })
+
+  describe('getPet', () => {
+    const petResponseMock = {
+      message: 'success',
+      data: {
+        pet: { id: 'pet-id' },
+        kit: { id: 'kit-id', code: 'VKDZHKS' },
+        requisition_form: 'base64 pdf',
+      },
+    }
+
+    beforeEach(() => {
+      jest.spyOn(cacheManager, 'get').mockReturnValue('mockAccessToken')
+    })
+
+    it('should query the kit code and the voyager pet id', async () => {
+      jest.spyOn(httpService, 'get').mockReturnValue(httpResponseMock(200, 'OK', petResponseMock))
+      const response = await service.getPet('VKDZHKS', '434956978', configMock)
+      expect(httpService.get).toHaveBeenCalledWith(
+        `${configMock.baseUrl}/api/voyager/pet`,
+        expect.objectContaining({
+          params: { kit_code: 'VKDZHKS', voyager_pet_id: '434956978' },
+          headers: expect.objectContaining({ Authorization: 'Bearer mockAccessToken' }),
+        }),
+      )
+      expect(response).toEqual(petResponseMock)
+    })
+
+    it('should surface the provider status code when the request fails', async () => {
+      jest.spyOn(httpService, 'get').mockImplementation(() => {
+        return throwError(() => ({
+          response: {
+            status: 422,
+            data: { message: 'WIS_VOY__105: Failed: Kit VKDZHKS could not be found.' },
+          },
+        }))
+      })
+      await expect(service.getPet('VKDZHKS', 'wrong-pet-id', configMock)).rejects.toMatchObject({
+        statusCode: 422,
+      })
+    })
+  })
 })

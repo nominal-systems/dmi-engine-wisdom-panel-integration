@@ -39,7 +39,7 @@ boot a second Statsig SDK instance.
 
 | Flag | Default | Description |
 | --- | --- | --- |
-| `dmi_wisdom_panel_activated_kit_recovery` | off | When the Wisdom Panel API rejects an order with `422` because the kit is already activated, look the kit up and recover the order if the existing activation matches the pet being submitted. If it belongs to a different pet, or no activated kit is found, the `422` is propagated as before. |
+| `dmi_wisdom_panel_activated_kit_recovery` | off | When the Wisdom Panel API rejects an order with `422` because the kit is already activated, look the kit up and recover the order if the existing activation matches the pet being submitted. The requisition form is then retrieved with `GET /api/voyager/pet`, which requires the `voyager_pet_id` sent at activation: a `422` there means the kit belongs to a different patient and the recovery is aborted, while any other failure still recovers the order without a manifest. If the kit belongs to a different pet, or no activated kit is found, the `422` is propagated as before. |
 
 Flags are evaluated with `clinicId` (the integration's `hospitalNumber`) and `integrationId`, so
 rules can target a specific clinic.

@@ -11,7 +11,7 @@ import {
   OAuthTokenResponse,
   WisdomPanelKitItem,
   WisdomPanelKitsResponse,
-  WisdomPanelPetCreatedResponse,
+  WisdomPanelPetResponse,
   WisdomPanelResultSetsResponse,
   WisdomPanelSimpleResultResponse,
 } from '../interfaces/wisdom-panel-api-responses.interface'
@@ -212,7 +212,7 @@ export class WisdomPanelApiService extends BaseApiService {
   async createPet(
     payload: WisdomPanelCreatePetPayload,
     config: WisdomPanelApiConfig,
-  ): Promise<WisdomPanelPetCreatedResponse> {
+  ): Promise<WisdomPanelPetResponse> {
     try {
       const token = await this.authenticate(config)
       const reqConfig = {
@@ -222,12 +222,38 @@ export class WisdomPanelApiService extends BaseApiService {
         },
       }
       return await this.post(
-        `${config.baseUrl}${WisdomPanelApiEndpoints.CREATE_PET}`,
+        `${config.baseUrl}${WisdomPanelApiEndpoints.VOYAGER_PET}`,
         payload,
         reqConfig,
       )
     } catch (err) {
       throw new WisdomApiException('Failed to create pet', err.status, err)
+    }
+  }
+
+  async getPet(
+    kitCode: string,
+    voyagerPetId: string,
+    config: WisdomPanelApiConfig,
+  ): Promise<WisdomPanelPetResponse> {
+    try {
+      const token = await this.authenticate(config)
+      const reqConfig = {
+        params: {
+          kit_code: kitCode,
+          voyager_pet_id: voyagerPetId,
+        },
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+      }
+      return await this.get<WisdomPanelPetResponse>(
+        `${config.baseUrl}${WisdomPanelApiEndpoints.VOYAGER_PET}`,
+        reqConfig,
+      )
+    } catch (err) {
+      throw new WisdomApiException('Failed to get pet', err.status, err)
     }
   }
 

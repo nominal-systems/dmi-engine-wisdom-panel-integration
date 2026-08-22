@@ -27,6 +27,7 @@ describe('WisdomPanelService', () => {
   }
   const apiServiceMock = {
     createPet: jest.fn(),
+    getPet: jest.fn(),
     getKits: jest.fn(),
     getUnacknowledgedKitsForHospital: jest.fn(),
     getUnacknowledgedResultSetsForHospital: jest.fn(),
@@ -141,6 +142,7 @@ describe('WisdomPanelService', () => {
           name: 'Firulais',
           species: 'dog',
           client_last_name: 'Greco',
+          voyager_pet_id: '434956978',
         },
       }
 
@@ -171,6 +173,14 @@ describe('WisdomPanelService', () => {
       beforeEach(() => {
         mapperMock.mapCreateOrderPayload.mockReturnValue(createPetPayload)
         apiServiceMock.createPet.mockRejectedValue(unprocessable)
+        apiServiceMock.getPet.mockResolvedValue({
+          message: 'success',
+          data: {
+            pet: { id: 'pet-id-1', name: 'Firulais' },
+            kit: { id: 'kit-id-1', code: 'VRHPBBN' },
+            requisition_form: 'base64 pdf',
+          },
+        })
         featureFlagProviderMock.isEnabled.mockReturnValue(true)
       })
 
@@ -191,6 +201,69 @@ describe('WisdomPanelService', () => {
           { include: 'pet,pet.owner' },
           expect.any(Object),
         )
+        expect(apiServiceMock.getPet).toHaveBeenCalledWith(
+          'VRHPBBN',
+          '434956978',
+          expect.any(Object),
+        )
+        expect(response).toEqual({
+          externalId: 'kit-id-1',
+          requisitionId: 'VRHPBBN',
+          status: OrderStatus.SUBMITTED,
+          manifest: {
+            contentType: 'application/pdf',
+            data: 'base64 pdf',
+          },
+        })
+      })
+
+      it('should not recover when Wisdom Panel does not match the kit to the submitted patient', async () => {
+        apiServiceMock.getKits.mockResolvedValue(
+          buildKitsResponse(
+            { code: 'VRHPBBN', activated: true },
+            { name: 'Firulais', species: 'dog', 'owner-last-name': 'Greco' },
+          ),
+        )
+        apiServiceMock.getPet.mockRejectedValue(
+          new WisdomApiException(
+            'Failed to get pet',
+            422,
+            new Error('WIS_VOY__105: Failed: Kit VRHPBBN could not be found.'),
+          ),
+        )
+        await expect(service.createOrder(payload, metadata)).rejects.toMatchObject({
+          statusCode: 422,
+          message: "Kit 'VRHPBBN' is activated for a different patient than the one submitted",
+        })
+      })
+
+      it('should not recover when the order carries no patient id', async () => {
+        mapperMock.mapCreateOrderPayload.mockReturnValue({
+          data: { ...createPetPayload.data, voyager_pet_id: '' },
+        })
+        apiServiceMock.getKits.mockResolvedValue(
+          buildKitsResponse(
+            { code: 'VRHPBBN', activated: true },
+            { name: 'Firulais', species: 'dog', 'owner-last-name': 'Greco' },
+          ),
+        )
+        await expect(service.createOrder(payload, metadata)).rejects.toMatchObject({
+          statusCode: 422,
+        })
+        expect(apiServiceMock.getPet).not.toHaveBeenCalled()
+      })
+
+      it('should recover without a manifest when the requisition form cannot be fetched', async () => {
+        apiServiceMock.getKits.mockResolvedValue(
+          buildKitsResponse(
+            { code: 'VRHPBBN', activated: true },
+            { name: 'Firulais', species: 'dog', 'owner-last-name': 'Greco' },
+          ),
+        )
+        apiServiceMock.getPet.mockRejectedValue(
+          new WisdomApiException('Failed to get pet', 429, new Error('Too Many Requests')),
+        )
+        const response: OrderCreatedResponse = await service.createOrder(payload, metadata)
         expect(response).toEqual({
           externalId: 'kit-id-1',
           requisitionId: 'VRHPBBN',
@@ -199,12 +272,28 @@ describe('WisdomPanelService', () => {
         })
       })
 
+      it('should recover without a manifest when the response carries no requisition form', async () => {
+        apiServiceMock.getKits.mockResolvedValue(
+          buildKitsResponse(
+            { code: 'VRHPBBN', activated: true },
+            { name: 'Firulais', species: 'dog', 'owner-last-name': 'Greco' },
+          ),
+        )
+        apiServiceMock.getPet.mockResolvedValue({
+          message: 'success',
+          data: { pet: {}, kit: { id: 'kit-id-1', code: 'VRHPBBN' } },
+        })
+        const response: OrderCreatedResponse = await service.createOrder(payload, metadata)
+        expect(response.manifest).toBeNull()
+      })
+
       it('should not attempt recovery when the flag is disabled', async () => {
         featureFlagProviderMock.isEnabled.mockReturnValue(false)
         await expect(service.createOrder(payload, metadata)).rejects.toMatchObject({
           statusCode: 422,
         })
         expect(apiServiceMock.getKits).not.toHaveBeenCalled()
+        expect(apiServiceMock.getPet).not.toHaveBeenCalled()
       })
 
       it('should fail with a clear 422 when the kit is activated for a different pet', async () => {
@@ -217,6 +306,7 @@ describe('WisdomPanelService', () => {
         await expect(service.createOrder(payload, metadata)).rejects.toThrow(
           /already activated for pet 'Rex'/,
         )
+        expect(apiServiceMock.getPet).not.toHaveBeenCalled()
       })
 
       it('should propagate the original 422 when no kit is found', async () => {
