@@ -9,7 +9,7 @@ export interface OAuthTokenResponse {
   created_at: number
 }
 
-export interface WisdomPanelPetCreatedResponse {
+export interface WisdomPanelPetResponse {
   message: string
   data: {
     pet: WisdomPanelPet

@@ -40,4 +40,21 @@ describe('WisdomPanelApiInterceptor.filter', () => {
       expect(result).toBe(true)
     })
   })
+
+  describe('extractAccessionIds', () => {
+    it('takes the kit code from the request body when a kit is activated', () => {
+      const res = {
+        config: { method: 'post', data: JSON.stringify({ data: { code: 'VKDZHKS' } }) },
+      } as any
+      const ids = interceptor.extractAccessionIds(WisdomPanelApiEndpoints.VOYAGER_PET, {}, res)
+      expect(ids).toEqual(['VKDZHKS'])
+    })
+
+    it('takes the kit code from the response body when an order is retrieved', () => {
+      const body = { data: { kit: { code: 'VKDZHKS' }, requisition_form: 'base64 pdf' } }
+      const res = { config: { method: 'get' } } as any
+      const ids = interceptor.extractAccessionIds(WisdomPanelApiEndpoints.VOYAGER_PET, body, res)
+      expect(ids).toEqual(['VKDZHKS'])
+    })
+  })
 })

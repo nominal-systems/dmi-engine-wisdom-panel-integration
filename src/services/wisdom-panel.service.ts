@@ -1,5 +1,6 @@
 import { Inject, Injectable, Logger, Optional } from '@nestjs/common'
 import {
+  Attachment,
   BaseProviderService,
   BatchResultsResponse,
   Breed,
@@ -9,6 +10,7 @@ import {
   FileUtils,
   IdPayload,
   IntegrationTestResponse,
+  isNullOrUndefinedOrEmpty,
   NullPayloadPayload,
   Order,
   OrderCreatedResponse,
@@ -29,7 +31,7 @@ import { WisdomPanelCreatePetPayload } from '../interfaces/wisdom-panel-api-payl
 import {
   WisdomPanelKitItem,
   WisdomPanelKitsResponse,
-  WisdomPanelPetCreatedResponse,
+  WisdomPanelPetResponse,
   WisdomPanelPetItem,
   WisdomPanelResultSetsResponse,
 } from '../interfaces/wisdom-panel-api-responses.interface'
@@ -78,7 +80,7 @@ export class WisdomPanelService extends BaseProviderService<WisdomPanelMessageDa
     let createPetPayload: WisdomPanelCreatePetPayload | undefined
     try {
       createPetPayload = this.wisdomPanelMapper.mapCreateOrderPayload(payload, metadata)
-      const response: WisdomPanelPetCreatedResponse = await this.wisdomPanelApiService.createPet(
+      const response: WisdomPanelPetResponse = await this.wisdomPanelApiService.createPet(
         createPetPayload,
         metadata.providerConfiguration,
       )
@@ -139,15 +141,17 @@ export class WisdomPanelService extends BaseProviderService<WisdomPanelMessageDa
     })
 
     if (pet !== undefined && petMatchesCreatePetPayload(pet, createPetPayload)) {
+      const manifest = await this.fetchRecoveredManifest(createPetPayload, metadata, originalError)
       this.logger.warn(
         `[RECOVERY] Recovered order for kit code '${kitCode}' (kit id: ${kit.id}): ` +
-          `existing activation matches submitted pet '${pet.attributes.name}'`,
+          `existing activation matches submitted pet '${pet.attributes.name}'` +
+          `${manifest === null ? ' (requisition form unavailable)' : ''}`,
       )
       return {
         externalId: kit.id,
         requisitionId: kit.attributes.code,
         status: OrderStatus.SUBMITTED,
-        manifest: null,
+        manifest,
       }
     }
 
@@ -160,6 +164,66 @@ export class WisdomPanelService extends BaseProviderService<WisdomPanelMessageDa
       422,
       originalError,
     )
+  }
+
+  /**
+   * Retrieves the requisition form of an already-activated kit.
+   *
+   * Wisdom Panel only returns it when the `voyager_pet_id` sent at activation matches the one
+   * stored on the pet, so a 422 here means the activation on record does not belong to the patient
+   * being resubmitted: the recovery is aborted and the original 422 propagated. Any other failure
+   * (throttling, transport, provider outage) says nothing about identity, so the order is still
+   * recovered — without a manifest, as before this endpoint existed.
+   */
+  private async fetchRecoveredManifest(
+    createPetPayload: WisdomPanelCreatePetPayload,
+    metadata: WisdomPanelMessageData,
+    originalError: any,
+  ): Promise<Attachment | null> {
+    const kitCode: string = createPetPayload.data.code
+    const voyagerPetId: string = createPetPayload.data.voyager_pet_id
+
+    if (isNullOrUndefinedOrEmpty(voyagerPetId)) {
+      this.logger.warn(
+        `[RECOVERY] Cannot verify the activation of kit '${kitCode}': the order carries no patient id`,
+      )
+      throw new WisdomApiException('Failed to create order', 422, originalError)
+    }
+
+    let response: WisdomPanelPetResponse
+    try {
+      response = await this.wisdomPanelApiService.getPet(
+        kitCode,
+        voyagerPetId,
+        metadata.providerConfiguration,
+      )
+    } catch (err) {
+      if ((err.statusCode ?? err.status) === 422) {
+        this.logger.warn(
+          `[RECOVERY] Kit '${kitCode}' is not activated for patient '${voyagerPetId}', not recovering`,
+        )
+        throw new WisdomApiException(
+          `Kit '${kitCode}' is activated for a different patient than the one submitted`,
+          422,
+          originalError,
+        )
+      }
+      this.logger.warn(
+        `[RECOVERY] Could not retrieve the requisition form for kit '${kitCode}': ${err.message}`,
+      )
+      return null
+    }
+
+    const requisitionForm = response?.data?.requisition_form
+    if (isNullOrUndefinedOrEmpty(requisitionForm)) {
+      this.logger.warn(`[RECOVERY] Wisdom Panel returned no requisition form for kit '${kitCode}'`)
+      return null
+    }
+
+    return {
+      contentType: 'application/pdf',
+      data: requisitionForm,
+    }
   }
 
   async getBatchOrders(

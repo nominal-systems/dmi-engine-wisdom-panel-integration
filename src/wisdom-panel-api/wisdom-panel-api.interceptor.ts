@@ -42,10 +42,18 @@ export class WisdomPanelApiInterceptor extends AxiosInterceptor {
   public extractAccessionIds(url: string, body: any, response: AxiosResponse): string[] {
     const accessionIds: string[] = []
 
-    if (url.includes(WisdomPanelApiEndpoints.CREATE_PET)) {
-      const payload: any = JSON.parse(response.config.data)
-      if (payload.data.code !== undefined) {
-        accessionIds.push(payload.data.code)
+    if (url.includes(WisdomPanelApiEndpoints.VOYAGER_PET)) {
+      // The same path serves the activation (POST, kit code in the request body) and the
+      // order retrieval (GET, kit code in the response body)
+      if (response.config.method?.toLowerCase() === 'get') {
+        if (body?.data?.kit?.code !== undefined) {
+          accessionIds.push(body.data.kit.code)
+        }
+      } else {
+        const payload: any = JSON.parse(response.config.data)
+        if (payload.data.code !== undefined) {
+          accessionIds.push(payload.data.code)
+        }
       }
     } else if (url.includes(WisdomPanelApiEndpoints.GET_KITS)) {
       body.data.forEach((kit: any) => {
