@@ -167,13 +167,8 @@ export class WisdomPanelService extends BaseProviderService<WisdomPanelMessageDa
   }
 
   /**
-   * Retrieves the requisition form of an already-activated kit.
-   *
-   * Wisdom Panel only returns it when the `voyager_pet_id` sent at activation matches the one
-   * stored on the pet, so a 422 here means the activation on record does not belong to the patient
-   * being resubmitted: the recovery is aborted and the original 422 propagated. Any other failure
-   * (throttling, transport, provider outage) says nothing about identity, so the order is still
-   * recovered — without a manifest, as before this endpoint existed.
+   * Fetches the requisition form of an already-activated kit. Wisdom Panel only returns it when the
+   * `voyager_pet_id` matches the pet on record, so a 422 means the kit belongs to another patient.
    */
   private async fetchRecoveredManifest(
     createPetPayload: WisdomPanelCreatePetPayload,
