@@ -129,6 +129,7 @@ export class WisdomPanelApiService extends BaseApiService {
 
   async getSimplifiedResultSets(
     kitId: string,
+    kitCode: string,
     config: WisdomPanelApiConfig,
   ): Promise<WisdomPanelSimpleResultResponse> {
     try {
@@ -138,6 +139,8 @@ export class WisdomPanelApiService extends BaseApiService {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
         },
+        // Read by the interceptor: neither the URL nor the response carries the kit code
+        metadata: { kitCode },
       }
       return await this.get<WisdomPanelSimpleResultResponse>(
         `${config.baseUrl}${WisdomPanelApiEndpoints.GET_SIMPLIFIED_RESULT_SETS}/${kitId}`,
@@ -148,7 +151,11 @@ export class WisdomPanelApiService extends BaseApiService {
     }
   }
 
-  async getReportPdfBase64(kitId: string, config: WisdomPanelApiConfig): Promise<string> {
+  async getReportPdfBase64(
+    kitId: string,
+    kitCode: string,
+    config: WisdomPanelApiConfig,
+  ): Promise<string> {
     try {
       const token = await this.authenticate(config)
       const reqConfig = {
@@ -157,6 +164,8 @@ export class WisdomPanelApiService extends BaseApiService {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
         },
+        // Read by the interceptor: neither the URL nor the response carries the kit code
+        metadata: { kitCode },
       }
       const response = await this.get<ArrayBuffer>(
         `${config.baseUrl}${WisdomPanelApiEndpoints.GET_REPORT_PDF}/${kitId}`,

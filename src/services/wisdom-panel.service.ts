@@ -319,6 +319,7 @@ export class WisdomPanelService extends BaseProviderService<WisdomPanelMessageDa
     // Get simplified results
     const simplifiedResults = await this.wisdomPanelApiService.getSimplifiedResultSets(
       kit.id,
+      kit.attributes.code,
       metadata.providerConfiguration,
     )
     if (simplifiedResults.data === undefined || simplifiedResults.data === null) {
@@ -333,6 +334,7 @@ export class WisdomPanelService extends BaseProviderService<WisdomPanelMessageDa
     try {
       base64PdfReport = await this.wisdomPanelApiService.getReportPdfBase64(
         kit.id,
+        kit.attributes.code,
         metadata.providerConfiguration,
       )
     } catch (error) {

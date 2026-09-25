@@ -174,10 +174,38 @@ describe('WisdomPanelApiService', () => {
           },
         }))
       })
-      await expect(service.getReportPdfBase64('kit-id', configMock)).rejects.toMatchObject({
+      await expect(
+        service.getReportPdfBase64('kit-id', 'KIT0001', configMock),
+      ).rejects.toMatchObject({
         statusCode: 404,
         message: expect.stringMatching(/^\[HTTP 404\] /),
       })
+    })
+
+    it('should send the kit code in the request config', async () => {
+      jest
+        .spyOn(httpService, 'get')
+        .mockReturnValue(httpResponseMock(200, 'OK', new ArrayBuffer(0)))
+      await service.getReportPdfBase64('kit-id', 'KIT0001', configMock)
+      expect(httpService.get).toHaveBeenCalledWith(
+        'https://api.example.com/pdf-generator/vet-report/kit-id',
+        expect.objectContaining({ metadata: { kitCode: 'KIT0001' } }),
+      )
+    })
+  })
+
+  describe('getSimplifiedResultSets', () => {
+    beforeEach(() => {
+      jest.spyOn(cacheManager, 'get').mockReturnValue('mockAccessToken')
+    })
+
+    it('should send the kit code in the request config', async () => {
+      jest.spyOn(httpService, 'get').mockReturnValue(httpResponseMock(200, 'OK', { data: {} }))
+      await service.getSimplifiedResultSets('kit-id', 'KIT0001', configMock)
+      expect(httpService.get).toHaveBeenCalledWith(
+        'https://api.example.com/api/voyager/banfield-results-retrieval/kit-id',
+        expect.objectContaining({ metadata: { kitCode: 'KIT0001' } }),
+      )
     })
   })
 })

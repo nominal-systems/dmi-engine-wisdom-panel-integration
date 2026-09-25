@@ -62,8 +62,15 @@ export class WisdomPanelApiInterceptor extends AxiosInterceptor {
       body.included.forEach((kit: any) => {
         accessionIds.push(kit.attributes.code)
       })
-    } else if (url.includes(WisdomPanelApiEndpoints.GET_SIMPLIFIED_RESULT_SETS)) {
-      // TODO(gb): there is no link to the kit code. Can the kit be included?
+    } else if (
+      url.includes(WisdomPanelApiEndpoints.GET_SIMPLIFIED_RESULT_SETS) ||
+      url.includes(WisdomPanelApiEndpoints.GET_REPORT_PDF)
+    ) {
+      // The URL carries the kit id, so the kit code comes from the request config
+      const kitCode = (response.config as any)?.metadata?.kitCode
+      if (kitCode !== undefined) {
+        accessionIds.push(kitCode)
+      }
     }
 
     return accessionIds
