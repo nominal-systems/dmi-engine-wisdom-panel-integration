@@ -295,7 +295,7 @@ export class WisdomPanelService extends BaseProviderService<WisdomPanelMessageDa
           }
         } catch (error) {
           this.logger.error(
-            `Failed to fetch result set ${resultSet.id} (kit code: ${kit.attributes.code}), leaving it unacknowledged: ${error.message}`,
+            `Failed to fetch result set ${resultSet.id} (kit code: ${kit.attributes.code}) of hospital '${metadata.integrationOptions.hospitalNumber}', leaving it unacknowledged: ${error.message}`,
             error.stack,
           )
         }
@@ -321,9 +321,9 @@ export class WisdomPanelService extends BaseProviderService<WisdomPanelMessageDa
       kit.id,
       metadata.providerConfiguration,
     )
-    if (isNullOrUndefinedOrEmpty(simplifiedResults.data)) {
+    if (simplifiedResults.data === undefined || simplifiedResults.data === null) {
       this.logger.warn(
-        `Result set ${resultSet.id} (kit code: ${kit.attributes.code}) has no result data, leaving it unacknowledged: ${simplifiedResults.message}`,
+        `Result set ${resultSet.id} (kit code: ${kit.attributes.code}) of hospital '${metadata.integrationOptions.hospitalNumber}' has no result data, leaving it unacknowledged: ${simplifiedResults.message}`,
       )
       return undefined
     }
@@ -338,7 +338,7 @@ export class WisdomPanelService extends BaseProviderService<WisdomPanelMessageDa
     } catch (error) {
       if ((error.statusCode ?? error.status) === 404) {
         this.logger.warn(
-          `Report PDF for result set ${resultSet.id} (kit code: ${kit.attributes.code}) is not available yet, leaving it unacknowledged`,
+          `Report PDF for result set ${resultSet.id} (kit code: ${kit.attributes.code}) of hospital '${metadata.integrationOptions.hospitalNumber}' is not available yet, leaving it unacknowledged`,
         )
         return undefined
       }

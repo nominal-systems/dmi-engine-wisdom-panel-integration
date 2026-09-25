@@ -78,15 +78,18 @@ describe('ResultsProcessor', () => {
     await processor.fetchResults(job)
 
     const data = { integrationId: 'integration-1', results }
-    expect(apiClientMock.emit).toHaveBeenCalledWith('external_order_results', data)
-    expect(apiClientMock.emit).toHaveBeenCalledWith('external_results', data)
+    expect(apiClientMock.emit).toHaveBeenCalledTimes(2)
+    expect(apiClientMock.emit).toHaveBeenNthCalledWith(1, 'external_order_results', data)
+    expect(apiClientMock.emit).toHaveBeenNthCalledWith(2, 'external_results', data)
     expect(wisdomPanelServiceMock.acknowledgeResult).toHaveBeenCalledTimes(2)
     const metadata = { integrationOptions: { hospitalNumber: '123' }, providerConfiguration: {} }
-    expect(wisdomPanelServiceMock.acknowledgeResult).toHaveBeenCalledWith(
+    expect(wisdomPanelServiceMock.acknowledgeResult).toHaveBeenNthCalledWith(
+      1,
       { id: 'result-set-1' },
       metadata,
     )
-    expect(wisdomPanelServiceMock.acknowledgeResult).toHaveBeenCalledWith(
+    expect(wisdomPanelServiceMock.acknowledgeResult).toHaveBeenNthCalledWith(
+      2,
       { id: 'result-set-3' },
       metadata,
     )

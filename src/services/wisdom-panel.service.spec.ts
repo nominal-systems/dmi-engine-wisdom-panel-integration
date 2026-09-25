@@ -493,7 +493,7 @@ describe('WisdomPanelService', () => {
         expect(mapperMock.mapWisdomPanelResult).toHaveBeenCalledTimes(2)
         expect(warnSpy).toHaveBeenCalledTimes(1)
         expect(warnSpy).toHaveBeenCalledWith(
-          expect.stringMatching(/result-set-2.*leaving it unacknowledged/),
+          expect.stringMatching(/result-set-2.*hospital '123'.*leaving it unacknowledged/),
         )
         expect(errorSpy).not.toHaveBeenCalled()
       })
