@@ -402,7 +402,9 @@ describe('WisdomPanelService', () => {
           },
         ],
       })
-      apiServiceMock.getSimplifiedResultSets.mockResolvedValueOnce({})
+      apiServiceMock.getSimplifiedResultSets.mockResolvedValueOnce({
+        data: { notable_and_at_risk_health_test_results: [] },
+      })
       const batchResultsResponse: BatchResultsResponse = await service.getBatchResults(
         payload,
         metadata,
@@ -542,6 +544,37 @@ describe('WisdomPanelService', () => {
           expect.stringContaining('result-set-2'),
           expect.any(String),
         )
+      })
+
+      it('should skip a result set that carries no result data', async () => {
+        const failedAnalysisMessage =
+          'WIS_VOY__108: Kit analysis has resulted in a failure during the generating-report stage with status code failed_edna_results.'
+        apiServiceMock.getUnacknowledgedResultSetsForHospital.mockResolvedValue(
+          buildResultSetsResponse(2),
+        )
+        apiServiceMock.getSimplifiedResultSets.mockImplementation(async (kitId: string) => {
+          if (kitId === 'kit-1') {
+            return { message: failedAnalysisMessage }
+          }
+          return { message: 'success', data: { notable_and_at_risk_health_test_results: [] } }
+        })
+        const response: BatchResultsResponse = await service.getBatchResults(payload, metadata)
+        expect(response.results).toEqual([{ id: 'result-set-2' }])
+        expect(apiServiceMock.getReportPdfBase64).not.toHaveBeenCalledWith(
+          'kit-1',
+          expect.anything(),
+        )
+        expect(apiServiceMock.getReportPdfBase64).toHaveBeenCalledWith('kit-2', expect.anything())
+        const mappedResultSetIds = mapperMock.mapWisdomPanelResult.mock.calls.map(
+          ([resultSet]) => resultSet.id,
+        )
+        expect(mappedResultSetIds).toEqual(['result-set-2'])
+        expect(warnSpy).toHaveBeenCalledTimes(1)
+        expect(warnSpy).toHaveBeenCalledWith(
+          expect.stringMatching(/result-set-1.*leaving it unacknowledged/),
+        )
+        expect(warnSpy).toHaveBeenCalledWith(expect.stringContaining(failedAnalysisMessage))
+        expect(errorSpy).not.toHaveBeenCalled()
       })
 
       it('should return a result set once its report PDF becomes available', async () => {

@@ -321,6 +321,12 @@ export class WisdomPanelService extends BaseProviderService<WisdomPanelMessageDa
       kit.id,
       metadata.providerConfiguration,
     )
+    if (isNullOrUndefinedOrEmpty(simplifiedResults.data)) {
+      this.logger.warn(
+        `Result set ${resultSet.id} (kit code: ${kit.attributes.code}) has no result data, leaving it unacknowledged: ${simplifiedResults.message}`,
+      )
+      return undefined
+    }
 
     // Get PDF report (Wisdom Panel answers 404 until the report of a released kit is generated)
     let base64PdfReport: string
