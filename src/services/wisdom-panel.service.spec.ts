@@ -1,4 +1,5 @@
 import { WisdomPanelService } from './wisdom-panel.service'
+import { Logger } from '@nestjs/common'
 import { Test, TestingModule } from '@nestjs/testing'
 import { WisdomPanelApiService } from '../wisdom-panel-api/wisdom-panel-api.service'
 import { WisdomPanelMapper } from '../providers/wisdom-panel-mapper'
@@ -364,6 +365,12 @@ describe('WisdomPanelService', () => {
   })
 
   describe('getBatchResults()', () => {
+    beforeEach(() => {
+      mapperMock.mapWisdomPanelResult
+        .mockReset()
+        .mockImplementation((resultSet) => ({ id: resultSet.id }))
+    })
+
     it("should fetch the PDF report from Wisdom's API", async () => {
       const payload = {} as unknown as NullPayloadPayload
       const metadata = {
@@ -402,6 +409,162 @@ describe('WisdomPanelService', () => {
       )
       expect(batchResultsResponse.results).toHaveLength(1)
       expect(apiServiceMock.getReportPdfBase64).toBeCalledWith('kit-id', expect.any(Object))
+    })
+
+    describe('result set isolation', () => {
+      const payload = {} as unknown as NullPayloadPayload
+      const metadata = {
+        integrationOptions: { hospitalNumber: '123' },
+        providerConfiguration: {},
+      } as unknown as WisdomPanelMessageData
+
+      const buildResultSetsResponse = (count: number) => ({
+        data: Array.from({ length: count }, (_, i) => ({
+          id: `result-set-${i + 1}`,
+          type: 'result-sets',
+          relationships: { kit: { data: { type: 'kits', id: `kit-${i + 1}` } } },
+        })),
+        included: Array.from({ length: count }, (_, i) => ({
+          id: `kit-${i + 1}`,
+          type: 'kits',
+          attributes: { code: `KIT000${i + 1}` },
+        })),
+      })
+
+      const pdfError = (status: number) =>
+        new WisdomApiException(
+          `[HTTP ${status}] Failed to GET https://api.example.com/pdf-generator/vet-report/kit-2`,
+          status,
+          new Error('Failed to GET https://api.example.com/pdf-generator/vet-report/kit-2'),
+        )
+
+      const pdfFailsFor = (failingKitId: string, error: Error) => {
+        apiServiceMock.getReportPdfBase64.mockImplementation(async (kitId: string) => {
+          if (kitId === failingKitId) {
+            throw error
+          }
+          return 'base64 pdf'
+        })
+      }
+
+      let warnSpy: jest.SpyInstance
+      let errorSpy: jest.SpyInstance
+
+      beforeEach(() => {
+        warnSpy = jest.spyOn(Logger.prototype, 'warn').mockImplementation(() => undefined)
+        errorSpy = jest.spyOn(Logger.prototype, 'error').mockImplementation(() => undefined)
+        apiServiceMock.getUnacknowledgedResultSetsForHospital.mockReset()
+        apiServiceMock.getSimplifiedResultSets.mockReset().mockResolvedValue({
+          message: 'success',
+          data: { notable_and_at_risk_health_test_results: [] },
+        })
+        apiServiceMock.getReportPdfBase64.mockReset().mockResolvedValue('base64 pdf')
+      })
+
+      afterEach(() => {
+        warnSpy.mockRestore()
+        errorSpy.mockRestore()
+      })
+
+      it('should return every result set when all report PDFs are available', async () => {
+        apiServiceMock.getUnacknowledgedResultSetsForHospital.mockResolvedValue(
+          buildResultSetsResponse(3),
+        )
+        const response: BatchResultsResponse = await service.getBatchResults(payload, metadata)
+        expect(response.results).toEqual([
+          { id: 'result-set-1' },
+          { id: 'result-set-2' },
+          { id: 'result-set-3' },
+        ])
+        expect(apiServiceMock.getReportPdfBase64).toHaveBeenCalledTimes(3)
+        expect(warnSpy).not.toHaveBeenCalled()
+        expect(errorSpy).not.toHaveBeenCalled()
+      })
+
+      it('should leave a result set whose report PDF is not available yet unacknowledged', async () => {
+        apiServiceMock.getUnacknowledgedResultSetsForHospital.mockResolvedValue(
+          buildResultSetsResponse(3),
+        )
+        pdfFailsFor('kit-2', pdfError(404))
+        const response: BatchResultsResponse = await service.getBatchResults(payload, metadata)
+        expect(response.results).toEqual([{ id: 'result-set-1' }, { id: 'result-set-3' }])
+        expect(mapperMock.mapWisdomPanelResult).toHaveBeenCalledTimes(2)
+        expect(warnSpy).toHaveBeenCalledTimes(1)
+        expect(warnSpy).toHaveBeenCalledWith(
+          expect.stringMatching(/result-set-2.*leaving it unacknowledged/),
+        )
+        expect(errorSpy).not.toHaveBeenCalled()
+      })
+
+      it('should skip a result set whose report PDF fails with another status', async () => {
+        apiServiceMock.getUnacknowledgedResultSetsForHospital.mockResolvedValue(
+          buildResultSetsResponse(3),
+        )
+        pdfFailsFor('kit-2', pdfError(500))
+        const response: BatchResultsResponse = await service.getBatchResults(payload, metadata)
+        expect(response.results).toEqual([{ id: 'result-set-1' }, { id: 'result-set-3' }])
+        expect(errorSpy).toHaveBeenCalledTimes(1)
+        expect(errorSpy).toHaveBeenCalledWith(
+          expect.stringMatching(/result-set-2.*leaving it unacknowledged/),
+          expect.any(String),
+        )
+        expect(warnSpy).not.toHaveBeenCalled()
+      })
+
+      it('should not treat a 404 on the simplified results as a pending report', async () => {
+        apiServiceMock.getUnacknowledgedResultSetsForHospital.mockResolvedValue(
+          buildResultSetsResponse(1),
+        )
+        apiServiceMock.getSimplifiedResultSets.mockRejectedValue(
+          new WisdomApiException('[HTTP 404] Failed to GET', 404, new Error('Failed to GET')),
+        )
+        const response: BatchResultsResponse = await service.getBatchResults(payload, metadata)
+        expect(response.results).toEqual([])
+        expect(apiServiceMock.getReportPdfBase64).not.toHaveBeenCalled()
+        expect(errorSpy).toHaveBeenCalledTimes(1)
+        expect(warnSpy).not.toHaveBeenCalled()
+      })
+
+      it('should skip a result set that fails to map', async () => {
+        apiServiceMock.getUnacknowledgedResultSetsForHospital.mockResolvedValue(
+          buildResultSetsResponse(3),
+        )
+        mapperMock.mapWisdomPanelResult.mockImplementation((resultSet) => {
+          if (resultSet.id === 'result-set-2') {
+            throw new TypeError('Cannot convert undefined or null to object')
+          }
+          return { id: resultSet.id }
+        })
+        const response: BatchResultsResponse = await service.getBatchResults(payload, metadata)
+        expect(response.results).toEqual([{ id: 'result-set-1' }, { id: 'result-set-3' }])
+        expect(errorSpy).toHaveBeenCalledTimes(1)
+        expect(errorSpy).toHaveBeenCalledWith(
+          expect.stringContaining('result-set-2'),
+          expect.any(String),
+        )
+      })
+
+      it('should return a result set once its report PDF becomes available', async () => {
+        apiServiceMock.getUnacknowledgedResultSetsForHospital.mockResolvedValue(
+          buildResultSetsResponse(1),
+        )
+        apiServiceMock.getReportPdfBase64
+          .mockRejectedValueOnce(pdfError(404))
+          .mockResolvedValueOnce('base64 pdf')
+        const firstPoll: BatchResultsResponse = await service.getBatchResults(payload, metadata)
+        expect(firstPoll.results).toEqual([])
+        const secondPoll: BatchResultsResponse = await service.getBatchResults(payload, metadata)
+        expect(secondPoll.results).toEqual([{ id: 'result-set-1' }])
+      })
+
+      it('should still fail the batch when the result sets cannot be listed', async () => {
+        apiServiceMock.getUnacknowledgedResultSetsForHospital.mockRejectedValue(
+          new Error('[HTTP 503] Failed to GET https://api.example.com/api/v1/result-sets'),
+        )
+        await expect(service.getBatchResults(payload, metadata)).rejects.toThrow(
+          /^Failed to get batch results: /,
+        )
+      })
     })
   })
 })

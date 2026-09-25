@@ -60,4 +60,35 @@ describe('ResultsProcessor', () => {
 
     await expect(processor.fetchResults(job)).rejects.toThrow(error)
   })
+
+  it('should emit and acknowledge every result returned by getBatchResults', async () => {
+    const job = {
+      data: {
+        payload: {
+          integrationId: 'integration-1',
+        },
+        integrationOptions: { hospitalNumber: '123' },
+        providerConfiguration: {},
+      },
+    } as any
+    const results = [{ id: 'result-set-1' }, { id: 'result-set-3' }]
+
+    wisdomPanelServiceMock.getBatchResults.mockResolvedValueOnce({ results })
+
+    await processor.fetchResults(job)
+
+    const data = { integrationId: 'integration-1', results }
+    expect(apiClientMock.emit).toHaveBeenCalledWith('external_order_results', data)
+    expect(apiClientMock.emit).toHaveBeenCalledWith('external_results', data)
+    expect(wisdomPanelServiceMock.acknowledgeResult).toHaveBeenCalledTimes(2)
+    const metadata = { integrationOptions: { hospitalNumber: '123' }, providerConfiguration: {} }
+    expect(wisdomPanelServiceMock.acknowledgeResult).toHaveBeenCalledWith(
+      { id: 'result-set-1' },
+      metadata,
+    )
+    expect(wisdomPanelServiceMock.acknowledgeResult).toHaveBeenCalledWith(
+      { id: 'result-set-3' },
+      metadata,
+    )
+  })
 })
