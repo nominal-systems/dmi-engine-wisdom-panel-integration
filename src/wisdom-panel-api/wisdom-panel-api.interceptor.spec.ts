@@ -56,5 +56,22 @@ describe('WisdomPanelApiInterceptor.filter', () => {
       const ids = interceptor.extractAccessionIds(WisdomPanelApiEndpoints.VOYAGER_PET, body, res)
       expect(ids).toEqual(['VKDZHKS'])
     })
+
+    describe.each([
+      ['simplified results', `${WisdomPanelApiEndpoints.GET_SIMPLIFIED_RESULT_SETS}/kit-id`],
+      ['report PDF', `${WisdomPanelApiEndpoints.GET_REPORT_PDF}/kit-id`],
+    ])('%s requests', (_, url) => {
+      it.each([200, 404])('takes the kit code from the request config (HTTP %i)', (status) => {
+        const res = { status, config: { method: 'get', metadata: { kitCode: 'VKDZHKS' } } } as any
+        const ids = interceptor.extractAccessionIds(url, {}, res)
+        expect(ids).toEqual(['VKDZHKS'])
+      })
+
+      it('returns no accession ids without a kit code in the request config', () => {
+        const res = { status: 200, config: { method: 'get' } } as any
+        const ids = interceptor.extractAccessionIds(url, {}, res)
+        expect(ids).toEqual([])
+      })
+    })
   })
 })

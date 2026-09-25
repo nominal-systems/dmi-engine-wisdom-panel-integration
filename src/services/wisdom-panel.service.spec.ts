@@ -410,7 +410,11 @@ describe('WisdomPanelService', () => {
         metadata,
       )
       expect(batchResultsResponse.results).toHaveLength(1)
-      expect(apiServiceMock.getReportPdfBase64).toBeCalledWith('kit-id', expect.any(Object))
+      expect(apiServiceMock.getReportPdfBase64).toHaveBeenCalledWith(
+        'kit-id',
+        'XOXOXO',
+        expect.any(Object),
+      )
     })
 
     describe('result set isolation', () => {
@@ -481,6 +485,20 @@ describe('WisdomPanelService', () => {
         expect(apiServiceMock.getReportPdfBase64).toHaveBeenCalledTimes(3)
         expect(warnSpy).not.toHaveBeenCalled()
         expect(errorSpy).not.toHaveBeenCalled()
+      })
+
+      it('should pass the kit code to the simplified results and report PDF requests', async () => {
+        apiServiceMock.getUnacknowledgedResultSetsForHospital.mockResolvedValue(
+          buildResultSetsResponse(2),
+        )
+        await service.getBatchResults(payload, metadata)
+        for (const [kitId, kitCode] of [
+          ['kit-1', 'KIT0001'],
+          ['kit-2', 'KIT0002'],
+        ]) {
+          expect(apiServiceMock.getSimplifiedResultSets).toHaveBeenCalledWith(kitId, kitCode, {})
+          expect(apiServiceMock.getReportPdfBase64).toHaveBeenCalledWith(kitId, kitCode, {})
+        }
       })
 
       it('should leave a result set whose report PDF is not available yet unacknowledged', async () => {
@@ -563,8 +581,13 @@ describe('WisdomPanelService', () => {
         expect(apiServiceMock.getReportPdfBase64).not.toHaveBeenCalledWith(
           'kit-1',
           expect.anything(),
+          expect.anything(),
         )
-        expect(apiServiceMock.getReportPdfBase64).toHaveBeenCalledWith('kit-2', expect.anything())
+        expect(apiServiceMock.getReportPdfBase64).toHaveBeenCalledWith(
+          'kit-2',
+          'KIT0002',
+          expect.anything(),
+        )
         const mappedResultSetIds = mapperMock.mapWisdomPanelResult.mock.calls.map(
           ([resultSet]) => resultSet.id,
         )
