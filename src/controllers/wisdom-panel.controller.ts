@@ -3,6 +3,7 @@ import { PROVIDER_NAME } from '../constants/provider-name'
 import { SHARED_SUBSCRIPTION_GROUP } from '../constants/shared-subscription-group'
 import {
   ApiEvent,
+  Attachment,
   Breed,
   Device,
   IntegrationTestResponse,
@@ -47,6 +48,15 @@ export class WisdomPanelController
   public async createOrder(msg: ApiEvent<WisdomPanelMessageData>): Promise<OrderCreatedResponse> {
     const { payload, ...metadata } = msg.data
     return await this.wisdomPanelService.createOrder(payload, metadata)
+  }
+
+  @SharedMessagePattern(
+    SHARED_SUBSCRIPTION_GROUP,
+    `${PROVIDER_NAME}/${Resource.Orders}/${Operation.Manifest}`,
+  )
+  public async getOrderManifest(msg: ApiEvent<WisdomPanelMessageData>): Promise<Attachment> {
+    const { payload, ...metadata } = msg.data
+    return await this.wisdomPanelService.getManifest(payload, metadata)
   }
 
   @SharedMessagePattern(
