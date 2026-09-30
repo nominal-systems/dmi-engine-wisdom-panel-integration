@@ -190,7 +190,8 @@ export interface WisdomPanelResultSetItem extends WisdomPanelLinks {
 
 export interface WisdomPanelSimpleResultResponse {
   message: string
-  data: WisdomPanelSimpleResult
+  // Absent when the kit's analysis failed: the response then carries only the message
+  data?: WisdomPanelSimpleResult
 }
 
 export interface WisdomPanelSimpleResult {

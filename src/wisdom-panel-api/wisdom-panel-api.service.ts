@@ -164,7 +164,7 @@ export class WisdomPanelApiService extends BaseApiService {
       )
       return Buffer.from(response).toString('base64')
     } catch (error) {
-      throw new Error(`[HTTP ${error.status}] ${error.message}`)
+      throw new WisdomApiException(`[HTTP ${error.status}] ${error.message}`, error.status, error)
     }
   }
 

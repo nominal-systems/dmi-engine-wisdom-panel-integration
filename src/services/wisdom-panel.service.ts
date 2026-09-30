@@ -33,6 +33,7 @@ import {
   WisdomPanelKitsResponse,
   WisdomPanelPetResponse,
   WisdomPanelPetItem,
+  WisdomPanelResultSetItem,
   WisdomPanelResultSetsResponse,
 } from '../interfaces/wisdom-panel-api-responses.interface'
 import { ConfigService } from '@nestjs/config'
@@ -283,40 +284,80 @@ export class WisdomPanelService extends BaseProviderService<WisdomPanelMessageDa
           continue
         }
 
-        // Get simplified results
         this.logger.debug(`Found result set ${resultSet.id} (kit code: ${kit.attributes.code})`)
-        const simplifiedResults = await this.wisdomPanelApiService.getSimplifiedResultSets(
-          kit.id,
-          metadata.providerConfiguration,
-        )
 
-        // Get PDF report
-        const base64PdfReport = await this.wisdomPanelApiService.getReportPdfBase64(
-          kit.id,
-          metadata.providerConfiguration,
-        )
-
-        if (this.configService.get('debug.wisdomApiResults')) {
-          FileUtils.saveFile(
-            `simplified-results-${kit.attributes.code}.json`,
-            JSON.stringify(simplifiedResults.data, null, 2),
+        // A result set that is not pushed here is never acknowledged, so it comes back on the next
+        // poll without holding back the other results of the hospital.
+        try {
+          const result = await this.fetchResult(resultSet, kit, metadata)
+          if (result !== undefined) {
+            batchResults.results.push(result)
+          }
+        } catch (error) {
+          this.logger.error(
+            `Failed to fetch result set ${resultSet.id} (kit code: ${kit.attributes.code}) of hospital '${metadata.integrationOptions.hospitalNumber}', leaving it unacknowledged: ${error.message}`,
+            error.stack,
           )
         }
-
-        batchResults.results.push(
-          this.wisdomPanelMapper.mapWisdomPanelResult(
-            resultSet,
-            kit,
-            simplifiedResults.data,
-            base64PdfReport,
-          ),
-        )
       }
     } catch (error) {
       throw new Error(`Failed to get batch results: ${error.message}`)
     }
 
     return batchResults
+  }
+
+  /**
+   * Fetches and maps a single result set. Returns `undefined` when the result set is not ready to
+   * be delivered yet, so that it is left unacknowledged and retried on the next poll.
+   */
+  private async fetchResult(
+    resultSet: WisdomPanelResultSetItem,
+    kit: WisdomPanelKitItem,
+    metadata: WisdomPanelMessageData,
+  ): Promise<Result | undefined> {
+    // Get simplified results
+    const simplifiedResults = await this.wisdomPanelApiService.getSimplifiedResultSets(
+      kit.id,
+      metadata.providerConfiguration,
+    )
+    if (simplifiedResults.data === undefined || simplifiedResults.data === null) {
+      this.logger.warn(
+        `Result set ${resultSet.id} (kit code: ${kit.attributes.code}) of hospital '${metadata.integrationOptions.hospitalNumber}' has no result data, leaving it unacknowledged: ${simplifiedResults.message}`,
+      )
+      return undefined
+    }
+
+    // Get PDF report (Wisdom Panel answers 404 until the report of a released kit is generated)
+    let base64PdfReport: string
+    try {
+      base64PdfReport = await this.wisdomPanelApiService.getReportPdfBase64(
+        kit.id,
+        metadata.providerConfiguration,
+      )
+    } catch (error) {
+      if ((error.statusCode ?? error.status) === 404) {
+        this.logger.warn(
+          `Report PDF for result set ${resultSet.id} (kit code: ${kit.attributes.code}) of hospital '${metadata.integrationOptions.hospitalNumber}' is not available yet, leaving it unacknowledged`,
+        )
+        return undefined
+      }
+      throw error
+    }
+
+    if (this.configService.get('debug.wisdomApiResults')) {
+      FileUtils.saveFile(
+        `simplified-results-${kit.attributes.code}.json`,
+        JSON.stringify(simplifiedResults.data, null, 2),
+      )
+    }
+
+    return this.wisdomPanelMapper.mapWisdomPanelResult(
+      resultSet,
+      kit,
+      simplifiedResults.data,
+      base64PdfReport,
+    )
   }
 
   async acknowledgeOrder(payload: IdPayload, metadata: WisdomPanelMessageData): Promise<void> {

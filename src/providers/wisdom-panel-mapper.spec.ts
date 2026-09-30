@@ -269,7 +269,7 @@ describe('WisdomPanelMapper', () => {
   describe('extractTestResults()', () => {
     const simpleResult = FileUtils.loadFile(
       'test/examples/simplified-results/BBBFCVH.json',
-    ) as WisdomPanelSimpleResultResponse
+    ) as Required<WisdomPanelSimpleResultResponse>
 
     it('should extract test results from a simplified result', () => {
       const testResults: TestResult[] = mapper.extractTestResults(simpleResult.data)
@@ -310,7 +310,7 @@ describe('WisdomPanelMapper', () => {
   describe('mapWisdomPanelTestResultItems()', () => {
     const simpleResult = FileUtils.loadFile(
       'test/examples/simplified-results/BBBFCVH.json',
-    ) as WisdomPanelSimpleResultResponse
+    ) as Required<WisdomPanelSimpleResultResponse>
 
     it('should map breed percentages results', () => {
       const breedPercentages: WisdomPanelTestResult = simpleResult.data

@@ -159,4 +159,25 @@ describe('WisdomPanelApiService', () => {
       })
     })
   })
+
+  describe('getReportPdfBase64', () => {
+    beforeEach(() => {
+      jest.spyOn(cacheManager, 'get').mockReturnValue('mockAccessToken')
+    })
+
+    it('should surface the provider status code when the report is not available', async () => {
+      jest.spyOn(httpService, 'get').mockImplementation(() => {
+        return throwError(() => ({
+          response: {
+            status: 404,
+            data: { message: 'Not Found' },
+          },
+        }))
+      })
+      await expect(service.getReportPdfBase64('kit-id', configMock)).rejects.toMatchObject({
+        statusCode: 404,
+        message: expect.stringMatching(/^\[HTTP 404\] /),
+      })
+    })
+  })
 })
