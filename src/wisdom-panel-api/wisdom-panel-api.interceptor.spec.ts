@@ -4,7 +4,10 @@ import { WisdomPanelApiHttpService } from './wisdom-panel-api-http.service'
 import { AxiosResponse } from 'axios'
 import { Logger } from '@nestjs/common'
 
-describe('WisdomPanelApiInterceptor.filter', () => {
+// Requests carry the integration's base URL, so the interceptor sees absolute URLs
+const BASE_URL = 'https://wisdom.example.test'
+
+describe('WisdomPanelApiInterceptor', () => {
   let interceptor: WisdomPanelApiInterceptor
 
   beforeEach(() => {
@@ -49,13 +52,13 @@ describe('WisdomPanelApiInterceptor.filter', () => {
 
     it('returns false for a successful token exchange on /oauth/token', () => {
       const res = buildResponse(200)
-      const result = interceptor.filter(WisdomPanelApiEndpoints.AUTH, res.data, res)
+      const result = interceptor.filter(`${BASE_URL}${WisdomPanelApiEndpoints.AUTH}`, res.data, res)
       expect(result).toBe(false)
     })
 
     it('returns false for a failed token exchange on /oauth/token (400 invalid_grant)', () => {
       const res = buildResponse(400)
-      const result = interceptor.filter(WisdomPanelApiEndpoints.AUTH, res.data, res)
+      const result = interceptor.filter(`${BASE_URL}${WisdomPanelApiEndpoints.AUTH}`, res.data, res)
       expect(result).toBe(false)
     })
   })
@@ -86,43 +89,65 @@ describe('WisdomPanelApiInterceptor.filter', () => {
     })
 
     const buildCall = (
+      method: 'get' | 'post',
       url: string,
       status: number,
       data: any,
-      payload: any,
+      payload?: any,
     ): AxiosResponse<any> => {
       return {
         data,
         status,
         statusText: '',
         headers: {},
-        config: { url, method: 'post', data: JSON.stringify(payload) },
-        request: { method: 'POST', headers: {} },
+        config: { url, method, data: payload === undefined ? undefined : JSON.stringify(payload) },
+        request: { method: method.toUpperCase(), headers: {} },
       } as any
     }
 
+    const tokenUrl = `${BASE_URL}${WisdomPanelApiEndpoints.AUTH}`
+    const kitsUrl = `${BASE_URL}${WisdomPanelApiEndpoints.GET_KITS}`
     const login = { username: 'dummy-user', password: 'dummy-password', grant_type: 'password' }
 
     it('does not emit a successful token exchange on /oauth/token', () => {
-      const res = buildCall(WisdomPanelApiEndpoints.AUTH, 200, { access_token: 'dummy' }, login)
+      const res = buildCall('post', tokenUrl, 200, { access_token: 'dummy' }, login)
       expect(onFulfilled(res)).toBe(res)
       expect(emit).not.toHaveBeenCalled()
     })
 
     it('does not emit a failed token exchange on /oauth/token that axios rejects', async () => {
-      const res = buildCall(WisdomPanelApiEndpoints.AUTH, 400, { error: 'invalid_grant' }, login)
+      const res = buildCall('post', tokenUrl, 400, { error: 'invalid_grant' }, login)
       const err = { config: res.config, response: res }
       await expect(onRejected(err)).rejects.toBe(err)
       expect(emit).not.toHaveBeenCalled()
     })
 
-    it('still emits a rejected call to another endpoint', async () => {
-      const res = buildCall(WisdomPanelApiEndpoints.ACKNOWLEDGE_KITS, 400, { errors: [] }, {})
-      const err = { config: res.config, response: res }
-      await expect(onRejected(err)).rejects.toBe(err)
+    it('still emits a successful kits page with records', () => {
+      const page = { meta: { 'record-count': 1 }, data: [{ attributes: { code: 'DUMMYKIT' } }] }
+      const res = buildCall('get', kitsUrl, 200, page)
+      expect(onFulfilled(res)).toBe(res)
+      expect(emit).toHaveBeenCalledTimes(1)
       expect(emit).toHaveBeenCalledWith(
         'raw_data',
-        expect.objectContaining({ status: 400, url: WisdomPanelApiEndpoints.ACKNOWLEDGE_KITS }),
+        expect.objectContaining({ status: 200, url: kitsUrl, accessionIds: ['DUMMYKIT'] }),
+      )
+    })
+
+    it('still drops an empty kits page', () => {
+      const res = buildCall('get', kitsUrl, 200, { meta: { 'record-count': 0 }, data: [] })
+      expect(onFulfilled(res)).toBe(res)
+      expect(emit).not.toHaveBeenCalled()
+    })
+
+    it('still emits a rejected call to another endpoint', async () => {
+      const ackUrl = `${BASE_URL}${WisdomPanelApiEndpoints.ACKNOWLEDGE_KITS}`
+      const res = buildCall('post', ackUrl, 400, { errors: [] }, {})
+      const err = { config: res.config, response: res }
+      await expect(onRejected(err)).rejects.toBe(err)
+      expect(emit).toHaveBeenCalledTimes(1)
+      expect(emit).toHaveBeenCalledWith(
+        'raw_data',
+        expect.objectContaining({ status: 400, url: ackUrl }),
       )
     })
   })
