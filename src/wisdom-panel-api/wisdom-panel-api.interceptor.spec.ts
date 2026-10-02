@@ -2,6 +2,7 @@ import { WisdomPanelApiInterceptor } from './wisdom-panel-api.interceptor'
 import { WisdomPanelApiEndpoints } from '../interfaces/wisdom-panel-api-endpoints.interface'
 import { WisdomPanelApiHttpService } from './wisdom-panel-api-http.service'
 import { AxiosResponse } from 'axios'
+import { Logger } from '@nestjs/common'
 
 describe('WisdomPanelApiInterceptor.filter', () => {
   let interceptor: WisdomPanelApiInterceptor
@@ -56,6 +57,73 @@ describe('WisdomPanelApiInterceptor.filter', () => {
       const res = buildResponse(400)
       const result = interceptor.filter(WisdomPanelApiEndpoints.AUTH, res.data, res)
       expect(result).toBe(false)
+    })
+  })
+
+  describe('raw_data events', () => {
+    let emit: jest.Mock
+    let onFulfilled: (response: AxiosResponse) => AxiosResponse
+    let onRejected: (err: any) => Promise<never>
+
+    beforeEach(() => {
+      jest.spyOn(Logger.prototype, 'debug').mockImplementation(() => undefined)
+      emit = jest.fn()
+      const axiosRef = {
+        interceptors: {
+          response: {
+            use: (fulfilled, rejected) => {
+              onFulfilled = fulfilled
+              onRejected = rejected
+            },
+          },
+        },
+      }
+      new WisdomPanelApiInterceptor({ axiosRef } as any, { emit } as any).onModuleInit()
+    })
+
+    afterEach(() => {
+      jest.restoreAllMocks()
+    })
+
+    const buildCall = (
+      url: string,
+      status: number,
+      data: any,
+      payload: any,
+    ): AxiosResponse<any> => {
+      return {
+        data,
+        status,
+        statusText: '',
+        headers: {},
+        config: { url, method: 'post', data: JSON.stringify(payload) },
+        request: { method: 'POST', headers: {} },
+      } as any
+    }
+
+    const login = { username: 'dummy-user', password: 'dummy-password', grant_type: 'password' }
+
+    it('does not emit a successful token exchange on /oauth/token', () => {
+      const res = buildCall(WisdomPanelApiEndpoints.AUTH, 200, { access_token: 'dummy' }, login)
+      expect(onFulfilled(res)).toBe(res)
+      expect(emit).not.toHaveBeenCalled()
+    })
+
+    it('does not emit a failed token exchange on /oauth/token that axios rejects', async () => {
+      const res = buildCall(WisdomPanelApiEndpoints.AUTH, 400, { error: 'invalid_grant' }, login)
+      const err = { config: res.config, response: res }
+      await expect(onRejected(err)).rejects.toBe(err)
+      expect(emit).not.toHaveBeenCalled()
+    })
+
+    it('still emits a rejected call to another endpoint', async () => {
+      const res = buildCall(WisdomPanelApiEndpoints.ACKNOWLEDGE_KITS, 400, { errors: [] }, {})
+      const err = { config: res.config, response: res }
+      await expect(onRejected(err)).rejects.toBe(err)
+      expect(emit).toHaveBeenCalledWith(
+        'raw_data',
+        expect.objectContaining({ status: 400, url: WisdomPanelApiEndpoints.ACKNOWLEDGE_KITS }),
+      )
     })
   })
 

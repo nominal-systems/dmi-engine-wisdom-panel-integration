@@ -19,7 +19,7 @@ export class WisdomPanelApiInterceptor extends AxiosInterceptor {
     // Excluded endpoints are checked first, whatever the status: the token exchange carries the
     // clinic's password in its request payload, so a failed login (400 invalid_grant) must not be
     // let through by the failed-request rule below.
-    if (EXCLUDED_ENDPOINTS.some((endpoint) => url.includes(endpoint))) {
+    if (this.isExcluded(url)) {
       return false
     }
 
@@ -36,6 +36,16 @@ export class WisdomPanelApiInterceptor extends AxiosInterceptor {
     }
 
     return true
+  }
+
+  // The base class consults filter() only for responses axios resolves; a rejected one (any status
+  // outside 2xx) goes straight to handleResponse() and is emitted. Excluded endpoints are dropped
+  // here as well, so a failed token exchange does not reach the request store either.
+  protected handleResponse(url: string, body: any, response: AxiosResponse): any {
+    if (this.isExcluded(url)) {
+      return
+    }
+    return super.handleResponse(url, body, response)
   }
 
   public debug(url: string, body: any, response: AxiosResponse): boolean {
@@ -70,5 +80,9 @@ export class WisdomPanelApiInterceptor extends AxiosInterceptor {
     }
 
     return accessionIds
+  }
+
+  private isExcluded(url: string): boolean {
+    return EXCLUDED_ENDPOINTS.some((endpoint) => url.includes(endpoint))
   }
 }
