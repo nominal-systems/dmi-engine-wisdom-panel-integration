@@ -39,6 +39,24 @@ describe('WisdomPanelApiInterceptor.filter', () => {
       const result = interceptor.filter(WisdomPanelApiEndpoints.GET_KITS, res.data, res)
       expect(result).toBe(true)
     })
+
+    it('does not filter a 400 from the kits endpoint', () => {
+      const res = buildResponse(400, 0)
+      const result = interceptor.filter(WisdomPanelApiEndpoints.GET_KITS, res.data, res)
+      expect(result).toBe(true)
+    })
+
+    it('returns false for a successful token exchange on /oauth/token', () => {
+      const res = buildResponse(200)
+      const result = interceptor.filter(WisdomPanelApiEndpoints.AUTH, res.data, res)
+      expect(result).toBe(false)
+    })
+
+    it('returns false for a failed token exchange on /oauth/token (400 invalid_grant)', () => {
+      const res = buildResponse(400)
+      const result = interceptor.filter(WisdomPanelApiEndpoints.AUTH, res.data, res)
+      expect(result).toBe(false)
+    })
   })
 
   describe('extractAccessionIds', () => {

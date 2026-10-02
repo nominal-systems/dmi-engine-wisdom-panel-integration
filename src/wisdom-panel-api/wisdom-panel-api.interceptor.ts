@@ -5,7 +5,7 @@ import { WisdomPanelBaseResponse } from '../interfaces/wisdom-panel-api-response
 import { PROVIDER_NAME } from '../constants/provider-name'
 import { WisdomPanelApiHttpService } from './wisdom-panel-api-http.service'
 
-const EXCLUDED_ENDPOINTS = []
+const EXCLUDED_ENDPOINTS = [WisdomPanelApiEndpoints.AUTH]
 
 const SEARCH_ENDPOINTS = [WisdomPanelApiEndpoints.GET_KITS, WisdomPanelApiEndpoints.GET_RESULT_SETS]
 
@@ -16,13 +16,16 @@ export class WisdomPanelApiInterceptor extends AxiosInterceptor {
   }
 
   public filter(url: string, body: any, response: AxiosResponse): boolean {
-    // Do not filter out failed requests
-    if (response.status >= 400) {
-      return true
-    }
-
+    // Excluded endpoints are checked first, whatever the status: the token exchange carries the
+    // clinic's password in its request payload, so a failed login (400 invalid_grant) must not be
+    // let through by the failed-request rule below.
     if (EXCLUDED_ENDPOINTS.some((endpoint) => url.includes(endpoint))) {
       return false
+    }
+
+    // Do not filter out failed requests to any other endpoint
+    if (response.status >= 400) {
+      return true
     }
 
     if (SEARCH_ENDPOINTS.some((endpoint) => url.includes(endpoint))) {
