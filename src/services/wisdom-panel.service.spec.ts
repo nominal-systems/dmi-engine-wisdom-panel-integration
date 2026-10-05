@@ -6,6 +6,7 @@ import { WisdomPanelMapper } from '../providers/wisdom-panel-mapper'
 import {
   BatchResultsResponse,
   CreateOrderPayload,
+  IdPayload,
   NullPayloadPayload,
   OrderCreatedResponse,
   OrderStatus,
@@ -22,6 +23,7 @@ import {
 describe('WisdomPanelService', () => {
   let service: WisdomPanelService
   let featureFlagProviderMock: jest.Mocked<FeatureFlagProvider>
+  let configServiceMock: { get: jest.Mock; getOrThrow: jest.Mock }
   const mapperMock = {
     mapCreateOrderPayload: jest.fn(),
     mapWisdomPanelResult: jest.fn(),
@@ -42,14 +44,13 @@ describe('WisdomPanelService', () => {
     featureFlagProviderMock = {
       isEnabled: jest.fn().mockReturnValue(false),
     }
+    configServiceMock = { get: jest.fn(), getOrThrow: jest.fn().mockReturnValue(36) }
     const module: TestingModule = await Test.createTestingModule({
       providers: [
         WisdomPanelService,
         {
           provide: ConfigService,
-          useValue: {
-            get: jest.fn(),
-          },
+          useValue: configServiceMock,
         },
         {
           provide: WisdomPanelApiService,
@@ -398,6 +399,8 @@ describe('WisdomPanelService', () => {
             id: 'kit-id',
             attributes: {
               code: 'XOXOXO',
+              'current-stage': 'report-ready',
+              'report-ready-at': '2026-10-01T08:00:00.000Z',
             },
           },
         ],
@@ -420,17 +423,38 @@ describe('WisdomPanelService', () => {
         providerConfiguration: {},
       } as unknown as WisdomPanelMessageData
 
+      const hoursAgo = (hours: number) => new Date(Date.now() - hours * 3600 * 1000).toISOString()
+
+      const readyKit = (id: string, code: string, reportReadyAt: string | null = hoursAgo(1)) => ({
+        id,
+        type: 'kits',
+        attributes: {
+          code,
+          'current-stage': 'report-ready',
+          'report-ready-at': reportReadyAt,
+        },
+      })
+
+      const pendingKit = (id: string, code: string) => ({
+        id,
+        type: 'kits',
+        attributes: { code, 'current-stage': 'generating-report' },
+      })
+
+      const resultSet = (id: string, kitId: string, createdHoursAgo = 13) => ({
+        id,
+        type: 'result-sets',
+        attributes: { 'created-at': hoursAgo(createdHoursAgo) },
+        relationships: { kit: { data: { type: 'kits', id: kitId } } },
+      })
+
       const buildResultSetsResponse = (count: number) => ({
-        data: Array.from({ length: count }, (_, i) => ({
-          id: `result-set-${i + 1}`,
-          type: 'result-sets',
-          relationships: { kit: { data: { type: 'kits', id: `kit-${i + 1}` } } },
-        })),
-        included: Array.from({ length: count }, (_, i) => ({
-          id: `kit-${i + 1}`,
-          type: 'kits',
-          attributes: { code: `KIT000${i + 1}` },
-        })),
+        data: Array.from({ length: count }, (_, i) =>
+          resultSet(`result-set-${i + 1}`, `kit-${i + 1}`),
+        ),
+        included: Array.from({ length: count }, (_, i) =>
+          readyKit(`kit-${i + 1}`, `KIT000${i + 1}`),
+        ),
       })
 
       const pdfError = (status: number) =>
@@ -588,6 +612,103 @@ describe('WisdomPanelService', () => {
         expect(firstPoll.results).toEqual([])
         const secondPoll: BatchResultsResponse = await service.getBatchResults(payload, metadata)
         expect(secondPoll.results).toEqual([{ id: 'result-set-1' }])
+      })
+
+      describe('report readiness', () => {
+        let debugSpy: jest.SpyInstance
+
+        beforeEach(() => {
+          debugSpy = jest.spyOn(Logger.prototype, 'debug').mockImplementation(() => undefined)
+        })
+
+        afterEach(() => {
+          debugSpy.mockRestore()
+        })
+
+        it('should not request the results of a kit whose report is not ready', async () => {
+          apiServiceMock.getUnacknowledgedResultSetsForHospital.mockResolvedValue({
+            data: [resultSet('result-set-1', 'kit-1'), resultSet('result-set-2', 'kit-2')],
+            included: [pendingKit('kit-1', 'KIT0001'), readyKit('kit-2', 'KIT0002')],
+          })
+          const response: BatchResultsResponse = await service.getBatchResults(payload, metadata)
+          expect(response.results).toEqual([{ id: 'result-set-2' }])
+          expect(apiServiceMock.getSimplifiedResultSets).not.toHaveBeenCalledWith(
+            'kit-1',
+            expect.anything(),
+          )
+          expect(apiServiceMock.getReportPdfBase64).not.toHaveBeenCalledWith(
+            'kit-1',
+            expect.anything(),
+          )
+          expect(warnSpy).not.toHaveBeenCalled()
+          expect(errorSpy).not.toHaveBeenCalled()
+        })
+
+        it('should treat a report-ready kit without report-ready-at as pending', async () => {
+          apiServiceMock.getUnacknowledgedResultSetsForHospital.mockResolvedValue({
+            data: [resultSet('result-set-1', 'kit-1')],
+            included: [readyKit('kit-1', 'KIT0001', null)],
+          })
+          const response: BatchResultsResponse = await service.getBatchResults(payload, metadata)
+          expect(response.results).toEqual([])
+          expect(apiServiceMock.getReportPdfBase64).not.toHaveBeenCalled()
+        })
+
+        it('should deliver a kit on the first poll after its report becomes ready', async () => {
+          apiServiceMock.getUnacknowledgedResultSetsForHospital
+            .mockResolvedValueOnce({
+              data: [resultSet('result-set-1', 'kit-1')],
+              included: [pendingKit('kit-1', 'KIT0001')],
+            })
+            .mockResolvedValueOnce({
+              data: [resultSet('result-set-1', 'kit-1')],
+              included: [readyKit('kit-1', 'KIT0001')],
+            })
+          const firstPoll: BatchResultsResponse = await service.getBatchResults(payload, metadata)
+          expect(firstPoll.results).toEqual([])
+          const secondPoll: BatchResultsResponse = await service.getBatchResults(payload, metadata)
+          expect(secondPoll.results).toEqual([{ id: 'result-set-1' }])
+        })
+
+        it('should not warn about a kit pending for less than the stuck threshold', async () => {
+          apiServiceMock.getUnacknowledgedResultSetsForHospital.mockResolvedValue({
+            data: [resultSet('result-set-1', 'kit-1', 12)],
+            included: [pendingKit('kit-1', 'KIT0001')],
+          })
+          await service.getBatchResults(payload, metadata)
+          expect(warnSpy).not.toHaveBeenCalled()
+        })
+
+        it('should warn once about a kit pending for longer than the stuck threshold', async () => {
+          apiServiceMock.getUnacknowledgedResultSetsForHospital.mockResolvedValue({
+            data: [resultSet('result-set-1', 'kit-1', 240)],
+            included: [pendingKit('kit-1', 'KIT0001')],
+          })
+          await service.getBatchResults(payload, metadata)
+          await service.getBatchResults(payload, metadata)
+          expect(warnSpy).toHaveBeenCalledTimes(1)
+          expect(warnSpy).toHaveBeenCalledWith(
+            expect.stringMatching(/KIT0001.*hospital '123'.*240h.*generating-report/),
+          )
+          expect(apiServiceMock.getReportPdfBase64).not.toHaveBeenCalled()
+        })
+
+        it('should deliver a kit with several result sets once and acknowledge all of them', async () => {
+          apiServiceMock.getUnacknowledgedResultSetsForHospital.mockResolvedValue({
+            data: [resultSet('result-set-1', 'kit-1'), resultSet('result-set-2', 'kit-1')],
+            included: [readyKit('kit-1', 'KIT0001')],
+          })
+          const response: BatchResultsResponse = await service.getBatchResults(payload, metadata)
+          expect(response.results).toEqual([{ id: 'result-set-1' }])
+          expect(apiServiceMock.getSimplifiedResultSets).toHaveBeenCalledTimes(1)
+          expect(apiServiceMock.getReportPdfBase64).toHaveBeenCalledTimes(1)
+
+          await service.acknowledgeResult({ id: 'result-set-1' } as IdPayload, metadata)
+          expect(apiServiceMock.acknowledgeResultSets).toHaveBeenCalledWith(
+            ['result-set-1', 'result-set-2'],
+            expect.anything(),
+          )
+        })
       })
 
       it('should still fail the batch when the result sets cannot be listed', async () => {

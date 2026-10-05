@@ -10,6 +10,7 @@ export interface Configuration {
     }
     results: {
       dryRun: boolean
+      stuckKitHours: number
     }
   }
 }

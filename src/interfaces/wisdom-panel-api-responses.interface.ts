@@ -52,6 +52,7 @@ export interface WisdomPanelKitItem extends WisdomPanelLinks {
     'lab-order-number'?: string
     'sample-received-on'?: string
     'report-ready-on'?: string
+    'report-ready-at'?: string
     'can-upgrade'?: boolean
     'disabled-at'?: string
     'kit-type-name-override'?: string

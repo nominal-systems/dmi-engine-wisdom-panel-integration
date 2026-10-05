@@ -12,6 +12,7 @@ import {
 import {
   WisdomPanelBreedPercentagesResult,
   WisdomPanelIdealWeightResult,
+  WisdomPanelKitItem,
   WisdomPanelNotableAndAtRiskHealthTestResult,
   WisdomPanelPetItem,
 } from '../interfaces/wisdom-panel-api-responses.interface'
@@ -38,6 +39,13 @@ export function mapPetSex(sex: string): 'male' | 'female' {
     default:
       return 'male'
   }
+}
+
+export function isReportReady(kit: WisdomPanelKitItem): boolean {
+  return (
+    kit.attributes['current-stage'] === 'report-ready' &&
+    !isNullOrUndefinedOrEmpty(kit.attributes['report-ready-at'])
+  )
 }
 
 export function mapKitStatus(currentStage: KitStage, currentFailure?: string): OrderStatus {

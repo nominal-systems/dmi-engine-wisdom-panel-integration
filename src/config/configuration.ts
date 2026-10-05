@@ -13,6 +13,7 @@ export default (): Configuration => ({
     },
     results: {
       dryRun: process.env.RESULTS_PROCESSOR_DRY_RUN === 'true',
+      stuckKitHours: Number(process.env.WISDOM_PANEL_STUCK_KIT_HOURS ?? 36),
     },
   },
 })
