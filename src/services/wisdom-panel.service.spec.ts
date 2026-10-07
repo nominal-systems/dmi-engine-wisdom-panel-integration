@@ -425,13 +425,17 @@ describe('WisdomPanelService', () => {
 
       const hoursAgo = (hours: number) => new Date(Date.now() - hours * 3600 * 1000).toISOString()
 
-      const readyKit = (id: string, code: string, reportReadyAt: string | null = hoursAgo(1)) => ({
+      const readyKit = (
+        id: string,
+        code: string,
+        reportTimestamps: Record<string, string> = { 'report-ready-at': hoursAgo(1) },
+      ) => ({
         id,
         type: 'kits',
         attributes: {
           code,
           'current-stage': 'report-ready',
-          'report-ready-at': reportReadyAt,
+          ...reportTimestamps,
         },
       })
 
@@ -644,14 +648,28 @@ describe('WisdomPanelService', () => {
           expect(errorSpy).not.toHaveBeenCalled()
         })
 
-        it('should treat a report-ready kit without report-ready-at as pending', async () => {
+        it('should treat a report-ready kit without a report-ready timestamp as pending', async () => {
           apiServiceMock.getUnacknowledgedResultSetsForHospital.mockResolvedValue({
             data: [resultSet('result-set-1', 'kit-1')],
-            included: [readyKit('kit-1', 'KIT0001', null)],
+            included: [readyKit('kit-1', 'KIT0001', {})],
           })
           const response: BatchResultsResponse = await service.getBatchResults(payload, metadata)
           expect(response.results).toEqual([])
           expect(apiServiceMock.getReportPdfBase64).not.toHaveBeenCalled()
+        })
+
+        it('should deliver a report-ready kit that only carries report-ready-on', async () => {
+          apiServiceMock.getUnacknowledgedResultSetsForHospital.mockResolvedValue({
+            data: [resultSet('result-set-1', 'kit-1')],
+            included: [readyKit('kit-1', 'KIT0001', { 'report-ready-on': hoursAgo(1) })],
+          })
+          const response: BatchResultsResponse = await service.getBatchResults(payload, metadata)
+          expect(response.results).toEqual([{ id: 'result-set-1' }])
+          expect(apiServiceMock.getSimplifiedResultSets).toHaveBeenCalledWith(
+            'kit-1',
+            expect.anything(),
+          )
+          expect(apiServiceMock.getReportPdfBase64).toHaveBeenCalledWith('kit-1', expect.anything())
         })
 
         it('should deliver a kit on the first poll after its report becomes ready', async () => {

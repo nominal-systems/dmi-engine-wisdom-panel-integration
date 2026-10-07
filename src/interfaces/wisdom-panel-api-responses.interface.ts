@@ -51,6 +51,8 @@ export interface WisdomPanelKitItem extends WisdomPanelLinks {
     'auto-activated'?: boolean
     'lab-order-number'?: string
     'sample-received-on'?: string
+    // The API sends the report timestamp under both keys, with the same value; the public spec only
+    // names `report-ready-on`.
     'report-ready-on'?: string
     'report-ready-at'?: string
     'can-upgrade'?: boolean

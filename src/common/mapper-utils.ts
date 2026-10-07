@@ -41,10 +41,12 @@ export function mapPetSex(sex: string): 'male' | 'female' {
   }
 }
 
+// The report timestamp may come under either key (see WisdomPanelKitItem), so either one will do.
 export function isReportReady(kit: WisdomPanelKitItem): boolean {
   return (
     kit.attributes['current-stage'] === 'report-ready' &&
-    !isNullOrUndefinedOrEmpty(kit.attributes['report-ready-at'])
+    (!isNullOrUndefinedOrEmpty(kit.attributes['report-ready-at']) ||
+      !isNullOrUndefinedOrEmpty(kit.attributes['report-ready-on']))
   )
 }
 
