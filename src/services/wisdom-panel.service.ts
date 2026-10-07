@@ -54,6 +54,8 @@ export class WisdomPanelService extends BaseProviderService<WisdomPanelMessageDa
   private readonly stuckKitWarnedAt = new Map<string, number>()
   // Delivered result set id → the other unacknowledged result sets of the same kit.
   private readonly duplicateResultSetIds = new Map<string, string[]>()
+  // Read once, so a missing setting fails at startup rather than every hospital's batch.
+  private readonly stuckKitHours: number
 
   constructor(
     private readonly configService: ConfigService,
@@ -64,6 +66,7 @@ export class WisdomPanelService extends BaseProviderService<WisdomPanelMessageDa
     private readonly featureFlags?: FeatureFlagProvider,
   ) {
     super()
+    this.stuckKitHours = this.configService.getOrThrow<number>('processors.results.stuckKitHours')
   }
 
   async testAuth(payload: NullPayloadPayload, metadata: any): Promise<IntegrationTestResponse> {
@@ -337,11 +340,10 @@ export class WisdomPanelService extends BaseProviderService<WisdomPanelMessageDa
     const hospitalNumber = metadata.integrationOptions.hospitalNumber
     const createdAt = Date.parse(resultSet.attributes?.['created-at'])
     const pendingHours = Number.isNaN(createdAt) ? 0 : (Date.now() - createdAt) / HOUR_MS
-    const stuckKitHours = this.configService.getOrThrow<number>('processors.results.stuckKitHours')
     const lastWarnedAt = this.stuckKitWarnedAt.get(kit.id)
     const warnedToday = lastWarnedAt !== undefined && Date.now() - lastWarnedAt < DAY_MS
 
-    if (pendingHours < stuckKitHours || warnedToday) {
+    if (pendingHours < this.stuckKitHours || warnedToday) {
       this.logger.debug(
         `Report of kit ${kit.attributes.code} (result set ${resultSet.id}) of hospital '${hospitalNumber}' is pending (stage: ${kit.attributes['current-stage']}), leaving it unacknowledged`,
       )
