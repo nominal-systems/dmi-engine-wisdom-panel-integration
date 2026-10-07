@@ -193,7 +193,8 @@ export interface WisdomPanelResultSetItem extends WisdomPanelLinks {
 
 export interface WisdomPanelSimpleResultResponse {
   message: string
-  // Absent when the kit's analysis failed: the response then carries only the message
+  // Absent when the results are not ready yet (`WIS_VOY__107`) or the kit's analysis failed
+  // (`WIS_VOY__108`): the response then carries only the message
   data?: WisdomPanelSimpleResult
 }
 

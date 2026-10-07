@@ -378,8 +378,9 @@ export class WisdomPanelService extends BaseProviderService<WisdomPanelMessageDa
   }
 
   /**
-   * Fetches and maps a single result set. Returns `undefined` when the result set is not ready to
-   * be delivered yet, so that it is left unacknowledged and retried on the next poll.
+   * Fetches and maps the result set of a report-ready kit. Returns `undefined` when its result data
+   * or report PDF is missing nonetheless, so that it is left unacknowledged and retried on the next
+   * poll.
    */
   private async fetchResult(
     resultSet: WisdomPanelResultSetItem,
