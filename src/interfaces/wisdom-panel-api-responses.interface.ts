@@ -51,7 +51,10 @@ export interface WisdomPanelKitItem extends WisdomPanelLinks {
     'auto-activated'?: boolean
     'lab-order-number'?: string
     'sample-received-on'?: string
+    // The API sends the report timestamp under both keys, with the same value; the public spec only
+    // names `report-ready-on`.
     'report-ready-on'?: string
+    'report-ready-at'?: string
     'can-upgrade'?: boolean
     'disabled-at'?: string
     'kit-type-name-override'?: string
@@ -190,7 +193,8 @@ export interface WisdomPanelResultSetItem extends WisdomPanelLinks {
 
 export interface WisdomPanelSimpleResultResponse {
   message: string
-  // Absent when the kit's analysis failed: the response then carries only the message
+  // Absent when the results are not ready yet (`WIS_VOY__107`) or the kit's analysis failed
+  // (`WIS_VOY__108`): the response then carries only the message
   data?: WisdomPanelSimpleResult
 }
 

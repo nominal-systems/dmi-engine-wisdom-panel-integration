@@ -26,7 +26,7 @@ import {
 import { WisdomPanelMessageData } from '../interfaces/wisdom-panel-message-data.interface'
 import { WisdomPanelApiService } from '../wisdom-panel-api/wisdom-panel-api.service'
 import { WisdomPanelMapper } from '../providers/wisdom-panel-mapper'
-import { petMatchesCreatePetPayload } from '../common/mapper-utils'
+import { isReportReady, petMatchesCreatePetPayload } from '../common/mapper-utils'
 import { WisdomPanelCreatePetPayload } from '../interfaces/wisdom-panel-api-payloads.interface'
 import {
   WisdomPanelKitItem,
@@ -44,9 +44,18 @@ import {
   type FeatureFlagProvider,
 } from '../feature-flags/feature-flag.interface'
 
+const HOUR_MS = 60 * 60 * 1000
+const DAY_MS = 24 * HOUR_MS
+
 @Injectable()
 export class WisdomPanelService extends BaseProviderService<WisdomPanelMessageData> {
   private readonly logger: Logger = new Logger(WisdomPanelService.name)
+  // Kit id → when it was last reported as stuck, so a stuck kit warns at most once a day.
+  private readonly stuckKitWarnedAt = new Map<string, number>()
+  // Delivered result set id → the other unacknowledged result sets of the same kit.
+  private readonly duplicateResultSetIds = new Map<string, string[]>()
+  // Read once, so a missing setting fails at startup rather than every hospital's batch.
+  private readonly stuckKitHours: number
 
   constructor(
     private readonly configService: ConfigService,
@@ -57,6 +66,7 @@ export class WisdomPanelService extends BaseProviderService<WisdomPanelMessageDa
     private readonly featureFlags?: FeatureFlagProvider,
   ) {
     super()
+    this.stuckKitHours = this.configService.getOrThrow<number>('processors.results.stuckKitHours')
   }
 
   async testAuth(payload: NullPayloadPayload, metadata: any): Promise<IntegrationTestResponse> {
@@ -286,12 +296,27 @@ export class WisdomPanelService extends BaseProviderService<WisdomPanelMessageDa
 
         this.logger.debug(`Found result set ${resultSet.id} (kit code: ${kit.attributes.code})`)
 
+        // Wisdom Panel lists a result set before its kit's report is generated (12 h since
+        // 2026-09-22), and some kits never get there. Their results and PDF don't exist yet.
+        if (!isReportReady(kit)) {
+          this.reportPending(resultSet, kit, metadata)
+          continue
+        }
+        this.stuckKitWarnedAt.delete(kit.id)
+
+        // A kit can have several result sets: deliver it once, acknowledge all of them.
+        const firstResultSetId = this.firstResultSetIdOfKit(response.data, kit.id)
+        if (firstResultSetId !== resultSet.id) {
+          continue
+        }
+
         // A result set that is not pushed here is never acknowledged, so it comes back on the next
         // poll without holding back the other results of the hospital.
         try {
           const result = await this.fetchResult(resultSet, kit, metadata)
           if (result !== undefined) {
             batchResults.results.push(result)
+            this.trackDuplicateResultSets(result.id, response.data, kit.id)
           }
         } catch (error) {
           this.logger.error(
@@ -307,9 +332,55 @@ export class WisdomPanelService extends BaseProviderService<WisdomPanelMessageDa
     return batchResults
   }
 
+  private reportPending(
+    resultSet: WisdomPanelResultSetItem,
+    kit: WisdomPanelKitItem,
+    metadata: WisdomPanelMessageData,
+  ): void {
+    const hospitalNumber = metadata.integrationOptions.hospitalNumber
+    const createdAt = Date.parse(resultSet.attributes?.['created-at'])
+    const pendingHours = Number.isNaN(createdAt) ? 0 : (Date.now() - createdAt) / HOUR_MS
+    const lastWarnedAt = this.stuckKitWarnedAt.get(kit.id)
+    const warnedToday = lastWarnedAt !== undefined && Date.now() - lastWarnedAt < DAY_MS
+
+    if (pendingHours < this.stuckKitHours || warnedToday) {
+      this.logger.debug(
+        `Report of kit ${kit.attributes.code} (result set ${resultSet.id}) of hospital '${hospitalNumber}' is pending (stage: ${kit.attributes['current-stage']}), leaving it unacknowledged`,
+      )
+      return
+    }
+
+    this.stuckKitWarnedAt.set(kit.id, Date.now())
+    this.logger.warn(
+      `Report of kit ${kit.attributes.code} (result set ${resultSet.id}) of hospital '${hospitalNumber}' is still pending after ${Math.floor(pendingHours)}h (stage: ${kit.attributes['current-stage']}, failure: ${kit.attributes['current-failure'] ?? 'none'}), leaving it unacknowledged`,
+    )
+  }
+
+  private firstResultSetIdOfKit(
+    resultSets: WisdomPanelResultSetItem[],
+    kitId: string,
+  ): string | undefined {
+    return resultSets.find((resultSet) => resultSet.relationships.kit.data?.id === kitId)?.id
+  }
+
+  private trackDuplicateResultSets(
+    deliveredResultSetId: string,
+    resultSets: WisdomPanelResultSetItem[],
+    kitId: string,
+  ): void {
+    const duplicates = resultSets
+      .filter((resultSet) => resultSet.relationships.kit.data?.id === kitId)
+      .map((resultSet) => resultSet.id)
+      .filter((id) => id !== deliveredResultSetId)
+    if (duplicates.length > 0) {
+      this.duplicateResultSetIds.set(deliveredResultSetId, duplicates)
+    }
+  }
+
   /**
-   * Fetches and maps a single result set. Returns `undefined` when the result set is not ready to
-   * be delivered yet, so that it is left unacknowledged and retried on the next poll.
+   * Fetches and maps the result set of a report-ready kit. Returns `undefined` when its result data
+   * or report PDF is missing nonetheless, so that it is left unacknowledged and retried on the next
+   * poll.
    */
   private async fetchResult(
     resultSet: WisdomPanelResultSetItem,
@@ -328,7 +399,7 @@ export class WisdomPanelService extends BaseProviderService<WisdomPanelMessageDa
       return undefined
     }
 
-    // Get PDF report (Wisdom Panel answers 404 until the report of a released kit is generated)
+    // Get PDF report (the kit is report-ready, so a 404 here is unexpected but transient)
     let base64PdfReport: string
     try {
       base64PdfReport = await this.wisdomPanelApiService.getReportPdfBase64(
@@ -365,10 +436,12 @@ export class WisdomPanelService extends BaseProviderService<WisdomPanelMessageDa
   }
 
   async acknowledgeResult(payload: IdPayload, metadata: WisdomPanelMessageData): Promise<void> {
+    const duplicates = this.duplicateResultSetIds.get(payload.id) ?? []
     await this.wisdomPanelApiService.acknowledgeResultSets(
-      [payload.id],
+      [payload.id, ...duplicates],
       metadata.providerConfiguration,
     )
+    this.duplicateResultSetIds.delete(payload.id)
   }
 
   cancelOrder(payload: IdPayload, metadata: WisdomPanelMessageData): Promise<void> {
