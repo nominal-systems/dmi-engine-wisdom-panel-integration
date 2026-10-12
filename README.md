@@ -19,6 +19,12 @@ To use it from another project, run:
 yalc add @nominal-systems/dmi-engine-wisdom-panel-integration
 ````
 
+## Configuration
+
+| Variable | Default | Description |
+| --- | --- | --- |
+| `WISDOM_PANEL_STUCK_KIT_HOURS` | `36` | Hours a result set can wait for its kit's report before it is logged as stuck: at most once a day per kit and worker process, and again after a restart, since the time of the last warning is only kept in memory. Until the report is ready the result set is left unacknowledged and retried on every poll. Anything but a positive number (empty, `0`, a typo) falls back to `36`. |
+
 ## Feature flags
 
 Some behaviour in this module is gated behind feature flags. The module does **not** ship a
