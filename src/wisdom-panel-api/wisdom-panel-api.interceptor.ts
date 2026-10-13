@@ -5,7 +5,7 @@ import { WisdomPanelBaseResponse } from '../interfaces/wisdom-panel-api-response
 import { PROVIDER_NAME } from '../constants/provider-name'
 import { WisdomPanelApiHttpService } from './wisdom-panel-api-http.service'
 
-const EXCLUDED_ENDPOINTS = []
+const EXCLUDED_ENDPOINTS = [WisdomPanelApiEndpoints.AUTH]
 
 const SEARCH_ENDPOINTS = [WisdomPanelApiEndpoints.GET_KITS, WisdomPanelApiEndpoints.GET_RESULT_SETS]
 
@@ -16,13 +16,16 @@ export class WisdomPanelApiInterceptor extends AxiosInterceptor {
   }
 
   public filter(url: string, body: any, response: AxiosResponse): boolean {
-    // Do not filter out failed requests
-    if (response.status >= 400) {
-      return true
+    // Excluded endpoints are checked first, whatever the status: the token exchange carries the
+    // clinic's password in its request payload, so a failed login (400 invalid_grant) must not be
+    // let through by the failed-request rule below.
+    if (this.isExcluded(url)) {
+      return false
     }
 
-    if (EXCLUDED_ENDPOINTS.some((endpoint) => url.includes(endpoint))) {
-      return false
+    // Do not filter out failed requests to any other endpoint
+    if (response.status >= 400) {
+      return true
     }
 
     if (SEARCH_ENDPOINTS.some((endpoint) => url.includes(endpoint))) {
@@ -33,6 +36,16 @@ export class WisdomPanelApiInterceptor extends AxiosInterceptor {
     }
 
     return true
+  }
+
+  // The base class consults filter() only for responses axios resolves; a rejected one (any status
+  // outside 2xx) goes straight to handleResponse() and is emitted. Excluded endpoints are dropped
+  // here as well, so a failed token exchange does not reach the request store either.
+  protected handleResponse(url: string, body: any, response: AxiosResponse): any {
+    if (this.isExcluded(url)) {
+      return
+    }
+    return super.handleResponse(url, body, response)
   }
 
   public debug(url: string, body: any, response: AxiosResponse): boolean {
@@ -67,5 +80,9 @@ export class WisdomPanelApiInterceptor extends AxiosInterceptor {
     }
 
     return accessionIds
+  }
+
+  private isExcluded(url: string): boolean {
+    return EXCLUDED_ENDPOINTS.some((endpoint) => url.includes(endpoint))
   }
 }
